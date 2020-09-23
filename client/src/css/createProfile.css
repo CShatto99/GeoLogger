@@ -1,0 +1,20 @@
+.color-block {
+  max-width: 100px;
+  width: 100px;
+  height: 100px;
+  margin: 0.25rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: opacity ease-out 150ms;
+}
+
+.color-block:hover {
+  transition: opacity ease-in 150ms;
+  opacity: 0.5;
+}
+
+.color-block-label {
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  color: #1a202c;
+}

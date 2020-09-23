@@ -1,0 +1,88 @@
+img {
+  transition: ease-in 0.1s;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+
+.landing-div {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/satellite-v9.png");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0c0f11;
+  text-align: center;
+}
+
+.landing-div-inner {
+  max-width: 72rem;
+  padding: 2rem;
+}
+
+.div-enter {
+  transition: ease 1s;
+  opacity: 1;
+}
+
+.div-exit {
+  transform: translateY(-100vh);
+  opacity: 0;
+}
+
+.start-btn {
+  border-radius: 999px !important;
+}
+
+.map-div {
+  min-height: 100vh;
+  background-color: #e2e8f0;
+  color: #1a202c;
+  text-align: center;
+}
+
+.map-div h3 {
+  font-weight: 300;
+  margin-top: 0.5rem;
+}
+
+.map-div-inner {
+  max-width: 72rem;
+  padding: 2rem;
+  margin: 0 auto;
+  grid-gap: 2.5rem;
+  gap: 2.5rem;
+}
+
+.vaca-history {
+  display: grid;
+  max-width: 72rem;
+  padding: 2rem;
+  margin: 0 auto;
+  grid-gap: 2.5rem;
+  gap: 2.5rem;
+  text-align: center;
+}
+
+.modal-prop {
+  border-radius: 0.5rem;
+  margin: auto 0;
+  background-color: #e2e8f0;
+}
+
+.sat-img {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 640px) {
+  .sat-img {
+    width: 100%;
+  }
+}

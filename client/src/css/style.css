@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*.map-container {
+    width: 100vw;
+    height: 60vh;
+  }
+  
+  .sidebarStyle {
+    background-color: #30475e;
+    color: #ffffff;
+    z-index: 1 !important;
+    padding: 6px;
+    font-weight: bold;
+    font-size: 12px;
+  }*/

@@ -1,0 +1,23 @@
+footer a {
+  text-decoration: none;
+}
+
+.footer-link-highlight {
+  transition: ease-in-out 0.2s;
+  border-top: 1.5px solid #718096;
+  width: 0%;
+  margin: -5px auto 0 auto;
+}
+
+.footer-link-hover:hover ~ .footer-link-highlight {
+  width: 18%;
+}
+
+.footer-icon {
+  transition: ease-in-out 0.2s;
+}
+
+.footer-icon:hover {
+  transition: ease-in-out 0.2s;
+  color: #4743d1;
+}

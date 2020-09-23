@@ -1,0 +1,94 @@
+h2 {
+  font-weight: 600;
+}
+
+.settings-div {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../img/settings-bg.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 1.5rem 1.5rem 1.5rem;
+  min-height: 100vh;
+  background-color: #e2e8f0;
+  text-align: center;
+  color: #1a202c;
+}
+
+.settings-div-inner {
+  max-width: 72rem;
+  padding: 1.5rem;
+  grid-gap: 1.25rem;
+  gap: 1.25rem;
+}
+
+.saved-changes {
+  grid-column: span 5 / span 5;
+  background-color: #9ae6b4;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+}
+
+.settings-card {
+  grid-column: span 5 / span 5;
+  background-color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.back-btn {
+  border: 1px solid #e53e3e !important;
+}
+.save-btn {
+  border: 1px solid #2b6cb0 !important;
+}
+
+.thumbnail {
+  transition: ease-out 0.2s;
+  border-radius: 0.3rem;
+}
+
+.thumbnail:hover {
+  transition: ease-in 0.2s;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+.settings-theme {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.theme-option {
+  padding: 0.3rem 0.5rem;
+  transition: ease-out 200ms;
+  border-radius: 0.3rem;
+}
+
+.theme-option:hover {
+  transition: ease-in 200ms;
+  background-color: #cbd5e0;
+  cursor: pointer;
+}
+
+.sat-img-settings {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 550px) {
+  .settings-nav-bg {
+    height: 6%;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .sat-img-settings {
+    width: 100%;
+  }
+}
