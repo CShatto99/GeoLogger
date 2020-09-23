@@ -57,8 +57,6 @@ const AppNavbar = () => {
     </Fragment>
   );
 
-  console.log(navIcon);
-
   return (
     <div className="flex justify-center">
       <nav className="pt-3 pl-4 pr-4 max-w-6xl w-full flex justify-between">
