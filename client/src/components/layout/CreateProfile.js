@@ -9,7 +9,7 @@ import outdoorsV11 from "../../img/outdoors-v11.png";
 import streetsV11 from "../../img/streets-v11.png";
 import satelliteV9 from "../../img/satellite-v9.png";
 import colors from "../../json/colors.json";
-import "../../css/authForm.css";
+import "../../css/createProfile.css";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const CreateProfile = () => {
   console.log(fillColor);
 
   return (
-    <div className="map-div min-h-screen max-w-6xl mx-auto text-center grid grid-cols-1 mb-5 pt-24 pr-4 pb-4 pl-4">
+    <div className="map-div min-h-screen max-w-6xl mx-auto text-center grid grid-cols-1 mb-5 pr-4 pb-4 pl-4">
       <h1 className="mb-5">Lets Start by Setting Up a Profile</h1>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-5 text-center mb-5">
         <h1 className="font-medium md:col-span-2">Choose a Map Style</h1>

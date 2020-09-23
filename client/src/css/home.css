@@ -85,4 +85,16 @@ img:hover {
   .sat-img {
     width: 100%;
   }
+
+  .landing-div-inner {
+    padding: 1rem;
+  }
+
+  .map-div-inner {
+    padding: 1rem;
+  }
+
+  .vaca-history {
+    padding: 1rem;
+  }
 }

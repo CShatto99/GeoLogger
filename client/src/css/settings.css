@@ -91,4 +91,8 @@ h2 {
   .sat-img-settings {
     width: 100%;
   }
+
+  .settings-div-inner {
+    padding: 1rem;
+  }
 }

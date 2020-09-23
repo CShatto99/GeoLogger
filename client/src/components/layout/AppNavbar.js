@@ -10,7 +10,7 @@ const AppNavbar = () => {
   const { isAuth } = useSelector(state => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
-  const [navIcon, setNavIcon] = useState(false);
+  const [navIcon, setNavIcon] = useState("nav-items-hide");
 
   const guestLinks = (
     <Fragment>
@@ -45,15 +45,17 @@ const AppNavbar = () => {
         </Link>
         <div className="sibling-highlight" />
       </NavItem>
-      <div className="dropdown">
-        <button className="nav-link text-gray-400 hover:text-gray-200 pb-1">
-          Profile
-        </button>
-        <div className="dropdown-content">
-          <Link to="/settings">Settings</Link>
-          <a onClick={() => dispatch(logout())}>Logout</a>
+      <NavItem>
+        <div className="dropdown">
+          <button className="nav-link text-gray-400 hover:text-gray-200 pb-1">
+            Profile
+          </button>
+          <div className="dropdown-content">
+            <Link to="/settings">Settings</Link>
+            <a onClick={() => dispatch(logout())}>Logout</a>
+          </div>
         </div>
-      </div>
+      </NavItem>
     </Fragment>
   );
 
@@ -71,13 +73,7 @@ const AppNavbar = () => {
             GeoLogger
           </button>
         </div>
-        <ul
-          className={
-            navIcon
-              ? "nav-items-show flex justify-end items-center"
-              : "nav-items-hide flex justify-end items-center m-0"
-          }
-        >
+        <ul className={`${navIcon} flex justify-end items-center`}>
           <NavItem>
             <Link
               to="/"
@@ -89,23 +85,34 @@ const AppNavbar = () => {
           </NavItem>
           {isAuth ? userLinks : guestLinks}
         </ul>
-        <div className="nav-hamburger" onClick={() => setNavIcon(!navIcon)}>
+        <div
+          className="nav-hamburger"
+          onClick={() => {
+            navIcon === "nav-items-hide"
+              ? setNavIcon("nav-items-show")
+              : setNavIcon("nav-items-hide");
+          }}
+        >
           <div
             className="bar1"
             style={{
-              transform: navIcon && "rotate(-45deg) translate(-10px, 10px)",
+              transform:
+                navIcon === "nav-items-show" &&
+                "rotate(-45deg) translate(-10px, 10px)",
             }}
           />
           <div
             className="bar2"
             style={{
-              opacity: navIcon && "0",
+              opacity: navIcon === "nav-items-show" && "0",
             }}
           />
           <div
             className="bar3"
             style={{
-              transform: navIcon && "rotate(45deg) translate(-3px, -2px)",
+              transform:
+                navIcon === "nav-items-show" &&
+                "rotate(45deg) translate(-3px, -2px)",
             }}
           />
         </div>

@@ -86,7 +86,7 @@
   z-index: 11;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 640px) {
   .nav-items-show {
     display: flex;
     flex-direction: row;
@@ -130,6 +130,10 @@
 
   .nav-items-hide > .nav-item {
     flex: 0 1 100%;
+  }
+
+  .dropdown {
+    margin-right: 45px;
   }
 
   .nav-link {
