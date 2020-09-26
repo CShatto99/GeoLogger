@@ -25,8 +25,6 @@ const Main = withRouter(({ location }) => {
     store.dispatch(refreshUser());
   }, []);
 
-  console.log(location);
-
   return (
     <div>
       <Provider store={store}>

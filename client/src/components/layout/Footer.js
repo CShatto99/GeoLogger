@@ -70,7 +70,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-transparent">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 sm:grid-cols-1 gap-10 text-center text-gray-200 p-5">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 sm:grid-cols-1 gap-10 text-center text-gray-200 p-4 sm:p-5">
         <div>
           <h2>About</h2>
           <p>
@@ -141,7 +141,7 @@ const Footer = () => {
         <div>
           <a
             className="footer-icon text-gray-200"
-            href="https://github.com/"
+            href="https://github.com/CShatto99/GeoLogger"
             target="_blank"
             rel="noreferrer noopener"
           >

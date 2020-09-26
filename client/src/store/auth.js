@@ -103,7 +103,7 @@ export const refreshUser = () => async dispatch => {
 
     if (data.accessToken) {
       dispatch(loadUser());
-      dispatch(loadProfile());
+      //dispatch(loadProfile());
       dispatch(login_user());
     }
   } catch (err) {

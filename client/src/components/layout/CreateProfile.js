@@ -40,7 +40,7 @@ const CreateProfile = () => {
   console.log(fillColor);
 
   return (
-    <div className="map-div min-h-screen max-w-6xl mx-auto text-center grid grid-cols-1 mb-5 pr-4 pb-4 pl-4">
+    <div className="min-h-screen max-w-6xl mx-auto text-center grid grid-cols-1 mb-5 p-4">
       <h1 className="mb-5">Lets Start by Setting Up a Profile</h1>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-5 text-center mb-5">
         <h1 className="font-medium md:col-span-2">Choose a Map Style</h1>
