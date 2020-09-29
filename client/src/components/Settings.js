@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "reactstrap";
 import Moment from "react-moment";
 import { updateProfile } from "../store/profile";
 import "../css/settings.css";
+import CustSpinner from "./layout/CustSpinner";
 import darkV10 from "../img/dark-v10.png";
 import lightV10 from "../img/light-v10.png";
 import outdoorsV11 from "../img/outdoors-v11.png";
@@ -53,7 +53,7 @@ const Settings = () => {
     <div className="settings-div">
       {loading ? (
         <div className="spinner-div">
-          <Spinner />
+          <CustSpinner />
         </div>
       ) : (
         <div className="settings-div-inner grid grid-cols-5">

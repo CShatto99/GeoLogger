@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactMapGL, { Layer, Source } from "react-map-gl";
-import { Spinner } from "reactstrap";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
+import CustSpinner from "./layout/CustSpinner";
 import Checklist from "./Checklist";
 import useWindowDimensions from "../hooks/windowDimensions";
 
@@ -68,7 +68,7 @@ const Mapbox = () => {
     <>
       {loading ? (
         <div className="spinner-div">
-          <Spinner />
+          <CustSpinner />
         </div>
       ) : (
         <div className="map-container">
