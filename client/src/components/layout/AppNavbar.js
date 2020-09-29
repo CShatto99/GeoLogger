@@ -36,7 +36,7 @@ const AppNavbar = withRouter(({ location }) => {
       <NavItem>
         <Link
           to="/register"
-          className="gen-btn nav-link bg-blue-700 text-white font-medium mt-1 py-1 px-3 rounded-lg hover:bg-blue-800"
+          className="gen-btn nav-link bg-blue-700 text-white font-medium mt-1 ml-3 py-1 px-3 rounded-lg hover:bg-blue-800"
         >
           Register
         </Link>
