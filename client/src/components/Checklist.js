@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import usa from "../json/US.json";
 import { updateProfile } from "../store/profile";
+import "../css/checklist.css";
 
 const Checklist = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const Checklist = () => {
 
   return (
     <>
-      <Row className="justify-content-center">
+      <Row className="add-states">
         <button
           className="gen-btn bg-blue-700 text-gray-200 font-medium mt-1 py-1 px-3 mr-2 rounded-lg hover:bg-blue-800"
           onClick={toggle}

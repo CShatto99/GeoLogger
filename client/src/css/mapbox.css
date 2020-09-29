@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  padding-top: 5rem;
 }
 
 .mapboxgl-ctrl {

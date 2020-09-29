@@ -53,8 +53,8 @@ const Mapbox = () => {
   }, [profile]);
 
   const [viewport, setViewport] = useState({
-    width: 1152,
-    height: height * 0.9,
+    width: "100%",
+    height: height,
     latitude: 40,
     longitude: -92,
     zoom: 3,
@@ -77,6 +77,7 @@ const Mapbox = () => {
             mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
             onViewportChange={nextViewport => setViewport(nextViewport)}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+            className="w-full"
           >
             {sources}
             <Checklist />

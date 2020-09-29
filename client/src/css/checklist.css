@@ -1,0 +1,8 @@
+.add-states {
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  margin: 0 0 10px -60px !important;
+  bottom: 0;
+}

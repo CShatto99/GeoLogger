@@ -1,16 +1,26 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
 import { NavItem } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/auth";
 import "../../css/navbar.css";
 
-const AppNavbar = () => {
+const AppNavbar = withRouter(({ location }) => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownActive, setDropdownActive] = useState(false);
+  const { profile } = useSelector(state => state.profile);
   const [navIcon, setNavIcon] = useState("nav-items-hide");
+  const [navLinkCol, setNavLinkCol] = useState("");
+
+  useEffect(() => {
+    if (JSON.stringify(profile) === "{}") setNavLinkCol("text-gray-400");
+    else
+      profile.mapStyle === "dark-v10" ||
+      profile.mapStyle === "satellite-v9" ||
+      location.pathname === "/"
+        ? setNavLinkCol("text-gray-400")
+        : setNavLinkCol("text-gray-900");
+  }, [profile, location.pathname]);
 
   const guestLinks = (
     <Fragment>
@@ -39,7 +49,7 @@ const AppNavbar = () => {
       <NavItem>
         <Link
           to="/map"
-          className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
+          className={`nav-link sibling-hover ${navLinkCol} hover:text-gray-200`}
         >
           Map
         </Link>
@@ -47,7 +57,7 @@ const AppNavbar = () => {
       </NavItem>
       <NavItem>
         <div className="dropdown">
-          <button className="nav-link text-gray-400 hover:text-gray-200 pb-1">
+          <button className={`nav-link ${navLinkCol} hover:text-gray-200 pb-1`}>
             Profile
           </button>
           <div className="dropdown-content">
@@ -69,7 +79,9 @@ const AppNavbar = () => {
           >
             <div className="navbrand-icon"></div>
           </i>
-          <button className="gen-btn logo ml-3 text-3xl font-medium cursor-pointer hover:text-blue-800">
+          <button
+            className={`gen-btn logo ml-3 text-3xl ${navLinkCol} font-medium cursor-pointer hover:text-blue-800`}
+          >
             GeoLogger
           </button>
         </div>
@@ -77,7 +89,7 @@ const AppNavbar = () => {
           <NavItem>
             <Link
               to="/"
-              className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
+              className={`nav-link sibling-hover ${navLinkCol} hover:text-gray-200`}
             >
               Home
             </Link>
@@ -119,6 +131,6 @@ const AppNavbar = () => {
       </nav>
     </div>
   );
-};
+});
 
 export default AppNavbar;
