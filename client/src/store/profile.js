@@ -33,7 +33,7 @@ const { load_profile, clear_profile } = profile.actions;
 export const loadProfile = () => async dispatch => {
   try {
     const res = await axios.get(`/api/profile`);
-    dispatch(load_profile(res.data));
+    res.data ? dispatch(load_profile(res.data)) : dispatch(load_profile({}));
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }

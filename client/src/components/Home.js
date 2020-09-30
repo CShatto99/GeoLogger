@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ModalBody, ListGroup, Button } from "reactstrap";
 import "../css/home.css";
 import usa from "../json/US.json";
@@ -31,10 +32,14 @@ for (let i = 0; i < 10; i++) {
 
 const Home = () => {
   const [landingDiv, setLandingDiv] = useState(false);
+  const { profile, loading } = useSelector(state => state.profile);
 
   useEffect(() => {
     setLandingDiv(!landingDiv);
   }, []);
+
+  if (!loading && JSON.stringify(profile) === "{}")
+    return <Redirect to="/create" />;
 
   return (
     <>

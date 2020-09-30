@@ -17,7 +17,7 @@ const Footer = () => {
       <div>
         <Link
           to="/login"
-          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
+          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Login
         </Link>
@@ -26,7 +26,7 @@ const Footer = () => {
       <div>
         <Link
           to="/register"
-          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
+          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Register
         </Link>
@@ -40,7 +40,7 @@ const Footer = () => {
       <div>
         <Link
           to="/map"
-          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
+          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Map
         </Link>
@@ -49,7 +49,7 @@ const Footer = () => {
       <div>
         <Link
           to="/settings"
-          className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
+          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
         >
           Settings
         </Link>
@@ -59,7 +59,7 @@ const Footer = () => {
         <a
           href="/"
           onClick={() => dispatch(logout())}
-          className="nav-link footer-link-hover cursor-pointer text-gray-400 hover:text-gray-600"
+          className="footer-link footer-link-hover cursor-pointer text-gray-400 hover:text-gray-600"
         >
           Logout
         </a>
@@ -84,7 +84,7 @@ const Footer = () => {
           <div>
             <Link
               to="/"
-              className="nav-link footer-link-hover text-gray-400 hover:text-gray-600"
+              className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
             >
               Home
             </Link>

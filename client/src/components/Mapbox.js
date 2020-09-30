@@ -16,7 +16,7 @@ const Mapbox = () => {
   let geoJSONRegions = [];
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && JSON.stringify(profile) !== "{}") {
       profile.visited.map(region => {
         const { source, coordinates } = geoJSON.regions.find(
           ({ source }) => source === region
@@ -60,9 +60,8 @@ const Mapbox = () => {
     zoom: 3,
   });
 
-  if (!localStorage.getItem("isAuth")) return <Redirect to="/" />;
-
-  if (!profile) return <Redirect to="/create" />;
+  if (!loading && JSON.stringify(profile) === "{}")
+    return <Redirect to="/create" />;
 
   return (
     <>

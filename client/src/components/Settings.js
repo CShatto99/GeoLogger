@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import { updateProfile } from "../store/profile";
@@ -48,6 +48,9 @@ const Settings = () => {
       setSaved(false);
     }, 4000);
   };
+
+  if (!loading && JSON.stringify(profile) === "{}")
+    return <Redirect to="/create" />;
 
   return (
     <div className="settings-div">

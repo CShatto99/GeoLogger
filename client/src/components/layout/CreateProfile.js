@@ -13,7 +13,7 @@ import "../../css/createProfile.css";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
-  const { profile } = useSelector(state => state.profile);
+  const { profile, loading } = useSelector(state => state.profile);
   const { msg } = useSelector(state => state.alert);
   const [mapStyle, setMapStyle] = useState("");
   const [fillColor, setFillColor] = useState("");
@@ -35,18 +35,16 @@ const CreateProfile = () => {
       dispatch(clearAlert());
     }, 4000);
 
-  if (JSON.stringify(profile) !== "{}") return <Redirect to="/map" />;
-
-  console.log(fillColor);
+  if (!loading && JSON.stringify(profile) !== "{}")
+    return <Redirect to="/map" />;
 
   return (
-    <div className="create-profile-div ">
+    <div className="create-profile-div">
       <h1 className="mb-5">Lets Start by Setting Up a Profile</h1>
       <div className="grid gap-5 grid-cols-1 md:grid-cols-2 mb-5">
         <h1 className="font-medium md:col-span-2">Choose a Map Style</h1>
         <div>
           <img
-            className="rounded-lg shadow-lg"
             src={darkV10}
             alt="mapbox dark-v10 theme"
             onClick={() => setMapStyle("dark-v10")}
@@ -59,7 +57,6 @@ const CreateProfile = () => {
         </div>
         <div>
           <img
-            className="rounded-lg shadow-lg"
             src={lightV10}
             alt="mapbox light-v10 theme"
             onClick={() => setMapStyle("light-v10")}
@@ -72,7 +69,6 @@ const CreateProfile = () => {
         </div>
         <div>
           <img
-            className="rounded-lg shadow-lg"
             src={outdoorsV11}
             alt="mapbox outdoors-v11 theme"
             onClick={() => setMapStyle("outdoors-v11")}
@@ -85,7 +81,6 @@ const CreateProfile = () => {
         </div>
         <div>
           <img
-            className="rounded-lg shadow-lg"
             src={streetsV11}
             alt="mapbox streets-v11 theme"
             onClick={() => setMapStyle("streets-v11")}
@@ -98,7 +93,7 @@ const CreateProfile = () => {
         </div>
         <div className="md:col-span-2 sm:col-span-1">
           <img
-            className="sat-img rounded-lg shadow-lg mx-auto"
+            className="sat-img mx-auto"
             src={satelliteV9}
             alt="mapbox satellite-v9 theme"
             onClick={() => setMapStyle("satellite-v9")}
@@ -110,7 +105,7 @@ const CreateProfile = () => {
           <h3 className="mt-2 font-light">Satellite V9</h3>
         </div>
       </div>
-      <div className="flex flex-wrap justify-center text-center">
+      <div className="color-div">
         <h1 className="mb-4 w-full">Choose A Highlight Color</h1>
         {colors.map(({ name, hex }, index) => (
           <div
@@ -125,7 +120,7 @@ const CreateProfile = () => {
               opacity: colorIndex === index ? "0.2" : undefined,
             }}
           >
-            <div className="color-block-label bg-gray-200">{name}</div>
+            <div className="color-block-label">{name}</div>
           </div>
         ))}
         <p className="w-full mt-2">
@@ -134,14 +129,11 @@ const CreateProfile = () => {
         </p>
       </div>
       {msg && (
-        <div className="bg-red-300 rounded-lg p-2">
-          <p className="m-0 text-gray-800 text-center">{msg}</p>
+        <div className="err-div">
+          <p className="m-0">{msg}</p>
         </div>
       )}
-      <button
-        onClick={onSubmit}
-        className="gen-btn bg-blue-700 text-gray-200 font-medium py-1 px-3 mr-2 rounded-lg hover:bg-blue-800"
-      >
+      <button onClick={onSubmit} className="gen-btn form-btn w-full">
         Finish
       </button>
     </div>

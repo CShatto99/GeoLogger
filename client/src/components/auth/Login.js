@@ -8,6 +8,7 @@ import "../../css/authForm.css";
 const Login = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
+  const { profile, loading } = useSelector(state => state.profile);
   const { msg } = useSelector(state => state.alert);
   const [state, setState] = useState({
     email: "",
@@ -32,12 +33,13 @@ const Login = () => {
     dispatch(login(user));
   };
 
-  if (isAuth) return <Redirect to="/map" />;
-
   if (msg)
     setTimeout(() => {
       dispatch(clearAlert());
     }, 4000);
+
+  if (!loading && JSON.stringify(profile) === "{}")
+    return <Redirect to="/create" />;
 
   return (
     <div className="form-div">

@@ -7,7 +7,7 @@ import "../../css/authForm.css";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { isAuth } = useSelector(state => state.auth);
+  const { profile, loading } = useSelector(state => state.profile);
   const { msg } = useSelector(state => state.alert);
   const [state, setState] = useState({
     username: "",
@@ -41,7 +41,8 @@ const Register = () => {
       dispatch(clearAlert());
     }, 4000);
 
-  if (isAuth) return <Redirect to="/create" />;
+  if (!loading && JSON.stringify(profile) === "{}")
+    return <Redirect to="/create" />;
 
   return (
     <div className="form-div">
