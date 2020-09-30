@@ -27,16 +27,17 @@ const AppNavbar = withRouter(({ location }) => {
       <NavItem>
         <Link
           to="/login"
-          className="nav-link sibling-hover text-gray-400 hover:text-gray-200"
+          className="nav-link text-gray-400 hover:text-gray-200"
+          onClick={() => setNavIcon("nav-items-hide")}
         >
           Login
         </Link>
-        <div className="sibling-highlight" />
       </NavItem>
       <NavItem>
         <Link
           to="/register"
-          className="gen-btn nav-link bg-blue-700 text-white font-medium mt-1 ml-3 py-1 px-3 rounded-lg hover:bg-blue-800"
+          className="nav-link reg-btn hover:bg-blue-800"
+          onClick={() => setNavIcon("nav-items-hide")}
         >
           Register
         </Link>
@@ -49,20 +50,29 @@ const AppNavbar = withRouter(({ location }) => {
       <NavItem>
         <Link
           to="/map"
-          className={`nav-link sibling-hover ${navLinkCol} hover:text-gray-200`}
+          className={`nav-link ${navLinkCol} hover:text-gray-200`}
+          onClick={() => setNavIcon("nav-items-hide")}
         >
           Map
         </Link>
-        <div className="sibling-highlight" />
       </NavItem>
       <NavItem>
         <div className="dropdown">
-          <button className={`nav-link ${navLinkCol} hover:text-gray-200 pb-1`}>
+          <div className={`nav-link ${navLinkCol} hover:text-gray-200`}>
             Profile
-          </button>
+          </div>
           <div className="dropdown-content">
-            <Link to="/settings">Settings</Link>
-            <a onClick={() => dispatch(logout())}>Logout</a>
+            <Link to="/settings" onClick={() => setNavIcon("nav-items-hide")}>
+              Settings
+            </Link>
+            <a
+              onClick={() => {
+                setNavIcon("nav-items-hide");
+                dispatch(logout());
+              }}
+            >
+              Logout
+            </a>
           </div>
         </div>
       </NavItem>
@@ -72,7 +82,7 @@ const AppNavbar = withRouter(({ location }) => {
   return (
     <div className="flex justify-center">
       <nav className="pt-3 pl-4 pr-4 max-w-6xl w-full flex justify-between">
-        <div className="flex items-center">
+        <div className="nav-brand flex items-center">
           <i
             className="gen-btn fa fa-globe fa-3x cursor-pointer hover:text-blue-800"
             aria-hidden="true"
@@ -85,15 +95,15 @@ const AppNavbar = withRouter(({ location }) => {
             GeoLogger
           </button>
         </div>
-        <ul className={`${navIcon} flex justify-end items-center`}>
+        <ul className={`${navIcon} flex justify-end items-center mb-0`}>
           <NavItem>
             <Link
               to="/"
-              className={`nav-link sibling-hover ${navLinkCol} hover:text-gray-200`}
+              className={`nav-link ${navLinkCol} hover:text-gray-200`}
+              onClick={() => setNavIcon("nav-items-hide")}
             >
               Home
             </Link>
-            <div className="sibling-highlight" />
           </NavItem>
           {isAuth ? userLinks : guestLinks}
         </ul>
@@ -105,28 +115,30 @@ const AppNavbar = withRouter(({ location }) => {
               : setNavIcon("nav-items-hide");
           }}
         >
-          <div
-            className="bar1"
-            style={{
-              transform:
-                navIcon === "nav-items-show" &&
-                "rotate(-45deg) translate(-10px, 10px)",
-            }}
-          />
-          <div
-            className="bar2"
-            style={{
-              opacity: navIcon === "nav-items-show" && "0",
-            }}
-          />
-          <div
-            className="bar3"
-            style={{
-              transform:
-                navIcon === "nav-items-show" &&
-                "rotate(45deg) translate(-3px, -2px)",
-            }}
-          />
+          <div className="nav-hamburger-content">
+            <div
+              className="bar1"
+              style={{
+                transform:
+                  navIcon === "nav-items-show" &&
+                  "rotate(-45deg) translate(-5px, 5px)",
+              }}
+            />
+            <div
+              className="bar2"
+              style={{
+                opacity: navIcon === "nav-items-show" && "0",
+              }}
+            />
+            <div
+              className="bar3"
+              style={{
+                transform:
+                  navIcon === "nav-items-show" &&
+                  "rotate(45deg) translate(-6px, -6px)",
+              }}
+            />
+          </div>
         </div>
       </nav>
     </div>

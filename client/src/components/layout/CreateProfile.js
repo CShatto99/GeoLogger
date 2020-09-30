@@ -40,9 +40,9 @@ const CreateProfile = () => {
   console.log(fillColor);
 
   return (
-    <div className="min-h-screen max-w-6xl mx-auto text-center grid grid-cols-1 mb-5 p-4">
+    <div className="create-profile-div ">
       <h1 className="mb-5">Lets Start by Setting Up a Profile</h1>
-      <div className="grid md:grid-cols-2 grid-cols-1 gap-5 text-center mb-5">
+      <div className="grid gap-5 grid-cols-1 md:grid-cols-2 mb-5">
         <h1 className="font-medium md:col-span-2">Choose a Map Style</h1>
         <div>
           <img

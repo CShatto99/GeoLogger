@@ -37,7 +37,9 @@ const Main = withRouter(({ location }) => {
           <PrivateRoute exact path="/settings" component={Settings} />
           <PrivateRoute exact path="/create" component={CreateProfile} />
         </Switch>
-        {location.pathname !== "/map" && <Footer />}
+        {location.pathname !== "/map" && location.pathname !== "/create" && (
+          <Footer />
+        )}
       </Provider>
     </div>
   );

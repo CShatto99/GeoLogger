@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 6rem 2rem 2rem 2rem;
+  padding: 6rem 1.5rem 1.5rem 1.5rem;
 }
 
 .form-div-inner {
@@ -46,4 +46,10 @@
 
 .form-btn:hover {
   background-color: #2c5282;
+}
+
+@media only screen and (max-width: 640px) {
+  .form-div {
+    padding: 6rem 1rem 1rem 1rem;
+  }
 }
