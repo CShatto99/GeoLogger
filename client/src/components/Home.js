@@ -67,24 +67,40 @@ const Home = () => {
         <div className="map-div-inner grid md:grid-cols-2 grid-cols-1">
           <h1 className="col-span-1 md:col-span-2">Choose a Map Style</h1>
           <div>
-            <img src={darkV10} alt="mapbox dark-v10 theme" />
+            <img
+              className="home-img"
+              src={darkV10}
+              alt="mapbox dark-v10 theme"
+            />
             <h3>Dark V10</h3>
           </div>
           <div>
-            <img src={lightV10} alt="mapbox light-v10 theme" />
+            <img
+              className="home-img"
+              src={lightV10}
+              alt="mapbox light-v10 theme"
+            />
             <h3>Light V10</h3>
           </div>
           <div>
-            <img src={outdoorsV11} alt="mapbox outdoors-v11 theme" />
+            <img
+              className="home-img"
+              src={outdoorsV11}
+              alt="mapbox outdoors-v11 theme"
+            />
             <h3>Outdoors V11</h3>
           </div>
           <div>
-            <img src={streetsV11} alt="mapbox streets-v11 theme" />
+            <img
+              className="home-img"
+              src={streetsV11}
+              alt="mapbox streets-v11 theme"
+            />
             <h3>Streets V11</h3>
           </div>
           <div className="md:col-span-2 sm:col-span-1">
             <img
-              className="sat-img"
+              className="sat-img home-img"
               src={satelliteV9}
               alt="mapbox satellite-v9 theme"
             />
@@ -96,7 +112,11 @@ const Home = () => {
       <div className="vaca-history grid-cols-1 md:grid-cols-2">
         <h1 className="col-span-1 md:col-span-2">Log Your Vacation History</h1>
         <div className="my-auto">
-          <img src={vacaEx} alt="mapbox outdoors-v11 theme" />
+          <img
+            className="home-img"
+            src={vacaEx}
+            alt="mapbox outdoors-v11 theme"
+          />
         </div>
         <div className="modal-prop">
           <ModalBody>

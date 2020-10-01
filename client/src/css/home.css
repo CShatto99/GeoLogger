@@ -1,8 +1,8 @@
-img {
+.home-img {
   transition: ease-in 0.1s;
 }
 
-img:hover {
+.home-img:hover {
   transform: scale(1.1);
 }
 
