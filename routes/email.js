@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
     let info = await transporter.sendMail({
       from: email,
       to: process.env.USER_EMAIL,
-      subject: "New Contact Message",
+      subject: `Message from ${email}`,
       text: message,
       html: htmlEmail,
     });
