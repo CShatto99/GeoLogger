@@ -1,14 +1,25 @@
-footer a {
+.footer-div {
+  max-width: 72rem;
+  margin: 0 auto;
+  grid-gap: 2.5rem;
+  text-align: center;
+  background-color: #e2e8f0;
+  color: #1a202c;
 }
 
 .footer-link {
   margin-bottom: 2rem;
   text-decoration: none !important;
+  color: #1a202c;
+}
+
+.footer-link:hover {
+  color: #2b6cb0;
 }
 
 .footer-link-highlight {
   transition: ease-in-out 0.2s;
-  border-top: 1.5px solid #718096;
+  border-top: 1.5px solid #2b6cb0;
   width: 0%;
   margin: 0 auto;
 }
@@ -19,6 +30,7 @@ footer a {
 
 .footer-icon {
   transition: ease-in-out 0.2s;
+  color: #1a202c;
 }
 
 .footer-icon:hover {

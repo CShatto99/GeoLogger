@@ -29,6 +29,7 @@
 
 .nav-link:hover {
   background-color: rgba(0, 0, 0, 0.5);
+  color: #2b6cb0;
 }
 
 /* Dropdown Button */
