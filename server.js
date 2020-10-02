@@ -12,12 +12,18 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
+app.use((_, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 connectDB();
 
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/user", require("./routes/user"));
 app.use("/api/profile", require("./routes/profile"));
+app.use("/api/contact", require("./routes/email"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

@@ -21,13 +21,6 @@ h2 {
   gap: 1.25rem;
 }
 
-.saved-changes {
-  grid-column: span 5 / span 5;
-  background-color: #9ae6b4;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
-}
-
 .settings-card {
   grid-column: span 5 / span 5;
   background-color: #e2e8f0;

@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { logout } from "../../store/auth";
+import { setAlert, clearAlert } from "../../store/alert";
 import "../../css/footer.css";
 
 const Footer = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
+  const { msg, status } = useSelector(state => state.alert);
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  const onChange = () => {};
+  const onSubmit = async e => {
+    e.preventDefault();
 
-  const onSubmit = () => {};
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const { data } = await axios.post(
+        "/api/contact",
+        { email, message },
+        config
+      );
+      dispatch(setAlert(data.msg, 200));
+
+      setEmail("");
+      setMessage("");
+    } catch (err) {
+      dispatch(setAlert(err.response.data.msg, err.response.status));
+    }
+  };
 
   const guestLinks = (
     <>
@@ -68,6 +93,13 @@ const Footer = () => {
     </>
   );
 
+  if (msg)
+    setTimeout(() => {
+      dispatch(clearAlert());
+    }, 4000);
+
+  console.log(email, message);
+
   return (
     <footer className="bg-transparent">
       <div className="max-w-6xl mx-auto grid md:grid-cols-3 sm:grid-cols-1 gap-10 text-center text-gray-200 p-4 sm:p-5">
@@ -102,7 +134,8 @@ const Footer = () => {
                 name="email"
                 className="cust-input"
                 placeholder="Email"
-                onChange={e => onChange(e)}
+                onChange={e => setEmail(e.target.value)}
+                value={email}
               />
             </div>
             <div className="mb-3">
@@ -112,13 +145,20 @@ const Footer = () => {
                 name="message"
                 className="cust-input"
                 placeholder="Message"
-                onChange={e => onChange(e)}
+                onChange={e => setMessage(e.target.value)}
+                value={message}
               />
             </div>
             <div className="flex justify-center items-center">
               <button className="gen-btn bg-blue-700 text-white font-medium py-1 px-3 mr-2 rounded-lg hover:bg-blue-800">
                 Send
-              </button>
+              </button>{" "}
+              {msg && status === 400 && (
+                <div className="err-div py-1">{msg}</div>
+              )}
+              {msg && status === 200 && (
+                <div className="saved-changes py-1">{msg}</div>
+              )}
             </div>
           </form>
         </div>
