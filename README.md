@@ -32,7 +32,7 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
 
 ## Local Setup
 
-1. In the root directory, rename `.env.example` to `.env` and add your Mongo URI, JWT access token secret, and JWT refresh token secret to the file.
+1. In the root directory, rename `.env.example` to `.env` and add your Mongo URI, JWT access token secret,WT refresh token secret, gmail email, and gmail password to the file.
 2. In the `client` directory, rename `.env.example` to `.env` and add your Mapbox token to the file.
 3. Run the following commands
 
