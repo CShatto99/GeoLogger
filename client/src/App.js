@@ -5,6 +5,7 @@ import {
   Route,
   withRouter,
 } from "react-router-dom";
+import { Provider } from "react-redux";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import AppNavbar from "./components/layout/AppNavbar";
 import Register from "./components/auth/Register";
@@ -14,11 +15,10 @@ import Home from "./components/Home";
 import Mapbox from "./components/Mapbox";
 import Settings from "./components/Settings";
 import Footer from "./components/layout/Footer";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import { Provider } from "react-redux";
 import store from "./store/index";
 import { refreshUser } from "./store/auth";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 const Main = withRouter(({ location }) => {
   useEffect(() => {

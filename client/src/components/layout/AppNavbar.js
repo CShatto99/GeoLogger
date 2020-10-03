@@ -80,22 +80,15 @@ const AppNavbar = withRouter(({ location }) => {
   );
 
   return (
-    <div className="flex justify-center">
-      <nav className="pt-3 pl-4 pr-4 max-w-6xl w-full flex justify-between">
-        <div className="nav-brand flex items-center">
-          <i
-            className="gen-btn fa fa-globe fa-3x cursor-pointer hover:text-blue-800"
-            aria-hidden="true"
-          >
+    <div className="nav-div">
+      <nav className="nav-div-inner">
+        <div className="nav-brand">
+          <i className="gen-btn fa fa-globe" aria-hidden="true">
             <div className="navbrand-icon"></div>
           </i>
-          <button
-            className={`gen-btn logo ml-3 text-3xl ${navLinkCol} font-medium cursor-pointer hover:text-blue-800`}
-          >
-            GeoLogger
-          </button>
+          <button className={`gen-btn logo ${navLinkCol}`}>GeoLogger</button>
         </div>
-        <ul className={`${navIcon} flex justify-end items-center mb-0`}>
+        <ul className={`nav-items ${navIcon}`}>
           <NavItem>
             <Link
               to="/"
