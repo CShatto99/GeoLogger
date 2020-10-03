@@ -114,7 +114,7 @@ const AppNavbar = withRouter(({ location }) => {
               style={{
                 transform:
                   navIcon === "nav-items-show" &&
-                  "rotate(-45deg) translate(-5px, 5px)",
+                  "rotate(-45deg) translate(-3px, 6px)",
               }}
             />
             <div
@@ -128,7 +128,7 @@ const AppNavbar = withRouter(({ location }) => {
               style={{
                 transform:
                   navIcon === "nav-items-show" &&
-                  "rotate(45deg) translate(-6px, -6px)",
+                  "rotate(45deg) translate(-5px, -8px)",
               }}
             />
           </div>
