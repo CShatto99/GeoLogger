@@ -47,7 +47,7 @@ const CreateProfile = () => {
         <h1 className="font-medium md:col-span-2">Choose a Map Style</h1>
         <div>
           <img
-            className={mapStyle === "dark-v10" ? "cp-img-active" : "cp-img"}
+            className={mapStyle === "dark-v10" ? "cust-img-active" : "cust-img"}
             src={darkV10}
             alt="mapbox dark-v10 theme"
             onClick={() => setMapStyle("dark-v10")}
@@ -61,7 +61,9 @@ const CreateProfile = () => {
         </div>
         <div>
           <img
-            className={mapStyle === "light-v10" ? "cp-img-active" : "cp-img"}
+            className={
+              mapStyle === "light-v10" ? "cust-img-active" : "cust-img"
+            }
             src={lightV10}
             alt="mapbox light-v10 theme"
             onClick={() => setMapStyle("light-v10")}
@@ -75,7 +77,9 @@ const CreateProfile = () => {
         </div>
         <div>
           <img
-            className={mapStyle === "outdoors-v11" ? "cp-img-active" : "cp-img"}
+            className={
+              mapStyle === "outdoors-v11" ? "cust-img-active" : "cust-img"
+            }
             src={outdoorsV11}
             alt="mapbox outdoors-v11 theme"
             onClick={() => setMapStyle("outdoors-v11")}
@@ -89,7 +93,9 @@ const CreateProfile = () => {
         </div>
         <div>
           <img
-            className={mapStyle === "streets-v11" ? "cp-img-active" : "cp-img"}
+            className={
+              mapStyle === "streets-v11" ? "cust-img-active" : "cust-img"
+            }
             src={streetsV11}
             alt="mapbox streets-v11 theme"
             onClick={() => setMapStyle("streets-v11")}
@@ -105,8 +111,8 @@ const CreateProfile = () => {
           <img
             className={
               mapStyle === "satellite-v9"
-                ? "cp-img-active sat-img mx-auto"
-                : "cp-img sat-img mx-auto"
+                ? "cust-img-active sat-img mx-auto"
+                : "cust-img sat-img mx-auto"
             }
             src={satelliteV9}
             alt="mapbox satellite-v9 theme"

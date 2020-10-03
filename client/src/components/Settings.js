@@ -119,68 +119,85 @@ const Settings = () => {
             <h4 className="mb-3">Map Style</h4>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
               <div className="md:col-span-1 sm:col-span-2">
-                <label>Dark V10</label>
+                <label>
+                  Dark V10{" "}
+                  {mapStyle === "dark-v10" && (
+                    <i className="fa fa-check-square" aria-hidden="true"></i>
+                  )}
+                </label>
                 <img
-                  className="thumbnail"
+                  className={
+                    mapStyle === "dark-v10" ? "cust-img-active" : "cust-img"
+                  }
                   src={darkV10}
                   alt="mapbox dark-v10 theme"
                   onClick={() => setMapStyle("dark-v10")}
-                  style={{
-                    filter: mapStyle === "dark-v10" && "blur(2px)",
-                    transform: mapStyle === "dark-v10" && "scale(1.2)",
-                  }}
                 />
               </div>
               <div className="md:col-span-1 sm:col-span-2">
-                <label>Light V10</label>
+                <label>
+                  Light V10{" "}
+                  {mapStyle === "light-v10" && (
+                    <i className="fa fa-check-square" aria-hidden="true"></i>
+                  )}
+                </label>
                 <img
-                  className="thumbnail"
+                  className={
+                    mapStyle === "light-v10" ? "cust-img-active" : "cust-img"
+                  }
                   src={lightV10}
                   alt="mapbox light-v10 theme"
                   onClick={() => setMapStyle("light-v10")}
-                  style={{
-                    filter: mapStyle === "light-v10" && "blur(2px)",
-                    transform: mapStyle === "light-v10" && "scale(1.2)",
-                  }}
                 />
               </div>
               <div className="md:col-span-1 sm:col-span-2">
-                <label>Outdoors V11</label>
+                <label>
+                  Outdoors V11{" "}
+                  {mapStyle === "outdoors-v11" && (
+                    <i className="fa fa-check-square" aria-hidden="true"></i>
+                  )}
+                </label>
                 <img
-                  className="thumbnail"
+                  className={
+                    mapStyle === "outdoors-v11" ? "cust-img-active" : "cust-img"
+                  }
                   src={outdoorsV11}
                   alt="mapbox outdoors-v11 theme"
                   onClick={() => setMapStyle("outdoors-v11")}
-                  style={{
-                    filter: mapStyle === "outdoors-v11" && "blur(2px)",
-                    transform: mapStyle === "outdoors-v11" && "scale(1.2)",
-                  }}
                 />
               </div>
               <div className="md:col-span-1 sm:col-span-2">
-                <label>Streets V11</label>
+                <label>
+                  Streets V11{" "}
+                  {mapStyle === "streets-v11" && (
+                    <i className="fa fa-check-square" aria-hidden="true"></i>
+                  )}
+                </label>
                 <img
-                  className="thumbnail"
+                  className={
+                    mapStyle === "streets-v11" ? "cust-img-active" : "cust-img"
+                  }
                   src={streetsV11}
                   alt="mapbox streets-v11 theme"
                   onClick={() => setMapStyle("streets-v11")}
-                  style={{
-                    filter: mapStyle === "streets-v11" && "blur(2px)",
-                    transform: mapStyle === "streets-v11" && "scale(1.2)",
-                  }}
                 />
               </div>
               <div className="col-span-2 sm:col-span-1">
-                <label>Satellite V9</label>
+                <label>
+                  Satellite V9{" "}
+                  {mapStyle === "satellite-v9" && (
+                    <i className="fa fa-check-square" aria-hidden="true"></i>
+                  )}
+                </label>
                 <img
-                  className="thumbnail sat-img-settings"
+                  className={
+                    mapStyle === "satellite-v9"
+                      ? "cust-img-active sat-img-settings"
+                      : "cust-img  sat-img-settings"
+                  }
                   src={satelliteV9}
                   alt="mapbox satellite-v9 theme"
                   onClick={() => setMapStyle("satellite-v9")}
-                  style={{
-                    filter: mapStyle === "satellite-v9" && "blur(2px)",
-                    transform: mapStyle === "satellite-v9" && "scale(1.2)",
-                  }}
                 />
               </div>
             </div>
