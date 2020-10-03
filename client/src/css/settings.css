@@ -37,28 +37,42 @@ h2 {
   border: 1px solid #2b6cb0 !important;
 }
 
-.settings-theme {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.theme-option {
-  padding: 0.3rem 0.5rem;
-  transition: ease-out 200ms;
-  border-radius: 0.3rem;
-}
-
-.theme-option:hover {
-  transition: ease-in 200ms;
-  background-color: #cbd5e0;
-  cursor: pointer;
-}
-
 .sat-img-settings {
   width: 50%;
   margin: 0 auto;
+}
+
+.account-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.account-field h4,
+.account-field h5 {
+  margin: 0;
+}
+
+.fa-settings {
+  cursor: pointer;
+  transition: ease-in-out 200ms;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.fa-pencil-square-o {
+  color: #2b6cb0;
+}
+
+.fa-pencil-square-o:hover {
+  color: #1a202c;
+  transition: ease-in-out 200ms;
+}
+
+.fa-ch-sq-cust:hover {
+  color: #70bd8b;
+  transition: ease-in-out 200ms;
 }
 
 @media only screen and (max-width: 550px) {

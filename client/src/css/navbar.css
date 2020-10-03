@@ -96,8 +96,8 @@
   margin-top: 5px;
   border-radius: 4px;
   z-index: 1;
-  -webkit-transition: ease-out 300ms;
-  /* s */
+  -webkit-transition: max-height ease-out 400ms, opacity ease-out 200ms,
+    visibility ease-out 200ms;
   transition: max-height ease-out 400ms, opacity ease-out 200ms,
     visibility ease-out 200ms;
 }
@@ -108,7 +108,7 @@
   padding: 8px 12px;
   text-decoration: none !important;
   display: block;
-  transition: background-color ease-out 0.15s;
+  transition: background-color ease-out 150ms;
   cursor: pointer;
   border-radius: 4px;
 }

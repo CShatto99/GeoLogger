@@ -20,6 +20,9 @@ const Settings = () => {
   const [mapStyle, setMapStyle] = useState("");
   const [fillColor, setFillColor] = useState("");
   const [visited, setVisited] = useState([]);
+  const [editAccount, setEditAccount] = useState([0, 0]);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (!loading) {
@@ -27,6 +30,8 @@ const Settings = () => {
       setMapStyle(profile.mapStyle);
       setFillColor(profile.fillColor);
       setVisited(profile.visited);
+      setUsername(user.username);
+      setEmail(user.email);
     }
   }, [profile]);
 
@@ -52,6 +57,7 @@ const Settings = () => {
   if (!loading && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
 
+  console.log(editAccount);
   return (
     <div className="settings-div">
       {loading ? (
@@ -83,8 +89,78 @@ const Settings = () => {
 
           <div className="settings-card">
             <h2>Account Info</h2>
-            <h4>{user.username}</h4>
-            <h5>{user.email}</h5>
+            <div className="account-field">
+              {editAccount[0] < 1 ? (
+                <>
+                  <i
+                    onClick={() => {
+                      editAccount[0] < 1
+                        ? setEditAccount([1, 0])
+                        : setEditAccount([0, 0]);
+                    }}
+                    className="fa fa-pencil-square-o fa-settings"
+                    aria-hidden="true"
+                  ></i>
+                  <h4>{username} </h4>
+                </>
+              ) : (
+                <>
+                  <i
+                    onClick={() => {
+                      editAccount[0] < 1
+                        ? setEditAccount([1, 0])
+                        : setEditAccount([0, 0]);
+                    }}
+                    className="fa fa-check-square fa-settings fa-ch-sq-cust"
+                    aria-hidden="true"
+                  ></i>
+                  <input
+                    type="text"
+                    name="username"
+                    className="cust-input"
+                    placeholder="Username"
+                    onChange={e => setUsername(e.target.value)}
+                    value={username}
+                  />
+                </>
+              )}
+            </div>
+            <div className="account-field">
+              {editAccount[1] < 1 ? (
+                <>
+                  <i
+                    onClick={() => {
+                      editAccount[1] < 1
+                        ? setEditAccount([0, 1])
+                        : setEditAccount([0, 0]);
+                    }}
+                    className="fa fa-pencil-square-o fa-settings"
+                    aria-hidden="true"
+                  ></i>
+                  <h5>{email} </h5>
+                </>
+              ) : (
+                <>
+                  <i
+                    onClick={() => {
+                      editAccount[1] < 1
+                        ? setEditAccount([0, 1])
+                        : setEditAccount([0, 0]);
+                    }}
+                    className="fa fa-check-square fa-settings fa-ch-sq-cust"
+                    aria-hidden="true"
+                  ></i>
+                  <input
+                    type="text"
+                    name="email"
+                    className="cust-input"
+                    placeholder="Email"
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
+                  />
+                </>
+              )}
+            </div>
             <p>
               Registered on{" "}
               <Moment format="MMM Do, YYYY hh:mm:ss A">{user.date}</Moment>
@@ -93,29 +169,6 @@ const Settings = () => {
 
           <div className="settings-card">
             <h2>User Settings</h2>
-            <div className="settings-theme">
-              <h4 className="w-full">Site Theme</h4>
-              <div
-                className="theme-option mr-2"
-                onClick={() => setTheme("light")}
-                style={{
-                  backgroundColor: theme === "light" && "#2b6cb0",
-                  color: theme === "light" && "#e2e8f0",
-                }}
-              >
-                Light
-              </div>
-              <div
-                className="theme-option"
-                onClick={() => setTheme("dark")}
-                style={{
-                  backgroundColor: theme === "dark" && "#2b6cb0",
-                  color: theme === "dark" && "#e2e8f0",
-                }}
-              >
-                Dark
-              </div>
-            </div>
             <h4 className="mb-3">Map Style</h4>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
               <div className="md:col-span-1 sm:col-span-2">

@@ -40,19 +40,13 @@ const Footer = () => {
   const guestLinks = (
     <>
       <div>
-        <Link
-          to="/login"
-          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
-        >
+        <Link to="/login" className="footer-link footer-link-hover">
           Login
         </Link>
         <div className="footer-link-highlight" />
       </div>
       <div>
-        <Link
-          to="/register"
-          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
-        >
+        <Link to="/register" className="footer-link footer-link-hover">
           Register
         </Link>
         <div className="footer-link-highlight" />
@@ -63,19 +57,13 @@ const Footer = () => {
   const authLinks = (
     <>
       <div>
-        <Link
-          to="/map"
-          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
-        >
+        <Link to="/map" className="footer-link footer-link-hover">
           Map
         </Link>
         <div className="footer-link-highlight" />
       </div>
       <div>
-        <Link
-          to="/settings"
-          className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
-        >
+        <Link to="/settings" className="footer-link footer-link-hover">
           Settings
         </Link>
         <div className="footer-link-highlight" />
@@ -84,7 +72,7 @@ const Footer = () => {
         <a
           href="/"
           onClick={() => dispatch(logout())}
-          className="footer-link footer-link-hover cursor-pointer text-gray-400 hover:text-gray-600"
+          className="footer-link footer-link-hover"
         >
           Logout
         </a>
@@ -115,7 +103,7 @@ const Footer = () => {
         <div>
           <Link
             to="/"
-            className="footer-link footer-link-hover text-gray-400 hover:text-gray-600"
+            className="footer-link footer-link-hover hover:text-gray-600"
           >
             Home
           </Link>
@@ -148,13 +136,13 @@ const Footer = () => {
               value={message}
             />
           </div>
-          <div className="flex justify-center items-center">
-            <button className="gen-btn bg-blue-700 text-white font-medium py-1 px-3 mr-2 rounded-lg hover:bg-blue-800">
-              Send
-            </button>{" "}
-            {msg && status === 400 && <div className="err-div py-1">{msg}</div>}
+          <div className="contact-submit">
+            <button className="gen-btn primary-btn">Send</button>{" "}
+            {msg && status === 400 && (
+              <div className="err-div py-1 ml-1">{msg}</div>
+            )}
             {msg && status === 200 && (
-              <div className="saved-changes py-1">{msg}</div>
+              <div className="saved-changes py-1 ml-1">{msg}</div>
             )}
           </div>
         </form>

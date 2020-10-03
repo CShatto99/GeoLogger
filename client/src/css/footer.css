@@ -37,3 +37,9 @@
   transition: ease-in-out 0.2s;
   color: #4743d1;
 }
+
+.contact-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
