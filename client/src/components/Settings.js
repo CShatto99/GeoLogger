@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import { updateProfile } from "../store/profile";
+import { updateUser } from "../store/auth";
 import "../css/settings.css";
 import CustSpinner from "./layout/CustSpinner";
 import darkV10 from "../img/dark-v10.png";
@@ -15,12 +16,14 @@ const Settings = () => {
   const dispatch = useDispatch();
   const { profile, loading } = useSelector(state => state.profile);
   const { user } = useSelector(state => state.auth);
+  const { msg, status } = useSelector(state => state.alert);
   const [saved, setSaved] = useState(false);
   const [theme, setTheme] = useState("");
   const [mapStyle, setMapStyle] = useState("");
   const [fillColor, setFillColor] = useState("");
   const [visited, setVisited] = useState([]);
   const [editAccount, setEditAccount] = useState([0, 0]);
+  const [accountEdited, setAccountEdited] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
 
@@ -33,7 +36,7 @@ const Settings = () => {
       setUsername(user.username);
       setEmail(user.email);
     }
-  }, [profile]);
+  }, [profile, user]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -46,8 +49,7 @@ const Settings = () => {
     };
 
     dispatch(updateProfile(profile));
-
-    setSaved(true);
+    accountEdited && dispatch(updateUser({ username, email }));
 
     setTimeout(() => {
       setSaved(false);
@@ -57,7 +59,6 @@ const Settings = () => {
   if (!loading && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
 
-  console.log(editAccount);
   return (
     <div className="settings-div">
       {loading ? (
@@ -66,12 +67,16 @@ const Settings = () => {
         </div>
       ) : (
         <div className="settings-div-inner grid grid-cols-5">
-          {saved && (
-            <div className="saved-changes">
-              <p className="m-0">Changes Saved!</p>
+          {msg !== "Please enter both fields" && status === 400 && (
+            <div className="err-div col-span-5">
+              <p className="m-0">{msg}</p>
             </div>
           )}
-
+          {msg && status === 200 && (
+            <div className="saved-changes">
+              <p className="m-0">{msg}</p>
+            </div>
+          )}
           <div className="settings-card">
             <div className="flex justify-between items-center">
               <Link className="gen-btn danger-btn" to="/map">
@@ -86,7 +91,6 @@ const Settings = () => {
               </button>
             </div>
           </div>
-
           <div className="settings-card">
             <h2>Account Info</h2>
             <div className="account-field">
@@ -119,7 +123,10 @@ const Settings = () => {
                     name="username"
                     className="cust-input"
                     placeholder="Username"
-                    onChange={e => setUsername(e.target.value)}
+                    onChange={e => {
+                      setUsername(e.target.value);
+                      setAccountEdited(true);
+                    }}
                     value={username}
                   />
                 </>
@@ -155,7 +162,10 @@ const Settings = () => {
                     name="email"
                     className="cust-input"
                     placeholder="Email"
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={e => {
+                      setEmail(e.target.value);
+                      setAccountEdited(true);
+                    }}
                     value={email}
                   />
                 </>
@@ -166,7 +176,6 @@ const Settings = () => {
               <Moment format="MMM Do, YYYY hh:mm:ss A">{user.date}</Moment>
             </p>
           </div>
-
           <div className="settings-card">
             <h2>User Settings</h2>
             <h4 className="mb-3">Map Style</h4>
@@ -284,7 +293,6 @@ const Settings = () => {
                   for hex color codes
                 </p>
               </div>
-
               <div></div>
             </form>
           </div>

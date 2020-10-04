@@ -95,6 +95,22 @@ export const register = user => async dispatch => {
   }
 };
 
+export const updateUser = user => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const { data } = await axios.put("/api/user", user, config);
+
+    dispatch(loadUser());
+  } catch (err) {
+    dispatch(setAlert(err.response.data.msg, err.response.status));
+  }
+};
+
 export const refreshUser = () => async dispatch => {
   try {
     const { data } = await axios.get("/api/auth/token");

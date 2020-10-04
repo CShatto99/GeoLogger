@@ -144,7 +144,7 @@
 
 .nav-items {
   display: flex;
-  justify-content: end !important;
+  justify-content: flex-end !important;
   align-items: center;
   margin-bottom: 0;
 }

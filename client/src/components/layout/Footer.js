@@ -86,8 +86,6 @@ const Footer = () => {
       dispatch(clearAlert());
     }, 4000);
 
-  console.log(email, message);
-
   return (
     <footer className="footer-div grid md:grid-cols-3 sm:grid-cols-1 p-4 sm:p-5">
       <div>
@@ -138,7 +136,7 @@ const Footer = () => {
           </div>
           <div className="contact-submit">
             <button className="gen-btn primary-btn">Send</button>{" "}
-            {msg && status === 400 && (
+            {msg === "Please enter both fields" && status === 400 && (
               <div className="err-div py-1 ml-1">{msg}</div>
             )}
             {msg && status === 200 && (

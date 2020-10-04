@@ -38,8 +38,6 @@ const CreateProfile = () => {
   if (!loading && JSON.stringify(profile) !== "{}")
     return <Redirect to="/map" />;
 
-  console.log(mapStyle);
-
   return (
     <div className="create-profile-div">
       <h1 className="mb-5">Lets Start by Setting Up a Profile</h1>
