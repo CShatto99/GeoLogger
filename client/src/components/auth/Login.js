@@ -40,8 +40,7 @@ const Login = () => {
 
   if (!loading && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
-
-  if (isAuth) return <Redirect to="/map" />;
+  else if (isAuth) return <Redirect to="/map" />;
 
   return (
     <div className="form-div">

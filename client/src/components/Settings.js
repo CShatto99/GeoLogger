@@ -17,7 +17,6 @@ const Settings = () => {
   const { profile, loading } = useSelector(state => state.profile);
   const { user } = useSelector(state => state.auth);
   const { msg, status } = useSelector(state => state.alert);
-  const [saved, setSaved] = useState(false);
   const [theme, setTheme] = useState("");
   const [mapStyle, setMapStyle] = useState("");
   const [fillColor, setFillColor] = useState("");
@@ -50,10 +49,6 @@ const Settings = () => {
 
     dispatch(updateProfile(profile));
     accountEdited && dispatch(updateUser({ username, email }));
-
-    setTimeout(() => {
-      setSaved(false);
-    }, 4000);
   };
 
   if (!loading && JSON.stringify(profile) === "{}")

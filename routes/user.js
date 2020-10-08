@@ -128,6 +128,7 @@ router.post("/register", async (req, res) => {
     const accessToken = genAccessToken({ id: newUser._id });
     const refreshToken = genRefreshToken({ id: newUser._id });
 
+    // MAKE COOKIE EXPIRE
     res.cookie("token", refreshToken, { httpOnly: true });
 
     res.json({ accessToken });
