@@ -74,7 +74,10 @@ router.post("/", async (req, res) => {
     const accessToken = genAccessToken({ id: user._id });
     const refreshToken = genRefreshToken({ id: user._id });
 
-    res.cookie("token", refreshToken, { httpOnly: true });
+    res.cookie("token", refreshToken, {
+      expires: new Date(Date.now() + 604800),
+      httpOnly: true,
+    });
 
     res.json({ accessToken });
   } catch (err) {
@@ -129,7 +132,10 @@ router.post("/register", async (req, res) => {
     const refreshToken = genRefreshToken({ id: newUser._id });
 
     // MAKE COOKIE EXPIRE
-    res.cookie("token", refreshToken, { httpOnly: true });
+    res.cookie("token", refreshToken, {
+      expires: new Date(Date.now() + 604800),
+      httpOnly: true,
+    });
 
     res.json({ accessToken });
   } catch (err) {
