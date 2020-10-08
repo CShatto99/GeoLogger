@@ -13,7 +13,8 @@ import "../../css/createProfile.css";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
-  const { profile, loading } = useSelector(state => state.profile);
+  const { isAuth } = useSelector(state => state.auth);
+  const { profile } = useSelector(state => state.profile);
   const { msg } = useSelector(state => state.alert);
   const [mapStyle, setMapStyle] = useState("");
   const [fillColor, setFillColor] = useState("");
@@ -35,8 +36,7 @@ const CreateProfile = () => {
       dispatch(clearAlert());
     }, 4000);
 
-  if (!loading && JSON.stringify(profile) !== "{}")
-    return <Redirect to="/map" />;
+  if (isAuth && JSON.stringify(profile) !== "{}") return <Redirect to="/map" />;
 
   return (
     <div className="create-profile-div">

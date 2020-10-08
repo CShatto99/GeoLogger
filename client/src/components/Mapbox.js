@@ -10,6 +10,7 @@ import useWindowDimensions from "../hooks/windowDimensions";
 
 const Mapbox = () => {
   const { profile, loading } = useSelector(state => state.profile);
+  const { isAuth } = useSelector(state => state.auth);
   const { width, height } = useWindowDimensions();
   const [sources, setSources] = useState([]);
 
@@ -60,7 +61,7 @@ const Mapbox = () => {
     zoom: 3,
   });
 
-  if (!loading && JSON.stringify(profile) === "{}")
+  if (isAuth && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
 
   return (

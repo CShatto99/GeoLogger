@@ -15,7 +15,7 @@ import satelliteV9 from "../img/satellite-v9.png";
 const Settings = () => {
   const dispatch = useDispatch();
   const { profile, loading } = useSelector(state => state.profile);
-  const { user } = useSelector(state => state.auth);
+  const { user, isAuth } = useSelector(state => state.auth);
   const { msg, status } = useSelector(state => state.alert);
   const [theme, setTheme] = useState("");
   const [mapStyle, setMapStyle] = useState("");
@@ -51,7 +51,7 @@ const Settings = () => {
     accountEdited && dispatch(updateUser({ username, email }));
   };
 
-  if (!loading && JSON.stringify(profile) === "{}")
+  if (isAuth && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
 
   return (
