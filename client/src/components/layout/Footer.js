@@ -87,89 +87,91 @@ const Footer = () => {
     }, 4000);
 
   return (
-    <footer className="footer-div grid md:grid-cols-3 sm:grid-cols-1 p-4 sm:p-5">
-      <div>
-        <h2>About</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi
-          tristique senectus et netus et malesuada fames.
-        </p>
-      </div>
-      <div>
-        <h2>Site Links</h2>
+    <footer className="footer-div">
+      <div className="footer-div-inner grid md:grid-cols-3 sm:grid-cols-1 p-4 sm:p-5">
         <div>
-          <Link
-            to="/"
-            className="footer-link footer-link-hover hover:text-gray-600"
-          >
-            Home
-          </Link>
-          <div className="footer-link-highlight" />
+          <h2>About</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi
+            tristique senectus et netus et malesuada fames.
+          </p>
         </div>
-        {isAuth ? authLinks : guestLinks}
-      </div>
-      <div className="text-center">
-        <h2>Contact</h2>
-        <form onSubmit={onSubmit}>
-          <div className="mb-3">
-            <label>Email</label>
-            <input
-              type="text"
-              name="email"
-              className="cust-input"
-              placeholder="Email"
-              onChange={e => setEmail(e.target.value)}
-              value={email}
-            />
+        <div>
+          <h2>Site Links</h2>
+          <div>
+            <Link
+              to="/"
+              className="footer-link footer-link-hover hover:text-gray-600"
+            >
+              Home
+            </Link>
+            <div className="footer-link-highlight" />
           </div>
-          <div className="mb-3">
-            <label>Message</label>
-            <input
-              type="textarea"
-              name="message"
-              className="cust-input"
-              placeholder="Message"
-              onChange={e => setMessage(e.target.value)}
-              value={message}
-            />
-          </div>
-          <div className="contact-submit">
-            <button className="gen-btn primary-btn">Send</button>{" "}
-            {msg === "Please enter both fields" && status === 400 && (
-              <div className="err-div py-1 ml-1">{msg}</div>
-            )}
-            {msg && status === 200 && (
-              <div className="saved-changes py-1 ml-1">{msg}</div>
-            )}
-          </div>
-        </form>
-      </div>
-      <div>
-        <small>&copy; Copyright {new Date().getFullYear()}, GeoLogger</small>
-      </div>
-      <div>
-        <small>
-          Made with{" "}
+          {isAuth ? authLinks : guestLinks}
+        </div>
+        <div className="text-center">
+          <h2>Contact</h2>
+          <form onSubmit={onSubmit}>
+            <div className="mb-3">
+              <label>Email</label>
+              <input
+                type="text"
+                name="email"
+                className="cust-input"
+                placeholder="Email"
+                onChange={e => setEmail(e.target.value)}
+                value={email}
+              />
+            </div>
+            <div className="mb-3">
+              <label>Message</label>
+              <input
+                type="textarea"
+                name="message"
+                className="cust-input"
+                placeholder="Message"
+                onChange={e => setMessage(e.target.value)}
+                value={message}
+              />
+            </div>
+            <div className="contact-submit">
+              <button className="gen-btn primary-btn">Send</button>{" "}
+              {msg === "Please enter both fields" && status === 400 && (
+                <div className="err-div py-1 ml-1">{msg}</div>
+              )}
+              {msg && status === 200 && (
+                <div className="saved-changes py-1 ml-1">{msg}</div>
+              )}
+            </div>
+          </form>
+        </div>
+        <div>
+          <small>&copy; Copyright {new Date().getFullYear()}, GeoLogger</small>
+        </div>
+        <div>
+          <small>
+            Made with{" "}
+            <a
+              className="hover:no-underline std-link text-sm"
+              href="https://www.mapbox.com/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              MapBox
+            </a>
+          </small>
+        </div>
+        <div>
           <a
-            className="hover:no-underline std-link text-sm"
-            href="https://www.mapbox.com/"
+            className="footer-icon text-gray-200"
+            href="https://github.com/CShatto99/GeoLogger"
             target="_blank"
             rel="noreferrer noopener"
           >
-            MapBox
+            <i className="fa fa-github fa-2x" aria-hidden="true"></i>
           </a>
-        </small>
-      </div>
-      <div>
-        <a
-          className="footer-icon text-gray-200"
-          href="https://github.com/CShatto99/GeoLogger"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <i className="fa fa-github fa-2x" aria-hidden="true"></i>
-        </a>
+        </div>
       </div>
     </footer>
   );
