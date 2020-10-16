@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
-
 import { loadProfile, clearProfile } from "./profile";
 import { setAlert } from "./alert";
 import setAuthToken from "../utils/setAuthToken";

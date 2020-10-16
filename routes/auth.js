@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 const genAccessToken = require("../utils/genAccessToken");
-const authToken = require("../middleware/authToken");
 
 // @route GET /api/auth/token
 // @desc Refresh a user
