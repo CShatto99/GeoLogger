@@ -11,6 +11,7 @@ import lightV10 from "../img/light-v10.png";
 import outdoorsV11 from "../img/outdoors-v11.png";
 import streetsV11 from "../img/streets-v11.png";
 import satelliteV9 from "../img/satellite-v9.png";
+import colors from "../json/colors.json";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -267,6 +268,44 @@ const Settings = () => {
                 <label className="mt-3">
                   <h4>Region Highlight Color</h4>
                 </label>
+                <div className="color-div">
+                  {colors.map(({ name, hex }, index) => {
+                    console.log("Profile fillColor: ", fillColor);
+                    console.log("Color Hex: ", hex);
+                    return (
+                      <div
+                        key={hex}
+                        className={fillColor === hex ? "cb cb-active" : "cb"}
+                        onClick={() => setFillColor(hex)}
+                        style={{
+                          backgroundColor: hex,
+                        }}
+                      >
+                        <div className="color-block-label">
+                          {name}{" "}
+                          {fillColor === hex && (
+                            <i
+                              className="fa fa-check-square"
+                              aria-hidden="true"
+                            ></i>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <p className="w-full mt-2">
+                    Not seeing your favorite color? Click{" "}
+                    <a
+                      className="std-link"
+                      href="https://htmlcolorcodes.com/color-picker/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      here
+                    </a>{" "}
+                    for hex color codes
+                  </p>
+                </div>
                 <input
                   onChange={e => setFillColor(e.target.value)}
                   type="text"
@@ -275,18 +314,7 @@ const Settings = () => {
                   placeholder="Color"
                   value={fillColor}
                 />
-                <p className="mt-2">
-                  Click{" "}
-                  <a
-                    className="std-link"
-                    href="https://htmlcolorcodes.com/color-picker/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    here
-                  </a>{" "}
-                  for hex color codes
-                </p>
+                <p className="mt-2"></p>
               </div>
               <div></div>
             </form>

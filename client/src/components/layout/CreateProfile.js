@@ -129,15 +129,13 @@ const CreateProfile = () => {
         {colors.map(({ name, hex }, index) => (
           <div
             key={hex}
-            className="color-block"
+            className={colorIndex === index ? "cb cb-active" : "cb"}
             onClick={() => {
               setFillColor(hex);
               setColorIndex(index);
             }}
             style={{
               backgroundColor: hex,
-              opacity: colorIndex === index ? "0.2" : undefined,
-              transform: colorIndex === index ? "scale(1.05)" : undefined,
             }}
           >
             <div className="color-block-label">{name}</div>

@@ -50,7 +50,7 @@ export const updateProfile = profile => async dispatch => {
     const { data } = await axios.post("/api/profile", profile, config);
 
     dispatch(load_profile(data));
-    //dispatch(setAlert("Changes Saved!", 200));
+    dispatch(setAlert("Changes Saved!", 200));
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }

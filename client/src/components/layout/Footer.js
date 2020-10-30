@@ -140,7 +140,7 @@ const Footer = () => {
               {msg === "Please enter both fields" && status === 400 && (
                 <div className="err-div py-1 ml-1">{msg}</div>
               )}
-              {msg && status === 200 && (
+              {msg === "Email sent" && status === 200 && (
                 <div className="saved-changes py-1 ml-1">{msg}</div>
               )}
             </div>
