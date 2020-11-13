@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ReactMapGL, { Layer, Source } from "react-map-gl";
+import ReactMapGL, { Layer, Source, Marker } from "react-map-gl";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
 import CustSpinner from "./layout/CustSpinner";
@@ -13,6 +13,7 @@ const Mapbox = () => {
   const { isAuth } = useSelector(state => state.auth);
   const { width, height } = useWindowDimensions();
   const [sources, setSources] = useState([]);
+  const [markers, setMarkers] = useState([]);
 
   let geoJSONRegions = [];
 
@@ -78,9 +79,32 @@ const Mapbox = () => {
             onViewportChange={nextViewport => setViewport(nextViewport)}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             className="w-full"
+            onClick={({ lngLat: [longitude, latitude] }) =>
+              setMarkers(markers => [...markers, { longitude, latitude }])
+            }
           >
             {sources}
             <Checklist />
+            {markers.map((m, index) => (
+              <Marker
+                key={index}
+                {...m}
+                offsetLeft={-23}
+                offsetTop={-23}
+                draggable
+                onDragEnd={({ lngLat: [longitude, latitude] }) =>
+                  setMarkers(prevMarkers =>
+                    prevMarkers.map((m, i) =>
+                      index !== i ? m : { longitude, latitude }
+                    )
+                  )
+                }
+              >
+                <i className="gen-btn fa fa-globe" aria-hidden="true">
+                  <div className="navbrand-icon"></div>
+                </i>
+              </Marker>
+            ))}
           </ReactMapGL>
         </div>
       )}
