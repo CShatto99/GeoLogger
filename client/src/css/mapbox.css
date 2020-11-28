@@ -19,32 +19,3 @@
   height: 30px;
   display: none;
 }
-
-.popup-inner {
-  width: 200px;
-  height: 100px;
-}
-
-.fa-popup {
-  transition: ease-in-out 0.2s;
-  font-size: 1.5rem;
-}
-
-.popup-btn-grp {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.fa-popup-times {
-  margin-left: 0.5rem;
-}
-
-.fa-popup-times:hover,
-.fa-popup-trash:hover {
-  color: #e53e3e;
-}
-
-.fa-popup-pencil:hover {
-  color: #2b6cb0;
-}

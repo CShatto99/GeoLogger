@@ -7,6 +7,7 @@ import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
 import CustSpinner from "./layout/CustSpinner";
 import Checklist from "./Checklist";
+import MarkerPopup from "./MarkerPopup";
 import useWindowDimensions from "../hooks/windowDimensions";
 
 const Mapbox = () => {
@@ -94,8 +95,7 @@ const Mapbox = () => {
   if (isAuth && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
 
-  console.log(markerJustMoved);
-
+  console.log(markers);
   return (
     <>
       {loading ? (
@@ -141,34 +141,12 @@ const Mapbox = () => {
                     offsetTop={-10}
                     onClose={() => handleMarkerClick(index)}
                   >
-                    <div className="popup-inner">
-                      <div className="popup-btn-grp">
-                        <button type="button">
-                          <i
-                            className="fa fa-trash fa-popup fa-popup-trash"
-                            aria-hidden="true"
-                          ></i>
-                        </button>
-                        <div>
-                          <button type="button">
-                            <i
-                              className="fa fa-pencil fa-popup fa-popup-pencil"
-                              aria-hidden="true"
-                            ></i>
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleMarkerClick(index)}
-                          >
-                            <i
-                              className="fa fa-times fa-popup fa-popup-times"
-                              aria-hidden="true"
-                            ></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div>Texttestestestestestsetestes</div>
-                    </div>
+                    <MarkerPopup
+                      handleMarkerClick={handleMarkerClick}
+                      index={index}
+                      markers={markers}
+                      setMarkers={setMarkers}
+                    />
                   </Popup>
                 )}
               </React.Fragment>

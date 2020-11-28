@@ -1,0 +1,51 @@
+.popup-inner {
+  width: 200px;
+  margin-bottom: 0.5rem;
+}
+
+.fa-popup {
+  transition: ease-in-out 0.2s;
+  font-size: 1.5rem;
+}
+
+.popup-btn-grp {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fa-popup-times {
+  margin-left: 0.5rem;
+}
+
+.fa-popup-times:hover,
+.fa-popup-trash:hover {
+  color: #e53e3e;
+}
+
+.fa-popup-pencil:hover {
+  color: #2b6cb0;
+}
+
+.file-upload {
+  display: none;
+}
+
+.file-btn {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+
+.popup-submit {
+  width: 100%;
+  border: 2px solid #9ae6b4;
+  box-sizing: border-box;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  color: #1a202c;
+}
+
+.popup-submit:hover {
+  background-color: #9ae6b4;
+}
