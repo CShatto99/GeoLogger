@@ -24,7 +24,7 @@ router.get("/", authToken, async (req, res) => {
 // @desc Create or update a user profile
 // @access Private
 router.post("/", authToken, async (req, res) => {
-  const { theme, mapStyle, fillColor, visited } = req.body;
+  const { theme, mapStyle, fillColor, visited, markers } = req.body;
 
   const profileFields = {
     user: req.user.id,
@@ -32,6 +32,7 @@ router.post("/", authToken, async (req, res) => {
     mapStyle,
     fillColor,
     visited,
+    markers,
   };
 
   try {

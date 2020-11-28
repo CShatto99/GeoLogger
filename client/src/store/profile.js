@@ -40,6 +40,7 @@ export const loadProfile = () => async dispatch => {
 };
 
 export const updateProfile = profile => async dispatch => {
+  console.log(profile);
   const config = {
     headers: {
       "Content-Type": "application/json",

@@ -23,6 +23,44 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  markers: {
+    type: [
+      {
+        open: {
+          type: Boolean,
+          required: true,
+          default: false,
+        },
+        latitude: {
+          type: Number,
+          required: true,
+          default: "",
+        },
+        longitude: {
+          type: Number,
+          required: true,
+          default: "",
+        },
+        title: {
+          type: String,
+          default: "",
+        },
+        date: {
+          type: String,
+          default: "",
+        },
+        notes: {
+          type: String,
+          default: "",
+        },
+        image: {
+          type: String,
+          default: "",
+        },
+      },
+    ],
+    default: [],
+  },
   date: {
     type: Date,
     default: Date.now,

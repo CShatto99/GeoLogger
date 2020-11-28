@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactMapGL, { Layer, Source, Marker, Popup } from "react-map-gl";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
 import CustSpinner from "./layout/CustSpinner";
 import Checklist from "./Checklist";
 import MarkerPopup from "./MarkerPopup";
 import useWindowDimensions from "../hooks/windowDimensions";
+import { updateProfile } from "../store/profile";
 
 const Mapbox = () => {
+  const dispatch = useDispatch();
+
   const { profile, loading } = useSelector(state => state.profile);
   const { isAuth } = useSelector(state => state.auth);
   const { width, height } = useWindowDimensions();
+
   const [sources, setSources] = useState([]);
   const [markers, setMarkers] = useState([]);
-  const [markersModal, setMarkersModal] = useState([]);
   const [popupJustClosed, setPopupJustClosed] = useState(false);
   const [markerJustMoved, setMarkerJustMoved] = useState(false);
+  const [popupEdited, setPopupEdited] = useState(false);
 
   let geoJSONRegions = [];
 
@@ -56,8 +59,15 @@ const Mapbox = () => {
         );
       });
       setSources(geoJSONRegions);
+      setMarkers(profile.markers);
     }
   }, [profile]);
+
+  useEffect(() => {
+    popupEdited && dispatch(updateProfile({ ...profile, markers }));
+    setPopupEdited(false);
+    setTimeout(() => setPopupJustClosed(false), 1000);
+  }, [markers]);
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -68,8 +78,16 @@ const Mapbox = () => {
   });
 
   const addMarker = ([longitude, latitude]) => {
-    setMarkers(markers => [...markers, { longitude, latitude }]);
-    setMarkersModal(markersModal => markersModal.concat(false));
+    const newMarker = {
+      longitude,
+      latitude,
+      open: false,
+      title: "",
+      date: "",
+      notes: "",
+      image: "",
+    };
+    setMarkers(markers => [...markers, newMarker]);
   };
 
   const handleMarkerDrag = ([longitude, latitude], index) => {
@@ -82,13 +100,11 @@ const Mapbox = () => {
 
   const handleMarkerClick = index => {
     if (!markerJustMoved) {
-      setMarkersModal(prevMarkersModal =>
-        prevMarkersModal.map((markerModal, i) =>
-          index === i ? !markerModal : markerModal
-        )
+      setMarkers(prevMarkers =>
+        prevMarkers.map((m, i) => (index === i ? { ...m, open: !m.open } : m))
       );
       setPopupJustClosed(true);
-      setTimeout(() => setPopupJustClosed(false), 400);
+      setTimeout(() => setPopupJustClosed(false), 100);
     }
   };
 
@@ -96,6 +112,7 @@ const Mapbox = () => {
     return <Redirect to="/create" />;
 
   console.log(markers);
+
   return (
     <>
       {loading ? (
@@ -131,7 +148,7 @@ const Mapbox = () => {
                     </i>
                   </Marker>
                 </div>
-                {markersModal[index] && (
+                {markers[index].open && (
                   <Popup
                     {...m}
                     tipSize={10}
@@ -144,8 +161,11 @@ const Mapbox = () => {
                     <MarkerPopup
                       handleMarkerClick={handleMarkerClick}
                       index={index}
+                      marker={m}
                       markers={markers}
                       setMarkers={setMarkers}
+                      setPopupEdited={() => setPopupEdited(true)}
+                      setPopupJustClosed={() => setPopupJustClosed(true)}
                     />
                   </Popup>
                 )}

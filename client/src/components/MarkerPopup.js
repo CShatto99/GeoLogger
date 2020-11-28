@@ -1,17 +1,35 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import handleFile from "../utils/handleFile";
 import { setAlert } from "../store/alert";
 import "../css/markerPopup.css";
 
-const MarkerPopup = ({ handleMarkerClick, index, markers, setMarkers }) => {
+const MarkerPopup = ({
+  handleMarkerClick,
+  index,
+  marker,
+  setMarkers,
+  setPopupEdited,
+  setPopupJustClosed,
+}) => {
   const dispatch = useDispatch();
+
+  const { loading } = useSelector(state => state.profile);
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
   const [image, setImage] = useState("");
   const [editing, setEditing] = useState(false);
+
+  useEffect(() => {
+    if (!loading) {
+      setTitle(marker.title);
+      setDate(marker.date);
+      setNotes(marker.notes);
+      setImage(marker.image);
+    }
+  }, [loading]);
 
   const handleFileUpload = e => {
     const validFile = handleFile(e);
@@ -24,14 +42,21 @@ const MarkerPopup = ({ handleMarkerClick, index, markers, setMarkers }) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const marker = {
+    const newMarker = {
       title,
       date,
       notes,
       image,
     };
 
-    setMarkers(markers.map((m, i) => (i === index ? { ...m, ...marker } : m)));
+    setMarkers(prevMarkers =>
+      prevMarkers.map((m, i) =>
+        i === index ? { ...m, ...newMarker, open: false } : m
+      )
+    );
+
+    setPopupEdited();
+    setPopupJustClosed();
   };
 
   return (
@@ -84,8 +109,8 @@ const MarkerPopup = ({ handleMarkerClick, index, markers, setMarkers }) => {
           <label>Date Travelled</label>
           {editing ? (
             <input
-              type="password"
-              name="password"
+              type="date"
+              name="date"
               className="cust-input"
               onChange={e => setDate(e.target.value)}
             />
