@@ -32,9 +32,7 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
 
 ## Local Setup
 
-1. In the root directory, rename `.env.example` to `.env` and add your Mongo URI, JWT access token secret, JWT refresh token secret, gmail email, and gmail password to the file.
-2. In the `client` directory, rename `.env.example` to `.env` and add your Mapbox token to the file.
-3. Run the following commands
+1. Run the following commands
 
    ```
    git clone https://github.com/CShatto99/GeoLogger.git
@@ -44,6 +42,8 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
    npm run installDep
    ```
 
+2. In the root directory, rename `.env.example` to `.env` and fill out the placeholder variable values.
+3. In the `client` directory, rename `.env.example` to `.env` and add your Mapbox token. Click [here](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/) to create a Mapbox token.
 4. Servers
 
    ```
@@ -57,8 +57,6 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
 
     npm run client (runs frontend server only)
    ```
-
-## API Endpoints
 
 ## DEMO
 
