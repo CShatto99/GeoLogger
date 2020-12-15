@@ -1,5 +1,5 @@
 .popup-inner {
-  width: 200px;
+  width: 300px;
   margin-bottom: 0.5rem;
 }
 
@@ -48,4 +48,44 @@
 
 .popup-submit:hover {
   background-color: #9ae6b4;
+}
+
+.popup-section {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 0.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.popup-section label {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.popup-section p {
+  margin: 0;
+}
+
+.img-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+}
+
+.img-section img {
+  display: block;
+  width: 300px;
+  height: auto;
+  border-radius: 3px !important;
+  margin-top: 0.5rem;
+}
+
+.img-wrapper {
+  width: 100%;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
 }

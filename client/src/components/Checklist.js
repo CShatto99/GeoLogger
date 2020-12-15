@@ -68,14 +68,9 @@ const Checklist = () => {
 
   return (
     <>
-      <Row className="add-states">
-        <button
-          className="gen-btn bg-blue-700 text-gray-200 font-medium mt-1 py-1 px-3 mr-2 rounded-lg hover:bg-blue-800"
-          onClick={toggle}
-        >
-          Add States
-        </button>
-      </Row>
+      <button className="gen-btn primary-btn mr-2" onClick={toggle}>
+        Add States
+      </button>
       <Modal isOpen={state.isOpen}>
         <ModalHeader className="text-black" toggle={toggle}>
           Add Some States

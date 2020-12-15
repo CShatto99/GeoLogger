@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactMapGL, { Layer, Source, Marker, Popup } from "react-map-gl";
+import { Row, Tooltip } from "reactstrap";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
 import CustSpinner from "./layout/CustSpinner";
@@ -17,11 +18,21 @@ const Mapbox = () => {
   const { isAuth } = useSelector(state => state.auth);
   const { width, height } = useWindowDimensions();
 
+  const [viewport, setViewport] = useState({
+    width: "100%",
+    height: height,
+    latitude: 40,
+    longitude: -92,
+    zoom: 3,
+  });
   const [sources, setSources] = useState([]);
   const [markers, setMarkers] = useState([]);
-  const [popupJustClosed, setPopupJustClosed] = useState(false);
   const [markerJustMoved, setMarkerJustMoved] = useState(false);
   const [popupEdited, setPopupEdited] = useState(false);
+  const [markerMode, setMarkerMode] = useState(false);
+  const [modeTooltip, setModeTooltip] = useState(false);
+  const [markerTooltip, setMarkerTooltip] = useState(false);
+  const [modeJustChanged, setModeJustChanged] = useState(false);
 
   let geoJSONRegions = [];
 
@@ -63,19 +74,11 @@ const Mapbox = () => {
     }
   }, [profile]);
 
-  useEffect(() => {
-    popupEdited && dispatch(updateProfile({ ...profile, markers }));
-    setPopupEdited(false);
-    setTimeout(() => setPopupJustClosed(false), 1000);
-  }, [markers]);
+  // useEffect(() => {
+  //   popupEdited && dispatch(updateProfile({ ...profile, markers }));
+  //   setPopupEdited(false);
 
-  const [viewport, setViewport] = useState({
-    width: "100%",
-    height: height,
-    latitude: 40,
-    longitude: -92,
-    zoom: 3,
-  });
+  // }, [markers]);
 
   const addMarker = ([longitude, latitude]) => {
     const newMarker = {
@@ -88,6 +91,7 @@ const Mapbox = () => {
       image: "",
     };
     setMarkers(markers => [...markers, newMarker]);
+    setMarkerMode(false);
   };
 
   const handleMarkerDrag = ([longitude, latitude], index) => {
@@ -103,8 +107,6 @@ const Mapbox = () => {
       setMarkers(prevMarkers =>
         prevMarkers.map((m, i) => (index === i ? { ...m, open: !m.open } : m))
       );
-      setPopupJustClosed(true);
-      setTimeout(() => setPopupJustClosed(false), 100);
     }
   };
 
@@ -127,10 +129,35 @@ const Mapbox = () => {
             onViewportChange={nextViewport => setViewport(nextViewport)}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             className="w-full"
-            onClick={({ lngLat }) => !popupJustClosed && addMarker(lngLat)}
+            onClick={({ lngLat }) =>
+              markerMode && !modeJustChanged && addMarker(lngLat)
+            }
           >
             {sources}
-            <Checklist />
+            <Row className="add-states">
+              <Checklist />
+              <button
+                className="gen-btn primary-btn"
+                id="marker-btn"
+                onClick={() => {
+                  setMarkerMode(!markerMode);
+                  setModeJustChanged(true);
+                  setTimeout(() => setModeJustChanged(false), 400);
+                }}
+              >
+                {markerMode ? "Exit Marker Mode" : "Add A Marker"}
+              </button>
+              {markerMode && (
+                <Tooltip
+                  placement="top"
+                  isOpen={modeTooltip}
+                  target="marker-btn"
+                  toggle={() => setModeTooltip(!modeTooltip)}
+                >
+                  Click on the map to add a marker!
+                </Tooltip>
+              )}
+            </Row>
 
             {markers.map((m, index) => (
               <React.Fragment key={index}>
@@ -144,8 +171,18 @@ const Mapbox = () => {
                     onDragEnd={({ lngLat }) => handleMarkerDrag(lngLat, index)}
                   >
                     <i className="gen-btn fa fa-globe" aria-hidden="true">
-                      <div className="navbrand-icon" />
+                      <div className="navbrand-icon" id="marker" />
                     </i>
+                    {/* {!m.open && (
+                      <Tooltip
+                        placement="top"
+                        isOpen={true}
+                        target="marker"
+                        toggle={() => setMarkerTooltip(!markerTooltip)}
+                      >
+                        Click me to edit!
+                      </Tooltip>
+                    )} */}
                   </Marker>
                 </div>
                 {markers[index].open && (
@@ -165,7 +202,6 @@ const Mapbox = () => {
                       markers={markers}
                       setMarkers={setMarkers}
                       setPopupEdited={() => setPopupEdited(true)}
-                      setPopupJustClosed={() => setPopupJustClosed(true)}
                     />
                   </Popup>
                 )}
