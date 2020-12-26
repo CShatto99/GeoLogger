@@ -3,25 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import handleFile from "../utils/handleFile";
 import { setAlert } from "../store/alert";
 import "../css/markerPopup.css";
-import { updateProfile } from "../store/profile";
+import profile, { updateProfile } from "../store/profile";
+import { set } from "mongoose";
 
 const MarkerPopup = ({
   handleMarkerClick,
   index,
   marker,
+  markers,
   setMarkers,
   setPopupEdited,
-  setPopupJustClosed,
 }) => {
   const dispatch = useDispatch();
 
-  const { loading } = useSelector(state => state.profile);
+  const { loading, profile } = useSelector(state => state.profile);
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
   const [image, setImage] = useState("");
   const [editing, setEditing] = useState(false);
+  const [changesSaved, setChangesSaved] = useState(false);
 
   useEffect(() => {
     if (!loading) {
@@ -31,6 +33,11 @@ const MarkerPopup = ({
       setImage(marker.image);
     }
   }, [loading]);
+
+  useEffect(() => {
+    console.log(markers);
+    setChangesSaved(false);
+  }, [title, date, notes, image]);
 
   const handleFileUpload = e => {
     const validFile = handleFile(e);
@@ -47,6 +54,8 @@ const MarkerPopup = ({
   const onSubmit = e => {
     e.preventDefault();
 
+    console.log("FAGGOT");
+
     const newMarker = {
       title,
       date,
@@ -61,87 +70,7 @@ const MarkerPopup = ({
     );
   };
 
-  const editingForm = (
-    <form onSubmit={onSubmit}>
-      <div className="mb-2">
-        <label className="mb-0">Title</label>
-        <input
-          type="text"
-          name="title"
-          className="cust-input"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-      </div>
-      <div className="mb-2">
-        <label className="mb-0 text-center">Date Travelled</label>
-        <input
-          type="date"
-          name="date"
-          className="cust-input"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-        />
-      </div>
-      <div className="mb-2">
-        <label className="mb-0">Notes</label>
-        <textarea
-          name="notes"
-          className="cust-input"
-          value={notes}
-          onChange={e => setNotes(e.target.value)}
-        />
-      </div>
-      <div className="img-section">
-        <label className="gen-btn primary-btn file-btn mb-0">
-          <input
-            type="file"
-            name="image"
-            className="file-upload"
-            onChange={handleFileUpload}
-            accept=".jpg, .jpeg, .png"
-          />
-          {image ? "Change Image" : "Upload Image"}
-        </label>
-        {image && (
-          <div className="img-wrapper">
-            <img src={URL.createObjectURL(image)} />
-          </div>
-        )}
-      </div>
-      <button
-        className="gen-btn popup-submit"
-        type="button"
-        onClick={() => setEditing(false)}
-      >
-        Save Changes
-      </button>
-    </form>
-  );
-
-  const popupContent = (
-    <>
-      <div className="popup-section">
-        <label className="mb-0">Title</label>
-        <p>{title}</p>
-      </div>
-      <div className="popup-section">
-        <label className="mb-0 text-center">Date Travelled</label>
-        <p>{date}</p>
-      </div>
-      <div className="popup-section">
-        <label className="mb-0">Notes</label>
-        <p>{notes}</p>
-      </div>
-      <div className="img-section">
-        {image && (
-          <div className="img-wrapper">
-            <img src={URL.createObjectURL(image)} className="" />
-          </div>
-        )}
-      </div>
-    </>
-  );
+  console.log(changesSaved);
 
   return (
     <>
@@ -175,7 +104,86 @@ const MarkerPopup = ({
           </div>
         </div>
       </div>
-      {editing ? editingForm : popupContent}
+      {editing ? (
+        <form onSubmit={onSubmit}>
+          <div className="mb-2">
+            <label className="mb-0">Title</label>
+            <input
+              type="text"
+              name="title"
+              className="cust-input"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="mb-0 text-center">Date Travelled</label>
+            <input
+              type="date"
+              name="date"
+              className="cust-input"
+              value={date}
+              onChange={e => setDate(e.target.value)}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="mb-0">Notes</label>
+            <textarea
+              name="notes"
+              className="cust-input"
+              value={notes}
+              onChange={e => setNotes(e.target.value)}
+            />
+          </div>
+          <div className="img-section">
+            <label className="gen-btn primary-btn file-btn mb-0">
+              <input
+                type="file"
+                name="image"
+                className="file-upload"
+                onChange={handleFileUpload}
+                accept=".jpg, .jpeg, .png"
+              />
+              {image ? "Change Image" : "Upload Image"}
+            </label>
+            {image && (
+              <div className="img-wrapper">
+                <img src={URL.createObjectURL(image)} />
+              </div>
+            )}
+          </div>
+          <button
+            className="gen-btn popup-submit"
+            // onClick={() => {
+            //   setEditing(false);
+            // }}
+          >
+            Save Changes
+          </button>
+        </form>
+      ) : (
+        <>
+          <div className="popup-section">
+            <label className="mb-0">Title</label>
+            <p>{title}</p>
+          </div>
+          <div className="popup-section">
+            <label className="mb-0 text-center">Date Travelled</label>
+            <p>{date}</p>
+          </div>
+          <div className="popup-section">
+            <label className="mb-0">Notes</label>
+            <p>{notes}</p>
+          </div>
+          <div className="img-section">
+            {image && (
+              <div className="img-wrapper">
+                <img src={URL.createObjectURL(image)} className="" />
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 };

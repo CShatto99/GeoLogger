@@ -74,11 +74,13 @@ const Mapbox = () => {
     }
   }, [profile]);
 
-  // useEffect(() => {
-  //   popupEdited && dispatch(updateProfile({ ...profile, markers }));
-  //   setPopupEdited(false);
-
-  // }, [markers]);
+  useEffect(() => {
+    if (popupEdited) {
+      popupEdited && dispatch(updateProfile({ ...profile, markers }));
+      setPopupEdited(false);
+      console.log("MARKERS EDITED");
+    }
+  }, [markers, popupEdited]);
 
   const addMarker = ([longitude, latitude]) => {
     const newMarker = {
@@ -96,10 +98,13 @@ const Mapbox = () => {
 
   const handleMarkerDrag = ([longitude, latitude], index) => {
     setMarkers(prevMarkers =>
-      prevMarkers.map((m, i) => (index !== i ? m : { longitude, latitude }))
+      prevMarkers.map((m, i) =>
+        index !== i ? m : { ...m, ...{ longitude, latitude } }
+      )
     );
     setMarkerJustMoved(true);
     setTimeout(() => setMarkerJustMoved(false), 100);
+    setPopupEdited(true);
   };
 
   const handleMarkerClick = index => {
@@ -110,10 +115,10 @@ const Mapbox = () => {
     }
   };
 
+  console.log(popupEdited);
+
   if (isAuth && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
-
-  console.log(markers);
 
   return (
     <>
@@ -173,16 +178,6 @@ const Mapbox = () => {
                     <i className="gen-btn fa fa-globe" aria-hidden="true">
                       <div className="navbrand-icon" id="marker" />
                     </i>
-                    {/* {!m.open && (
-                      <Tooltip
-                        placement="top"
-                        isOpen={true}
-                        target="marker"
-                        toggle={() => setMarkerTooltip(!markerTooltip)}
-                      >
-                        Click me to edit!
-                      </Tooltip>
-                    )} */}
                   </Marker>
                 </div>
                 {markers[index].open && (
