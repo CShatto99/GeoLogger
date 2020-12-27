@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import handleFile from "../utils/handleFile";
-import { setAlert } from "../store/alert";
 import "../css/markerPopup.css";
-import profile, { updateProfile } from "../store/profile";
-import { set } from "mongoose";
 
-const MarkerPopup = ({
-  handleMarkerClick,
-  index,
-  marker,
-  markers,
-  setMarkers,
-  setPopupEdited,
-}) => {
-  const dispatch = useDispatch();
-
-  const { loading, profile } = useSelector(state => state.profile);
+const MarkerPopup = ({ index, marker, setMarkers, setMarkersEdited }) => {
+  const { loading } = useSelector(state => state.profile);
+  const { msg, status } = useSelector(state => state.alert);
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
   const [image, setImage] = useState("");
   const [editing, setEditing] = useState(false);
-  const [changesSaved, setChangesSaved] = useState(false);
 
   useEffect(() => {
     if (!loading) {
@@ -33,11 +21,6 @@ const MarkerPopup = ({
       setImage(marker.image);
     }
   }, [loading]);
-
-  useEffect(() => {
-    console.log(markers);
-    setChangesSaved(false);
-  }, [title, date, notes, image]);
 
   const handleFileUpload = e => {
     const validFile = handleFile(e);
@@ -54,8 +37,6 @@ const MarkerPopup = ({
   const onSubmit = e => {
     e.preventDefault();
 
-    console.log("FAGGOT");
-
     const newMarker = {
       title,
       date,
@@ -64,13 +45,11 @@ const MarkerPopup = ({
     };
 
     setMarkers(prevMarkers =>
-      prevMarkers.map((m, i) =>
-        i === index ? { ...m, ...newMarker, open: false } : m
-      )
+      prevMarkers.map((m, i) => (i === index ? { ...m, ...newMarker } : m))
     );
-  };
 
-  console.log(changesSaved);
+    setMarkersEdited();
+  };
 
   return (
     <>
@@ -92,8 +71,13 @@ const MarkerPopup = ({
             <button
               type="button"
               onClick={() => {
-                handleMarkerClick(index);
-                setEditing(false);
+                setMarkers(prevMarkers =>
+                  prevMarkers.map((m, i) =>
+                    i === index ? { ...m, open: !m.open } : m
+                  )
+                );
+
+                setMarkersEdited();
               }}
             >
               <i
@@ -152,36 +136,47 @@ const MarkerPopup = ({
               </div>
             )}
           </div>
-          <button
-            className="gen-btn popup-submit"
-            // onClick={() => {
-            //   setEditing(false);
-            // }}
-          >
-            Save Changes
+          <button className="gen-btn popup-submit">
+            {msg === "Saved!" ? "Saved!" : "Save Changes"}
           </button>
         </form>
       ) : (
         <>
-          <div className="popup-section">
-            <label className="mb-0">Title</label>
-            <p>{title}</p>
-          </div>
-          <div className="popup-section">
-            <label className="mb-0 text-center">Date Travelled</label>
-            <p>{date}</p>
-          </div>
-          <div className="popup-section">
-            <label className="mb-0">Notes</label>
-            <p>{notes}</p>
-          </div>
-          <div className="img-section">
-            {image && (
-              <div className="img-wrapper">
-                <img src={URL.createObjectURL(image)} className="" />
-              </div>
-            )}
-          </div>
+          {!title && !date && !notes && !image && (
+            <div className="popup-section">
+              <p>Click on the pencil icon to add some details!</p>
+            </div>
+          )}
+          {title && (
+            <div className="popup-section">
+              <label className="mb-0">Title</label>
+              <p>{title}</p>
+            </div>
+          )}
+
+          {date && (
+            <div className="popup-section">
+              <label className="mb-0 text-center">Date Travelled</label>
+              <p>{date}</p>
+            </div>
+          )}
+
+          {notes && (
+            <div className="popup-section">
+              <label className="mb-0">Notes</label>
+              <p>{notes}</p>
+            </div>
+          )}
+
+          {image && (
+            <div className="img-section">
+              {image && (
+                <div className="img-wrapper">
+                  <img src={URL.createObjectURL(image)} className="" />
+                </div>
+              )}
+            </div>
+          )}
         </>
       )}
     </>

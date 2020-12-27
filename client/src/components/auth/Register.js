@@ -37,11 +37,6 @@ const Register = () => {
     dispatch(register(user));
   };
 
-  if (msg)
-    setTimeout(() => {
-      dispatch(clearAlert());
-    }, 4000);
-
   if (isAuth && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
   else if (isAuth && JSON.stringify(profile) !== "{}")

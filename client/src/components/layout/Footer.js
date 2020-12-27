@@ -81,11 +81,6 @@ const Footer = () => {
     </>
   );
 
-  if (msg)
-    setTimeout(() => {
-      dispatch(clearAlert());
-    }, 4000);
-
   return (
     <footer className="footer-div">
       <div className="footer-div-inner grid md:grid-cols-3 sm:grid-cols-1 p-4 sm:p-5">

@@ -10,6 +10,7 @@ import Checklist from "./Checklist";
 import MarkerPopup from "./MarkerPopup";
 import useWindowDimensions from "../hooks/windowDimensions";
 import { updateProfile } from "../store/profile";
+import { setAlert } from "../store/alert";
 
 const Mapbox = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Mapbox = () => {
   const [sources, setSources] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [markerJustMoved, setMarkerJustMoved] = useState(false);
-  const [popupEdited, setPopupEdited] = useState(false);
+  const [markersEdited, setMarkersEdited] = useState(false);
   const [markerMode, setMarkerMode] = useState(false);
   const [modeTooltip, setModeTooltip] = useState(false);
   const [markerTooltip, setMarkerTooltip] = useState(false);
@@ -75,12 +76,12 @@ const Mapbox = () => {
   }, [profile]);
 
   useEffect(() => {
-    if (popupEdited) {
-      popupEdited && dispatch(updateProfile({ ...profile, markers }));
-      setPopupEdited(false);
-      console.log("MARKERS EDITED");
+    if (markersEdited) {
+      dispatch(updateProfile({ ...profile, markers }));
+      dispatch(setAlert("Saved!", 200));
+      setMarkersEdited(false);
     }
-  }, [markers, popupEdited]);
+  }, [markers, markersEdited]);
 
   const addMarker = ([longitude, latitude]) => {
     const newMarker = {
@@ -93,6 +94,7 @@ const Mapbox = () => {
       image: "",
     };
     setMarkers(markers => [...markers, newMarker]);
+    setMarkersEdited(true);
     setMarkerMode(false);
   };
 
@@ -104,7 +106,7 @@ const Mapbox = () => {
     );
     setMarkerJustMoved(true);
     setTimeout(() => setMarkerJustMoved(false), 100);
-    setPopupEdited(true);
+    setMarkersEdited(true);
   };
 
   const handleMarkerClick = index => {
@@ -112,13 +114,15 @@ const Mapbox = () => {
       setMarkers(prevMarkers =>
         prevMarkers.map((m, i) => (index === i ? { ...m, open: !m.open } : m))
       );
+
+      setMarkersEdited(true);
     }
   };
 
-  console.log(popupEdited);
-
   if (isAuth && JSON.stringify(profile) === "{}")
     return <Redirect to="/create" />;
+
+  console.log(markers);
 
   return (
     <>
@@ -196,7 +200,9 @@ const Mapbox = () => {
                       marker={m}
                       markers={markers}
                       setMarkers={setMarkers}
-                      setPopupEdited={() => setPopupEdited(true)}
+                      setMarkersEdited={() => {
+                        setMarkersEdited(true);
+                      }}
                     />
                   </Popup>
                 )}

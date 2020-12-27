@@ -31,11 +31,6 @@ const CreateProfile = () => {
     dispatch(updateProfile(profile));
   };
 
-  if (msg)
-    setTimeout(() => {
-      dispatch(clearAlert());
-    }, 4000);
-
   if (isAuth && JSON.stringify(profile) !== "{}") return <Redirect to="/map" />;
 
   return (

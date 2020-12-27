@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import { updateProfile } from "../store/profile";
 import { updateUser } from "../store/auth";
+import { setAlert } from "../store/alert";
 import "../css/settings.css";
 import CustSpinner from "./layout/CustSpinner";
 import darkV10 from "../img/dark-v10.png";
@@ -50,6 +51,7 @@ const Settings = () => {
 
     dispatch(updateProfile(profile));
     accountEdited && dispatch(updateUser({ username, email }));
+    dispatch(setAlert("Changes Saved!", 200));
   };
 
   if (isAuth && JSON.stringify(profile) === "{}")
