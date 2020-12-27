@@ -26,6 +26,7 @@ const ProfileSchema = new mongoose.Schema({
   markers: {
     type: [
       {
+        _id: false,
         open: {
           type: Boolean,
           required: true,

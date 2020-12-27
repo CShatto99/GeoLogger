@@ -25,9 +25,7 @@ const MarkerPopup = ({ index, marker, setMarkers, setMarkersEdited }) => {
   const handleFileUpload = e => {
     const validFile = handleFile(e);
 
-    console.log("FILE:" + validFile);
-
-    setImage(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
 
     // validFile
     //   ? setImage(validFile.result)
@@ -132,7 +130,7 @@ const MarkerPopup = ({ index, marker, setMarkers, setMarkersEdited }) => {
             </label>
             {image && (
               <div className="img-wrapper">
-                <img src={URL.createObjectURL(image)} />
+                <img src={image} />
               </div>
             )}
           </div>
@@ -172,7 +170,7 @@ const MarkerPopup = ({ index, marker, setMarkers, setMarkersEdited }) => {
             <div className="img-section">
               {image && (
                 <div className="img-wrapper">
-                  <img src={URL.createObjectURL(image)} className="" />
+                  <img src={image} className="" />
                 </div>
               )}
             </div>
