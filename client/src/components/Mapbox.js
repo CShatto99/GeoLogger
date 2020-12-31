@@ -119,8 +119,10 @@ const Mapbox = () => {
     }
   };
 
-  if (isAuth && JSON.stringify(profile) === "{}")
+  if (isAuth && JSON.stringify(profile) === "{}") {
+    console.log("Redirecting to create page");
     return <Redirect to="/create" />;
+  }
 
   console.log(markers);
 

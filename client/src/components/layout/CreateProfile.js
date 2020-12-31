@@ -10,11 +10,12 @@ import streetsV11 from "../../img/streets-v11.png";
 import satelliteV9 from "../../img/satellite-v9.png";
 import colors from "../../json/colors.json";
 import "../../css/createProfile.css";
+import CustSpinner from "./CustSpinner";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
-  const { profile } = useSelector(state => state.profile);
+  const { profile, loading } = useSelector(state => state.profile);
   const { msg } = useSelector(state => state.alert);
   const [mapStyle, setMapStyle] = useState("");
   const [fillColor, setFillColor] = useState("");
@@ -31,9 +32,26 @@ const CreateProfile = () => {
     dispatch(updateProfile(profile));
   };
 
-  if (isAuth && JSON.stringify(profile) !== "{}") return <Redirect to="/map" />;
+  if (
+    localStorage.getItem("isAuth") === "true" &&
+    JSON.stringify(profile) === "{}"
+  )
+    return (
+      <div className="spinner-div">
+        <CustSpinner />
+      </div>
+    );
 
-  return (
+  // if (isAuth && JSON.stringify(profile) !== "{}") return <Redirect to="/map" />;
+
+  return isAuth && JSON.stringify(profile) !== "{}" ? (
+    <Redirect to="/map" />
+  ) : localStorage.getItem("isAuth") === "true" &&
+    JSON.stringify(profile) === "{}" ? (
+    <div className="spinner-div">
+      <CustSpinner />
+    </div>
+  ) : (
     <div className="create-profile-div">
       <h1 className="mb-5">Lets Start by Setting Up a Profile</h1>
       <div className="grid gap-5 grid-cols-1 md:grid-cols-2 mb-5">
