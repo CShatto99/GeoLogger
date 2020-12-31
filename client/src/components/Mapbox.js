@@ -124,8 +124,6 @@ const Mapbox = () => {
     return <Redirect to="/create" />;
   }
 
-  console.log(markers);
-
   return (
     <>
       {loading ? (
@@ -145,7 +143,7 @@ const Mapbox = () => {
             }
           >
             {sources}
-            <Row className="add-states">
+            <div className="add-states">
               <Checklist />
               <button
                 className="gen-btn primary-btn"
@@ -168,7 +166,7 @@ const Mapbox = () => {
                   Click on the map to add a marker!
                 </Tooltip>
               )}
-            </Row>
+            </div>
 
             {markers.map((m, index) => (
               <React.Fragment key={index}>
