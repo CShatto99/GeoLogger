@@ -44,13 +44,17 @@ const CreateProfile = () => {
 
   // if (isAuth && JSON.stringify(profile) !== "{}") return <Redirect to="/map" />;
 
-  return isAuth && JSON.stringify(profile) !== "{}" ? (
-    <Redirect to="/map" />
-  ) : localStorage.getItem("isAuth") === "true" &&
+  /*
+localStorage.getItem("isAuth") === "true" &&
     JSON.stringify(profile) === "{}" ? (
     <div className="spinner-div">
       <CustSpinner />
     </div>
+  ) :
+  */
+
+  return isAuth && JSON.stringify(profile) !== "{}" ? (
+    <Redirect to="/map" />
   ) : (
     <div className="create-profile-div">
       <h1 className="mb-5">Lets Start by Setting Up a Profile</h1>
