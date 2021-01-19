@@ -32,15 +32,15 @@ const CreateProfile = () => {
     dispatch(updateProfile(profile));
   };
 
-  if (
-    localStorage.getItem("isAuth") === "true" &&
-    JSON.stringify(profile) === "{}"
-  )
-    return (
-      <div className="spinner-div">
-        <CustSpinner />
-      </div>
-    );
+  // if (
+  //   localStorage.getItem("isAuth") === "true" &&
+  //   JSON.stringify(profile) === "{}"
+  // )
+  //   return (
+  //     <div className="spinner-div">
+  //       <CustSpinner />
+  //     </div>
+  //   );
 
   // if (isAuth && JSON.stringify(profile) !== "{}") return <Redirect to="/map" />;
 
@@ -51,6 +51,8 @@ localStorage.getItem("isAuth") === "true" &&
       <CustSpinner />
     </div>
   ) :
+
+    
   */
 
   return isAuth && JSON.stringify(profile) !== "{}" ? (
@@ -155,7 +157,12 @@ localStorage.getItem("isAuth") === "true" &&
               backgroundColor: hex,
             }}
           >
-            <div className="color-block-label">{name}</div>
+            <div className="color-block-label">
+              {name}{" "}
+              {colorIndex === index && (
+                <i className="fa fa-check-square" aria-hidden="true"></i>
+              )}
+            </div>
           </div>
         ))}
         <p className="w-full mt-2">

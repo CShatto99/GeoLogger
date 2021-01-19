@@ -42,14 +42,14 @@ const Settings = () => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const profile = {
+    const updatedProfile = {
       theme,
       mapStyle,
       fillColor,
       visited,
     };
 
-    dispatch(updateProfile(profile));
+    dispatch(updateProfile({ ...profile, ...updatedProfile }));
     accountEdited && dispatch(updateUser({ username, email }));
     dispatch(setAlert("Changes Saved!", 200));
   };

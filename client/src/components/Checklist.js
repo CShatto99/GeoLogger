@@ -42,14 +42,14 @@ const Checklist = () => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const profile = {
+    const updatedProfile = {
       theme: state.theme,
       fillColor: state.fillColor,
       visited: state.visited,
       mapStyle: state.mapStyle,
     };
 
-    dispatch(updateProfile(profile));
+    dispatch(updateProfile({ ...profile, ...updatedProfile }));
 
     toggle();
   };
