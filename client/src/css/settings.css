@@ -88,5 +88,8 @@ h2 {
 
   .settings-div {
     padding: 6rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

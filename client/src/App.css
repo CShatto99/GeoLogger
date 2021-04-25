@@ -101,12 +101,14 @@ button:focus {
 }
 
 .cust-img-active {
-  filter: blur(2px);
   transform: scale(1.05);
-  transition: ease-in 100ms;
+  transition: ease-in 200ms;
+  border: 2px solid #9ae6b4;
 }
 
-.cust-img:hover {
+.cust-img:hover,
+.cust-img-active:hover {
+  cursor: pointer;
   transform: scale(1.05);
 }
 

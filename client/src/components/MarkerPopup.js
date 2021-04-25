@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import handleFile from "../utils/handleFile";
+import { useDispatch, useSelector } from "react-redux";
+import { setAlert } from "../store/alert";
+import getBase64, { isFileImage } from "../utils/handleFile";
 import "../css/markerPopup.css";
 
 const MarkerPopup = ({ index, marker, setMarkers, setMarkersEdited }) => {
+  const dispatch = useDispatch();
   const { loading } = useSelector(state => state.profile);
   const { msg, status } = useSelector(state => state.alert);
 
@@ -22,14 +24,11 @@ const MarkerPopup = ({ index, marker, setMarkers, setMarkersEdited }) => {
     }
   }, [loading]);
 
-  const handleFileUpload = e => {
-    const validFile = handleFile(e);
-
-    setImage(URL.createObjectURL(e.target.files[0]));
-
-    // validFile
-    //   ? setImage(validFile.result)
-    //   : dispatch(setAlert("Image must be of type .png or .jpg.", 400));
+  const handleFileUpload = async e => {
+    const base64 = await getBase64(e);
+    typeof base64 === "string"
+      ? dispatch(setAlert(base64, 400))
+      : setImage(base64.result);
   };
 
   const onSubmit = e => {
@@ -134,6 +133,7 @@ const MarkerPopup = ({ index, marker, setMarkers, setMarkersEdited }) => {
               </div>
             )}
           </div>
+          {msg && status === 400 && <div className="err-div mb-2">{msg}</div>}
           <button className="gen-btn popup-submit">
             {msg === "Saved!" ? "Saved!" : "Save Changes"}
           </button>

@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.4.0",
-    "axios": "^0.19.2",
+    "@reduxjs/toolkit": "^1.5.1",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.1",
     "cra-template": "1.0.3",
     "dotenv": "^8.2.0",
@@ -16,6 +16,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
+    "react-tooltip": "^4.2.18",
     "reactstrap": "^8.5.1",
     "redux": "^4.0.5",
     "tailwindcss": "^1.8.8"

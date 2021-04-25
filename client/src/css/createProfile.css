@@ -3,7 +3,6 @@
   max-width: 72rem;
   margin: 0 auto;
   padding: 1.5rem;
-
   text-align: center;
 }
 
@@ -27,10 +26,12 @@
 
 .cb-active {
   transform: scale(1.05);
+  font-weight: 700;
 }
 
 .cb:hover {
   transition: ease-in 150ms;
+  transform: scale(1.05);
   opacity: 0.5;
 }
 

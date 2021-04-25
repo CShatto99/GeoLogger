@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactMapGL, { Layer, Source, Marker, Popup } from "react-map-gl";
-import { Row, Tooltip } from "reactstrap";
+import ReactTooltip from "react-tooltip";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
 import CustSpinner from "./layout/CustSpinner";
@@ -17,7 +17,7 @@ const Mapbox = () => {
 
   const { profile, loading } = useSelector(state => state.profile);
   const { isAuth } = useSelector(state => state.auth);
-  const { width, height } = useWindowDimensions();
+  const { height } = useWindowDimensions();
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -31,8 +31,6 @@ const Mapbox = () => {
   const [markerJustMoved, setMarkerJustMoved] = useState(false);
   const [markersEdited, setMarkersEdited] = useState(false);
   const [markerMode, setMarkerMode] = useState(false);
-  const [modeTooltip, setModeTooltip] = useState(false);
-  const [markerTooltip, setMarkerTooltip] = useState(false);
   const [modeJustChanged, setModeJustChanged] = useState(false);
 
   let geoJSONRegions = [];
@@ -120,7 +118,6 @@ const Mapbox = () => {
   };
 
   if (isAuth && JSON.stringify(profile) === "{}") {
-    console.log("Redirecting to create page");
     return <Redirect to="/create" />;
   }
 
@@ -145,9 +142,15 @@ const Mapbox = () => {
             {sources}
             <div className="add-states">
               <Checklist />
+              {markerMode && (
+                <ReactTooltip id="marker-btn" aria-haspopup="true">
+                  Click on the map to add a marker!
+                </ReactTooltip>
+              )}
               <button
+                data-tip
+                data-for="marker-btn"
                 className="gen-btn primary-btn"
-                id="marker-btn"
                 onClick={() => {
                   setMarkerMode(!markerMode);
                   setModeJustChanged(true);
@@ -156,21 +159,17 @@ const Mapbox = () => {
               >
                 {markerMode ? "Exit Marker Mode" : "Add A Marker"}
               </button>
-              {markerMode && (
-                <Tooltip
-                  placement="top"
-                  isOpen={modeTooltip}
-                  target="marker-btn"
-                  toggle={() => setModeTooltip(!modeTooltip)}
-                >
-                  Click on the map to add a marker!
-                </Tooltip>
-              )}
             </div>
 
             {markers.map((m, index) => (
               <React.Fragment key={index}>
                 <div onClick={() => handleMarkerClick(index)}>
+                  {m.title && (
+                    <ReactTooltip id={`marker-${index}`} aria-haspopup="true">
+                      {m.title}
+                    </ReactTooltip>
+                  )}
+
                   <Marker
                     {...m}
                     offsetLeft={-23}
@@ -179,7 +178,12 @@ const Mapbox = () => {
                     onClick={index => handleMarkerClick(m, index)}
                     onDragEnd={({ lngLat }) => handleMarkerDrag(lngLat, index)}
                   >
-                    <i className="gen-btn fa fa-globe" aria-hidden="true">
+                    <i
+                      className="gen-btn fa fa-globe"
+                      aria-hidden="true"
+                      data-tip
+                      data-for={`marker-${index}`}
+                    >
                       <div className="navbrand-icon" id="marker" />
                     </i>
                   </Marker>

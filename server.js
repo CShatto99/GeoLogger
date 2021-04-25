@@ -12,7 +12,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({ limit: "16mb" }));
 app.use((_, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");

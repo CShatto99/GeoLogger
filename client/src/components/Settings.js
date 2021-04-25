@@ -7,6 +7,7 @@ import { updateUser } from "../store/auth";
 import { setAlert } from "../store/alert";
 import "../css/settings.css";
 import CustSpinner from "./layout/CustSpinner";
+import MapType from "./MapType";
 import darkV10 from "../img/dark-v10.png";
 import lightV10 from "../img/light-v10.png";
 import outdoorsV11 from "../img/outdoors-v11.png";
@@ -103,7 +104,7 @@ const Settings = () => {
                     className="fa fa-pencil-square-o fa-settings"
                     aria-hidden="true"
                   ></i>
-                  <h4>{username} </h4>
+                  <h4>{username}</h4>
                 </>
               ) : (
                 <>
@@ -177,89 +178,38 @@ const Settings = () => {
           <div className="settings-card">
             <h2>User Settings</h2>
             <h4 className="mb-3">Map Style</h4>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
-              <div className="md:col-span-1 sm:col-span-2">
-                <label>
-                  Dark V10{" "}
-                  {mapStyle === "dark-v10" && (
-                    <i className="fa fa-check-square" aria-hidden="true"></i>
-                  )}
-                </label>
-                <img
-                  className={
-                    mapStyle === "dark-v10" ? "cust-img-active" : "cust-img"
-                  }
-                  src={darkV10}
-                  alt="mapbox dark-v10 theme"
-                  onClick={() => setMapStyle("dark-v10")}
-                />
-              </div>
-              <div className="md:col-span-1 sm:col-span-2">
-                <label>
-                  Light V10{" "}
-                  {mapStyle === "light-v10" && (
-                    <i className="fa fa-check-square" aria-hidden="true"></i>
-                  )}
-                </label>
-                <img
-                  className={
-                    mapStyle === "light-v10" ? "cust-img-active" : "cust-img"
-                  }
-                  src={lightV10}
-                  alt="mapbox light-v10 theme"
-                  onClick={() => setMapStyle("light-v10")}
-                />
-              </div>
-              <div className="md:col-span-1 sm:col-span-2">
-                <label>
-                  Outdoors V11{" "}
-                  {mapStyle === "outdoors-v11" && (
-                    <i className="fa fa-check-square" aria-hidden="true"></i>
-                  )}
-                </label>
-                <img
-                  className={
-                    mapStyle === "outdoors-v11" ? "cust-img-active" : "cust-img"
-                  }
-                  src={outdoorsV11}
-                  alt="mapbox outdoors-v11 theme"
-                  onClick={() => setMapStyle("outdoors-v11")}
-                />
-              </div>
-              <div className="md:col-span-1 sm:col-span-2">
-                <label>
-                  Streets V11{" "}
-                  {mapStyle === "streets-v11" && (
-                    <i className="fa fa-check-square" aria-hidden="true"></i>
-                  )}
-                </label>
-                <img
-                  className={
-                    mapStyle === "streets-v11" ? "cust-img-active" : "cust-img"
-                  }
-                  src={streetsV11}
-                  alt="mapbox streets-v11 theme"
-                  onClick={() => setMapStyle("streets-v11")}
-                />
-              </div>
-              <div className="col-span-2 sm:col-span-1">
-                <label>
-                  Satellite V9{" "}
-                  {mapStyle === "satellite-v9" && (
-                    <i className="fa fa-check-square" aria-hidden="true"></i>
-                  )}
-                </label>
-                <img
-                  className={
-                    mapStyle === "satellite-v9"
-                      ? "cust-img-active sat-img-settings"
-                      : "cust-img  sat-img-settings"
-                  }
-                  src={satelliteV9}
-                  alt="mapbox satellite-v9 theme"
-                  onClick={() => setMapStyle("satellite-v9")}
-                />
-              </div>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 place-items-center mb-4">
+              <MapType
+                selectedMapStyle={mapStyle}
+                setSelectedMapStyle={() => setMapStyle("dark-v10")}
+                mapStyle="dark-v10"
+                mapTitle="Dark V10"
+                image={darkV10}
+              />
+              <MapType
+                selectedMapStyle={mapStyle}
+                setSelectedMapStyle={() => setMapStyle("light-v10")}
+                mapTitle="Light V10"
+                image={lightV10}
+              />
+              <MapType
+                selectedMapStyle={mapStyle}
+                setSelectedMapStyle={() => setMapStyle("outdoors-v11")}
+                mapTitle="Outdoors V11"
+                image={outdoorsV11}
+              />
+              <MapType
+                selectedMapStyle={mapStyle}
+                setSelectedMapStyle={() => setMapStyle("streets-v11")}
+                mapTitle="Streets V11"
+                image={streetsV11}
+              />
+              <MapType
+                selectedMapStyle={mapStyle}
+                setSelectedMapStyle={() => setMapStyle("satellite-v9")}
+                mapTitle="Satellite V9"
+                image={satelliteV9}
+              />
             </div>
             <form
               id="settings-form"
@@ -272,11 +222,9 @@ const Settings = () => {
                 </label>
                 <div className="color-div">
                   {colors.map(({ name, hex }, index) => {
-                    console.log("Profile fillColor: ", fillColor);
-                    console.log("Color Hex: ", hex);
                     return (
                       <div
-                        key={hex}
+                        key={index}
                         className={fillColor === hex ? "cb cb-active" : "cb"}
                         onClick={() => setFillColor(hex)}
                         style={{
