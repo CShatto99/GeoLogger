@@ -6,7 +6,19 @@ import { Actions } from './types';
 const profile = createSlice({
   name: 'profile',
   initialState: {
-    profile: {},
+    profile: {
+      date: '',
+      theme: '',
+      fillColor: '',
+      mapStyle: '',
+      visited: [],
+      markers: [],
+      user: {
+        date: '',
+        email: '',
+        username: '',
+      },
+    },
     loading: true,
   },
   reducers: {
@@ -20,7 +32,19 @@ const profile = createSlice({
     clear_profile: (state) => {
       return {
         ...state,
-        profile: {},
+        profile: {
+          date: '',
+          theme: '',
+          fillColor: '',
+          mapStyle: '',
+          visited: [],
+          markers: [],
+          user: {
+            date: '',
+            email: '',
+            username: '',
+          },
+        },
         loading: true,
       };
     },

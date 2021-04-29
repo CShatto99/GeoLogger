@@ -1,30 +1,29 @@
-import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../store/auth";
-import { clearAlert } from "../../store/alert";
-import "../../css/authForm.css";
+import { FC, useState } from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { register } from '../../store/auth';
+// import '../../css/authForm.css';
 
-const Register = () => {
-  const dispatch = useDispatch();
-  const { isAuth } = useSelector(state => state.auth);
-  const { profile } = useSelector(state => state.profile);
-  const { msg } = useSelector(state => state.alert);
+const Register: FC = () => {
+  const dispatch = useAppDispatch();
+  const { isAuth } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
+  const { msg } = useAppSelector((state) => state.alert);
   const [state, setState] = useState({
-    username: "",
-    email: "",
-    password: "",
-    passVerify: "",
+    username: '',
+    email: '',
+    password: '',
+    passVerify: '',
   });
 
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const user = {
@@ -37,10 +36,8 @@ const Register = () => {
     dispatch(register(user));
   };
 
-  if (isAuth && JSON.stringify(profile) === "{}")
-    return <Redirect to="/create" />;
-  else if (isAuth && JSON.stringify(profile) !== "{}")
-    return <Redirect to="/map" />;
+  if (isAuth && JSON.stringify(profile) === '{}') return <Redirect to="/create" />;
+  else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
 
   return (
     <div className="form-div">
@@ -55,49 +52,25 @@ const Register = () => {
             <label>
               Username<span className="text-red-600"> *</span>
             </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              className="cust-input"
-              onChange={e => onChange(e)}
-            />
+            <input type="text" name="username" className="cust-input" onChange={(e) => onChange(e)} />
           </div>
           <div className="mb-3">
             <label>
               Email<span className="text-red-600"> *</span>
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="cust-input"
-              onChange={e => onChange(e)}
-            />
+            <input type="email" name="email" className="cust-input" onChange={(e) => onChange(e)} />
           </div>
           <div className="mb-3">
             <label>
               Password<span className="text-red-600"> *</span>
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="cust-input"
-              onChange={e => onChange(e)}
-            />
+            <input type="password" name="password" className="cust-input" onChange={(e) => onChange(e)} />
           </div>
           <div className="mb-3">
             <label>
               Verify Password<span className="text-red-600"> *</span>
             </label>
-            <input
-              type="password"
-              id="passVerify"
-              name="passVerify"
-              className="cust-input"
-              onChange={e => onChange(e)}
-            />
+            <input type="password" name="passVerify" className="cust-input" onChange={(e) => onChange(e)} />
           </div>
           <div className="flex items-center">
             <button className="gen-btn form-btn">Register</button>
@@ -106,7 +79,7 @@ const Register = () => {
             </Link>
           </div>
           <p className="mt-2 mb-0">
-            Already have an account?{" "}
+            Already have an account?{' '}
             <Link to="/login" className="std-link">
               Login
             </Link>

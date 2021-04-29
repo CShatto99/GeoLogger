@@ -1,17 +1,13 @@
 import React, { FC, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../store';
 import { login } from '../../store/auth';
-import { clearAlert } from '../../store/alert';
-import '../../css/authForm.css';
-import { RootState } from '../../store';
-import { AlertState, AuthState, ProfileState } from '../../store/types';
 
 const Login: FC = () => {
-  const dispatch = useDispatch();
-  const { isAuth } = useSelector<RootState, AuthState>((state) => state.auth);
-  const { profile } = useSelector<RootState, ProfileState>((state) => state.profile);
-  const { msg } = useSelector<RootState, AlertState>((state) => state.alert);
+  const dispatch = useAppDispatch();
+  const { isAuth } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
+  const { msg } = useAppSelector((state) => state.alert);
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -35,10 +31,8 @@ const Login: FC = () => {
     dispatch(login(user));
   };
 
-  // if (isAuth && JSON.stringify(profile) === "{}")
-  //   return <Redirect to="/create" />;
-  // else if (isAuth && JSON.stringify(profile) !== "{}")
-  //   return <Redirect to="/map" />;
+  if (isAuth && JSON.stringify(profile) === '{}') return <Redirect to="/create" />;
+  else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
 
   return (
     <div className="form-div">
