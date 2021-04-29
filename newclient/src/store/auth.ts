@@ -11,7 +11,7 @@ const auth = createSlice({
     user: {},
     isAuth: false,
     loading: true,
-  } as AuthState,
+  },
   reducers: {
     login_user: (state) => {
       localStorage.setItem('isAuth', 'true');

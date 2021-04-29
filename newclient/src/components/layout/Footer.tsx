@@ -1,37 +1,33 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { logout } from "../../store/auth";
-import { setAlert, clearAlert } from "../../store/alert";
-import "../../css/footer.css";
+import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { logout } from '../../store/auth';
+import { setAlert } from '../../store/alert';
+//import "../../css/footer.css";
 
-const Footer = () => {
-  const dispatch = useDispatch();
-  const { isAuth } = useSelector(state => state.auth);
-  const { msg, status } = useSelector(state => state.alert);
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+const Footer: FC = () => {
+  const dispatch = useAppDispatch();
+  const { isAuth } = useAppSelector((state) => state.auth);
+  const { msg, status } = useAppSelector((state) => state.alert);
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  const onSubmit = async e => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
     try {
-      const { data } = await axios.post(
-        "/api/contact",
-        { email, message },
-        config
-      );
+      const { data } = await axios.post('/api/contact', { email, message }, config);
       dispatch(setAlert(data.msg, 200));
 
-      setEmail("");
-      setMessage("");
+      setEmail('');
+      setMessage('');
     } catch (err) {
       dispatch(setAlert(err.response.data.msg, err.response.status));
     }
@@ -69,11 +65,7 @@ const Footer = () => {
         <div className="footer-link-highlight" />
       </div>
       <div>
-        <a
-          href="/"
-          onClick={() => dispatch(logout())}
-          className="footer-link footer-link-hover"
-        >
+        <a href="/" onClick={() => dispatch(logout())} className="footer-link footer-link-hover">
           Logout
         </a>
         <div className="footer-link-highlight" />
@@ -87,18 +79,14 @@ const Footer = () => {
         <div>
           <h2>About</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi
-            tristique senectus et netus et malesuada fames.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Morbi tristique senectus et netus et malesuada fames.
           </p>
         </div>
         <div>
           <h2>Site Links</h2>
           <div>
-            <Link
-              to="/"
-              className="footer-link footer-link-hover hover:text-gray-600"
-            >
+            <Link to="/" className="footer-link footer-link-hover hover:text-gray-600">
               Home
             </Link>
             <div className="footer-link-highlight" />
@@ -115,7 +103,7 @@ const Footer = () => {
                 name="email"
                 className="cust-input"
                 placeholder="Email"
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
             </div>
@@ -126,18 +114,14 @@ const Footer = () => {
                 name="message"
                 className="cust-input"
                 placeholder="Message"
-                onChange={e => setMessage(e.target.value)}
+                onChange={(e) => setMessage(e.target.value)}
                 value={message}
               />
             </div>
             <div className="contact-submit">
-              <button className="gen-btn primary-btn">Send</button>{" "}
-              {msg === "Please enter both fields" && status === 400 && (
-                <div className="err-div py-1 ml-1">{msg}</div>
-              )}
-              {msg === "Email sent" && status === 200 && (
-                <div className="saved-changes py-1 ml-1">{msg}</div>
-              )}
+              <button className="gen-btn primary-btn">Send</button>{' '}
+              {msg === 'Please enter both fields' && status === 400 && <div className="err-div py-1 ml-1">{msg}</div>}
+              {msg === 'Email sent' && status === 200 && <div className="saved-changes py-1 ml-1">{msg}</div>}
             </div>
           </form>
         </div>
@@ -146,7 +130,7 @@ const Footer = () => {
         </div>
         <div>
           <small>
-            Made with{" "}
+            Made with{' '}
             <a
               className="hover:no-underline std-link text-sm"
               href="https://www.mapbox.com/"
