@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm run start --prefix newclient",
+    "client": "npm run start --prefix client",
+    "newclient": "npm run start --prefix newclient",
     "installDep": "npm i && cd client && npm i",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev-newclient": "concurrently \"npm run server\" \"npm run newclient\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Cameron H. Shatto",
