@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { loadProfile, clearProfile } from './profile';
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
-import { Action } from './types';
+import { Actions } from './types';
 
 const auth = createSlice({
   name: 'auth',
@@ -11,7 +11,7 @@ const auth = createSlice({
     user: {},
     isAuth: false,
     loading: true,
-  },
+  } as AuthState,
   reducers: {
     login_user: (state) => {
       localStorage.setItem('isAuth', 'true');
@@ -45,7 +45,7 @@ export default auth.reducer;
 
 const { login_user, load_user, logout_user } = auth.actions;
 
-export const loadUser: Action = () => async (dispatch) => {
+export const loadUser: Actions['auth'] = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/user');
     dispatch(load_user(data));
@@ -54,7 +54,7 @@ export const loadUser: Action = () => async (dispatch) => {
   }
 };
 
-export const login: Action = (user) => async (dispatch) => {
+export const login: Actions['auth'] = (user) => async (dispatch) => {
   axios.defaults.headers.withCredentials = true;
   const config = {
     headers: {
@@ -75,7 +75,7 @@ export const login: Action = (user) => async (dispatch) => {
   }
 };
 
-export const register: Action = (user) => async (dispatch) => {
+export const register: Actions['auth'] = (user) => async (dispatch) => {
   axios.defaults.headers.withCredentials = true;
   const config = {
     headers: {
@@ -95,7 +95,7 @@ export const register: Action = (user) => async (dispatch) => {
   }
 };
 
-export const updateUser: Action = (user) => async (dispatch) => {
+export const updateUser: Actions['auth'] = (user) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export const updateUser: Action = (user) => async (dispatch) => {
   }
 };
 
-export const refreshUser: Action = () => async (dispatch) => {
+export const refreshUser: Actions['auth'] = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/auth/token');
 
@@ -127,7 +127,7 @@ export const refreshUser: Action = () => async (dispatch) => {
   }
 };
 
-export const logout: Action = () => async (dispatch) => {
+export const logout: Actions['auth'] = () => async (dispatch) => {
   try {
     dispatch(clearProfile());
     dispatch(logout_user());

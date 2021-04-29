@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Action } from './types';
+import { Actions } from './types';
 
 const alert = createSlice({
   name: 'alert',
   initialState: {
     msg: '',
     status: '',
-  },
+  } as AlertState,
   reducers: {
     set_alert: (state, action) => {
       return {
@@ -29,11 +29,11 @@ export default alert.reducer;
 
 const { set_alert, clear_alert } = alert.actions;
 
-export const setAlert: Action = (msg, status) => (dispatch) => {
+export const setAlert: Actions['alert'] = (msg, status) => (dispatch) => {
   dispatch(set_alert({ msg, status }));
   setTimeout(() => dispatch(clear_alert()), 4000);
 };
 
-export const clearAlert: Action = () => (dispatch) => {
+export const clearAlert: Actions['alert'] = () => (dispatch) => {
   dispatch(clear_alert());
 };

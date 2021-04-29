@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 import { setAlert } from './alert';
-import { Action } from './types';
+import { Actions } from './types';
 
 const profile = createSlice({
   name: 'profile',
@@ -31,7 +31,7 @@ export default profile.reducer;
 
 const { load_profile, clear_profile } = profile.actions;
 
-export const loadProfile: Action = () => async (dispatch) => {
+export const loadProfile: Actions['profile'] = () => async (dispatch) => {
   try {
     const res = await axios.get(`/api/profile`);
     res.data ? dispatch(load_profile(res.data)) : dispatch(load_profile({}));
@@ -40,7 +40,7 @@ export const loadProfile: Action = () => async (dispatch) => {
   }
 };
 
-export const updateProfile: Action = (profile) => async (dispatch) => {
+export const updateProfile: Actions['profile'] = (profile) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -56,6 +56,6 @@ export const updateProfile: Action = (profile) => async (dispatch) => {
   }
 };
 
-export const clearProfile: Action = () => (dispatch) => {
+export const clearProfile: Actions['profile'] = () => (dispatch) => {
   dispatch(clear_profile());
 };

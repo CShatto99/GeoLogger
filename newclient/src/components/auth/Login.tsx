@@ -1,28 +1,30 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/auth';
 import { clearAlert } from '../../store/alert';
 import '../../css/authForm.css';
+import { RootState } from '../../store';
+import { AlertState, AuthState, ProfileState } from '../../store/types';
 
 const Login: FC = () => {
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.auth);
-  const { profile } = useSelector((state) => state.profile);
-  const { msg } = useSelector((state) => state.alert);
+  const { isAuth } = useSelector<RootState, AuthState>((state) => state.auth);
+  const { profile } = useSelector<RootState, ProfileState>((state) => state.profile);
+  const { msg } = useSelector<RootState, AlertState>((state) => state.alert);
   const [state, setState] = useState({
     email: '',
     password: '',
   });
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const user = {
@@ -66,7 +68,7 @@ const Login: FC = () => {
             </Link>
           </div>
           <p className="mt-2 mb-0">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link to="/register" className="std-link">
               Register
             </Link>
