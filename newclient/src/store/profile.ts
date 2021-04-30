@@ -27,17 +27,11 @@ const profile = createSlice({
       return {
         ...state,
         profile: {
-          date: '',
           theme: '',
           fillColor: '',
           mapStyle: '',
           visited: [],
           markers: [],
-          user: {
-            date: '',
-            email: '',
-            username: '',
-          },
         },
         loading: true,
       };

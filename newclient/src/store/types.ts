@@ -1,4 +1,5 @@
-type Marker = {
+export type Marker = {
+  date: string;
   image: string;
   latitude: number;
   longitude: number;
@@ -16,8 +17,10 @@ type Profile = {
 };
 
 type User = {
+  date: string;
   email: string;
-  password: string;
+  username: string;
+  password?: string;
 };
 
 export interface Actions {

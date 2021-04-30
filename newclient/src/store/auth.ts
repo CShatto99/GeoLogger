@@ -8,7 +8,11 @@ import { Actions } from './types';
 const auth = createSlice({
   name: 'auth',
   initialState: {
-    user: {},
+    user: {
+      date: '',
+      username: '',
+      email: '',
+    },
     isAuth: false,
     loading: true,
   },
@@ -33,7 +37,7 @@ const auth = createSlice({
       localStorage.removeItem('isAuth');
       return {
         ...state,
-        user: {},
+        user: { date: '', username: '', email: '' },
         isAuth: false,
         loading: true,
       };
