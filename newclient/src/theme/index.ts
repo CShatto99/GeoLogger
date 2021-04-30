@@ -1,9 +1,10 @@
 const theme = {
   colors: {
     primary: '#2b6cb0;',
+    darkPrimary: '#2c5282',
     secondary: '#E73D8E',
-    dark: '#697077',
-    light: '#A2A9B0',
+    white: '#edf2f7',
+    black: '#1a202c',
     success: '#28a745',
     danger: '#e53e3e',
   },
@@ -22,11 +23,11 @@ const theme = {
     light: 400,
   },
   mediaQueries: {
-    xsMax: 'only screen and (max-width: 576px)',
-    smMax: 'only screen and (max-width: 768px)',
-    mdMax: 'only screen and (max-width: 992px)',
-    lgMax: 'only screen and (max-width: 1200px)',
-    xlMax: 'only screen and (max-width: 1400px)',
+    xs: 'only screen and (max-width: 576px)',
+    sm: 'only screen and (max-width: 768px)',
+    md: 'only screen and (max-width: 992px)',
+    lg: 'only screen and (max-width: 1200px)',
+    xl: 'only screen and (max-width: 1400px)',
   },
 };
 
