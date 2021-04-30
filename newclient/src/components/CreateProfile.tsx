@@ -1,14 +1,14 @@
 import { FC, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { updateProfile } from '../../store/profile';
-import darkV10 from '../../img/dark-v10.png';
-import lightV10 from '../../img/light-v10.png';
-import outdoorsV11 from '../../img/outdoors-v11.png';
-import streetsV11 from '../../img/streets-v11.png';
-import satelliteV9 from '../../img/satellite-v9.png';
-import colors from '../../json/colors.json';
-//import '../../css/createProfile.css';
+import { useAppDispatch, useAppSelector } from '../store';
+import { updateProfile } from '../store/profile';
+import darkV10 from '../img/dark-v10.png';
+import lightV10 from '../img/light-v10.png';
+import outdoorsV11 from '../img/outdoors-v11.png';
+import streetsV11 from '../img/streets-v11.png';
+import satelliteV9 from '../img/satellite-v9.png';
+import colors from '../json/colors.json';
+import '../css/createProfile.css';
 //import CustSpinner from './CustSpinner';
 
 const CreateProfile: FC = () => {

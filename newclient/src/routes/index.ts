@@ -1,6 +1,6 @@
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
-import CreateProfile from '../components/layout/CreateProfile';
+import CreateProfile from '../components/CreateProfile';
 import Home from '../components/Home';
 import Mapbox from '../components/Mapbox';
 import Settings from '../components/Settings';

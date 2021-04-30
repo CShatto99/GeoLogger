@@ -1,11 +1,11 @@
 const theme = {
   colors: {
-    primary: '#123148',
+    primary: '#2b6cb0;',
     secondary: '#E73D8E',
     dark: '#697077',
     light: '#A2A9B0',
-    success: '#1EA2A7',
-    error: '#FF3B30',
+    success: '#28a745',
+    danger: '#e53e3e',
   },
   fontSizes: {
     largest: '24px',
