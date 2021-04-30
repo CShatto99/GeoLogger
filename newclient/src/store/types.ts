@@ -17,10 +17,11 @@ type Profile = {
 };
 
 type User = {
-  date: string;
+  date?: string;
+  username?: string;
   email: string;
-  username: string;
   password?: string;
+  passVerify?: string;
 };
 
 export interface Actions {

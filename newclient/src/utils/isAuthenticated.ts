@@ -1,3 +1,3 @@
-const isAuthenticated: () => boolean = () => !!localStorage.userToken;
+const isAuthenticated: () => boolean = () => !!localStorage.isAuth;
 
 export default isAuthenticated;

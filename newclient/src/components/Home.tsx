@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { ModalBody, ListGroup, Button } from 'reactstrap';
 import { useAppSelector } from '../store/index';
-//import "../css/home.css";
+import '../css/home.css';
 import usa from '../json/US.json';
 import darkV10 from '../img/dark-v10.png';
 import lightV10 from '../img/light-v10.png';
