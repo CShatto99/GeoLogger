@@ -1,7 +1,13 @@
 import React, { FC, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { login } from '../../store/auth';
+
+const LoginContainer = styled.div`
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.success};
+`;
 
 const Login: FC = () => {
   const dispatch = useAppDispatch();
@@ -35,10 +41,10 @@ const Login: FC = () => {
   else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
 
   return (
-    <div className="form-div">
-      <div className="form-div-inner">
-        {msg && <div className="err-div">{msg}</div>}
-        <div className="form-title">
+    <LoginContainer>
+      <div>
+        {msg && <div>{msg}</div>}
+        <div>
           <h2>Login</h2>
           <p>* required</p>
         </div>
@@ -69,7 +75,7 @@ const Login: FC = () => {
           </p>
         </form>
       </div>
-    </div>
+    </LoginContainer>
   );
 };
 

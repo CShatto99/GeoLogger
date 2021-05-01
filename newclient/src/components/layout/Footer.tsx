@@ -175,7 +175,7 @@ const Footer: FC = () => {
           </div>
           <div>
             <SendButton>Send</SendButton>{' '}
-            {msg === 'Please enter both fields' && status === 400 && <Alert type="success" msg={msg} />}
+            {msg === 'Please enter both fields' && status === 400 && <Alert type="error" msg={msg} />}
             {msg === 'Email sent' && status === 200 && <Alert type="success" msg={msg} />}
           </div>
         </form>

@@ -162,7 +162,7 @@ const ModalProp = styled.div`
   }
 
   & > div > span:nth-child(2) {
-    color: ${({ theme }) => theme.colors.success};
+    color: ${({ theme }) => theme.colors.successDark};
   }
 `;
 

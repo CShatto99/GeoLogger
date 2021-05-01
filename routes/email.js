@@ -23,7 +23,9 @@ router.post("/", async (req, res) => {
 
   try {
     let transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // use SSL
       auth: {
         user: process.env.USER_EMAIL,
         pass: process.env.USER_PASSWORD,
@@ -43,6 +45,7 @@ router.post("/", async (req, res) => {
 
     res.json({ msg: "Email sent" });
   } catch (err) {
+    console.log(err);
     res.status(500).send("Error sending email");
   }
 });

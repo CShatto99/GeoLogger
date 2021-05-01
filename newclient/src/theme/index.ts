@@ -5,8 +5,10 @@ const theme = {
     secondary: '#E73D8E',
     white: '#edf2f7',
     black: '#0c0f11',
-    success: '#ACFF9F',
+    success: '#D4EDDA',
+    successDark: '#55B36A',
     danger: '#feb2b2',
+    dangerDark: '#983F3F',
   },
   fontSizes: {
     largest: '24px',

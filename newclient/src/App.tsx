@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import AppNavbar from './components/layout/AppNavbar';
@@ -11,9 +11,12 @@ import isAuthenticated from './utils/isAuthenticated';
 import theme from './theme';
 import routes from './routes';
 import './App.css';
+import Login from './components/auth/Login';
 
 const RenderRoute = (route: RouteType) => {
   const history = useHistory();
+
+  console.log(console.log());
 
   document.title = `${route.title} - Geologger` || 'GeoLogger';
   if (route.needsAuth && !isAuthenticated()) history.push('/login');
@@ -22,17 +25,29 @@ const RenderRoute = (route: RouteType) => {
   return <Route path={route.path} exact component={route.component} />;
 };
 
+const RenderNavbar: FC = () => {
+  const location = useLocation();
+
+  return location.pathname !== '/create' && location.pathname !== '/login' && location.pathname !== '/register' ? (
+    <AppNavbar />
+  ) : null;
+};
+
 const App: FC = () => {
   useEffect(() => {
     store.dispatch(refreshUser());
   }, []);
+
+  console.log(routes);
 
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           {location.pathname !== '/create' && <AppNavbar />}
+          <RenderNavbar />
           <Switch>
+            <Login />
             {routes.map((route, index) => (
               <RenderRoute {...route} key={index} />
             ))}
