@@ -51,6 +51,7 @@ const LandingLink = styled(GeneralLink)`
   background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 999px;
   padding: 0.5rem 1rem;
+  margin: 0;
   font-size: 1.1rem;
 
   &:hover {

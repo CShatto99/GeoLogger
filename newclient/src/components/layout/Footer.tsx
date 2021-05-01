@@ -1,10 +1,96 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+import { FaGithub } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
 import { setAlert } from '../../store/alert';
-//import "../../css/footer.css";
+import GeneralLink from '../styles/GeneralLink';
+import GeneralInput from '../styles/GeneralInput';
+import Alert from '../styles/Alert';
+
+const FooterContainer = styled.footer`
+  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
+  display: grid;
+  place-items: center;
+`;
+
+const FooterContent = styled.div`
+  max-width: 72rem;
+  text-align: center;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2rem;
+
+  & h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  & small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & input {
+    margin-top: 0.25rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    grid-template-columns: 1fr;
+    font-size: 12px;
+    grid-gap: 1rem;
+  }
+`;
+
+const FooterLink = styled(GeneralLink)`
+  color: ${({ theme }) => theme.colors.black};
+  margin: 0;
+  width: 60px;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+const SiteLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SendButton = styled.button`
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.white};
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: ease-out 100ms;
+  width: 100%;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.darkPrimary};
+    transition: ease-in 100ms;
+  }
+`;
+
+const MapboxLink = styled.a`
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+const GitHubLink = styled.a`
+  transition: ease-out 100ms;
+  color: ${({ theme }) => theme.colors.black};
+
+  &:hover {
+    transition: ease-in 100ms;
+    color: #4743d1;
+  }
+`;
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
@@ -35,124 +121,81 @@ const Footer: FC = () => {
 
   const guestLinks = (
     <>
-      <div>
-        <Link to="/login" className="footer-link footer-link-hover">
-          Login
-        </Link>
-        <div className="footer-link-highlight" />
-      </div>
-      <div>
-        <Link to="/register" className="footer-link footer-link-hover">
-          Register
-        </Link>
-        <div className="footer-link-highlight" />
-      </div>
+      <FooterLink to="/login">Login</FooterLink>
+      <FooterLink to="/register">Register</FooterLink>
     </>
   );
 
   const authLinks = (
     <>
-      <div>
-        <Link to="/map" className="footer-link footer-link-hover">
-          Map
-        </Link>
-        <div className="footer-link-highlight" />
-      </div>
-      <div>
-        <Link to="/settings" className="footer-link footer-link-hover">
-          Settings
-        </Link>
-        <div className="footer-link-highlight" />
-      </div>
-      <div>
-        <a href="/" onClick={() => dispatch(logout())} className="footer-link footer-link-hover">
-          Logout
-        </a>
-        <div className="footer-link-highlight" />
-      </div>
+      <FooterLink to="/map">Map</FooterLink>
+      <FooterLink to="/settings">Settings</FooterLink>
+      <FooterLink to="/" onClick={() => dispatch(logout())}>
+        Logout
+      </FooterLink>
     </>
   );
 
   return (
-    <footer className="footer-div">
-      <div className="footer-div-inner grid md:grid-cols-3 sm:grid-cols-1 p-4 sm:p-5">
+    <FooterContainer>
+      <FooterContent>
         <div>
-          <h2>About</h2>
+          <h3>About</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Morbi tristique senectus et netus et malesuada fames.
           </p>
         </div>
-        <div>
-          <h2>Site Links</h2>
-          <div>
-            <Link to="/" className="footer-link footer-link-hover hover:text-gray-600">
-              Home
-            </Link>
-            <div className="footer-link-highlight" />
-          </div>
+        <SiteLinks>
+          <h3>Site Links</h3>
+          <FooterLink to="/">Home</FooterLink>
           {isAuth ? authLinks : guestLinks}
-        </div>
-        <div className="text-center">
-          <h2>Contact</h2>
-          <form onSubmit={onSubmit}>
-            <div className="mb-3">
-              <label>Email</label>
-              <input
-                type="text"
-                name="email"
-                className="cust-input"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-            </div>
-            <div className="mb-3">
-              <label>Message</label>
-              <input
-                type="textarea"
-                name="message"
-                className="cust-input"
-                placeholder="Message"
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-              />
-            </div>
-            <div className="contact-submit">
-              <button className="gen-btn primary-btn">Send</button>{' '}
-              {msg === 'Please enter both fields' && status === 400 && <div className="err-div py-1 ml-1">{msg}</div>}
-              {msg === 'Email sent' && status === 200 && <div className="saved-changes py-1 ml-1">{msg}</div>}
-            </div>
-          </form>
-        </div>
+        </SiteLinks>
+        <form onSubmit={onSubmit}>
+          <h3>Contact</h3>
+          <div>
+            <label>Email</label>
+            <GeneralInput
+              type="text"
+              name="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </div>
+          <div>
+            <label>Message</label>
+            <GeneralInput
+              type="textarea"
+              name="message"
+              placeholder="Message"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+            />
+          </div>
+          <div>
+            <SendButton>Send</SendButton>{' '}
+            {msg === 'Please enter both fields' && status === 400 && <Alert type="success" msg={msg} />}
+            {msg === 'Email sent' && status === 200 && <Alert type="success" msg={msg} />}
+          </div>
+        </form>
+        <small>&copy; Copyright {new Date().getFullYear()}, GeoLogger</small>
+        <small>
+          <span>
+            Made with
+            <MapboxLink href="https://www.mapbox.com/" target="_blank" rel="noreferrer noopener">
+              {' '}
+              Mapbox
+            </MapboxLink>
+          </span>
+        </small>
         <div>
-          <small>&copy; Copyright {new Date().getFullYear()}, GeoLogger</small>
+          <GitHubLink href="https://github.com/CShatto99/GeoLogger" target="_blank" rel="noreferrer noopener">
+            <FaGithub size={'28px'} />
+          </GitHubLink>
         </div>
-        <div>
-          <small>
-            Made with{' '}
-            <a
-              className="hover:no-underline std-link text-sm"
-              href="https://www.mapbox.com/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              MapBox
-            </a>
-          </small>
-        </div>
-        <div>
-          <a
-            className="footer-icon text-gray-200"
-            href="https://github.com/CShatto99/GeoLogger"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <i className="fa fa-github fa-2x" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </footer>
+      </FooterContent>
+    </FooterContainer>
   );
 };
 
