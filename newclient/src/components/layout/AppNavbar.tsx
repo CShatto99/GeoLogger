@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
+import GeneralLink from '../styles/GeneralLink';
 
 const NavbarContainer = styled.nav`
   width: 100%;
@@ -83,27 +84,13 @@ const NavbarLinks = styled.ul`
   }
 `;
 
-const NavbarLink = styled(Link)`
-  color: #edf2f7;
-  border-radius: 0.3rem;
-  margin-left: 0.5rem;
-  padding: 0.25rem 1rem;
-  cursor: pointer;
-  transition: ease-out 100ms;
-  text-decoration: none;
-  text-align: center;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-    transition: ease-in 100ms;
-  }
-
+const NavbarLink = styled(GeneralLink)`
   @media ${({ theme }) => theme.mediaQueries.sm} {
     margin: 0 0 0.5rem 0;
   }
 `;
 
-const NavbarRegister = styled(NavbarLink)`
+const NavbarRegister = styled(GeneralLink)`
   background-color: ${({ theme }) => theme.colors.primary};
 
   &:hover {

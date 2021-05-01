@@ -4,7 +4,7 @@ const theme = {
     darkPrimary: '#2c5282',
     secondary: '#E73D8E',
     white: '#edf2f7',
-    black: '#1a202c',
+    black: '#0c0f11',
     success: '#28a745',
     danger: '#e53e3e',
   },

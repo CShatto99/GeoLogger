@@ -1,0 +1,20 @@
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const GeneralLink = styled(Link)`
+  color: #edf2f7;
+  border-radius: 0.3rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  transition: ease-out 100ms;
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: ease-in 100ms;
+  }
+`;
+
+export default GeneralLink;
