@@ -1,6 +1,7 @@
-import { FC, useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
 
@@ -23,9 +24,11 @@ const NavbarContents = styled.div`
   justify-content: space-between;
   padding: 0 1.5rem;
 
-  & .nav-items-hide {
-    margin-top: -100%;
-    transition: ease-out 300ms;
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    & .nav-items-hide {
+      margin-top: -100%;
+      transition: ease-out 200ms;
+    }
   }
 `;
 
@@ -66,7 +69,7 @@ const NavbarLinks = styled.ul`
   display: flex;
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    transition: ease-out 300ms;
+    transition: ease-out 200ms;
     position: absolute;
     flex-direction: column;
     height: auto;
@@ -84,7 +87,7 @@ const NavbarLink = styled(Link)`
   color: #edf2f7;
   border-radius: 0.3rem;
   margin-left: 0.5rem;
-  padding: 0.25rem 1rem !important;
+  padding: 0.25rem 1rem;
   cursor: pointer;
   transition: ease-out 100ms;
   text-decoration: none;
@@ -134,28 +137,68 @@ const NavbarToggler = styled.div`
   }
 `;
 
+const Dropdown = styled.div`
+  & .dropdown {
+    visibility: visible;
+    opacity: 1;
+    max-height: 500px;
+    transition: ease-in 100ms;
+  }
+`;
+
+const DropdownContent = styled.div`
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  background-color: #edf2f7;
+  min-width: 140px;
+  margin: 2rem 0 0 -9.5rem;
+  border-radius: 4px;
+  transition: ease-out 100ms;
+
+  & > a {
+    color: ${({ theme }) => theme.colors.black};
+    padding: 0.75rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: ease-out 100ms;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  & > a:hover {
+    transition: ease-in 100ms;
+    background-color: #ddd;
+    color: #2b6cb0;
+  }
+
+  & > a > span {
+    margin-left: 0.5rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    position: absolute;
+    margin: 0;
+    right: 4.5rem;
+    left: 4.5rem;
+  }
+`;
+
 const AppNavbar: FC = () => {
   const dispatch = useAppDispatch();
-  const location = useLocation();
+  // const location = useLocation();
   const { isAuth } = useAppSelector((state) => state.auth);
-  const { profile } = useAppSelector((state) => state.profile);
+  // const { profile } = useAppSelector((state) => state.profile);
   const [navIcon, setNavIcon] = useState('nav-items-hide');
+  const [dropdownOpen, setDropdownOpen] = useState('dropdown-closed');
 
-  useEffect(() => {
-    if (JSON.stringify(profile) === '{}') setNavLinkCol('text-gray-400');
-    else
-      profile.mapStyle === 'dark-v10' || profile.mapStyle === 'satellite-v9' || location.pathname === '/'
-        ? setNavLinkCol('text-gray-400')
-        : setNavLinkCol('text-gray-900');
-  }, [profile, location.pathname]);
+  // useEffect(() => {
+  // }, [profile, location.pathname]);
 
   const guestLinks = (
     <>
-      <NavbarLink
-        to="/login"
-        className="text-gray-400 hover:text-gray-200"
-        onClick={() => setNavIcon('nav-items-hide')}
-      >
+      <NavbarLink to="/login" onClick={() => setNavIcon('nav-items-hide')}>
         Login
       </NavbarLink>
       <NavbarRegister to="/register" onClick={() => setNavIcon('nav-items-hide')}>
@@ -166,18 +209,20 @@ const AppNavbar: FC = () => {
 
   const userLinks = (
     <>
-      <Link
-        to="/map"
-        className={`nav-link ${navLinkCol} hover:text-gray-200`}
-        onClick={() => setNavIcon('nav-items-hide')}
-      >
+      <NavbarLink to="/map" onClick={() => setNavIcon('nav-items-hide')}>
         Map
-      </Link>
-      <div className="dropdown">
-        <div className={`nav-link ${navLinkCol} hover:text-gray-200`}>Profile</div>
-        <div className="dropdown-content">
+      </NavbarLink>
+      <NavbarLink
+        to="/"
+        onClick={() => (dropdownOpen === 'dropdown' ? setDropdownOpen('dropdown-closed') : setDropdownOpen('dropdown'))}
+      >
+        Profile
+      </NavbarLink>
+      <Dropdown>
+        <DropdownContent className={dropdownOpen}>
           <Link to="/settings" onClick={() => setNavIcon('nav-items-hide')}>
-            Settings
+            <IoSettingsOutline />
+            <span>Settings</span>
           </Link>
           <a
             onClick={() => {
@@ -185,10 +230,11 @@ const AppNavbar: FC = () => {
               dispatch(logout());
             }}
           >
-            Logout
+            <IoLogOutOutline />
+            <span>Logout</span>
           </a>
-        </div>
-      </div>
+        </DropdownContent>
+      </Dropdown>
     </>
   );
 
