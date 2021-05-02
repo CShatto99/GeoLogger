@@ -1,92 +1,162 @@
-import { FC, useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import React, { FC, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { register } from '../../store/auth';
-// import '../../css/authForm.css';
+import Brand from '../layout/Brand';
+import GeneralInput from '../styles/GeneralInput';
+import Button from '../styles/Buttons';
+import { DefaultLink, DangerLink } from '../styles/Links';
+import satelliteV9 from '../../img/satellite-v9.png';
+import Alert from '../styles/Alert';
+
+export const AuthContainer = styled.div`
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.black};
+  background-image: url(${satelliteV9});
+  background-repeat: no-repeat;
+  background-size: cover;
+  grid-template-columns: 1fr 1fr;
+
+  & img {
+    border-radius: 0;
+  }
+`;
+
+export const AuthContent = styled.div`
+  height: 100vh;
+  width: 484px;
+  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
+  padding: 2.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & a {
+    color: ${({ theme }) => theme.colors.black};
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.xs} {
+    width: 100%;
+    padding: 2rem;
+  }
+`;
+
+export const FormContent = styled.form`
+  width: 400px;
+
+  & > h2 {
+    color: ${({ theme }) => theme.colors.primary};
+    font-size: 30px;
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
+    margin-bottom: 2rem;
+  }
+
+  & > div {
+    margin-bottom: 2rem;
+  }
+
+  & > div:first-child {
+    margin-bottom: 4rem;
+  }
+
+  & > p {
+    margin-top: 3rem;
+  }
+
+  & > p > a {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.xs} {
+    width: 100%;
+  }
+`;
+
+export const FooterContent = styled.span`
+  font-size: 14px;
+  width: 400px;
+
+  & > a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+export const AuthInput = styled(GeneralInput)`
+  padding: 0.5rem 0.25rem;
+`;
 
 const Register: FC = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector((state) => state.auth);
   const { profile } = useAppSelector((state) => state.profile);
   const { msg } = useAppSelector((state) => state.alert);
-  const [state, setState] = useState({
-    username: '',
-    email: '',
-    password: '',
-    passVerify: '',
-  });
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passVerify, setPassVerify] = useState('');
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const user = {
-      username: state.username,
-      email: state.email,
-      password: state.password,
-      passVerify: state.passVerify,
-    };
-
-    dispatch(register(user));
+    dispatch(
+      register({
+        username,
+        email,
+        password,
+        passVerify,
+      }),
+    );
   };
 
   if (isAuth && JSON.stringify(profile) === '{}') return <Redirect to="/create" />;
   else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
 
   return (
-    <div className="form-div">
-      <div className="form-div-inner">
+    <AuthContainer>
+      <AuthContent>
         {msg && <div className="err-div">{msg}</div>}
-        <div className="form-title">
-          <h2>Register</h2>
-          <p>* required</p>
-        </div>
-        <form onSubmit={onSubmit}>
+
+        <FormContent onSubmit={onSubmit}>
+          <Brand />
+          <h2>Create an accoount</h2>
           <div className="mb-3">
-            <label>
-              Username<span className="text-red-600"> *</span>
-            </label>
-            <input type="text" name="username" className="cust-input" onChange={(e) => onChange(e)} />
+            <label>Username</label>
+            <AuthInput type="text" name="username" onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div className="mb-3">
-            <label>
-              Email<span className="text-red-600"> *</span>
-            </label>
-            <input type="email" name="email" className="cust-input" onChange={(e) => onChange(e)} />
+            <label>Email</label>
+            <AuthInput type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="mb-3">
-            <label>
-              Password<span className="text-red-600"> *</span>
-            </label>
-            <input type="password" name="password" className="cust-input" onChange={(e) => onChange(e)} />
+            <label>Password</label>
+            <AuthInput type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div className="mb-3">
-            <label>
-              Verify Password<span className="text-red-600"> *</span>
-            </label>
-            <input type="password" name="passVerify" className="cust-input" onChange={(e) => onChange(e)} />
+            <label>Verify Password</label>
+            <AuthInput type="password" name="passVerify" onChange={(e) => setPassVerify(e.target.value)} />
           </div>
+          {msg && <Alert type="error" msg={msg} />}
           <div className="flex items-center">
-            <button className="gen-btn form-btn">Register</button>
-            <Link to="/" className="gen-btn danger-btn">
-              Cancel
-            </Link>
+            <Button disabled={!username || !email || !password || !passVerify} text="Register" />
+            <DangerLink to="/">Cancel</DangerLink>
           </div>
-          <p className="mt-2 mb-0">
+          <p>
             Already have an account?{' '}
-            <Link to="/login" className="std-link">
+            <DefaultLink to="/login" className="std-link">
               Login
-            </Link>
+            </DefaultLink>
           </p>
-        </form>
-      </div>
-    </div>
+        </FormContent>
+        <FooterContent>
+          &copy; GeoLogger {new Date().getFullYear()} &bull;{' '}
+          <DefaultLink to="/terms-conditions">Terms &#38; Conditions</DefaultLink>
+        </FooterContent>
+      </AuthContent>
+    </AuthContainer>
   );
 };
 

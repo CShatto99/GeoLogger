@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const BrandStyle = styled.div`
@@ -26,12 +27,13 @@ const BrandStyle = styled.div`
     border-radius: 50%;
   }
 
-  & > h2 {
+  & > a {
     margin-left: 1rem;
     font-size: 1.875rem;
     font-weight: ${({ theme }) => theme.fontWeights.regular};
     color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
+    text-decoration: none;
   }
 `;
 
@@ -41,7 +43,7 @@ const Brand: FC = () => {
       <i className="fa fa-globe" aria-hidden="true">
         <div />
       </i>
-      <h2>GeoLogger</h2>
+      <Link to="/">GeoLogger</Link>
     </BrandStyle>
   );
 };

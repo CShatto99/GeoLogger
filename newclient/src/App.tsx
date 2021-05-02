@@ -12,6 +12,7 @@ import theme from './theme';
 import routes from './routes';
 import './App.css';
 import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 const RenderRoute = (route: RouteType) => {
   const history = useHistory();
@@ -44,7 +45,8 @@ const App: FC = () => {
         <Provider store={store}>
           <RenderNavbar />
           <Switch>
-            <Login />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             {routes.map((route, index) => (
               <RenderRoute {...route} key={index} />
             ))}

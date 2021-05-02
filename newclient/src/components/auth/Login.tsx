@@ -3,92 +3,20 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { login } from '../../store/auth';
+import { AuthContainer, AuthContent, FormContent, FooterContent, AuthInput } from './Register';
 import Brand from '../layout/Brand';
-import GeneralInput from '../styles/GeneralInput';
 import Button from '../styles/Buttons';
 import { DefaultLink, DangerLink } from '../styles/Links';
-import satelliteV9 from '../../img/satellite-v9.png';
 import Alert from '../styles/Alert';
 
-const LoginContainer = styled.div`
-  min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.black};
-  background-image: url(${satelliteV9});
-  background-repeat: no-repeat;
-  background-size: cover;
-  grid-template-columns: 1fr 1fr;
-
-  & img {
-    border-radius: 0;
-  }
-`;
-
-const LoginContent = styled.div`
-  height: 100vh;
-  width: 484px;
-  background-color: ${({ theme }) => theme.colors.white};
-  color: ${({ theme }) => theme.colors.black};
-  padding: 2.5rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  & h2 {
-    color: ${({ theme }) => theme.colors.black};
-  }
-
-  @media ${({ theme }) => theme.mediaQueries.xs} {
-    width: 100%;
-  }
-`;
-
-const FormContent = styled.form`
-  width: 400px;
-
-  & > h2 {
-    color: ${({ theme }) => theme.colors.primary};
-    font-size: 30px;
-    font-weight: ${({ theme }) => theme.fontWeights.medium};
-    margin-bottom: 2rem;
-  }
-
-  & > div {
-    margin-bottom: 2rem;
-  }
-
-  & > div:first-child {
-    margin-bottom: 4rem;
-  }
-
+const LoginFormContent = styled(FormContent)`
   & > div:nth-child(4) a {
     float: right;
-  }
-
-  & > p {
-    margin-top: 3rem;
-  }
-
-  @media ${({ theme }) => theme.mediaQueries.xs} {
-    width: 100%;
-  }
-`;
-
-const FooterContent = styled.span`
-  font-size: 14px;
-  width: 400px;
-
-  & > a {
-    text-decoration: none;
     color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
-const LoginInput = styled(GeneralInput)`
-  padding: 0.5rem 0.25rem;
-`;
-
-const PasswordInput = styled(LoginInput)`
+const PasswordInput = styled(AuthInput)`
   margin-bottom: 0.25rem;
 
   & a {
@@ -119,14 +47,14 @@ const Login: FC = () => {
   else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
 
   return (
-    <LoginContainer>
-      <LoginContent>
-        <FormContent onSubmit={onSubmit}>
+    <AuthContainer>
+      <AuthContent>
+        <LoginFormContent onSubmit={onSubmit}>
           <Brand />
           <h2>Log in to your account</h2>
           <div>
             <label>Email</label>
-            <LoginInput type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <AuthInput type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <label>Password</label>
@@ -144,13 +72,13 @@ const Login: FC = () => {
               Register
             </DefaultLink>
           </p>
-        </FormContent>
+        </LoginFormContent>
         <FooterContent>
           &copy; GeoLogger {new Date().getFullYear()} &bull;{' '}
           <DefaultLink to="/terms-conditions">Terms &#38; Conditions</DefaultLink>
         </FooterContent>
-      </LoginContent>
-    </LoginContainer>
+      </AuthContent>
+    </AuthContainer>
   );
 };
 
