@@ -5,6 +5,8 @@ const theme = {
     secondary: '#E73D8E',
     white: '#edf2f7',
     black: '#0c0f11',
+    light: '#D9DFDD',
+    dark: '#89989B',
     success: '#D4EDDA',
     successDark: '#55B36A',
     danger: '#feb2b2',

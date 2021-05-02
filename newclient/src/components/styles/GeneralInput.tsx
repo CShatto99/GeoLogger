@@ -7,8 +7,8 @@ const GeneralInput = styled.input`
   box-shadow: 0 0 1pt 0 #1a202c;
   transition: ease-out 100ms;
   border: none;
-  margin-bottom: 1rem;
   box-sizing: border-box;
+  margin-top: 0.25rem;
   padding: 0.25rem;
 
   &:focus {

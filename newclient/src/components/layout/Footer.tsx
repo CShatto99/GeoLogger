@@ -5,7 +5,7 @@ import { FaGithub } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
 import { setAlert } from '../../store/alert';
-import GeneralLink from '../styles/GeneralLink';
+import GeneralLink, { DefaultLinkHTML } from '../styles/Links';
 import GeneralInput from '../styles/GeneralInput';
 import Alert from '../styles/Alert';
 
@@ -34,8 +34,12 @@ const FooterContent = styled.div`
     justify-content: center;
   }
 
-  & input {
-    margin-top: 0.25rem;
+  & > form > div:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  & a {
+    font-size: 1rem !important;
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
@@ -78,10 +82,6 @@ const SendButton = styled.button`
   }
 `;
 
-const MapboxLink = styled.a`
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.primary};
-`;
 const GitHubLink = styled.a`
   transition: ease-out 100ms;
   color: ${({ theme }) => theme.colors.black};
@@ -179,14 +179,14 @@ const Footer: FC = () => {
             {msg === 'Email sent' && status === 200 && <Alert type="success" msg={msg} />}
           </div>
         </form>
-        <small>&copy; Copyright {new Date().getFullYear()}, GeoLogger</small>
+        <small>&copy; GeoLogger {new Date().getFullYear()}</small>
         <small>
           <span>
             Made with
-            <MapboxLink href="https://www.mapbox.com/" target="_blank" rel="noreferrer noopener">
+            <DefaultLinkHTML href="https://www.mapbox.com/" target="_blank" rel="noreferrer noopener">
               {' '}
               Mapbox
-            </MapboxLink>
+            </DefaultLinkHTML>
           </span>
         </small>
         <div>

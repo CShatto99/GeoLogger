@@ -2,9 +2,10 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
+import Brand from './Brand';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
-import GeneralLink from '../styles/GeneralLink';
+import GeneralLink from '../styles/Links';
 
 const NavbarContainer = styled.nav`
   width: 100%;
@@ -30,39 +31,6 @@ const NavbarContents = styled.div`
       margin-top: -100%;
       transition: ease-out 200ms;
     }
-  }
-`;
-
-const NavbarBrand = styled.div`
-  display: flex;
-  align-items: center;
-
-  & .fa-globe {
-    position: relative;
-    color: ${({ theme }) => theme.colors.primary};
-    font-size: 3rem;
-    -webkit-text-stroke: 1px ${({ theme }) => theme.colors.black};
-  }
-
-  & div {
-    background-color: green;
-    position: absolute;
-    top: 10%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    height: 80%;
-    width: 100%;
-    border-radius: 50%;
-  }
-
-  & > h2 {
-    margin-left: 1rem;
-    font-size: 1.875rem;
-    font-weight: ${({ theme }) => theme.fontWeights.regular};
-    color: ${({ theme }) => theme.colors.white};
-    cursor: pointer;
   }
 `;
 
@@ -228,12 +196,7 @@ const AppNavbar: FC = () => {
   return (
     <NavbarContainer>
       <NavbarContents>
-        <NavbarBrand>
-          <i className="fa fa-globe" aria-hidden="true">
-            <div />
-          </i>
-          <h2>GeoLogger</h2>
-        </NavbarBrand>
+        <Brand />
         <NavbarLinks className={navIcon}>
           <NavbarLink to="/" onClick={() => setNavIcon('nav-items-hide')}>
             Home

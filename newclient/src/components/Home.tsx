@@ -10,7 +10,7 @@ import outdoorsV11 from '../img/outdoors-v11.png';
 import streetsV11 from '../img/streets-v11.png';
 import satelliteV9 from '../img/satellite-v9.png';
 import vacaEx from '../img/vaca-ex.png';
-import GeneralLink from './styles/GeneralLink';
+import GeneralLink from './styles/Links';
 
 const HomePage = styled.div`
   & img {

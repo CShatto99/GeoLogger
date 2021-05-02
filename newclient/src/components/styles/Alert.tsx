@@ -11,7 +11,7 @@ const ErrorAlert = styled.div`
   margin-top: 0.5rem;
   padding: 0.25rem;
   color: ${({ theme }) => theme.colors.dangerDark};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
   text-align: left;
   display: flex;
   align-items: center;

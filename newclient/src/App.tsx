@@ -38,13 +38,10 @@ const App: FC = () => {
     store.dispatch(refreshUser());
   }, []);
 
-  console.log(routes);
-
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          {location.pathname !== '/create' && <AppNavbar />}
           <RenderNavbar />
           <Switch>
             <Login />
@@ -52,7 +49,10 @@ const App: FC = () => {
               <RenderRoute {...route} key={index} />
             ))}
           </Switch>
-          {location.pathname !== '/map' && location.pathname !== '/create' && <Footer />}
+          {location.pathname !== '/map' &&
+            location.pathname !== '/create' &&
+            location.pathname !== '/login' &&
+            location.pathname !== '/register' && <Footer />}
         </Provider>
       </ThemeProvider>
     </Router>
