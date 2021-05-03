@@ -1,30 +1,18 @@
 import { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import AppNavbar from './components/layout/AppNavbar';
 import Footer from './components/layout/Footer';
 import store from './store/index';
 import { refreshUser } from './store/auth';
-import { RouteType } from './routes';
-import isAuthenticated from './utils/isAuthenticated';
-import theme from './theme';
-import routes from './routes';
-import './App.css';
-import Login from './components/auth/Login';
+import PrivateRoute from './components/routing/PrivateRoute';
+import Mapbox from './components/Mapbox';
 import Register from './components/auth/Register';
-
-const RenderRoute = (route: RouteType) => {
-  const history = useHistory();
-
-  console.log(console.log());
-
-  document.title = `${route.title} - Geologger` || 'GeoLogger';
-  if (route.needsAuth && !isAuthenticated()) history.push('/login');
-  else if (!route.needsAuth && isAuthenticated()) history.push('/map');
-
-  return <Route path={route.path} exact component={route.component} />;
-};
+import Login from './components/auth/Login';
+import Home from './components/Home';
+import theme from './theme';
+import './App.css';
 
 const RenderNavbar: FC = () => {
   const location = useLocation();
@@ -32,6 +20,12 @@ const RenderNavbar: FC = () => {
   return location.pathname !== '/create' && location.pathname !== '/login' && location.pathname !== '/register' ? (
     <AppNavbar />
   ) : null;
+};
+
+const RenderFooter: FC = () => {
+  const location = useLocation();
+
+  return location.pathname === '/' ? <Footer /> : null;
 };
 
 const App: FC = () => {
@@ -45,16 +39,12 @@ const App: FC = () => {
         <Provider store={store}>
           <RenderNavbar />
           <Switch>
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
-            {routes.map((route, index) => (
-              <RenderRoute {...route} key={index} />
-            ))}
+            <Route exact path="/login" component={Login} />
+            <PrivateRoute path="/map" component={Mapbox} />
           </Switch>
-          {location.pathname !== '/map' &&
-            location.pathname !== '/create' &&
-            location.pathname !== '/login' &&
-            location.pathname !== '/register' && <Footer />}
+          <RenderFooter />
         </Provider>
       </ThemeProvider>
     </Router>

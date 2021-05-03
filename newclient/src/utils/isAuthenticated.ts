@@ -1,3 +1,3 @@
-const isAuthenticated: () => boolean = () => !!localStorage.isAuth;
+const isAuthenticated: () => boolean = () => localStorage.getItem('isAuth') !== 'true';
 
 export default isAuthenticated;

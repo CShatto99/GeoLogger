@@ -1,17 +1,18 @@
-import React, { FC, useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-import ReactMapGL, { Layer, Source, Marker, Popup } from 'react-map-gl';
-import { useAppDispatch, useAppSelector } from '../store/';
-import ReactTooltip from 'react-tooltip';
+import { FC, useState, useEffect } from 'react';
+// import { Redirect } from 'react-router-dom';
+import ReactMapGL, { Layer, Source } from 'react-map-gl';
+import { useAppSelector } from '../store/';
+//import { useAppDispatch, useAppSelector } from '../store/';
+// import ReactTooltip from 'react-tooltip';
 import geoJSON from '../json/geoJSON.json';
 import '../css/mapbox.css';
 import GeoLoggerSpinner from './layout/GeoLoggerSpinner';
-import Checklist from './Checklist';
-import MarkerPopup from './MarkerPopup';
+// import Checklist from './Checklist';
+// import MarkerPopup from './MarkerPopup';
 import useWindowDimensions from '../hooks/windowDimensions';
-import { updateProfile } from '../store/profile';
-import { setAlert } from '../store/alert';
-import { Marker as MarkerType } from '../store/types';
+// import { updateProfile } from '../store/profile';
+// import { setAlert } from '../store/alert';
+// import { Marker as MarkerType } from '../store/types';
 
 type Viewport = {
   width: string;
@@ -22,9 +23,9 @@ type Viewport = {
 };
 
 const Mapbox: FC = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { profile, loading } = useAppSelector((state) => state.profile);
-  const { isAuth } = useAppSelector((state) => state.auth);
+  // const { isAuth } = useAppSelector((state) => state.auth);
   const { height } = useWindowDimensions();
 
   const [viewport, setViewport] = useState({
@@ -35,11 +36,11 @@ const Mapbox: FC = () => {
     zoom: 3,
   });
   const [sources, setSources] = useState<React.ReactElement[]>([]);
-  const [markers, setMarkers] = useState<MarkerType[]>([]);
-  const [markerJustMoved, setMarkerJustMoved] = useState(false);
-  const [markersEdited, setMarkersEdited] = useState(false);
-  const [markerMode, setMarkerMode] = useState(false);
-  const [modeJustChanged, setModeJustChanged] = useState(false);
+  // const [markers, setMarkers] = useState<MarkerType[]>([]);
+  // const [markerJustMoved, setMarkerJustMoved] = useState(false);
+  // const [markersEdited, setMarkersEdited] = useState(false);
+  // const [markerMode, setMarkerMode] = useState(false);
+  // const [modeJustChanged, setModeJustChanged] = useState(false);
 
   const geoJSONRegions: React.ReactElement[] = [];
 
@@ -78,70 +79,66 @@ const Mapbox: FC = () => {
         }
       });
       setSources(geoJSONRegions);
-      setMarkers(profile.markers);
+      //setMarkers(profile.markers);
     }
   }, [profile]);
 
-  useEffect(() => {
-    if (markersEdited) {
-      dispatch(updateProfile({ ...profile, markers }));
-      dispatch(setAlert('Saved!', 200));
-      setMarkersEdited(false);
-    }
-  }, [markers, markersEdited]);
+  // useEffect(() => {
+  //   if (markersEdited) {
+  //     dispatch(updateProfile({ ...profile, markers }));
+  //     dispatch(setAlert('Saved!', 200));
+  //     setMarkersEdited(false);
+  //   }
+  // }, [markers, markersEdited]);
 
-  const addMarker = ([longitude, latitude]: [number, number]) => {
-    const newMarker = {
-      longitude,
-      latitude,
-      open: false,
-      title: '',
-      date: '',
-      notes: '',
-      image: '',
-    };
-    setMarkers((markers) => [...markers, newMarker]);
-    setMarkersEdited(true);
-    setMarkerMode(false);
-  };
+  // const addMarker = ([longitude, latitude]: [number, number]) => {
+  //   const newMarker = {
+  //     longitude,
+  //     latitude,
+  //     open: false,
+  //     title: '',
+  //     date: '',
+  //     notes: '',
+  //     image: '',
+  //   };
+  //   setMarkers((markers) => [...markers, newMarker]);
+  //   setMarkersEdited(true);
+  //   setMarkerMode(false);
+  // };
 
-  const handleMarkerDrag = ([longitude, latitude]: [number, number], index: number) => {
-    setMarkers((prevMarkers) => prevMarkers.map((m, i) => (index !== i ? m : { ...m, ...{ longitude, latitude } })));
-    setMarkerJustMoved(true);
-    setTimeout(() => setMarkerJustMoved(false), 100);
-    setMarkersEdited(true);
-  };
+  // const handleMarkerDrag = ([longitude, latitude]: [number, number], index: number) => {
+  //   setMarkers((prevMarkers) => prevMarkers.map((m, i) => (index !== i ? m : { ...m, ...{ longitude, latitude } })));
+  //   setMarkerJustMoved(true);
+  //   setTimeout(() => setMarkerJustMoved(false), 100);
+  //   setMarkersEdited(true);
+  // };
 
-  const handleMarkerClick = (index: number) => {
-    if (!markerJustMoved) {
-      setMarkers((prevMarkers) => prevMarkers.map((m, i) => (index === i ? { ...m, open: !m.open } : m)));
+  // const handleMarkerClick = (index: number) => {
+  //   if (!markerJustMoved) {
+  //     setMarkers((prevMarkers) => prevMarkers.map((m, i) => (index === i ? { ...m, open: !m.open } : m)));
 
-      setMarkersEdited(true);
-    }
-  };
+  //     setMarkersEdited(true);
+  //   }
+  // };
 
-  if (isAuth && JSON.stringify(profile) === '{}') {
-    return <Redirect to="/create" />;
-  }
+  // if (isAuth && JSON.stringify(profile) === '{}') {
+  //   return <Redirect to="/create" />;
+  // }
 
-  return (
-    <>
-      {loading ? (
-        <div className="spinner-div">
-          <GeoLoggerSpinner />
-        </div>
-      ) : (
-        <div className="map-container">
-          <ReactMapGL
-            {...viewport}
-            mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
-            onViewportChange={(nextViewport: Viewport) => setViewport(nextViewport)}
-            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-            className="w-full"
-            onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
-          >
-            {sources}
-            <div className="add-states">
+  return loading ? (
+    <GeoLoggerSpinner />
+  ) : (
+    <div className="map-container">
+      <ReactMapGL
+        {...viewport}
+        mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
+        onViewportChange={(nextViewport: Viewport) => setViewport(nextViewport)}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        className="w-full"
+        //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
+      >
+        {sources}
+        {/* <div className="add-states">
               <Checklist />
               {markerMode && (
                 <ReactTooltip id="marker-btn" aria-haspopup="true">
@@ -204,11 +201,9 @@ const Mapbox: FC = () => {
                   </Popup>
                 )}
               </React.Fragment>
-            ))}
-          </ReactMapGL>
-        </div>
-      )}
-    </>
+            ))} */}
+      </ReactMapGL>
+    </div>
   );
 };
 

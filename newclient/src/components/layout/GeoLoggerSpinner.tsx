@@ -1,7 +1,15 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-const GeoLoggerSpinnerStyle = styled.div`
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #2b6cb0;
+`;
+
+const SpinnerStyle = styled.div`
   height: 7rem;
   width: 7rem;
   border-top: 3px solid #2b6cb0;
@@ -31,7 +39,11 @@ const GeoLoggerSpinnerStyle = styled.div`
 `;
 
 const GeoLoggerSpinner: FC = () => {
-  return <GeoLoggerSpinnerStyle />;
+  return (
+    <SpinnerContainer>
+      <SpinnerStyle />
+    </SpinnerContainer>
+  );
 };
 
 export default GeoLoggerSpinner;
