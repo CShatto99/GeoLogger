@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../store/';
 import ReactTooltip from 'react-tooltip';
 import geoJSON from '../json/geoJSON.json';
 import '../css/mapbox.css';
-import CustSpinner from './layout/CustSpinner';
+import GeoLoggerSpinner from './layout/GeoLoggerSpinner';
 import Checklist from './Checklist';
 import MarkerPopup from './MarkerPopup';
 import useWindowDimensions from '../hooks/windowDimensions';
@@ -128,7 +128,7 @@ const Mapbox: FC = () => {
     <>
       {loading ? (
         <div className="spinner-div">
-          <CustSpinner />
+          <GeoLoggerSpinner />
         </div>
       ) : (
         <div className="map-container">

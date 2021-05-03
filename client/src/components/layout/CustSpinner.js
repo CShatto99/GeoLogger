@@ -1,8 +1,8 @@
 import React from "react";
-import "../../css/custSpinner.css";
+import "../../css/GeoLoggerSpinner.css";
 
-const CustSpinner = () => {
+const GeoLoggerSpinner = () => {
   return <div className="cust-spinner-child"></div>;
 };
 
-export default CustSpinner;
+export default GeoLoggerSpinner;

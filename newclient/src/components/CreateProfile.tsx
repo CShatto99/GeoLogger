@@ -9,7 +9,7 @@ import streetsV11 from '../img/streets-v11.png';
 import satelliteV9 from '../img/satellite-v9.png';
 import colors from '../json/colors.json';
 import '../css/createProfile.css';
-//import CustSpinner from './CustSpinner';
+//import GeoLoggerSpinner from './GeoLoggerSpinner';
 
 const CreateProfile: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +38,7 @@ const CreateProfile: FC = () => {
   // )
   //   return (
   //     <div className="spinner-div">
-  //       <CustSpinner />
+  //       <GeoLoggerSpinner />
   //     </div>
   //   );
 
@@ -48,7 +48,7 @@ const CreateProfile: FC = () => {
 localStorage.getItem("isAuth") === "true" &&
     JSON.stringify(profile) === "{}" ? (
     <div className="spinner-div">
-      <CustSpinner />
+      <GeoLoggerSpinner />
     </div>
   ) :
 
