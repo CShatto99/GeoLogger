@@ -3,7 +3,8 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { login } from '../../store/auth';
-import { AuthContainer, AuthContent, FormContent, FooterContent, AuthInput } from './Register';
+import { AuthContainer, AuthContent, FormContent, FooterContent } from './Register';
+import { AuthInput, PasswordInput } from '../styles/Inputs';
 import Brand from '../layout/Brand';
 import Button from '../styles/Buttons';
 import { DefaultLink, DangerLink } from '../styles/Links';
@@ -13,14 +14,7 @@ const LoginFormContent = styled(FormContent)`
   & > div:nth-child(4) a {
     float: right;
     color: ${({ theme }) => theme.colors.primary};
-  }
-`;
-
-const PasswordInput = styled(AuthInput)`
-  margin-bottom: 0.25rem;
-
-  & a {
-    font-size: 14px !important;
+    margin-top: 0.25rem;
   }
 `;
 
@@ -51,17 +45,18 @@ const Login: FC = () => {
       <AuthContent>
         <LoginFormContent onSubmit={onSubmit}>
           <Brand />
+          {msg && <Alert type="error" msg={msg} />}
           <h2>Log in to your account</h2>
           <div>
             <label>Email</label>
-            <AuthInput type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <AuthInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <label>Password</label>
-            <PasswordInput type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
             <DefaultLink to="/forgot-password">Forgot Password?</DefaultLink>
           </div>
-          {msg && <Alert type="error" msg={msg} />}
+
           <div>
             <Button disabled={!email || !password} text="Login" />
             <DangerLink to="/">Cancel</DangerLink>

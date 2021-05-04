@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
 import { setAlert } from '../../store/alert';
 import GeneralLink, { DefaultLinkHTML } from '../styles/Links';
-import GeneralInput from '../styles/GeneralInput';
+import GeneralInput from '../styles/Inputs';
 import Alert from '../styles/Alert';
 
 const FooterContainer = styled.footer`
@@ -155,23 +155,11 @@ const Footer: FC = () => {
           <h3>Contact</h3>
           <div>
             <label>Email</label>
-            <GeneralInput
-              type="text"
-              name="email"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
+            <GeneralInput type="text" onChange={(e) => setEmail(e.target.value)} value={email} />
           </div>
           <div>
             <label>Message</label>
-            <GeneralInput
-              type="textarea"
-              name="message"
-              placeholder="Message"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-            />
+            <GeneralInput type="textarea" onChange={(e) => setMessage(e.target.value)} value={message} />
           </div>
           <div>
             <SendButton>Send</SendButton>{' '}

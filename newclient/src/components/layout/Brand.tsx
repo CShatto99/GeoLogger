@@ -1,34 +1,22 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FcGlobe } from 'react-icons/fc';
 import styled from 'styled-components';
 
 const BrandStyle = styled.div`
   display: flex;
   align-items: center;
 
-  & .fa-globe {
-    position: relative;
-    color: ${({ theme }) => theme.colors.primary};
-    font-size: 3rem;
-    -webkit-text-stroke: 1px ${({ theme }) => theme.colors.black};
-    z-index: 1;
+  & > svg {
+    font-size: 2.5rem;
   }
 
-  & div {
-    background-color: green;
-    position: absolute;
-    top: 10%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    height: 80%;
-    width: 100%;
-    border-radius: 50%;
+  & > svg > path:nth-child(2) {
+    fill: ${({ theme }) => theme.colors.primary};
   }
 
   & > a {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     font-size: 1.875rem;
     font-weight: ${({ theme }) => theme.fontWeights.regular};
     color: ${({ theme }) => theme.colors.white};
@@ -40,9 +28,7 @@ const BrandStyle = styled.div`
 const Brand: FC = () => {
   return (
     <BrandStyle>
-      <i className="fa fa-globe" aria-hidden="true">
-        <div />
-      </i>
+      <FcGlobe color="red !important" />
       <Link to="/">GeoLogger</Link>
     </BrandStyle>
   );

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { register } from '../../store/auth';
 import Brand from '../layout/Brand';
-import GeneralInput from '../styles/GeneralInput';
+import { AuthInput, PasswordInput } from '../styles/Inputs';
 import Button from '../styles/Buttons';
 import { DefaultLink, DangerLink } from '../styles/Links';
 import satelliteV9 from '../../img/satellite-v9.png';
@@ -60,6 +60,7 @@ export const FormContent = styled.form`
 
   & > div:first-child {
     margin-bottom: 4rem;
+    color: ${({ theme }) => theme.colors.black};
   }
 
   & > p {
@@ -83,10 +84,6 @@ export const FooterContent = styled.span`
     text-decoration: none;
     color: ${({ theme }) => theme.colors.primary};
   }
-`;
-
-export const AuthInput = styled(GeneralInput)`
-  padding: 0.5rem 0.25rem;
 `;
 
 const Register: FC = () => {
@@ -125,19 +122,19 @@ const Register: FC = () => {
           <h2>Create an accoount</h2>
           <div className="mb-3">
             <label>Username</label>
-            <AuthInput type="text" name="username" onChange={(e) => setUsername(e.target.value)} />
+            <AuthInput type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div className="mb-3">
             <label>Email</label>
-            <AuthInput type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
+            <AuthInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="mb-3">
             <label>Password</label>
-            <AuthInput type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
+            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div className="mb-3">
             <label>Verify Password</label>
-            <AuthInput type="password" name="passVerify" onChange={(e) => setPassVerify(e.target.value)} />
+            <PasswordInput value={passVerify} onChange={(e) => setPassVerify(e.target.value)} />
           </div>
           {msg && <Alert type="error" msg={msg} />}
           <div className="flex items-center">
