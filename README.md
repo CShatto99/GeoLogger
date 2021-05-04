@@ -28,6 +28,7 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
 - jsonwebtoken
 - MongoDB/mongoose
 - bcryptjs
+- nodemailer
 
 ## Local Setup
 
