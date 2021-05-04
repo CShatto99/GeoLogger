@@ -9,14 +9,18 @@ const ErrorAlert = styled.div`
   border-radius: 0.3rem;
   border: 1px solid ${({ theme }) => theme.colors.dangerDark};
   margin-top: 0.5rem;
-  padding: 0.25rem;
+  padding: 0.3rem;
   color: ${({ theme }) => theme.colors.dangerDark};
   font-weight: ${({ theme }) => theme.fontWeights.regular};
+  font-size: 20px;
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  & > p {
+    font-size: 14px;
+  }
   & svg {
     cursor: pointer;
   }

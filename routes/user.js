@@ -6,6 +6,7 @@ const User = require("../models/User");
 const authToken = require("../middleware/authToken");
 const genAccessToken = require("../utils/genAccessToken");
 const genRefreshToken = require("../utils/genRefreshToken");
+const validator = require("../utils/validator");
 
 // @route GET /api/user
 // @desc Load a user
@@ -101,14 +102,21 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ msg: "A password is required" });
     else if (!passVerify)
       return res.status(400).json({ msg: "You must verify your password" });
-
-    if (password !== passVerify)
+    else if (password !== passVerify)
       return res.status(400).json({ msg: "Your passwords do not match" });
+    else {
+      const rules = {
+        "8 characters": password.length >= 8,
+        "1 number": /(?=.*?[0-9])/.test(password),
+        "1 lowercase letter": /(?=.*?[a-z])/.test(password),
+        "1 uppercase letter": /(?=.*?[A-Z])/.test(password),
+        "1 special character": /(?=.*?[#?!@$%^&*-])/.test(password),
+      };
 
-    if (password.length < 6)
-      return res
-        .status(400)
-        .json({ msg: "Your password must contain 6 or more characters" });
+      const msg = validator(password, "password", rules);
+
+      if (msg) return res.status(400).json({ msg });
+    }
 
     let santitizedEmail = email.toLowerCase();
 
@@ -131,7 +139,6 @@ router.post("/register", async (req, res) => {
     const accessToken = genAccessToken({ id: newUser._id });
     const refreshToken = genRefreshToken({ id: newUser._id });
 
-    // MAKE COOKIE EXPIRE
     res.cookie("token", refreshToken, {
       expires: new Date(Date.now() + 604800),
       httpOnly: true,
@@ -139,7 +146,7 @@ router.post("/register", async (req, res) => {
 
     res.json({ accessToken });
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
     res.status(500).json({ msg: "Error registering user" });
   }
 });
