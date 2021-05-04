@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 import Brand from './Brand';
@@ -15,7 +15,7 @@ const NavbarContainer = styled.nav`
   background-color: rgba(14, 16, 18, 0.6);
   backdrop-filter: blur(10px);
   position: fixed;
-  z-index: 100;
+  z-index: 10;
 `;
 
 const NavbarContents = styled.div`
@@ -45,10 +45,9 @@ const NavbarLinks = styled.ul`
     top: 0;
     right: 0;
     left: 0;
-    padding: 1.5rem;
-    margin-top: 4.5rem;
+    padding: 5.5rem 1rem 1rem 1rem;
     background-color: ${({ theme }) => theme.colors.black};
-    z-index: 10;
+    z-index: -1;
   }
 `;
 
@@ -92,22 +91,13 @@ const NavbarToggler = styled.div`
   }
 `;
 
-const Dropdown = styled.div`
-  & .dropdown {
-    visibility: visible;
-    opacity: 1;
-    max-height: 500px;
-    transition: ease-in 100ms;
-  }
-`;
-
 const DropdownContent = styled.div`
   opacity: 0;
   visibility: hidden;
   position: absolute;
   background-color: #edf2f7;
   min-width: 140px;
-  margin: 2rem 0 0 -9.5rem;
+  margin: 1.5rem 0 0 6.5rem;
   border-radius: 4px;
   transition: ease-out 100ms;
 
@@ -134,19 +124,32 @@ const DropdownContent = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     position: absolute;
-    margin: 0;
+    margin: 5.5rem 0 0 0;
     right: 4.5rem;
     left: 4.5rem;
   }
 `;
 
+const DropdownToggler = styled(NavbarLink)`
+  &:hover + div,
+  & + div:hover {
+    visibility: visible;
+    opacity: 1;
+    max-height: 500px;
+    transition: ease-in 100ms;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    margin: 0;
+  }
+`;
+
 const AppNavbar: FC = () => {
   const dispatch = useAppDispatch();
-  // const location = useLocation();
+  const location = useLocation();
   const { isAuth } = useAppSelector((state) => state.auth);
   // const { profile } = useAppSelector((state) => state.profile);
   const [navIcon, setNavIcon] = useState('nav-items-hide');
-  const [dropdownOpen, setDropdownOpen] = useState('dropdown-closed');
 
   // useEffect(() => {
   // }, [profile, location.pathname]);
@@ -167,29 +170,22 @@ const AppNavbar: FC = () => {
       <NavbarLink to="/map" onClick={() => setNavIcon('nav-items-hide')}>
         Map
       </NavbarLink>
-      <NavbarLink
-        to="/"
-        onClick={() => (dropdownOpen === 'dropdown' ? setDropdownOpen('dropdown-closed') : setDropdownOpen('dropdown'))}
-      >
-        Profile
-      </NavbarLink>
-      <Dropdown>
-        <DropdownContent className={dropdownOpen}>
-          <Link to="/settings" onClick={() => setNavIcon('nav-items-hide')}>
-            <IoSettingsOutline />
-            <span>Settings</span>
-          </Link>
-          <a
-            onClick={() => {
-              setNavIcon('nav-items-hide');
-              dispatch(logout());
-            }}
-          >
-            <IoLogOutOutline />
-            <span>Logout</span>
-          </a>
-        </DropdownContent>
-      </Dropdown>
+      <DropdownToggler to={location.pathname}>Profile</DropdownToggler>
+      <DropdownContent>
+        <Link to="/settings" onClick={() => setNavIcon('nav-items-hide')}>
+          <IoSettingsOutline />
+          <span>Settings</span>
+        </Link>
+        <a
+          onClick={() => {
+            setNavIcon('nav-items-hide');
+            dispatch(logout());
+          }}
+        >
+          <IoLogOutOutline />
+          <span>Logout</span>
+        </a>
+      </DropdownContent>
     </>
   );
 
