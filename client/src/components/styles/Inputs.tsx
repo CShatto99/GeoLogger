@@ -4,11 +4,10 @@ import styled from 'styled-components';
 
 export const GeneralInputStyle = styled.input`
   width: 100%;
-  color: #1a202c;
-  border-radius: 0.2rem;
-  box-shadow: 0 0 1pt 0 #1a202c;
+  color: ${({ theme }) => theme.colors.black};
   transition: ease-out 100ms;
   border: none;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.dark};
   box-sizing: border-box;
   margin-top: 0.25rem;
   padding: 0.25rem;
@@ -16,19 +15,15 @@ export const GeneralInputStyle = styled.input`
   &:focus {
     transition: ease-in 100ms;
     outline: none;
-    box-shadow: 0 0 3pt 1pt ${({ theme }) => theme.colors.primary};
+    box-shadow: 0px 1px 1px 0px ${({ theme }) => theme.colors.primary};
   }
 
   &::placeholder {
-    color: #b8b8b8;
+    color: ${({ theme }) => theme.colors.dark};
   }
 `;
 
-const FilledInput = styled(GeneralInputStyle)((props) => ({
-  backgroundColor: props.value ? '#D9DFDD' : '#fff',
-}));
-
-const AuthInputStyle = styled(FilledInput)`
+const AuthInputStyle = styled(GeneralInputStyle)`
   padding: 0.5rem 0.25rem;
 `;
 
@@ -55,7 +50,7 @@ type InputProps = {
 };
 
 const GeneralInput: FC<InputProps> = ({ type, value, placeholder, onChange }: InputProps) => (
-  <FilledInput type={type} value={value} placeholder={placeholder} onChange={onChange} />
+  <GeneralInputStyle type={type} value={value} placeholder={placeholder} onChange={onChange} />
 );
 
 export const AuthInput: FC<InputProps> = ({ type, value, placeholder, onChange }: InputProps) => (
@@ -73,7 +68,9 @@ export const PasswordInput: FC<InputProps> = ({ value, placeholder, onChange }: 
         placeholder={placeholder}
         onChange={onChange}
       />
-      <Toggler onClick={() => setPassVisible(!passVisible)}>{passVisible ? <IoMdEye /> : <IoMdEyeOff />}</Toggler>
+      {value && (
+        <Toggler onClick={() => setPassVisible(!passVisible)}>{passVisible ? <IoMdEye /> : <IoMdEyeOff />}</Toggler>
+      )}
     </>
   );
 };
