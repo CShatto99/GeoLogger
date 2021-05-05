@@ -1,6 +1,6 @@
 # GeoLogger
 
-GeoLogger is a web app that allows you to log your vacation history. Create an account to choose from one of five map styles and modify your vacation history tracking color using any hex color code. An early version of the site can be found with this link: [GeoLogger](https://geo-logger.herokuapp.com).This web app is currently under development and will be expected to contain bugs. If you wish to report a bug, notify me at geologgerservice@gmail.com.
+GeoLogger is a web app that allows you to log your vacation history. Create an account to choose from one of five map styles and change your vacation history tracking color using any hex color code. An early version of the site can be found at [GeoLogger](https://geo-logger.herokuapp.com). This web app is currently under development and will be expected to contain bugs. If you discover a bug please notify me at geologgerservice@gmail.com.
 
 ## Table of Contents
 
@@ -12,23 +12,23 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
 
 ## Tech Stack
 
-#### Front-end
+#### Front end
 
 - React
 - react-router-dom
 - redux
-- bootstrap/reactstrap
+- styled-components
 - react-map-gl
-- tailwindcss
 - axios
 
-#### Back-end
+#### Back end
 
-- Node
+- node
 - express
 - jsonwebtoken
 - MongoDB/mongoose
-- bryptjs
+- bcryptjs
+- nodemailer
 
 ## Local Setup
 
@@ -47,15 +47,15 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
 4. Servers
 
    ```
-    Option 1 (runs backend and frontend servers):
+    Option 1 (runs backeend and fronteend servers):
 
     npm run dev
 
     Option 2 (for running both the servers individually):
 
-    npm run server (runs backend server only)
+    npm run server (runs backeend server only)
 
-    npm run client (runs frontend server only)
+    npm run client (runs fronteend server only)
    ```
 
 ## DEMO
