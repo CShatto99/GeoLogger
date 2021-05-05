@@ -6,7 +6,7 @@ import { updateProfile } from "../store/profile";
 import { updateUser } from "../store/auth";
 import { setAlert } from "../store/alert";
 import "../css/settings.css";
-import GeoLoggerSpinner from "./layout/GeoLoggerSpinner";
+import CustSpinner from "./layout/CustSpinner";
 import MapType from "./MapType";
 import darkV10 from "../img/dark-v10.png";
 import lightV10 from "../img/light-v10.png";
@@ -63,7 +63,7 @@ const Settings = () => {
     <div className="settings-div">
       {loading ? (
         <div className="spinner-div">
-          <GeoLoggerSpinner />
+          <CustSpinner />
         </div>
       ) : (
         <div className="settings-div-inner grid grid-cols-5">

@@ -5,7 +5,7 @@ import ReactMapGL, { Layer, Source, Marker, Popup } from "react-map-gl";
 import ReactTooltip from "react-tooltip";
 import geoJSON from "../json/geoJSON.json";
 import "../css/mapbox.css";
-import GeoLoggerSpinner from "./layout/GeoLoggerSpinner";
+import CustSpinner from "./layout/CustSpinner";
 import Checklist from "./Checklist";
 import MarkerPopup from "./MarkerPopup";
 import useWindowDimensions from "../hooks/windowDimensions";
@@ -125,7 +125,7 @@ const Mapbox = () => {
     <>
       {loading ? (
         <div className="spinner-div">
-          <GeoLoggerSpinner />
+          <CustSpinner />
         </div>
       ) : (
         <div className="map-container">

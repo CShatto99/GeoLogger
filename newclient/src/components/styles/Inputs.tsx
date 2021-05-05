@@ -16,7 +16,7 @@ export const GeneralInputStyle = styled.input`
   &:focus {
     transition: ease-in 100ms;
     outline: none;
-    box-shadow: 0 0 3pt 1pt #4299e1;
+    box-shadow: 0 0 3pt 1pt ${({ theme }) => theme.colors.primary};
   }
 
   &::placeholder {

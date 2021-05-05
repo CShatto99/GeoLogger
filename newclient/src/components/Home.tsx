@@ -23,7 +23,7 @@ const HomePage = styled.div`
   }
 `;
 
-const Landing = styled.div`
+const LandingSection = styled.div`
   background-image: url(${satelliteV9});
   background-size: cover;
   display: grid;
@@ -59,7 +59,7 @@ const LandingLink = styled(GeneralLink)`
   }
 `;
 
-const Map = styled.div`
+const MapSection = styled.div`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.white};
   display: grid;
@@ -107,12 +107,12 @@ const MapStyleContainer = styled.div`
   }
 `;
 
-const LoggingExample = styled.div`
+const LoggingSection = styled.div`
   display: grid;
   place-items: center;
 `;
 
-const LoggingExampleContent = styled.div`
+const LoggingContent = styled.div`
   max-width: 72rem;
   text-align: center;
   padding: 1.5rem;
@@ -189,7 +189,7 @@ const Home: FC = () => {
 
   return (
     <HomePage>
-      <Landing>
+      <LandingSection>
         <LandingContent>
           <h1>Welcome To GeoLogger</h1>
           <p>
@@ -198,8 +198,8 @@ const Home: FC = () => {
           </p>
           <LandingLink to="/register">Start Logging</LandingLink>
         </LandingContent>
-      </Landing>
-      <Map>
+      </LandingSection>
+      <MapSection>
         <MapContent>
           <h1>Customize Your Map Style</h1>
           <MapStyleContainer>
@@ -223,17 +223,17 @@ const Home: FC = () => {
             <h3>Satellite V9</h3>
           </MapStyleContainer>
         </MapContent>
-      </Map>
+      </MapSection>
 
-      <LoggingExample>
-        <LoggingExampleContent>
+      <LoggingSection>
+        <LoggingContent>
           <h1>Log Your Vacation History</h1>
           <div>
             <img className="home-img" src={vacaEx} alt="mapbox outdoors-v11 theme" />
           </div>
           <ModalProp>{modalDemo}</ModalProp>
-        </LoggingExampleContent>
-      </LoggingExample>
+        </LoggingContent>
+      </LoggingSection>
     </HomePage>
   );
 };

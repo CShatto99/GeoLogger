@@ -10,7 +10,7 @@ import streetsV11 from "../../img/streets-v11.png";
 import satelliteV9 from "../../img/satellite-v9.png";
 import colors from "../../json/colors.json";
 import "../../css/createProfile.css";
-import GeoLoggerSpinner from "./GeoLoggerSpinner";
+import CustSpinner from "./CustSpinner";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();

@@ -13,6 +13,7 @@ import useWindowDimensions from '../hooks/windowDimensions';
 // import { updateProfile } from '../store/profile';
 // import { setAlert } from '../store/alert';
 // import { Marker as MarkerType } from '../store/types';
+import MapActions from './MapActions';
 
 type Viewport = {
   width: string;
@@ -138,6 +139,7 @@ const Mapbox: FC = () => {
         //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
       >
         {sources}
+        <MapActions />
         {/* <div className="add-states">
               <Checklist />
               {markerMode && (

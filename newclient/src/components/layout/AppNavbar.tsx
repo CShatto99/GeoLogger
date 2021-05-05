@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
+import { VscAccount } from 'react-icons/vsc';
 import Brand from './Brand';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
@@ -95,7 +96,7 @@ const DropdownContent = styled.div`
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  background-color: #edf2f7;
+  background-color: ${({ theme }) => theme.colors.white};
   min-width: 140px;
   margin: 1.5rem 0 0 6.5rem;
   border-radius: 4px;
@@ -120,6 +121,20 @@ const DropdownContent = styled.div`
 
   & > a > span {
     margin-left: 0.5rem;
+  }
+
+  & > a:first-child > svg {
+    font-size: 14px;
+    margin-right: 0.1rem;
+    margin-left: 0.1rem;
+  }
+
+  & > a:last-child {
+    color: ${({ theme }) => theme.colors.dangerDark};
+  }
+
+  & > a:last-child > svg {
+    margin: 0.05rem -0.1rem 0 0.1rem;
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
@@ -172,6 +187,10 @@ const AppNavbar: FC = () => {
       </NavbarLink>
       <DropdownToggler to={location.pathname}>Profile</DropdownToggler>
       <DropdownContent>
+        <Link to="/profile" onClick={() => setNavIcon('nav-items-hide')}>
+          <VscAccount />
+          <span>Profile</span>
+        </Link>
         <Link to="/settings" onClick={() => setNavIcon('nav-items-hide')}>
           <IoSettingsOutline />
           <span>Settings</span>
