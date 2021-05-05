@@ -1,11 +1,10 @@
 import { FC } from 'react';
-// import { FaMapMarkerAlt } from 'react-icons/fa';
+import styled from 'styled-components';
 import { RiRoadMapFill } from 'react-icons/ri';
-import { IoMdAddCircle } from 'react-icons/io';
 import { IoEarthSharp } from 'react-icons/io5';
 import { FaHighlighter } from 'react-icons/fa';
 import ReactTooltip from 'react-tooltip';
-import styled from 'styled-components';
+import AddHighlight from './AddHighlight';
 
 const MapActionsContainer = styled.div`
   position: absolute;
@@ -48,10 +47,7 @@ const MapActions: FC = () => {
   return (
     <MapActionsContainer>
       <MapAction>
-        <IoMdAddCircle data-tip data-for="add-action" />
-        <ReactTooltip id="add-action" aria-haspopup="true">
-          <small>Add a Highlight</small>
-        </ReactTooltip>
+        <AddHighlight />
       </MapAction>
       <MapAction>
         <RiRoadMapFill data-tip data-for="marker-action" />
