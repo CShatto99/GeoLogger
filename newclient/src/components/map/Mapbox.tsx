@@ -1,19 +1,18 @@
 import { FC, useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
 import ReactMapGL, { Layer, Source } from 'react-map-gl';
-import { useAppSelector } from '../store/';
+import { useAppSelector } from '../../store';
 //import { useAppDispatch, useAppSelector } from '../store/';
 // import ReactTooltip from 'react-tooltip';
-import geoJSON from '../json/geoJSON.json';
-import '../css/mapbox.css';
-import GeoLoggerSpinner from './layout/GeoLoggerSpinner';
+import geoJSON from '../../json/geoJSON.json';
+import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 // import Checklist from './Checklist';
 // import MarkerPopup from './MarkerPopup';
-import useWindowDimensions from '../hooks/windowDimensions';
+import useWindowDimensions from '../../hooks/windowDimensions';
 // import { updateProfile } from '../store/profile';
 // import { setAlert } from '../store/alert';
 // import { Marker as MarkerType } from '../store/types';
-import MapActions from './MapActions';
+import MapActions from './mapActions/MapActions';
 
 type Viewport = {
   width: string;

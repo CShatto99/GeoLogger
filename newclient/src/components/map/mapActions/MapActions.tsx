@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { RiRoadMapFill } from 'react-icons/ri';
-import { IoEarthSharp } from 'react-icons/io5';
-import { FaHighlighter } from 'react-icons/fa';
-import ReactTooltip from 'react-tooltip';
 import AddHighlight from './AddHighlight';
+import AddMarker from './AddMarker';
+import HighlightColor from './HighlightColor';
+import MapStyle from './MapStyle';
 
 const MapActionsContainer = styled.div`
   position: absolute;
@@ -50,22 +49,13 @@ const MapActions: FC = () => {
         <AddHighlight />
       </MapAction>
       <MapAction>
-        <RiRoadMapFill data-tip data-for="marker-action" />
-        <ReactTooltip id="marker-action" aria-haspopup="true">
-          <small>Add a Marker</small>
-        </ReactTooltip>
+        <AddMarker />
       </MapAction>
       <MapAction>
-        <FaHighlighter data-tip data-for="highlight-action" />
-        <ReactTooltip id="highlight-action" aria-haspopup="true">
-          <small>Map Highlight Color</small>
-        </ReactTooltip>
+        <HighlightColor />
       </MapAction>
       <MapAction>
-        <IoEarthSharp data-tip data-for="settings-action" />
-        <ReactTooltip id="settings-action" aria-haspopup="true">
-          <small>Map Style</small>
-        </ReactTooltip>
+        <MapStyle />
       </MapAction>
     </MapActionsContainer>
   );

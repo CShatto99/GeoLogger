@@ -7,7 +7,7 @@ import { refreshUser } from './store/auth';
 import AppNavbar from './components/layout/AppNavbar';
 import Footer from './components/layout/Footer';
 import PrivateRoute from './components/routing/PrivateRoute';
-import Mapbox from './components/Mapbox';
+import Mapbox from './components/map/Mapbox';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Home from './components/Home';
