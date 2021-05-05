@@ -130,7 +130,11 @@ table {
   scrollbar-color: #d9dfdd #0c0f11;
 }
 
-/* Works on Chrome, Edge, and Safari */
+/* * {
+  scrollbar-width: thin;
+  scrollbar-color: #d9dfdd #0c0f11;
+}
+
 *::-webkit-scrollbar {
   width: 12px;
 }
@@ -143,7 +147,7 @@ table {
   background-color: #d9dfdd;
   border-radius: 20px;
   border: 3px solid #0c0f11;
-}
+} */
 
 html,
 body {

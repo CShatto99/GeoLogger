@@ -8,6 +8,8 @@ export const GeneralInputStyle = styled.input`
   transition: ease-out 100ms;
   border: none;
   border-bottom: 1px solid ${({ theme }) => theme.colors.dark};
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
   box-sizing: border-box;
   margin-top: 0.25rem;
   padding: 0.25rem;
