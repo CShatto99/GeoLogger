@@ -29,17 +29,32 @@ const DisabledButton = styled(PrimaryButtonStyle)`
   }
 `;
 
-type PrimaryButtonProps = {
+export const DangerButtonStyle = styled(PrimaryButtonStyle)`
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.danger};
+  color: ${({ theme }) => theme.colors.black};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.danger};
+    color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+type ButtonProps = {
   disabled?: boolean;
   text: string;
 };
 
-const Button: FC<PrimaryButtonProps> = ({ disabled, text }: PrimaryButtonProps) => {
+const Button: FC<ButtonProps> = ({ disabled, text }: ButtonProps) => {
   return disabled ? (
     <DisabledButton disabled={disabled}>{text}</DisabledButton>
   ) : (
     <PrimaryButtonStyle disabled={disabled}>{text}</PrimaryButtonStyle>
   );
 };
+
+export const DangerButton: FC<ButtonProps> = ({ disabled, text }: ButtonProps) => (
+  <DangerButtonStyle disabled={disabled}>{text}</DangerButtonStyle>
+);
 
 export default Button;

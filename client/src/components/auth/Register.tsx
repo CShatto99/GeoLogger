@@ -1,8 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { IoInformationCircle } from 'react-icons/io5';
-import ReactTooltip from 'react-tooltip';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { register } from '../../store/auth';
 import Brand from '../layout/Brand';
@@ -11,6 +9,7 @@ import Button from '../styles/Buttons';
 import { DefaultLink, DangerLink } from '../styles/Links';
 import satelliteV9 from '../../img/satellite-v9.png';
 import Alert from '../styles/Alert';
+import PasswordLabel from './PasswordLabel';
 
 export const AuthContainer = styled.div`
   min-height: 100vh;
@@ -88,24 +87,6 @@ export const FooterContent = styled.span`
   }
 `;
 
-const PasswordLabel = styled.div`
-  display: flex;
-  align-items: center;
-
-  & > div {
-    max-width: 300px;
-    width: 100%;
-  }
-
-  & > svg {
-    margin: 0 0 -2px 3px;
-  }
-
-  & > svg > path {
-    fill: ${({ theme }) => theme.colors.dark};
-  }
-`;
-
 const Register: FC = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector((state) => state.auth);
@@ -148,16 +129,7 @@ const Register: FC = () => {
             <AuthInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
-            <PasswordLabel>
-              <label>Password</label>
-              <IoInformationCircle data-tip data-for="pass-info" />
-              <ReactTooltip id="pass-info" aria-haspopup="true">
-                <small>
-                  Your password must contain at least 8 characters, 1 number, 1 lowercase letter, 1 uppercase letter,
-                  and 1 special character.
-                </small>
-              </ReactTooltip>
-            </PasswordLabel>
+            <PasswordLabel />
             <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div>

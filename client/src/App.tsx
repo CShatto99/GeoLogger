@@ -11,7 +11,7 @@ import Mapbox from './components/map/Mapbox';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Home from './components/Home';
-import Settings from './components/Settings';
+import Settings from './components/settings/Settings';
 import theme from './theme';
 import './App.css';
 

@@ -5,12 +5,12 @@ import { useAppDispatch } from '../../store';
 import { clearAlert } from '../../store/alert';
 
 const ErrorAlert = styled.div`
-  background-color: #feb2b2;
+  background-color: ${({ theme }) => theme.colors.dangerlight};
   border-radius: 0.3rem;
-  border: 1px solid ${({ theme }) => theme.colors.dangerDark};
+  border: 1px solid ${({ theme }) => theme.colors.danger};
   margin-top: 0.5rem;
   padding: 0.3rem;
-  color: ${({ theme }) => theme.colors.dangerDark};
+  color: ${({ theme }) => theme.colors.black};
   font-weight: ${({ theme }) => theme.fontWeights.regular};
   font-size: 20px;
   text-align: left;
@@ -27,9 +27,9 @@ const ErrorAlert = styled.div`
 `;
 
 const SuccessAlert = styled(ErrorAlert)`
-  background-color: ${({ theme }) => theme.colors.success};
-  border: 1px solid ${({ theme }) => theme.colors.successDark};
-  color: ${({ theme }) => theme.colors.successDark};
+  background-color: ${({ theme }) => theme.colors.successLight};
+  border: 1px solid ${({ theme }) => theme.colors.success};
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 type AlertProps = {

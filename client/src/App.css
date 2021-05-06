@@ -181,7 +181,7 @@ p {
   margin: 0;
 }
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
   h1 {
     font-size: 1.75rem;
   }
@@ -193,4 +193,4 @@ p {
   p {
     font-size: 0.85rem;
   }
-}
+}  */

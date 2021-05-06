@@ -6,10 +6,11 @@ export const GeneralInputStyle = styled.input`
   width: 100%;
   color: ${({ theme }) => theme.colors.black};
   transition: ease-out 100ms;
+  background-color: ${({ theme }) => theme.colors.lightInput};
   border: none;
   border-bottom: 1px solid ${({ theme }) => theme.colors.dark};
   -webkit-border-radius: 0px;
-  border-radius: 0px;
+  border-radius: 0.3rem 0.3rem 0 0;
   box-sizing: border-box;
   margin-top: 0.25rem;
   padding: 0.25rem;
@@ -18,6 +19,7 @@ export const GeneralInputStyle = styled.input`
     transition: ease-in 100ms;
     outline: none;
     box-shadow: 0px 1px 1px 0px ${({ theme }) => theme.colors.primary};
+    -webkit-box-shadow: 0px 1px 1px 0px ${({ theme }) => theme.colors.primary};
   }
 
   &::placeholder {

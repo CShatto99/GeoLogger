@@ -129,7 +129,7 @@ const Footer: FC = () => {
   const authLinks = (
     <>
       <FooterLink to="/map">Map</FooterLink>
-      <FooterLink to="/settings">Settings</FooterLink>
+      <FooterLink to="/settings/profile">Settings</FooterLink>
       <FooterLink to="/" onClick={() => dispatch(logout())}>
         Logout
       </FooterLink>

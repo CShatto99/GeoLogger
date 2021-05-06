@@ -29,8 +29,8 @@ export const DefaultLink = styled(Link)`
 `;
 
 export const DangerLink = styled(GeneralLink)`
-border: 1px solid ${({ theme }) => theme.colors.dangerDark};
-color: ${({ theme }) => theme.colors.dangerDark};
+border: 1px solid ${({ theme }) => theme.colors.dangerLight};
+color: ${({ theme }) => theme.colors.dangerLight};
 
 
 &:hover {

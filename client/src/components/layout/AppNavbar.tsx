@@ -15,12 +15,11 @@ const NavbarContainer = styled.nav`
   justify-content: center;
   background-color: rgba(14, 16, 18, 0.6);
   backdrop-filter: blur(10px);
-  position: fixed;
+  position: absolute;
   z-index: 10;
 `;
 
 const NavbarContents = styled.div`
-  max-width: 72rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -130,7 +129,7 @@ const DropdownContent = styled.div`
   }
 
   & > a:last-child {
-    color: ${({ theme }) => theme.colors.dangerDark};
+    color: ${({ theme }) => theme.colors.danger};
   }
 
   & > a:last-child > svg {
@@ -191,7 +190,7 @@ const AppNavbar: FC = () => {
           <VscAccount />
           <span>Profile</span>
         </Link>
-        <Link to="/settings" onClick={() => setNavIcon('nav-items-hide')}>
+        <Link to="/settings/profile" onClick={() => setNavIcon('nav-items-hide')}>
           <IoSettingsOutline />
           <span>Settings</span>
         </Link>
