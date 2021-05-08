@@ -224,7 +224,6 @@ const Home: FC = () => {
           </MapStyleContainer>
         </MapContent>
       </MapSection>
-
       <LoggingSection>
         <LoggingContent>
           <h1>Log Your Vacation History</h1>

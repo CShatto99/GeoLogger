@@ -29,13 +29,14 @@ export const DefaultLink = styled(Link)`
 `;
 
 export const DangerLink = styled(GeneralLink)`
-border: 1px solid ${({ theme }) => theme.colors.dangerLight};
-color: ${({ theme }) => theme.colors.dangerLight};
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.danger};
+  color: ${({ theme }) => theme.colors.black};
 
-
-&:hover {
-  background-color: ${({ theme }) => theme.colors.danger};
-  transition: ease-in 100ms;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.danger};
+    color: ${({ theme }) => theme.colors.white};
+  }
 `;
 
 export default GeneralLink;

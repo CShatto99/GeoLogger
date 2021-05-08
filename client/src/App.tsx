@@ -12,6 +12,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Home from './components/Home';
 import Settings from './components/settings/Settings';
+import CreateProfile from './components/profile/CreateProfile';
 import theme from './theme';
 import './App.css';
 
@@ -43,8 +44,9 @@ const App: FC = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <PrivateRoute path="/map" component={Mapbox} />
-            <PrivateRoute path="/settings" component={Settings} />
+            <PrivateRoute exact path="/map" component={Mapbox} />
+            <PrivateRoute exact path="/settings" component={Settings} />
+            <Route exact path="/create-profile" component={CreateProfile} />
           </Switch>
           <RenderFooter />
         </Provider>
