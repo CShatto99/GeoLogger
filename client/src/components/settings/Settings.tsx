@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import PrivateRoute from '../routing/PrivateRoute';
+// import PrivateRoute from '../routing/PrivateRoute';
 import SettingsNav from './SettingsNav';
-import Profile from './Profile';
-import Account from './Account';
-import Appearance from './Appearance';
+// import Profile from './Profile';
+// import Account from './Account';
+// import Appearance from './Appearance';
 
 const SettingsContainer = styled.div`
   min-height: 100vh;
@@ -36,11 +36,7 @@ const Settings: FC = () => {
     <SettingsContainer>
       <SettingsContent>
         <SettingsNav />
-        <SettingsTabContent>
-          <PrivateRoute exact path="/settings/profile" component={Profile} />
-          <PrivateRoute exact path="/settings/account" component={Account} />
-          <PrivateRoute exact path="/settings/appearance" component={Appearance} />
-        </SettingsTabContent>
+        <SettingsTabContent></SettingsTabContent>
       </SettingsContent>
     </SettingsContainer>
   );

@@ -1,11 +1,11 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import darkV10 from '../../img/dark-v10.png';
 import lightV10 from '../../img/light-v10.png';
 import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
-import Button from '../styles/Buttons';
+// import Button from '../styles/Buttons';
 
 const CreateProfileContainer = styled.div`
   min-height: 100vh;
@@ -57,17 +57,10 @@ const MapStyleContainer = styled.div`
 `;
 
 const CreateProfile: FC = () => {
-  const [step, setStep] = useState(0);
-
-  console.log(step);
-
   return (
     <CreateProfileContainer>
       <CreateProfileContent>
         <h3>Please complete the following steps to set up your profile.</h3>
-        {step > 0 && <Button text="Previous" onClick={() => setStep((prevStep) => prevStep - 1)} />}
-        {step < 2 && <Button text="Next" onClick={() => setStep((prevStep) => prevStep + 1)} />}
-        <h2>Percentage completed: {(step / 2) * 100}%</h2>
         <br />
         <p>Choose a map style:</p>
         <MapContent>
