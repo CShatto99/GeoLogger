@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SettingsNavContainer = styled.div`
@@ -23,6 +23,15 @@ const SettingsNavContainer = styled.div`
   & > *:last-child {
     border-bottom: none;
   }
+
+  & > .active-tab {
+    background-color: ${({ theme }) => theme.colors.light};
+    border-left: 2px solid ${({ theme }) => theme.colors.primary};
+  }
+
+  & > .active-tab:last-child {
+    border-bottom-left-radius: 0.5rem;
+  }
 `;
 
 const NavItem = styled(Link)`
@@ -41,16 +50,27 @@ const NavItem = styled(Link)`
   }
 `;
 
+const paths = ['/settings/profile', '/settings/account', '/settings/appearance'];
+
 const SettingsNav: FC = () => {
   const { url } = useRouteMatch();
+  const { pathname } = useLocation();
+
+  const getClassName = (index: number) => (pathname === paths[index] ? 'active-tab' : undefined);
 
   return (
     <div>
       <SettingsNavContainer>
         <div>Settings</div>
-        <NavItem to={`${url}/profile`}>Profile</NavItem>
-        <NavItem to={`${url}/account`}>Account</NavItem>
-        <NavItem to={`${url}/appearance`}>Appearance</NavItem>
+        <NavItem to={`${url}/profile`} className={getClassName(0)}>
+          Profile
+        </NavItem>
+        <NavItem to={`${url}/account`} className={getClassName(1)}>
+          Account
+        </NavItem>
+        <NavItem to={`${url}/appearance`} className={getClassName(2)}>
+          Appearance
+        </NavItem>
       </SettingsNavContainer>
     </div>
   );
