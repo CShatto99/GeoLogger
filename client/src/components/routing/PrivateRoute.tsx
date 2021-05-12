@@ -1,15 +1,20 @@
-import { FC } from 'react';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+import React, { FC } from 'react';
+import { Route, Redirect, RouteProps, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../store/index';
 
 type PrivateRouteProps = {
-  path: string;
+  component: React.FC;
 } & RouteProps;
 
-const PrivateRoute: FC<PrivateRouteProps> = ({ path, ...routeProps }: PrivateRouteProps) => {
+const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }: PrivateRouteProps) => {
   const { isAuth } = useAppSelector((state) => state.auth);
+  const location = useLocation();
 
-  return isAuth ? <Route exact path={path} {...routeProps} /> : <Redirect to={{ pathname: '/login' }} />;
+  return (
+    <Route {...rest}>
+      {isAuth ? <Component /> : <Redirect to={{ pathname: '/login', state: { from: location } }} />}
+    </Route>
+  );
 };
 
 export default PrivateRoute;

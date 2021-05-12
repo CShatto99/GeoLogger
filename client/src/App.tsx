@@ -13,9 +13,6 @@ import Login from './components/auth/Login';
 import Home from './components/Home';
 import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/CreateProfile';
-import Profile from './components/settings/Profile';
-import Account from './components/settings/Account';
-import Appearance from './components/settings/Appearance';
 import theme from './theme';
 import './App.css';
 
@@ -44,15 +41,20 @@ const App: FC = () => {
         <Provider store={store}>
           <RenderNavbar />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
             <PrivateRoute exact path="/map" component={Mapbox} />
-            <PrivateRoute exact path="/settings" component={Settings} />
-            <Route exact path="/create-profile" component={CreateProfile} />
-            <PrivateRoute exact path="/settings/profile" component={Profile} />
-            <PrivateRoute exact path="/settings/account" component={Account} />
-            <PrivateRoute exact path="/settings/appearance" component={Appearance} />
+            <PrivateRoute path="/settings" component={Settings} />
+            <Route exact path="/create-profile">
+              <CreateProfile />
+            </Route>
           </Switch>
           <RenderFooter />
         </Provider>

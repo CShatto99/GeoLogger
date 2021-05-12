@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SettingsNavContainer = styled.div`
@@ -42,19 +42,15 @@ const NavItem = styled(Link)`
 `;
 
 const SettingsNav: FC = () => {
-  // const [tab, setTab] = useState('/settings/profile');
-
-  const location = useLocation();
-
-  console.log(location.pathname);
+  const { url } = useRouteMatch();
 
   return (
     <div>
       <SettingsNavContainer>
         <div>Settings</div>
-        <NavItem to="/settings/profile">Profile</NavItem>
-        <NavItem to="/settings/account">Account</NavItem>
-        <NavItem to="/settings/appearance">Appearance</NavItem>
+        <NavItem to={`${url}/profile`}>Profile</NavItem>
+        <NavItem to={`${url}/account`}>Account</NavItem>
+        <NavItem to={`${url}/appearance`}>Appearance</NavItem>
       </SettingsNavContainer>
     </div>
   );

@@ -1,10 +1,10 @@
 import { FC } from 'react';
+import { Route, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
-// import PrivateRoute from '../routing/PrivateRoute';
 import SettingsNav from './SettingsNav';
-// import Profile from './Profile';
-// import Account from './Account';
-// import Appearance from './Appearance';
+import Profile from './Profile';
+import Account from './Account';
+import Appearance from './Appearance';
 
 const SettingsContainer = styled.div`
   min-height: 100vh;
@@ -32,11 +32,23 @@ const SettingsContent = styled.div`
 const SettingsTabContent = styled.div``;
 
 const Settings: FC = () => {
+  const { url } = useRouteMatch();
+
   return (
     <SettingsContainer>
       <SettingsContent>
         <SettingsNav />
-        <SettingsTabContent></SettingsTabContent>
+        <SettingsTabContent>
+          <Route path={`${url}/profile`}>
+            <Profile />
+          </Route>
+          <Route path={`${url}/account`}>
+            <Account />
+          </Route>
+          <Route path={`${url}/appearance`}>
+            <Appearance />
+          </Route>
+        </SettingsTabContent>
       </SettingsContent>
     </SettingsContainer>
   );
