@@ -24,6 +24,10 @@ const CreateProfileContainer = styled.div`
 const CreateProfileContent = styled.div`
   max-width: 72rem;
   margin: 0 auto;
+
+  & > button {
+    width: 100%;
+  }
 `;
 
 const MapContent = styled.div`
@@ -56,6 +60,7 @@ const SectionTitle = styled(PasswordLabelStyle)`
 const ColorContent = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 2.5rem;
 
   & > p {
     width: 100%;
@@ -179,9 +184,8 @@ const CreateProfile: FC = () => {
               </ColorBlockLabel>
             </ColorBox>
           ))}
-          <p>Not seeing your favorite color? You can apply a custom highlight color in your profile settings</p>
         </ColorContent>
-        <Button text="Finish" onClick={onSubmit} disabled={!mapStyle || !fillColor}></Button>
+        <Button text="Finish" onClick={onSubmit} disabled={!mapStyle || !fillColor} />
       </CreateProfileContent>
     </CreateProfileContainer>
   );
