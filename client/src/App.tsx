@@ -52,9 +52,7 @@ const App: FC = () => {
             </Route>
             <PrivateRoute exact path="/map" component={Mapbox} />
             <PrivateRoute path="/settings" component={Settings} />
-            <Route exact path="/create-profile">
-              <CreateProfile />
-            </Route>
+            <PrivateRoute path="/create-profile" component={CreateProfile} />
           </Switch>
           <RenderFooter />
         </Provider>

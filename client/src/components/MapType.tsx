@@ -3,15 +3,23 @@ import styled from 'styled-components';
 import { BsCheckCircle } from 'react-icons/bs';
 
 const MapTypeContainer = styled.div`
-  & .map-active {
+  & > .map-active {
     transform: scale(1.05);
+  }
+
+  & > .map-active > * {
+    border: 2px solid ${({ theme }) => theme.colors.success};
+  }
+
+  & > .map-active > *:first-child {
+    border-bottom: none;
   }
 `;
 
 const MapTypeContent = styled.div`
   cursor: pointer;
-  transition: all ease-out 100ms;
   max-width: 300px;
+  transition: all ease-out 100ms;
 
   &:hover {
     transition: all ease-in 100ms;
