@@ -1,8 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppSelector } from '../store/index';
-//import '../css/home.css';
 import usa from '../json/US.json';
 import darkV10 from '../img/dark-v10.png';
 import lightV10 from '../img/light-v10.png';
@@ -179,13 +176,10 @@ for (let i = 0; i < 10; i++) {
 
 const Home: FC = () => {
   const [landingDiv, setLandingDiv] = useState(false);
-  const { profile, loading } = useAppSelector((state) => state.profile);
 
   useEffect(() => {
     setLandingDiv(!landingDiv);
   }, []);
-
-  if (!loading && JSON.stringify(profile) === '{}') return <Redirect to="/create" />;
 
   return (
     <HomePage>

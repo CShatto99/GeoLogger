@@ -136,6 +136,8 @@ router.post("/register", async (req, res) => {
 
     const newUser = await user.save();
 
+    console.log(newUser);
+
     const accessToken = genAccessToken({ id: newUser._id });
     const refreshToken = genRefreshToken({ id: newUser._id });
 

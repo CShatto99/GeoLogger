@@ -10,7 +10,7 @@ import { DefaultLink, DangerLink } from '../styles/Links';
 import satelliteV9 from '../../img/satellite-v9.png';
 import Alert from '../styles/Alert';
 import PasswordLabel from './PasswordLabel';
-import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
+// import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 
 export const AuthContainer = styled.div`
   min-height: 100vh;
@@ -90,8 +90,7 @@ export const FooterContent = styled.span`
 
 const Register: FC = () => {
   const dispatch = useAppDispatch();
-  const { isAuth, loading } = useAppSelector((state) => state.auth);
-  const { profile } = useAppSelector((state) => state.profile);
+  const { user, isAuth } = useAppSelector((state) => state.auth);
   const { msg } = useAppSelector((state) => state.alert);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -114,12 +113,10 @@ const Register: FC = () => {
   // if (isAuth && JSON.stringify(profile) === '{}') return <Redirect to="/create" />;
   // else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
 
-  console.log(profile, isAuth);
+  console.log(user);
 
-  return isAuth && loading ? (
-    <GeoLoggerSpinner />
-  ) : isAuth ? (
-    <Redirect to="/create-profile" />
+  return isAuth && !user.profileSetUp ? (
+    <Redirect to="/create" />
   ) : (
     <AuthContainer>
       <AuthContent>

@@ -19,9 +19,7 @@ import './App.css';
 const RenderNavbar: FC = () => {
   const location = useLocation();
 
-  return location.pathname !== '/create' && location.pathname !== '/login' && location.pathname !== '/register' ? (
-    <AppNavbar />
-  ) : null;
+  return location.pathname !== '/login' && location.pathname !== '/register' ? <AppNavbar /> : null;
 };
 
 const RenderFooter: FC = () => {
@@ -52,7 +50,7 @@ const App: FC = () => {
             </Route>
             <PrivateRoute exact path="/map" component={Mapbox} />
             <PrivateRoute path="/settings" component={Settings} />
-            <PrivateRoute path="/create-profile" component={CreateProfile} />
+            <PrivateRoute path="/create" component={CreateProfile} />
           </Switch>
           <RenderFooter />
         </Provider>

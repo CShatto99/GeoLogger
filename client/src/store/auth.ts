@@ -12,6 +12,7 @@ const auth = createSlice({
       date: '',
       username: '',
       email: '',
+      profileSetUp: false,
     },
     isAuth: false,
     loading: true,
@@ -37,7 +38,7 @@ const auth = createSlice({
       localStorage.removeItem('isAuth');
       return {
         ...state,
-        user: { date: '', username: '', email: '' },
+        user: { date: '', username: '', email: '', profileSetUp: false },
         isAuth: false,
         loading: true,
       };
@@ -52,6 +53,8 @@ const { login_user, load_user, logout_user } = auth.actions;
 export const loadUser: Actions['auth'] = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/user');
+
+    console.log(data);
     dispatch(load_user(data));
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));

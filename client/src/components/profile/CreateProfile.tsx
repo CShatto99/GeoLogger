@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { IoInformationCircle } from 'react-icons/io5';
@@ -138,8 +137,7 @@ const ButtonGroup = styled.div`
 
 const CreateProfile: FC = () => {
   const dispatch = useAppDispatch();
-  const { isAuth, loading } = useAppSelector((state) => state.auth);
-  const { profile } = useAppSelector((state) => state.profile);
+  const { loading } = useAppSelector((state) => state.auth);
   const [step, setStep] = useState(1);
   const [mapStyle, setMapStyle] = useState('');
   const [fillColor, setFillColor] = useState('');
@@ -159,8 +157,6 @@ const CreateProfile: FC = () => {
 
   return loading ? (
     <GeoLoggerSpinner />
-  ) : isAuth && JSON.stringify(profile) !== '{}' ? (
-    <Redirect to="/map" />
   ) : (
     <CreateProfileContainer>
       <CreateProfileContent>

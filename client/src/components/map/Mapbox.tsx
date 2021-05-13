@@ -25,7 +25,6 @@ type Viewport = {
 const Mapbox: FC = () => {
   // const dispatch = useAppDispatch();
   const { profile, loading } = useAppSelector((state) => state.profile);
-  // const { isAuth } = useAppSelector((state) => state.auth);
   const { height } = useWindowDimensions();
 
   const [viewport, setViewport] = useState({

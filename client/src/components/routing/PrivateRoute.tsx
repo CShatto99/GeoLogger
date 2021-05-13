@@ -7,12 +7,18 @@ type PrivateRouteProps = {
 } & RouteProps;
 
 const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }: PrivateRouteProps) => {
-  const { isAuth } = useAppSelector((state) => state.auth);
+  const { user, isAuth } = useAppSelector((state) => state.auth);
   const location = useLocation();
 
   return (
     <Route {...rest}>
-      {isAuth ? <Component /> : <Redirect to={{ pathname: '/login', state: { from: location } }} />}
+      {isAuth && !user.profileSetUp && location.pathname !== '/create' ? (
+        <Redirect to={{ pathname: '/login', state: { from: location } }} />
+      ) : isAuth ? (
+        <Component />
+      ) : (
+        <Redirect to={{ pathname: '/login', state: { from: location } }} />
+      )}
     </Route>
   );
 };
