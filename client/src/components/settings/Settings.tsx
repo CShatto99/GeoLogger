@@ -9,7 +9,7 @@ import { useAppSelector } from '../../store';
 import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 
 const SettingsContainer = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - 7.5rem);
   background-color: ${({ theme }) => theme.colors.white};
   padding: 6rem 1.5rem 1.5rem 1.5rem;
 `;

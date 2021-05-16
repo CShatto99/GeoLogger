@@ -95,7 +95,7 @@ const Register: FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passVerify, setPassVerify] = useState('');
+  const [confirmPass, setconfirmPass] = useState('');
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -105,7 +105,7 @@ const Register: FC = () => {
         username,
         email,
         password,
-        passVerify,
+        confirmPass,
       }),
     );
   };
@@ -135,10 +135,10 @@ const Register: FC = () => {
           </div>
           <div>
             <label>Verify Password</label>
-            <PasswordInput value={passVerify} onChange={(e) => setPassVerify(e.target.value)} />
+            <PasswordInput value={confirmPass} onChange={(e) => setconfirmPass(e.target.value)} />
           </div>
           <div>
-            <Button disabled={!username || !email || !password || !passVerify} text="Register" />
+            <Button disabled={!username || !email || !password || !confirmPass} text="Register" />
             <DangerLink to="/">Cancel</DangerLink>
           </div>
           <p>

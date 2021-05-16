@@ -1,12 +1,15 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { changePassword } from '../../store/auth';
 import PasswordLabel from '../auth/PasswordLabel';
 import { PasswordInput } from '../styles/Inputs';
 import Button, { DangerButton } from '../styles/Buttons';
 import { DefaultLink } from '../styles/Links';
+import Alert from '../styles/Alert';
 
 const ChangePassword = styled.div`
-  margin-bottom: 2.5rem;
+  margin: 1rem 0 2.5rem 0;
 
   & > form > a {
     margin-left: 0.5rem;
@@ -32,19 +35,22 @@ const DeleteAccount = styled.div`
 `;
 
 const Account: FC = () => {
+  const dispatch = useAppDispatch();
+  const { msg, status } = useAppSelector((state) => state.alert);
   const [oldPass, setOldPass] = useState('');
-  const [newPass, setNewPass] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    console.log({ oldPass, newPass, confirmPass });
+    dispatch(changePassword({ oldPass, password, confirmPass }));
   };
 
   return (
     <>
       <h1 style={{ marginBottom: '2rem' }}>Account</h1>
+      {msg && <Alert type={status === 200 ? 'success' : 'error'} msg={msg} />}
       <ChangePassword>
         <h3>Change password</h3>
         <Divider />
@@ -55,13 +61,13 @@ const Account: FC = () => {
           </FormGroup>
           <FormGroup>
             <PasswordLabel />
-            <PasswordInput value={newPass} onChange={(e) => setNewPass(e.target.value)} />
+            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
           </FormGroup>
           <FormGroup>
             <label>Confirm password</label>
             <PasswordInput value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
           </FormGroup>
-          <Button text="Change Password" disabled={!oldPass || !newPass || !confirmPass} />
+          <Button text="Change Password" disabled={!oldPass || !password || !confirmPass} onClick={onSubmit} />
           <DefaultLink to="/forgot-password">Forgot your password?</DefaultLink>
         </form>
       </ChangePassword>

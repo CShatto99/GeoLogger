@@ -15,6 +15,8 @@ router.get("/", authToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select(" -password -__v");
 
+    console.log(user, "BACKEND");
+
     res.json(user);
   } catch (err) {
     console.log(err.message);
@@ -91,7 +93,7 @@ router.post("/", async (req, res) => {
 // @desc Register a user
 // @access Public
 router.post("/register", async (req, res) => {
-  const { username, email, password, passVerify } = req.body;
+  const { username, email, password, confirmPass } = req.body;
 
   try {
     if (!username)
@@ -100,9 +102,9 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ msg: "An email is required" });
     else if (!password)
       return res.status(400).json({ msg: "A password is required" });
-    else if (!passVerify)
+    else if (!confirmPass)
       return res.status(400).json({ msg: "You must verify your password" });
-    else if (password !== passVerify)
+    else if (password !== confirmPass)
       return res.status(400).json({ msg: "Your passwords do not match" });
     else {
       const rules = {
@@ -136,8 +138,6 @@ router.post("/register", async (req, res) => {
 
     const newUser = await user.save();
 
-    console.log(newUser);
-
     const accessToken = genAccessToken({ id: newUser._id });
     const refreshToken = genRefreshToken({ id: newUser._id });
 
@@ -150,6 +150,58 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "Error registering user" });
+  }
+});
+
+// @route PUT /api/user/reset-password
+// @desc Change a user's password
+// @access Private
+router.put("/reset-password", authToken, async (req, res) => {
+  const { oldPass, password, confirmPass } = req.body;
+
+  try {
+    if (!oldPass || !password || !confirmPass)
+      return res.status(400).json({ msg: "All fields are required" });
+
+    const user = await User.findById(req.user.id).select("password -_id");
+    const match = await bcrypt.compare(oldPass, user.password);
+
+    if (!match)
+      return res.status(400).json({ msg: "Your old password is incorrect" });
+    else if (oldPass === password)
+      return res
+        .status(400)
+        .json({ msg: "Your new password should not match your old password" });
+    else if (password !== confirmPass)
+      return res.status(400).json({ msg: "Your passwords do not match" });
+    else {
+      const rules = {
+        "8 characters": password.length >= 8,
+        "1 number": /(?=.*?[0-9])/.test(password),
+        "1 lowercase letter": /(?=.*?[a-z])/.test(password),
+        "1 uppercase letter": /(?=.*?[A-Z])/.test(password),
+        "1 special character": /(?=.*?[#?!@$%^&*-])/.test(password),
+      };
+
+      const msg = validator(password, "password", rules);
+
+      if (msg) return res.status(400).json({ msg });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+
+    const hash = await bcrypt.hash(password, salt);
+
+    const newUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { password: hash },
+      { new: true }
+    ).select("-password -__v");
+
+    res.json(newUser);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Error changing password" });
   }
 });
 

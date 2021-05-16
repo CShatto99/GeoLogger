@@ -19,9 +19,10 @@ export type Profile = {
 type User = {
   date?: string;
   username?: string;
-  email: string;
+  email?: string;
+  oldPass?: string;
   password?: string;
-  passVerify?: string;
+  confirmPass?: string;
   profileSetUp?: boolean;
 };
 

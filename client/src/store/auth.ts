@@ -108,12 +108,27 @@ export const updateUser: Actions['auth'] = (user) => async (dispatch) => {
     },
   };
 
-  console.log('UPDATED USER: ', user);
-
   try {
     const { data } = await axios.put('/api/user', user, config);
 
     dispatch(load_user(data));
+  } catch (err) {
+    dispatch(setAlert(err.response.data.msg, err.response.status));
+  }
+};
+
+export const changePassword: Actions['auth'] = (body) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const { data } = await axios.put('/api/user/reset-password', body, config);
+
+    dispatch(load_user(data));
+    dispatch(setAlert('Password reset successfully!', 200));
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }

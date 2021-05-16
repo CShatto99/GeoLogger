@@ -145,8 +145,7 @@ const CPDangerLink = styled(DangerLink)`
 const CreateProfile: FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { user } = useAppSelector((state) => state.auth);
-  const { loading } = useAppSelector((state) => state.profile);
+  const { user, loading } = useAppSelector((state) => state.auth);
   const [step, setStep] = useState(1);
   const [mapStyle, setMapStyle] = useState('');
   const [fillColor, setFillColor] = useState('');
