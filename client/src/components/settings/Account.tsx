@@ -44,6 +44,7 @@ const Account: FC = () => {
 
   return (
     <>
+      <h1 style={{ marginBottom: '2rem' }}>Account</h1>
       <ChangePassword>
         <h3>Change password</h3>
         <Divider />

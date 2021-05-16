@@ -64,14 +64,14 @@ const MapContent = styled.div`
   }
 `;
 
-const SectionTitle = styled(PasswordLabelStyle)`
+export const SectionTitle = styled(PasswordLabelStyle)`
   & > svg {
     margin: 0 0 -4px 5px;
     font-size: 1.2rem;
   }
 `;
 
-const ColorContent = styled.div`
+export const ColorContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -95,7 +95,7 @@ const ColorContent = styled.div`
   }
 `;
 
-const ColorBox = styled.div`
+export const ColorBox = styled.div`
   width: 100px;
   height: 100px;
   margin: 0.25rem;
@@ -112,7 +112,7 @@ const ColorBox = styled.div`
   }
 `;
 
-const ColorBlockLabel = styled.div`
+export const ColorBlockLabel = styled.div`
   height: 1.2rem;
   color: ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.white};
@@ -150,7 +150,6 @@ const CreateProfile: FC = () => {
   const [step, setStep] = useState(1);
   const [mapStyle, setMapStyle] = useState('');
   const [fillColor, setFillColor] = useState('');
-  const [colorIndex, setColorIndex] = useState(-1);
 
   const onSubmit = () => {
     const profile = {
@@ -241,20 +240,17 @@ const CreateProfile: FC = () => {
               </SectionTitle>
               <Divider />
             </div>
-            {colors.map(({ name, hex }, index) => (
+            {colors.map(({ name, hex }) => (
               <ColorBox
                 key={hex}
-                className={colorIndex === index ? 'cb-active' : undefined}
-                onClick={() => {
-                  setFillColor(hex);
-                  setColorIndex(index);
-                }}
+                className={fillColor === hex ? 'cb-active' : undefined}
+                onClick={() => setFillColor(hex)}
                 style={{
                   backgroundColor: hex,
                 }}
               >
                 <ColorBlockLabel>
-                  {name} {colorIndex === index && <BsCheckCircle />}
+                  {name} {fillColor === hex && <BsCheckCircle />}
                 </ColorBlockLabel>
               </ColorBox>
             ))}

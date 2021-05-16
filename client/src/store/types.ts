@@ -8,7 +8,7 @@ export type Marker = {
   title: string;
 };
 
-type Profile = {
+export type Profile = {
   theme: string;
   fillColor: string;
   mapStyle: string;

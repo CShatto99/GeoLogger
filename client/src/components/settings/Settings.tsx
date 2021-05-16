@@ -2,9 +2,11 @@ import { FC } from 'react';
 import { Route, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import SettingsNav from './SettingsNav';
-import Profile from './Profile';
+import ProfileInfo from './ProfileInfo';
 import Account from './Account';
 import Appearance from './Appearance';
+import { useAppSelector } from '../../store';
+import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 
 const SettingsContainer = styled.div`
   min-height: 100vh;
@@ -33,21 +35,23 @@ const SettingsTabContent = styled.div``;
 
 const Settings: FC = () => {
   const { url } = useRouteMatch();
+  const { profile, loading } = useAppSelector((state) => state.profile);
 
-  return (
+  return loading ? (
+    <GeoLoggerSpinner />
+  ) : (
     <SettingsContainer>
       <SettingsContent>
         <SettingsNav />
         <SettingsTabContent>
-          <h1 style={{ marginBottom: '2.5rem', color: 'red' }}>Settings page in progress...</h1>
           <Route path={`${url}/profile`}>
-            <Profile />
+            <ProfileInfo profile={profile} />
           </Route>
           <Route path={`${url}/account`}>
             <Account />
           </Route>
           <Route path={`${url}/appearance`}>
-            <Appearance />
+            <Appearance profile={profile} />
           </Route>
         </SettingsTabContent>
       </SettingsContent>

@@ -109,7 +109,7 @@ const DropdownContent = styled.div`
     align-items: center;
     transition: ease-out 100ms;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 0;
   }
 
   & > a:hover {
