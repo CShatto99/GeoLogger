@@ -22,6 +22,7 @@ type User = {
   email: string;
   password?: string;
   passVerify?: string;
+  profileSetUp?: boolean;
 };
 
 export interface Actions {

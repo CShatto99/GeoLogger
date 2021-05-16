@@ -27,8 +27,8 @@ router.get("/token", (req, res) => {
 // @route DELETE /api/auth/logout
 // @desc Logout a user
 // @access Public
-router.delete("/logout", (req, res) => {
-  res.clearCookie("token");
+router.delete("/logout", (_, res) => {
+  res.clearCookie("gl_token");
   res.status(204).send();
 });
 

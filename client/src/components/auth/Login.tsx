@@ -20,8 +20,7 @@ const LoginFormContent = styled(FormContent)`
 
 const Login: FC = () => {
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector((state) => state.auth);
-  const { profile } = useAppSelector((state) => state.profile);
+  const { user, isAuth } = useAppSelector((state) => state.auth);
   const { msg } = useAppSelector((state) => state.alert);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,10 +36,11 @@ const Login: FC = () => {
     );
   };
 
-  if (isAuth && JSON.stringify(profile) === '{}') return <Redirect to="/create" />;
-  else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
-
-  return (
+  return isAuth && !user.profileSetUp ? (
+    <Redirect to="/create" />
+  ) : isAuth && user.profileSetUp ? (
+    <Redirect to="/map" />
+  ) : (
     <AuthContainer>
       <AuthContent>
         <LoginFormContent onSubmit={onSubmit}>

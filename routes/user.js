@@ -26,7 +26,7 @@ router.get("/", authToken, async (req, res) => {
 // @desc Update a user
 // @access Private
 router.put("/", authToken, async (req, res) => {
-  const { username, email } = req.body;
+  const { username, email, profileSetUp } = req.body;
 
   try {
     if (!username || !email)
@@ -41,11 +41,11 @@ router.put("/", authToken, async (req, res) => {
 
     const newUser = await User.findByIdAndUpdate(
       req.user.id,
-      { username, email: sanitizedEmail },
+      { username, email: sanitizedEmail, profileSetUp },
       { new: true }
     ).select("-password -__v");
 
-    res.json({ msg: "Account updated!" });
+    res.json(newUser);
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ msg: "Internal server error" });
@@ -141,7 +141,7 @@ router.post("/register", async (req, res) => {
     const accessToken = genAccessToken({ id: newUser._id });
     const refreshToken = genRefreshToken({ id: newUser._id });
 
-    res.cookie("token", refreshToken, {
+    res.cookie("gl_token", refreshToken, {
       expires: new Date(Date.now() + 604800),
       httpOnly: true,
     });

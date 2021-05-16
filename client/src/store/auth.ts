@@ -54,7 +54,6 @@ export const loadUser: Actions['auth'] = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/user');
 
-    console.log(data);
     dispatch(load_user(data));
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
@@ -109,10 +108,12 @@ export const updateUser: Actions['auth'] = (user) => async (dispatch) => {
     },
   };
 
-  try {
-    await axios.put('/api/user', user, config);
+  console.log('UPDATED USER: ', user);
 
-    dispatch(loadUser());
+  try {
+    const { data } = await axios.put('/api/user', user, config);
+
+    dispatch(load_user(data));
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }
@@ -130,6 +131,7 @@ export const refreshUser: Actions['auth'] = () => async (dispatch) => {
       dispatch(login_user());
     }
   } catch (err) {
+    console.log(err);
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }
 };

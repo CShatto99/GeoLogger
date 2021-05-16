@@ -34,7 +34,7 @@ const AddHighlight: FC = () => {
         onRequestClose={() => setIsOpen(!isOpen)}
         contentLabel="Add Highlight Modal"
         shouldCloseOnEsc={false}
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
         style={modalStyles}
       >
         ADD HIGHLIGHT MODAL

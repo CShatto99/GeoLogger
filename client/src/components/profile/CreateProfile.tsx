@@ -1,12 +1,16 @@
 import { FC, useState } from 'react';
+import { useHistory, Redirect } from 'react-router';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { IoInformationCircle } from 'react-icons/io5';
 import { BsCheckCircle } from 'react-icons/bs';
 import { useAppDispatch, useAppSelector } from '../../store/index';
 import { updateProfile } from '../../store/profile';
+import { updateUser, logout } from '../../store/auth';
 import { Divider } from '../settings/Account';
 import { PasswordLabelStyle } from '../auth/PasswordLabel';
+import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
+import { DangerLink } from '../styles/Links';
 import MapType from '../MapType';
 import Button from '../styles/Buttons';
 import colors from '../../json/colors.json';
@@ -15,7 +19,6 @@ import lightV10 from '../../img/light-v10.png';
 import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
-import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 
 const TOTAL_STEPS = 2;
 
@@ -135,9 +138,15 @@ const ButtonGroup = styled.div`
   margin-bottom: 1.5rem;
 `;
 
+const CPDangerLink = styled(DangerLink)`
+  margin: 0;
+`;
+
 const CreateProfile: FC = () => {
   const dispatch = useAppDispatch();
-  const { loading } = useAppSelector((state) => state.auth);
+  const history = useHistory();
+  const { user } = useAppSelector((state) => state.auth);
+  const { loading } = useAppSelector((state) => state.profile);
   const [step, setStep] = useState(1);
   const [mapStyle, setMapStyle] = useState('');
   const [fillColor, setFillColor] = useState('');
@@ -153,17 +162,22 @@ const CreateProfile: FC = () => {
     };
 
     dispatch(updateProfile(profile));
+    dispatch(updateUser({ ...user, ...{ profileSetUp: true } }));
+    history.push('/map');
   };
 
   return loading ? (
     <GeoLoggerSpinner />
+  ) : user.profileSetUp ? (
+    <Redirect to="/map" />
   ) : (
     <CreateProfileContainer>
       <CreateProfileContent>
-        {/* <h3>Please complete the following steps to set up your profile.</h3> */}
         <ButtonGroup>
           {step <= 1 ? (
-            <div />
+            <CPDangerLink to="/register" onClick={() => dispatch(logout())}>
+              Cancel
+            </CPDangerLink>
           ) : (
             <Button text="Go Back" disabled={step <= 1} onClick={() => setStep((prevStep) => prevStep - 1)} />
           )}

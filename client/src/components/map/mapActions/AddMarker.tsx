@@ -34,7 +34,7 @@ const AddMarker: FC = () => {
         onRequestClose={() => setIsOpen(!isOpen)}
         contentLabel="Add Marker Modal"
         shouldCloseOnEsc={false}
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
         style={modalStyles}
       >
         ADD MARKER MODAL

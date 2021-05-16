@@ -34,7 +34,7 @@ const HighlightColor: FC = () => {
         onRequestClose={() => setIsOpen(!isOpen)}
         contentLabel="Change Highlight Modal"
         shouldCloseOnEsc={false}
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
         style={modalStyles}
       >
         CHANGE HIGHLIGHT COLOR

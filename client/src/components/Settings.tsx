@@ -51,7 +51,6 @@ const Settings: FC = () => {
     };
 
     dispatch(updateProfile({ ...profile, ...updatedProfile }));
-    console.log({ ...profile, ...updatedProfile });
     accountEdited && dispatch(updateUser({ ...user, ...{ username, email } }));
     dispatch(setAlert('Changes Saved!', 200));
   };

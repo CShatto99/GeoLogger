@@ -110,13 +110,10 @@ const Register: FC = () => {
     );
   };
 
-  // if (isAuth && JSON.stringify(profile) === '{}') return <Redirect to="/create" />;
-  // else if (isAuth && JSON.stringify(profile) !== '{}') return <Redirect to="/map" />;
-
-  console.log(user);
-
   return isAuth && !user.profileSetUp ? (
     <Redirect to="/create" />
+  ) : isAuth && user.profileSetUp ? (
+    <Redirect to="/map" />
   ) : (
     <AuthContainer>
       <AuthContent>

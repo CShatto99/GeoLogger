@@ -39,6 +39,7 @@ const Settings: FC = () => {
       <SettingsContent>
         <SettingsNav />
         <SettingsTabContent>
+          <h1 style={{ marginBottom: '2.5rem', color: 'red' }}>Settings page in progress...</h1>
           <Route path={`${url}/profile`}>
             <Profile />
           </Route>

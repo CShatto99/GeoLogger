@@ -28,6 +28,10 @@ const MapAction = styled.div`
     font-size: 1.5rem;
   }
 
+  & > svg:focus {
+    outline: none;
+  }
+
   & > svg:hover > path,
   > svg:hover {
     cursor: pointer;

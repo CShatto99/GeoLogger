@@ -30,7 +30,7 @@ const SettingsNavContainer = styled.div`
   }
 
   & > .active-tab:last-child {
-    border-bottom-left-radius: 0.5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
   }
 `;
 

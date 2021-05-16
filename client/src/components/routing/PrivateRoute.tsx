@@ -13,11 +13,11 @@ const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }: 
   return (
     <Route {...rest}>
       {isAuth && !user.profileSetUp && location.pathname !== '/create' ? (
+        <Redirect to={{ pathname: '/create', state: { from: location } }} />
+      ) : !isAuth ? (
         <Redirect to={{ pathname: '/login', state: { from: location } }} />
-      ) : isAuth ? (
-        <Component />
       ) : (
-        <Redirect to={{ pathname: '/login', state: { from: location } }} />
+        <Component />
       )}
     </Route>
   );

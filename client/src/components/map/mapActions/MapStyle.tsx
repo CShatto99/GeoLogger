@@ -34,7 +34,7 @@ const MapStyle: FC = () => {
         onRequestClose={() => setIsOpen(!isOpen)}
         contentLabel="Change Map Style Modal"
         shouldCloseOnEsc={false}
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
         style={modalStyles}
       >
         CHANGE MAP STYLE
