@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { changePassword } from '../../store/auth';
+import GeoLoggerModal from '../GeoLoggerModal';
 import PasswordLabel from '../auth/PasswordLabel';
 import { PasswordInput } from '../styles/Inputs';
 import Button, { DangerButton } from '../styles/Buttons';
@@ -34,12 +35,36 @@ const DeleteAccount = styled.div`
   }
 `;
 
+const ModalBody = styled.div`
+  & > p {
+    color: ${({ theme }) => theme.colors.danger};
+  }
+
+  & > button {
+    width: 100%;
+  }
+`;
+
+const ModalFormGroup = styled.div`
+  margin: 1rem 0;
+
+  & > label {
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
+  }
+`;
+
 const Account: FC = () => {
   const dispatch = useAppDispatch();
   const { msg, status } = useAppSelector((state) => state.alert);
+  const [isOpen, setIsOpen] = useState(false);
   const [oldPass, setOldPass] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [deletePass, setDeletePass] = useState('');
+
+  useEffect(() => {
+    !isOpen && setDeletePass('');
+  }, [isOpen]);
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -75,7 +100,21 @@ const Account: FC = () => {
         <h3>Delete account</h3>
         <Divider />
         <p>This action is irreversible. Once you delete your account you can no longer recover it.</p>
-        <DangerButton text="Delete Account" />
+        <DangerButton text="Delete Account" onClick={() => setIsOpen(!isOpen)} />
+        <GeoLoggerModal
+          title="Are you sure you want to delete your account?"
+          isOpen={isOpen}
+          onClose={() => setIsOpen(!isOpen)}
+        >
+          <ModalBody>
+            <p>* If you delete your account, all data associated with your account will be unrecoverable.</p>
+            <ModalFormGroup>
+              <label>Enter your password:</label>
+              <PasswordInput value={deletePass} onChange={(e) => setDeletePass(e.target.value)} />
+            </ModalFormGroup>
+            <DangerButton text="Delete My Account" disabled={!deletePass} onClick={() => setIsOpen(!isOpen)} />
+          </ModalBody>
+        </GeoLoggerModal>
       </DeleteAccount>
     </>
   );

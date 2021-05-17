@@ -56,10 +56,14 @@ const Button: FC<ButtonProps> = ({ disabled, text, onClick }: ButtonProps) => {
   );
 };
 
-export const DangerButton: FC<ButtonProps> = ({ disabled, text, onClick }: ButtonProps) => (
-  <DangerButtonStyle disabled={disabled} onClick={onClick}>
-    {text}
-  </DangerButtonStyle>
-);
+export const DangerButton: FC<ButtonProps> = ({ disabled, text, onClick }: ButtonProps) => {
+  return disabled ? (
+    <DisabledButton disabled={disabled}>{text}</DisabledButton>
+  ) : (
+    <DangerButtonStyle disabled={disabled} onClick={onClick}>
+      {text}
+    </DangerButtonStyle>
+  );
+};
 
 export default Button;

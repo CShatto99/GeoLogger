@@ -96,6 +96,8 @@ const DropdownContent = styled.div`
   visibility: hidden;
   position: absolute;
   background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   min-width: 140px;
   margin: 1.5rem 0 0 6.5rem;
   border-radius: 4px;
