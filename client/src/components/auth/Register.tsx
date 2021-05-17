@@ -8,7 +8,7 @@ import { AuthInput, PasswordInput } from '../styles/Inputs';
 import Button from '../styles/Buttons';
 import { DefaultLink, DangerLink } from '../styles/Links';
 import satelliteV9 from '../../img/satellite-v9.png';
-import Alert from '../styles/Alert';
+// import Alert from '../styles/Alert';
 import PasswordLabel from './PasswordLabel';
 // import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 
@@ -91,7 +91,7 @@ export const FooterContent = styled.span`
 const Register: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isAuth } = useAppSelector((state) => state.auth);
-  const { msg } = useAppSelector((state) => state.alert);
+  // const { msg } = useAppSelector((state) => state.alert);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -120,7 +120,7 @@ const Register: FC = () => {
         <FormContent onSubmit={onSubmit}>
           <Brand />
           <h2>Create an accoount</h2>
-          {msg && <Alert type="error" msg={msg} />}
+          {/* {msg && <Alert type="error" msg={msg} />} */}
           <div>
             <label>Username</label>
             <AuthInput type="text" value={username} onChange={(e) => setUsername(e.target.value)} />

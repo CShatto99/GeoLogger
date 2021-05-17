@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../store';
 import { clearAlert } from '../../store/alert';
 
 const ErrorAlert = styled.div`
-  background-color: ${({ theme }) => theme.colors.dangerlight};
+  background-color: ${({ theme }) => theme.colors.dangerLight};
   border-radius: 0.3rem;
   border: 1px solid ${({ theme }) => theme.colors.danger};
   margin-top: 0.5rem;

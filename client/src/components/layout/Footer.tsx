@@ -95,7 +95,7 @@ const GitHubLink = styled.a`
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector((state) => state.auth);
-  const { msg, status } = useAppSelector((state) => state.alert);
+  const { status } = useAppSelector((state) => state.alert);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
@@ -110,12 +110,12 @@ const Footer: FC = () => {
 
     try {
       const { data } = await axios.post('/api/contact', { email, message }, config);
-      dispatch(setAlert(data.msg, 200));
+      dispatch(setAlert(data.msg, 'SUCC_change_password', 200));
 
       setEmail('');
       setMessage('');
     } catch (err) {
-      dispatch(setAlert(err.response.data.msg, err.response.status));
+      dispatch(setAlert(err.response.data.msg, 'ERR_change_password', err.response.status));
     }
   };
 
@@ -162,9 +162,8 @@ const Footer: FC = () => {
             <GeneralInput type="textarea" onChange={(e) => setMessage(e.target.value)} value={message} />
           </div>
           <div>
-            <SendButton>Send</SendButton>{' '}
-            {msg === 'Please enter both fields' && status === 400 && <Alert type="error" msg={msg} />}
-            {msg === 'Email sent' && status === 200 && <Alert type="success" msg={msg} />}
+            <SendButton>Send</SendButton> {status && status === 400 && <Alert type="error" msg={''} />}
+            {/* {msg === 'Email sent' && status === 200 && <Alert type="success" msg={msg} />} */}
           </div>
         </form>
         <small>&copy; GeoLogger {new Date().getFullYear()}</small>

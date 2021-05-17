@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 
 const User = require("../models/User");
+const Profile = require("../models/Profile");
 const authToken = require("../middleware/authToken");
 const genAccessToken = require("../utils/genAccessToken");
 const genRefreshToken = require("../utils/genRefreshToken");
@@ -15,11 +16,8 @@ router.get("/", authToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select(" -password -__v");
 
-    console.log(user, "BACKEND");
-
     res.json(user);
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({ msg: "Error loading user" });
   }
 });
@@ -49,7 +47,6 @@ router.put("/", authToken, async (req, res) => {
 
     res.json(newUser);
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({ msg: "Internal server error" });
   }
 });
@@ -84,7 +81,6 @@ router.post("/", async (req, res) => {
 
     res.json({ accessToken });
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({ msg: "Error logging in user" });
   }
 });
@@ -148,7 +144,6 @@ router.post("/register", async (req, res) => {
 
     res.json({ accessToken });
   } catch (err) {
-    console.log(err);
     res.status(500).json({ msg: "Error registering user" });
   }
 });
@@ -200,7 +195,27 @@ router.put("/reset-password", authToken, async (req, res) => {
 
     res.json(newUser);
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ msg: "Error changing password" });
+  }
+});
+
+// @route DELETE /api/user/delete-user
+// @desc Delete a user's account
+// @access Private
+router.delete("/delete-user", authToken, async (req, res) => {
+  const { deletePass } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id).select("password");
+
+    const match = await bcrypt.compare(deletePass, user.password);
+
+    if (!match) return res.status(400).json({ msg: "Incorrect password" });
+
+    await User.findByIdAndDelete(req.user.id);
+    await Profile.findOneAndDelete({ user: req.user.id });
+    res.status(204).send();
+  } catch (err) {
     res.status(500).json({ msg: "Error changing password" });
   }
 });

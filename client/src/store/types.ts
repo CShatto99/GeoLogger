@@ -24,10 +24,11 @@ type User = {
   password?: string;
   confirmPass?: string;
   profileSetUp?: boolean;
+  deletePass?: string;
 };
 
 export interface Actions {
   profile: (profile?: Profile) => (dispatch: React.Dispatch<unknown>) => void;
   auth: (user?: User) => (dispatch: React.Dispatch<unknown>) => void;
-  alert: (msg?: string, status?: number) => (dispatch: React.Dispatch<unknown>) => void;
+  alert: (msg?: string, key?: string, status?: number) => (dispatch: React.Dispatch<unknown>) => void;
 }

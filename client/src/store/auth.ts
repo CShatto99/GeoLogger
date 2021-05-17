@@ -128,9 +128,9 @@ export const changePassword: Actions['auth'] = (body) => async (dispatch) => {
     const { data } = await axios.put('/api/user/reset-password', body, config);
 
     dispatch(load_user(data));
-    dispatch(setAlert('Password reset successfully!', 200));
+    dispatch(setAlert('Password reset successfully!', 'SUCC_change_password', 200));
   } catch (err) {
-    dispatch(setAlert(err.response.data.msg, err.response.status));
+    dispatch(setAlert(err.response.data.msg, 'ERR_change_password', err.response.status));
   }
 };
 
@@ -155,9 +155,25 @@ export const logout: Actions['auth'] = () => async (dispatch) => {
   try {
     dispatch(clearProfile());
     dispatch(logout_user());
+    console.log('logging out');
 
     await axios.delete('/api/auth/logout');
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
+  }
+};
+
+export const deleteUser: Actions['auth'] = (body) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    await axios.delete('/api/user/delete-user', { data: body, headers: config });
+    dispatch(logout());
+  } catch (err) {
+    dispatch(setAlert(err.response.data.msg, 'ERR_delete_account', err.response.status));
   }
 };

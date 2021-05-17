@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { changePassword } from '../../store/auth';
+import { changePassword, deleteUser } from '../../store/auth';
 import GeoLoggerModal from '../GeoLoggerModal';
 import PasswordLabel from '../auth/PasswordLabel';
 import { PasswordInput } from '../styles/Inputs';
@@ -42,11 +42,12 @@ const ModalBody = styled.div`
 
   & > button {
     width: 100%;
+    margin-top: 0.5rem;
   }
 `;
 
 const ModalFormGroup = styled.div`
-  margin: 1rem 0;
+  margin: 1rem 0 0.5rem 0;
 
   & > label {
     font-weight: ${({ theme }) => theme.fontWeights.medium};
@@ -55,7 +56,7 @@ const ModalFormGroup = styled.div`
 
 const Account: FC = () => {
   const dispatch = useAppDispatch();
-  const { msg, status } = useAppSelector((state) => state.alert);
+  const { SUCC_change_password, ERR_change_password, ERR_delete_account } = useAppSelector((state) => state.alert);
   const [isOpen, setIsOpen] = useState(false);
   const [oldPass, setOldPass] = useState('');
   const [password, setPassword] = useState('');
@@ -75,7 +76,8 @@ const Account: FC = () => {
   return (
     <>
       <h1 style={{ marginBottom: '2rem' }}>Account</h1>
-      {msg && <Alert type={status === 200 ? 'success' : 'error'} msg={msg} />}
+      {SUCC_change_password && <Alert type="success" msg={SUCC_change_password} />}
+      {ERR_change_password && <Alert type="error" msg={ERR_change_password} />}
       <ChangePassword>
         <h3>Change password</h3>
         <Divider />
@@ -107,12 +109,20 @@ const Account: FC = () => {
           onClose={() => setIsOpen(!isOpen)}
         >
           <ModalBody>
-            <p>* If you delete your account, all data associated with your account will be unrecoverable.</p>
+            <p>
+              Once you delete your account, you will be logged out and all data associated with your account will be
+              unrecoverable.
+            </p>
             <ModalFormGroup>
               <label>Enter your password:</label>
               <PasswordInput value={deletePass} onChange={(e) => setDeletePass(e.target.value)} />
             </ModalFormGroup>
-            <DangerButton text="Delete My Account" disabled={!deletePass} onClick={() => setIsOpen(!isOpen)} />
+            {ERR_delete_account && <Alert type="error" msg={ERR_delete_account} />}
+            <DangerButton
+              text="Delete My Account"
+              disabled={!deletePass}
+              onClick={() => dispatch(deleteUser({ deletePass }))}
+            />
           </ModalBody>
         </GeoLoggerModal>
       </DeleteAccount>

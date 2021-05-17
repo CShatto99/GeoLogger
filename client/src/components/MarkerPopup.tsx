@@ -15,7 +15,7 @@ type MarkerPopupProps = {
 const MarkerPopup: FC<MarkerPopupProps> = ({ index, marker, setMarkers, setMarkersEdited }: MarkerPopupProps) => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.profile);
-  const { msg, status } = useAppSelector((state) => state.alert);
+  // const { status } = useAppSelector((state) => state.alert);
 
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -34,7 +34,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ index, marker, setMarkers, setMarke
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const base64 = await getBase64(e);
-    typeof base64 === 'string' ? dispatch(setAlert(base64, 400)) : setImage(base64.result);
+    typeof base64 === 'string' ? dispatch(setAlert(base64, 'ERR_change_password', 400)) : setImage(base64.result);
   };
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -119,8 +119,8 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ index, marker, setMarkers, setMarke
               </div>
             )}
           </div>
-          {msg && status === 400 && <div className="err-div mb-2">{msg}</div>}
-          <button className="gen-btn popup-submit">{msg === 'Saved!' ? 'Saved!' : 'Save Changes'}</button>
+          {/* {msg && status === 400 && <div className="err-div mb-2">{msg}</div>} */}
+          {/* <button className="gen-btn popup-submit">{msg === 'Saved!' ? 'Saved!' : 'Save Changes'}</button> */}
         </form>
       ) : (
         <>

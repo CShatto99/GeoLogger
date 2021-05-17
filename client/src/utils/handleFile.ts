@@ -2,7 +2,6 @@ const handleFile: (e: any) => Promise<any> = async (e: any) => {
   if (e.target.files && !isFileImage(e.target.files[0])) {
     return 'Image must be of type .png or .jpg';
   } else if (e.target.files[0].size / 1024 / 1024 > 16) {
-    console.log('FILE TOO LARGE');
     return 'File must be smaller than 16 MB';
   } else {
     return new Promise((resolve, reject) => {
