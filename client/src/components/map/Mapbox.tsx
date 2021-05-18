@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
-import styled from 'styled-components';
 import ReactMapGL, { Layer, Source } from 'react-map-gl';
 import { useAppSelector } from '../../store';
 //import { useAppDispatch, useAppSelector } from '../store/';
@@ -14,12 +13,6 @@ import useWindowDimensions from '../../hooks/windowDimensions';
 // import { setAlert } from '../store/alert';
 // import { Marker as MarkerType } from '../store/types';
 import MapActions from './mapActions/MapActions';
-
-const MapContainer = styled.div`
-  height: 100vh;
-  display: grid;
-  place-items: center;
-`;
 
 type Viewport = {
   width: string;
@@ -131,22 +124,20 @@ const Mapbox: FC = () => {
   //   return <Redirect to="/create" />;
   // }
 
-  return (
-    <MapContainer>
-      {loading ? (
-        <GeoLoggerSpinner />
-      ) : (
-        <ReactMapGL
-          {...viewport}
-          mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
-          onViewportChange={(nextViewport: Viewport) => setViewport(nextViewport)}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          className="w-full"
-          //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
-        >
-          {sources}
-          <MapActions />
-          {/* <div className="add-states">
+  return loading ? (
+    <GeoLoggerSpinner />
+  ) : (
+    <ReactMapGL
+      {...viewport}
+      mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
+      onViewportChange={(nextViewport: Viewport) => setViewport(nextViewport)}
+      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      className="w-full"
+      //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
+    >
+      {sources}
+      <MapActions />
+      {/* <div className="add-states">
               <Checklist />
               {markerMode && (
                 <ReactTooltip id="marker-btn" aria-haspopup="true">
@@ -210,9 +201,7 @@ const Mapbox: FC = () => {
                 )}
               </React.Fragment>
             ))} */}
-        </ReactMapGL>
-      )}
-    </MapContainer>
+    </ReactMapGL>
   );
 };
 

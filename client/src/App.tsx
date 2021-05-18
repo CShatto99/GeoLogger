@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { useTheme } from './theme/useTheme';
 import store from './store/index';
 import { refreshUser } from './store/auth';
 import AppNavbar from './components/layout/AppNavbar';
@@ -13,7 +14,6 @@ import Login from './components/auth/Login';
 import Home from './components/Home';
 import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/CreateProfile';
-import theme from './theme';
 import './App.css';
 
 const RenderNavbar: FC = () => {
@@ -29,13 +29,17 @@ const RenderFooter: FC = () => {
 };
 
 const App: FC = () => {
+  const { siteTheme } = useTheme();
+
+  console.log(siteTheme);
+
   useEffect(() => {
     store.dispatch(refreshUser());
   }, []);
 
   return (
     <Router>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={siteTheme}>
         <Provider store={store}>
           <RenderNavbar />
           <Switch>

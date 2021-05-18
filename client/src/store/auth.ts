@@ -92,7 +92,7 @@ export const login: Actions['auth'] = (user) => async (dispatch) => {
     dispatch(loadProfile());
     dispatch(login_user());
   } catch (err) {
-    dispatch(setAlert(err.response.data.msg, err.response.status));
+    dispatch(setAlert(err.response.data.msg, 'ERR_login', err.response.status));
   }
   dispatch(action_ended());
 };
@@ -114,7 +114,7 @@ export const register: Actions['auth'] = (user) => async (dispatch) => {
     dispatch(loadUser());
     dispatch(login_user());
   } catch (err) {
-    dispatch(setAlert(err.response.data.msg, err.response.status));
+    dispatch(setAlert(err.response.data.msg, 'ERR_register', err.response.status));
   }
   dispatch(action_ended());
 };

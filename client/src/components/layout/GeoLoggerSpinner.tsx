@@ -3,10 +3,14 @@ import styled from 'styled-components';
 import theme from '../../theme';
 
 const SpinnerContainer = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
   color: #2b6cb0;
 `;
 
@@ -47,8 +51,8 @@ const GeoLoggerSpinner: FC<SpinnerProps> = ({ size = '7rem', borderWidth = '1rem
         style={{
           height: `${size}`,
           width: `${size}`,
-          border: `${borderWidth} solid ${theme.colors.white}`,
-          borderTop: `${borderWidth} solid ${theme.colors.primary}`,
+          border: `${borderWidth} solid ${theme.light.colors.white}`,
+          borderTop: `${borderWidth} solid ${theme.light.colors.primary}`,
         }}
       />
     </SpinnerContainer>

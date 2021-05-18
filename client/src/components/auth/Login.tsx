@@ -8,7 +8,7 @@ import { AuthInput, PasswordInput } from '../styles/Inputs';
 import Brand from '../layout/Brand';
 import Button from '../styles/Buttons';
 import { DefaultLink, DangerLink } from '../styles/Links';
-// import Alert from '../styles/Alert';
+import Alert from '../styles/Alert';
 
 const LoginFormContent = styled(FormContent)`
   & > div:nth-child(4) a {
@@ -21,7 +21,7 @@ const LoginFormContent = styled(FormContent)`
 const Login: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isAuth } = useAppSelector((state) => state.auth);
-  // const { msg } = useAppSelector((state) => state.alert);
+  const { ERR_login } = useAppSelector((state) => state.alert);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -45,8 +45,8 @@ const Login: FC = () => {
       <AuthContent>
         <LoginFormContent onSubmit={onSubmit}>
           <Brand />
-          {/* {msg && <Alert type="error" msg={msg} />} */}
           <h2>Log in to your account</h2>
+          {ERR_login && <Alert type="error" msg={ERR_login} />}
           <div>
             <label>Email</label>
             <AuthInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />

@@ -65,11 +65,13 @@ router.post("/", async (req, res) => {
 
     const user = await User.findOne({ email }).select("_id password");
 
-    if (!user) return res.status(400).json({ msg: "Invalid credentials" });
+    if (!user)
+      return res.status(400).json({ msg: "Incorrect login information" });
 
     const match = await bcrypt.compare(password, user.password);
 
-    if (!match) return res.status(400).json({ msg: "Invalid credentials" });
+    if (!match)
+      return res.status(400).json({ msg: "Incorrect login information" });
 
     const accessToken = genAccessToken({ id: user._id });
     const refreshToken = genRefreshToken({ id: user._id });
@@ -216,7 +218,7 @@ router.delete("/delete-user", authToken, async (req, res) => {
     await Profile.findOneAndDelete({ user: req.user.id });
     res.status(204).send();
   } catch (err) {
-    res.status(500).json({ msg: "Error changing password" });
+    res.status(500).json({ msg: "Error deleting account" });
   }
 });
 
