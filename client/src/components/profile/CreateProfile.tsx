@@ -28,7 +28,7 @@ const CreateProfileContainer = styled.div`
   min-height: calc(100vh - 7.5rem);
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 6rem 0.5rem 0.5rem 0.5rem;
+    padding: 6rem 1rem 1rem 1rem;
   }
 `;
 

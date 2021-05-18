@@ -27,10 +27,10 @@ export const AuthContainer = styled.div`
 
 export const AuthContent = styled.div`
   height: 100vh;
-  width: 484px;
+  width: 468px;
   background-color: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.black};
-  padding: 2.5rem;
+  padding: 2rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ export const AuthContent = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
     width: 100%;
-    padding: 2rem;
+    padding: 1rem;
   }
 `;
 

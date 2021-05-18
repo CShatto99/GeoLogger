@@ -45,7 +45,7 @@ const FooterContent = styled.div`
   @media ${({ theme }) => theme.mediaQueries.sm} {
     grid-template-columns: 1fr;
     grid-gap: 1rem;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 `;
 

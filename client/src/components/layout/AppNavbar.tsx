@@ -27,7 +27,7 @@ const NavbarContents = styled.div`
   padding: 0 1.5rem;
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
 
     & .nav-items-hide {
       margin-top: -100%;

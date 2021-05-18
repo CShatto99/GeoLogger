@@ -44,7 +44,7 @@ const LandingContent = styled.div`
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 0.5rem;
+    padding: 1rem;
   }
 `;
 
@@ -89,7 +89,7 @@ const MapContent = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     grid-gap: 1rem;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
@@ -134,7 +134,8 @@ const LoggingContent = styled.div`
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 0.5rem;
+    padding: 1em;
+
     & > div {
       grid-column: 1 / span 2;
     }

@@ -14,7 +14,7 @@ const SettingsContainer = styled.div`
   padding: 6rem 1.5rem 1.5rem 1.5rem;
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 6rem 0.5rem 0.5rem 0.5rem;
+    padding: 6rem 1rem 1rem 1rem;
   }
 `;
 
