@@ -8,7 +8,7 @@ const genAccessToken = require("../utils/genAccessToken");
 // @desc Refresh a user
 // @access Public
 router.get("/token", (req, res) => {
-  const token = req.cookies.token;
+  const token = req.cookies.gl_token;
 
   try {
     if (!token) return res.json({ accessToken: "" });
@@ -19,7 +19,6 @@ router.get("/token", (req, res) => {
 
     res.json({ accessToken });
   } catch (err) {
-    console.log(err.message);
     res.status(401).json({ msg: "Error validating token" });
   }
 });

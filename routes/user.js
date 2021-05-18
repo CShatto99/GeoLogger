@@ -74,8 +74,8 @@ router.post("/", async (req, res) => {
     const accessToken = genAccessToken({ id: user._id });
     const refreshToken = genRefreshToken({ id: user._id });
 
-    res.cookie("token", refreshToken, {
-      expires: new Date(Date.now() + 604800),
+    res.cookie("gl_token", refreshToken, {
+      expires: new Date(Date.now() + 6048000),
       httpOnly: true,
     });
 
@@ -138,7 +138,7 @@ router.post("/register", async (req, res) => {
     const refreshToken = genRefreshToken({ id: newUser._id });
 
     res.cookie("gl_token", refreshToken, {
-      expires: new Date(Date.now() + 604800),
+      expires: new Date(Date.now() + 6048000),
       httpOnly: true,
     });
 

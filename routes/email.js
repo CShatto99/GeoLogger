@@ -45,7 +45,6 @@ router.post("/", async (req, res) => {
 
     res.json({ msg: "Email sent" });
   } catch (err) {
-    console.log(err);
     res.status(500).send("Error sending email");
   }
 });

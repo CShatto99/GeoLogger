@@ -1,20 +1,17 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import theme from '../../theme';
 
 const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
   color: #2b6cb0;
 `;
 
-const SpinnerStyle = styled.div`
-  height: 7rem;
-  width: 7rem;
-  border-top: 3px solid #2b6cb0;
+const Spinner = styled.div`
   border-radius: 50%;
-  box-shadow: 0 0 2pt 2pt #1a202c;
 
   -webkit-animation: spin 700ms linear infinite;
   -moz-animation: spin 700ms linear infinite;
@@ -38,10 +35,22 @@ const SpinnerStyle = styled.div`
   }
 `;
 
-const GeoLoggerSpinner: FC = () => {
+type SpinnerProps = {
+  size?: string;
+  borderWidth?: string;
+};
+
+const GeoLoggerSpinner: FC<SpinnerProps> = ({ size = '7rem', borderWidth = '1rem' }: SpinnerProps) => {
   return (
     <SpinnerContainer>
-      <SpinnerStyle />
+      <Spinner
+        style={{
+          height: `${size}`,
+          width: `${size}`,
+          border: `${borderWidth} solid ${theme.colors.white}`,
+          borderTop: `${borderWidth} solid ${theme.colors.primary}`,
+        }}
+      />
     </SpinnerContainer>
   );
 };

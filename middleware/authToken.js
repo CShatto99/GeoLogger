@@ -8,7 +8,6 @@ const authToken = (req, res, next) => {
 
     next();
   } catch (err) {
-    console.log(err.message);
     res.status(401).json({ msg: "Error authenticating token" });
   }
 };

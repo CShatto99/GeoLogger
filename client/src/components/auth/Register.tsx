@@ -138,7 +138,7 @@ const Register: FC = () => {
             <PasswordInput value={confirmPass} onChange={(e) => setconfirmPass(e.target.value)} />
           </div>
           <div>
-            <Button disabled={!username || !email || !password || !confirmPass} text="Register" />
+            <Button disabled={!username || !email || !password || !confirmPass}>Register</Button>
             <DangerLink to="/">Cancel</DangerLink>
           </div>
           <p>

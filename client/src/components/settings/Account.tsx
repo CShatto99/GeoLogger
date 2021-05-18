@@ -56,6 +56,7 @@ const ModalFormGroup = styled.div`
 
 const Account: FC = () => {
   const dispatch = useAppDispatch();
+
   const { SUCC_change_password, ERR_change_password, ERR_delete_account } = useAppSelector((state) => state.alert);
   const [isOpen, setIsOpen] = useState(false);
   const [oldPass, setOldPass] = useState('');
@@ -94,7 +95,9 @@ const Account: FC = () => {
             <label>Confirm password</label>
             <PasswordInput value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
           </FormGroup>
-          <Button text="Change Password" disabled={!oldPass || !password || !confirmPass} onClick={onSubmit} />
+          <Button disabled={!oldPass || !password || !confirmPass} onClick={onSubmit}>
+            Change Password
+          </Button>
           <DefaultLink to="/forgot-password">Forgot your password?</DefaultLink>
         </form>
       </ChangePassword>
@@ -102,7 +105,7 @@ const Account: FC = () => {
         <h3>Delete account</h3>
         <Divider />
         <p>This action is irreversible. Once you delete your account you can no longer recover it.</p>
-        <DangerButton text="Delete Account" onClick={() => setIsOpen(!isOpen)} />
+        <DangerButton onClick={() => setIsOpen(!isOpen)}>Delete Account</DangerButton>
         <GeoLoggerModal
           title="Are you sure you want to delete your account?"
           isOpen={isOpen}
@@ -118,11 +121,9 @@ const Account: FC = () => {
               <PasswordInput value={deletePass} onChange={(e) => setDeletePass(e.target.value)} />
             </ModalFormGroup>
             {ERR_delete_account && <Alert type="error" msg={ERR_delete_account} />}
-            <DangerButton
-              text="Delete My Account"
-              disabled={!deletePass}
-              onClick={() => dispatch(deleteUser({ deletePass }))}
-            />
+            <DangerButton disabled={!deletePass} onClick={() => dispatch(deleteUser({ deletePass }))}>
+              Delete My Account
+            </DangerButton>
           </ModalBody>
         </GeoLoggerModal>
       </DeleteAccount>

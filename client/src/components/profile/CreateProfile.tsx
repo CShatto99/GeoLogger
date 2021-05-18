@@ -177,16 +177,21 @@ const CreateProfile: FC = () => {
               Cancel
             </CPDangerLink>
           ) : (
-            <Button text="Go Back" disabled={step <= 1} onClick={() => setStep((prevStep) => prevStep - 1)} />
+            <Button disabled={step <= 1} onClick={() => setStep((prevStep) => prevStep - 1)}>
+              Go Back
+            </Button>
           )}
           {step < TOTAL_STEPS ? (
             <Button
-              text="Next"
               disabled={step >= 2 || (!mapStyle && !fillColor)}
               onClick={() => setStep((prevStep) => prevStep + 1)}
-            />
+            >
+              Next
+            </Button>
           ) : (
-            <Button text="Finish" onClick={onSubmit} disabled={!mapStyle || !fillColor} />
+            <Button onClick={onSubmit} disabled={!mapStyle || !fillColor}>
+              Finish
+            </Button>
           )}
         </ButtonGroup>
         {step === 1 && (

@@ -110,7 +110,7 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
     <>
       <TitleSection>
         <h1>Appearance</h1>
-        {settingsChanged && <Button text="Apply" onClick={onSubmit} />}
+        {settingsChanged && <Button onClick={onSubmit}>Apply</Button>}
       </TitleSection>
       <SiteTheme>
         <h3>Site Theme</h3>

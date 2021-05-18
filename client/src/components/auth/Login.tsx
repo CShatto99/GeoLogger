@@ -58,7 +58,7 @@ const Login: FC = () => {
           </div>
 
           <div>
-            <Button disabled={!email || !password} text="Login" />
+            <Button disabled={!email || !password}>Login</Button>
             <DangerLink to="/">Cancel</DangerLink>
           </div>
           <p>

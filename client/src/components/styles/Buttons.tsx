@@ -42,26 +42,26 @@ export const DangerButtonStyle = styled(PrimaryButtonStyle)`
 
 type ButtonProps = {
   disabled?: boolean;
-  text: string;
+  children?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Button: FC<ButtonProps> = ({ disabled, text, onClick }: ButtonProps) => {
+const Button: FC<ButtonProps> = ({ disabled, children, onClick }: ButtonProps) => {
   return disabled ? (
-    <DisabledButton disabled={disabled}>{text}</DisabledButton>
+    <DisabledButton disabled={disabled}>{children}</DisabledButton>
   ) : (
     <PrimaryButtonStyle disabled={disabled} onClick={onClick}>
-      {text}
+      {children}
     </PrimaryButtonStyle>
   );
 };
 
-export const DangerButton: FC<ButtonProps> = ({ disabled, text, onClick }: ButtonProps) => {
+export const DangerButton: FC<ButtonProps> = ({ disabled, children, onClick }: ButtonProps) => {
   return disabled ? (
-    <DisabledButton disabled={disabled}>{text}</DisabledButton>
+    <DisabledButton disabled={disabled}>{children}</DisabledButton>
   ) : (
     <DangerButtonStyle disabled={disabled} onClick={onClick}>
-      {text}
+      {children}
     </DangerButtonStyle>
   );
 };
