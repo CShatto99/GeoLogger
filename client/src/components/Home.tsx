@@ -42,6 +42,10 @@ const LandingContent = styled.div`
     font-weight: ${({ theme }) => theme.fontWeights.light};
     margin: 0.5rem 0 2rem 0;
   }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 0.5rem;
+  }
 `;
 
 const LandingLink = styled(GeneralLink)`
@@ -85,6 +89,7 @@ const MapContent = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     grid-gap: 1rem;
+    padding: 0.5rem;
   }
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
@@ -129,6 +134,7 @@ const LoggingContent = styled.div`
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 0.5rem;
     & > div {
       grid-column: 1 / span 2;
     }

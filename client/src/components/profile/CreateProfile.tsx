@@ -26,6 +26,10 @@ const CreateProfileContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 6rem 1.5rem 1.5rem 1.5rem;
   min-height: calc(100vh - 7.5rem);
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 6rem 0.5rem 0.5rem 0.5rem;
+  }
 `;
 
 const CreateProfileContent = styled.div`

@@ -44,8 +44,8 @@ const FooterContent = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     grid-template-columns: 1fr;
-    font-size: 12px;
     grid-gap: 1rem;
+    padding: 0.5rem;
   }
 `;
 
