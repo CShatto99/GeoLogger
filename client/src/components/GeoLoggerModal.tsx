@@ -68,7 +68,7 @@ const ModalHeader = styled.div`
 
 const ModalBody = styled.div`
   padding-top: 1rem;
-  border-top: 1px solid ${({ theme }) => theme.colors.darkBorder};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   line-height: 1.3rem;
 `;
 

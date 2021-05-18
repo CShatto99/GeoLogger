@@ -6,13 +6,13 @@ const SettingsNavContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   flex-direction: column;
-  border: 1px solid ${({ theme }) => theme.colors.darkBorder};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 0.5rem;
   box-sizing: border-box;
 
   & > * {
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.darkBorder};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
     font-weight: ${({ theme }) => theme.fontWeights.medium};
   }
 

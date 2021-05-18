@@ -43,9 +43,8 @@ const Themes = styled.div`
     transition: all 100ms ease-out;
   }
 
-  & > div:hover {
+  & > div > .item-active {
     transform: scale(1.05);
-    transition: all 100ms ease-in;
   }
 
   & > div > div {
@@ -71,22 +70,11 @@ const MapContent = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
-
-    & > div:last-child {
-      grid-column: 1 / span 2;
-      width: 50%;
-      margin: 0 auto;
-    }
   }
 `;
 
 const ColorContent = styled(OldColorContent)`
-  justify-content: start;
   margin-bottom: 1rem;
-
-  @media ${({ theme }) => theme.mediaQueries.md} {
-    justify-content: center;
-  }
 `;
 
 const HighlightColor = styled.div`
@@ -114,18 +102,17 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
   const [settingsChanged, setSettingsChanged] = useState(false);
 
   useEffect(() => {
-    (mapStyle !== profile.mapStyle || fillColor !== profile.fillColor) && setSettingsChanged(true);
+    (theme !== profile.theme || mapStyle !== profile.mapStyle || fillColor !== profile.fillColor) &&
+      setSettingsChanged(true);
   }, [mapStyle, fillColor]);
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    dispatch(updateProfile({ ...profile, ...{ mapStyle, fillColor } }));
+    dispatch(updateProfile({ ...profile, ...{ theme, mapStyle, fillColor } }));
 
     setSettingsChanged(false);
   };
-
-  console.log(theme, setTheme);
 
   return (
     <>
@@ -138,7 +125,7 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
         <Divider />
         <Themes>
           <CardLabel onClick={() => setTheme('light')} label="Light" active={theme === 'light'} />
-          <CardLabel onClick={() => setTheme('dark')} label="Dark" active={theme === 'dark'} />
+          {/* <CardLabel onClick={() => setTheme('dark')} label="Dark" active={theme === 'dark'} /> */}
           {/* <CardLabel onClick={() => setTheme('sync')} label="Sync" active={theme === 'sync'} /> */}
         </Themes>
       </SiteTheme>
@@ -191,6 +178,7 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
           {colors.map(({ name, hex }) => (
             <ColorBox
               key={hex}
+              className={fillColor === hex ? 'item-active' : undefined}
               onClick={() => setFillColor(hex)}
               style={{
                 backgroundColor: hex,

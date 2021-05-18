@@ -15,7 +15,6 @@ const MapTypeContent = styled.div`
 
   &:hover {
     transition: all ease-in 100ms;
-    transform: scale(1.05);
   }
 
   & > div:first-child {

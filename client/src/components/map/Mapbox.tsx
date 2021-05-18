@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 import ReactMapGL, { Layer, Source } from 'react-map-gl';
 import { useAppSelector } from '../../store';
 //import { useAppDispatch, useAppSelector } from '../store/';

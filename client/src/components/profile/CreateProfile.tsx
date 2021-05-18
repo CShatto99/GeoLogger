@@ -78,24 +78,14 @@ export const SectionTitle = styled(PasswordLabelStyle)`
 export const ColorContent = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   margin-bottom: 2.5rem;
 
   & > div:first-child {
     width: 100%;
   }
 
-  & > p {
-    width: 100%;
-  }
-
-  & > .cb-active {
+  & > .item-active {
     transform: scale(1.05);
-    border: 2px solid ${({ theme }) => theme.colors.success};
-  }
-
-  & > .cb-active > div {
-    border-radius 0.2rem 0.2rem 0 0;
   }
 `;
 
@@ -112,7 +102,6 @@ export const ColorBox = styled.div`
 
   &:hover {
     transition: all ease-in 100ms;
-    transform: scale(1.05);
   }
 `;
 
@@ -231,6 +220,7 @@ const CreateProfile: FC = () => {
             {colors.map(({ name, hex }) => (
               <ColorBox
                 key={hex}
+                className={fillColor === hex ? 'item-active' : undefined}
                 onClick={() => setFillColor(hex)}
                 style={{
                   backgroundColor: hex,

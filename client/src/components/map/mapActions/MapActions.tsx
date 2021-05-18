@@ -7,7 +7,9 @@ import MapStyle from './MapStyle';
 
 const MapActionsContainer = styled.div`
   position: absolute;
-  right 0;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
   width: auto;
   height: auto;
   background-color: rgba(14, 16, 18, 0.6);
@@ -15,11 +17,10 @@ const MapActionsContainer = styled.div`
   padding: 0.5rem;
   border-radius: 999px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 
   & > div:not(:last-child) {
-    margin-bottom: 1rem;
+    margin-right: 1.5rem;
   }
 `;
 
