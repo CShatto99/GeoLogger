@@ -2,7 +2,6 @@ import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { IoInformationCircle } from 'react-icons/io5';
-import { BsCheckCircle } from 'react-icons/bs';
 import { useAppDispatch } from '../../store';
 import { updateProfile } from '../../store/profile';
 import { Divider } from './Account';
@@ -11,13 +10,14 @@ import { Profile } from '../../store/types';
 import Button from '../styles/Buttons';
 import { DefaultLinkHTML } from '../styles/Links';
 import { AuthInput } from '../styles/Inputs';
-import { ColorContent as OldColorContent, ColorBox, ColorBlockLabel, SectionTitle } from '../profile/CreateProfile';
+import { ColorContent as OldColorContent, ColorBox, SectionTitle } from '../profile/CreateProfile';
 import colors from '../../json/colors.json';
 import darkV10 from '../../img/dark-v10.png';
 import lightV10 from '../../img/light-v10.png';
 import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
+import CardLabel from '../styles/CardLabel';
 
 const TitleSection = styled.div`
   margin-bottom: 2rem;
@@ -28,14 +28,32 @@ const TitleSection = styled.div`
 
 const SiteTheme = styled.div`
   margin-bottom: 2.5rem;
-  padding: 0.5rem;
-  background-color: ${({ theme }) => theme.colors.light};
-  border-radius: 0.3rem;
-  opacity: 0.5;
-  cursor: default;
 
   & > h2 {
     color: ${({ theme }) => theme.colors.danger};
+  }
+`;
+
+const Themes = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+
+  & > div {
+    transition: all 100ms ease-out;
+  }
+
+  & > div:hover {
+    transform: scale(1.05);
+    transition: all 100ms ease-in;
+  }
+
+  & > div > div {
+    border-radius: 0.3rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
@@ -90,6 +108,7 @@ type AppearanceProps = {
 
 const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
   const dispatch = useAppDispatch();
+  const [theme, setTheme] = useState(profile.theme);
   const [mapStyle, setMapStyle] = useState(profile.mapStyle);
   const [fillColor, setFillColor] = useState(profile.fillColor);
   const [settingsChanged, setSettingsChanged] = useState(false);
@@ -106,6 +125,8 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
     setSettingsChanged(false);
   };
 
+  console.log(theme, setTheme);
+
   return (
     <>
       <TitleSection>
@@ -115,7 +136,11 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
       <SiteTheme>
         <h3>Site Theme</h3>
         <Divider />
-        <h2>Site theme coming soon...</h2>
+        <Themes>
+          <CardLabel onClick={() => setTheme('light')} label="Light" active={theme === 'light'} />
+          <CardLabel onClick={() => setTheme('dark')} label="Dark" active={theme === 'dark'} />
+          {/* <CardLabel onClick={() => setTheme('sync')} label="Sync" active={theme === 'sync'} /> */}
+        </Themes>
       </SiteTheme>
       <MapStyle>
         <h3>Map Style</h3>
@@ -166,15 +191,12 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
           {colors.map(({ name, hex }) => (
             <ColorBox
               key={hex}
-              className={fillColor === hex ? 'cb-active' : undefined}
               onClick={() => setFillColor(hex)}
               style={{
                 backgroundColor: hex,
               }}
             >
-              <ColorBlockLabel>
-                {name} {fillColor === hex && <BsCheckCircle />}
-              </ColorBlockLabel>
+              <CardLabel label={name} active={fillColor === hex} />
             </ColorBox>
           ))}
         </ColorContent>

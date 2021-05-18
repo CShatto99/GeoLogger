@@ -1,18 +1,10 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { BsCheckCircle } from 'react-icons/bs';
+import CardLabel from './styles/CardLabel';
 
 const MapTypeContainer = styled.div`
   & > .map-active {
     transform: scale(1.05);
-  }
-
-  & > .map-active > * {
-    border: 2px solid ${({ theme }) => theme.colors.success};
-  }
-
-  & > .map-active > *:first-child {
-    border-bottom: none;
   }
 `;
 
@@ -26,27 +18,17 @@ const MapTypeContent = styled.div`
     transform: scale(1.05);
   }
 
+  & > div:first-child {
+    position: relative;
+    z-index: 2;
+    margin-bottom: -1.5rem;
+  }
+
   & > img {
+    position: relative;
     max-width: 300px;
     box-sizing: border-box;
-  }
-`;
-
-const MapTypeLabel = styled.div`
-  background: ${({ theme }) => theme.colors.white};
-  border-radius: 0.3rem 0.3rem 0 0;
-  box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
-  padding: 0.2rem;
-  margin-bottom: -20px;
-  position: relative;
-
-  & > svg {
-    margin: 0 0 -1px 0.15rem;
-    font-size: 0.9rem;
-  }
-
-  & > svg > path {
-    fill: ${({ theme }) => theme.colors.success};
+    z-index: 1;
   }
 `;
 
@@ -66,9 +48,10 @@ const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapT
         onClick={setSelectedMapStyle}
         className={selectedMapStyle === mapStyle ? 'map-active' : undefined}
       >
-        <MapTypeLabel>
+        {/* <MapTypeLabel>
           {mapTitle} {selectedMapStyle === mapStyle && <BsCheckCircle />}
-        </MapTypeLabel>
+        </MapTypeLabel> */}
+        <CardLabel label={mapTitle} active={selectedMapStyle === mapStyle} />
         <img src={image} alt={`mapbox ${selectedMapStyle} theme`} onClick={setSelectedMapStyle} />
       </MapTypeContent>
     </MapTypeContainer>

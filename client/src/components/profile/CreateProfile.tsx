@@ -3,7 +3,6 @@ import { useHistory, Redirect } from 'react-router';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { IoInformationCircle } from 'react-icons/io5';
-import { BsCheckCircle } from 'react-icons/bs';
 import { useAppDispatch, useAppSelector } from '../../store/index';
 import { updateProfile } from '../../store/profile';
 import { updateUser, logout } from '../../store/auth';
@@ -19,6 +18,7 @@ import lightV10 from '../../img/light-v10.png';
 import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
+import CardLabel from '../styles/CardLabel';
 
 const TOTAL_STEPS = 2;
 
@@ -113,26 +113,6 @@ export const ColorBox = styled.div`
   &:hover {
     transition: all ease-in 100ms;
     transform: scale(1.05);
-  }
-`;
-
-export const ColorBlockLabel = styled.div`
-  height: 1.2rem;
-  color: ${({ theme }) => theme.colors.black};
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius 0.3rem 0.3rem 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.2);
-
-  & > svg {
-    margin: 0 0 -1px 0.15rem;
-    font-size: 0.9rem;
-  }
-
-  & > svg > path {
-    fill: ${({ theme }) => theme.colors.success};
   }
 `;
 
@@ -251,15 +231,12 @@ const CreateProfile: FC = () => {
             {colors.map(({ name, hex }) => (
               <ColorBox
                 key={hex}
-                className={fillColor === hex ? 'cb-active' : undefined}
                 onClick={() => setFillColor(hex)}
                 style={{
                   backgroundColor: hex,
                 }}
               >
-                <ColorBlockLabel>
-                  {name} {fillColor === hex && <BsCheckCircle />}
-                </ColorBlockLabel>
+                <CardLabel label={name} active={fillColor === hex} />
               </ColorBox>
             ))}
           </ColorContent>
