@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
-import styled from 'styled-components';
 import ReactMapGL, { Layer, Source } from 'react-map-gl';
 import { useAppSelector } from '../../store';
 //import { useAppDispatch, useAppSelector } from '../store/';
@@ -133,7 +132,6 @@ const Mapbox: FC = () => {
       mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
       onViewportChange={(nextViewport: Viewport) => setViewport(nextViewport)}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      className="w-full"
       //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
     >
       {sources}

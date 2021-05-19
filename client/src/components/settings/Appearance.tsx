@@ -11,13 +11,14 @@ import Button from '../styles/Buttons';
 import { DefaultLinkHTML } from '../styles/Links';
 import { AuthInput } from '../styles/Inputs';
 import { ColorContent as OldColorContent, ColorBox, SectionTitle } from '../profile/CreateProfile';
+import CardLabel from '../styles/CardLabel';
 import colors from '../../json/colors.json';
+import mapStyles from '../../utils/mapStyles';
 import darkV10 from '../../img/dark-v10.png';
 import lightV10 from '../../img/light-v10.png';
 import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
-import CardLabel from '../styles/CardLabel';
 
 const TitleSection = styled.div`
   margin-bottom: 2rem;
@@ -62,7 +63,7 @@ const MapStyle = styled.div`
 
 const MapContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1rem;
   margin-bottom: 2.5rem;
 
@@ -135,32 +136,50 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
         <MapContent>
           <MapType
             selectedMapStyle={mapStyle}
-            setSelectedMapStyle={() => setMapStyle('dark-v10')}
-            mapTitle="Dark V10"
-            image={darkV10}
-          />
-          <MapType
-            selectedMapStyle={mapStyle}
-            setSelectedMapStyle={() => setMapStyle('light-v10')}
-            mapTitle="Light V10"
-            image={lightV10}
-          />
-          <MapType
-            selectedMapStyle={mapStyle}
-            setSelectedMapStyle={() => setMapStyle('outdoors-v11')}
-            mapTitle="Outdoors V11"
-            image={outdoorsV11}
-          />
-          <MapType
-            selectedMapStyle={mapStyle}
-            setSelectedMapStyle={() => setMapStyle('streets-v11')}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.streets)}
             mapTitle="Streets V11"
             image={streetsV11}
           />
           <MapType
             selectedMapStyle={mapStyle}
-            setSelectedMapStyle={() => setMapStyle('satellite-v9')}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.outdoors)}
+            mapTitle="Outdoors V11"
+            image={outdoorsV11}
+          />
+          <MapType
+            selectedMapStyle={mapStyle}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.light)}
+            mapTitle="Light V10"
+            image={lightV10}
+          />
+          <MapType
+            selectedMapStyle={mapStyle}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.dark)}
+            mapTitle="Dark V10"
+            image={darkV10}
+          />
+          <MapType
+            selectedMapStyle={mapStyle}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.satellite)}
             mapTitle="Satellite V9"
+            image={satelliteV9}
+          />
+          <MapType
+            selectedMapStyle={mapStyle}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.satelliteStreets)}
+            mapTitle="Satellite Streets V11"
+            image={satelliteV9}
+          />
+          <MapType
+            selectedMapStyle={mapStyle}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.navigationDay)}
+            mapTitle="Navigation Day V1"
+            image={satelliteV9}
+          />
+          <MapType
+            selectedMapStyle={mapStyle}
+            setSelectedMapStyle={() => setMapStyle(mapStyles.navigationNight)}
+            mapTitle="Navigation Night V1"
             image={satelliteV9}
           />
         </MapContent>

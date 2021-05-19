@@ -21,6 +21,7 @@ const MapTypeContent = styled.div`
     position: relative;
     z-index: 2;
     margin-bottom: -1.5rem;
+    text-overflow: clip;
   }
 
   & > img {
@@ -47,9 +48,6 @@ const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapT
         onClick={setSelectedMapStyle}
         className={selectedMapStyle === mapStyle ? 'map-active' : undefined}
       >
-        {/* <MapTypeLabel>
-          {mapTitle} {selectedMapStyle === mapStyle && <BsCheckCircle />}
-        </MapTypeLabel> */}
         <CardLabel label={mapTitle} active={selectedMapStyle === mapStyle} />
         <img src={image} alt={`mapbox ${selectedMapStyle} theme`} onClick={setSelectedMapStyle} />
       </MapTypeContent>

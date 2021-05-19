@@ -27,10 +27,11 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  padding-top: 12rem;
+  padding: 6rem 0 1.5rem 0;
+  overflow: scroll;
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
-    padding: 12rem 1.5rem 0 1.5rem;
+    padding: 6rem 1.5rem 1.5rem 1.5rem;
   }
 `;
 
@@ -46,21 +47,23 @@ const ModalContent = styled.div`
 const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-bottom: 1rem;
 
   & > h2 {
     font-weight: ${({ theme }) => theme.fontWeights.medium};
   }
 
-  & > svg {
+  & > div > svg {
     cursor: pointer;
+    height: 100%;
   }
 
-  & > svg > path {
+  & > div > svg > path {
     transition: fill 100ms ease-out;
   }
 
-  & > svg:hover > path {
+  & > div > svg:hover > path {
     fill: ${({ theme }) => theme.colors.danger};
     transition: fill 100ms ease-in;
   }
@@ -73,13 +76,14 @@ const ModalBody = styled.div`
 `;
 
 type ModalProps = {
-  isOpen: boolean;
-  onClose: React.MouseEventHandler<unknown> | undefined;
+  isOpen?: boolean;
+  onClose?: React.MouseEventHandler<unknown> | undefined;
   title?: string;
   children?: React.ReactNode;
+  toggler?: React.ReactNode;
 };
 
-const GeoLoggerModal: FC<ModalProps> = ({ isOpen, onClose, title, children }: ModalProps) => {
+const GeoLoggerModal: FC<ModalProps> = ({ isOpen, onClose, title, children, toggler }: ModalProps) => {
   const portalDiv = document.getElementById('root');
 
   return portalDiv
@@ -89,7 +93,13 @@ const GeoLoggerModal: FC<ModalProps> = ({ isOpen, onClose, title, children }: Mo
             <ModalContent onClick={(e) => e.stopPropagation()}>
               <ModalHeader>
                 <h2>{title}</h2>
-                <IoCloseSharp onClick={onClose} />
+                {toggler ? (
+                  <div onClick={onClose}>{toggler}</div>
+                ) : (
+                  <div>
+                    <IoCloseSharp onClick={onClose} />
+                  </div>
+                )}
               </ModalHeader>
               <ModalBody>{children}</ModalBody>
             </ModalContent>

@@ -11,6 +11,7 @@ import { PasswordLabelStyle } from '../auth/PasswordLabel';
 import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 import { DangerLink } from '../styles/Links';
 import MapType from '../MapType';
+import CardLabel from '../styles/CardLabel';
 import Button from '../styles/Buttons';
 import colors from '../../json/colors.json';
 import darkV10 from '../../img/dark-v10.png';
@@ -18,7 +19,7 @@ import lightV10 from '../../img/light-v10.png';
 import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
-import CardLabel from '../styles/CardLabel';
+import mapStyles from '../../utils/mapStyles';
 
 const TOTAL_STEPS = 2;
 
@@ -175,31 +176,31 @@ const CreateProfile: FC = () => {
             </div>
             <MapType
               selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle('dark-v10')}
+              setSelectedMapStyle={() => setMapStyle(mapStyles.dark)}
               mapTitle="Dark V10"
               image={darkV10}
             />
             <MapType
               selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle('light-v10')}
+              setSelectedMapStyle={() => setMapStyle(mapStyles.light)}
               mapTitle="Light V10"
               image={lightV10}
             />
             <MapType
               selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle('outdoors-v11')}
+              setSelectedMapStyle={() => setMapStyle(mapStyles.outdoors)}
               mapTitle="Outdoors V11"
               image={outdoorsV11}
             />
             <MapType
               selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle('streets-v11')}
+              setSelectedMapStyle={() => setMapStyle(mapStyles.streets)}
               mapTitle="Streets V11"
               image={streetsV11}
             />
             <MapType
               selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle('satellite-v9')}
+              setSelectedMapStyle={() => setMapStyle(mapStyles.satellite)}
               mapTitle="Satellite V9"
               image={satelliteV9}
             />
