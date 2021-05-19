@@ -1,10 +1,17 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { RiShareForwardBoxLine } from 'react-icons/ri';
 import CardLabel from './styles/CardLabel';
+import ReactTooltip from 'react-tooltip';
 
 const MapTypeContainer = styled.div`
   & > .map-active {
+    position: relative;
     transform: scale(1.05);
+  }
+
+  & > .map-active > div:last-child {
+    z-index: 2;
   }
 `;
 
@@ -12,6 +19,7 @@ const MapTypeContent = styled.div`
   cursor: pointer;
   max-width: 300px;
   transition: all ease-out 100ms;
+  z-index: 2;
 
   &:hover {
     transition: all ease-in 100ms;
@@ -28,8 +36,19 @@ const MapTypeContent = styled.div`
     position: relative;
     max-width: 300px;
     box-sizing: border-box;
-    z-index: 1;
+    z-index: 0;
   }
+`;
+
+const ViewEx = styled.a`
+  position: relative;
+  z-index: 2;
+  background-color: ${({ theme }) => theme.colors.white};
+  margin-top: -26px;
+  padding: 0.2rem;
+  width: 16px;
+  float: right;
+  border-bottom-right-radius: 0.3rem;
 `;
 
 type MapTypeProps = {
@@ -37,10 +56,11 @@ type MapTypeProps = {
   setSelectedMapStyle?: () => void;
   mapTitle: string;
   image: string;
+  demo?: string;
 };
 
-const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapTitle, image }: MapTypeProps) => {
-  const mapStyle = mapTitle.replace(' ', '-').toLowerCase();
+const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapTitle, image, demo }: MapTypeProps) => {
+  const mapStyle = mapTitle.replaceAll(' ', '-').toLowerCase();
 
   return (
     <MapTypeContainer>
@@ -50,6 +70,12 @@ const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapT
       >
         <CardLabel label={mapTitle} active={selectedMapStyle === mapStyle} />
         <img src={image} alt={`mapbox ${selectedMapStyle} theme`} onClick={setSelectedMapStyle} />
+        <ViewEx data-tip data-for={mapStyle} href={demo} target="_blank" rel="noopener noreferrer">
+          <RiShareForwardBoxLine />
+        </ViewEx>
+        <ReactTooltip id={mapStyle} aria-haspopup="true">
+          <small>View {mapTitle} demo.</small>
+        </ReactTooltip>
       </MapTypeContent>
     </MapTypeContainer>
   );

@@ -20,6 +20,12 @@ const CardLabelContent = styled.div`
   align-items: center;
   cursor: pointer;
   transition: all 100ms ease-in;
+
+  @media ${({ theme }) => theme.mediaQueries.xs} {
+    & > p {
+      font-size: 14px;
+    }
+  }
 `;
 
 type CardLabelProps = {
