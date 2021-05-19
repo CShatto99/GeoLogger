@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-const PrimaryButtonStyle = styled.button`
+export const PrimaryButtonStyle = styled.button`
   color: #edf2f7;
   border-radius: 0.3rem;
   padding: 0.25rem 1rem;

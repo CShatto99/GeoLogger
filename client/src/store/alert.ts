@@ -9,6 +9,8 @@ const alert = createSlice({
     ERR_delete_account: '',
     ERR_login: '',
     ERR_register: '',
+    SUCC_contact: '',
+    ERR_contact: '',
     status: undefined,
   },
   reducers: {
@@ -28,6 +30,8 @@ const alert = createSlice({
         ERR_delete_account: '',
         ERR_login: '',
         ERR_register: '',
+        SUCC_contact: '',
+        ERR_contact: '',
         status: undefined,
       };
     },

@@ -6,7 +6,7 @@ export const GeneralInputStyle = styled.input`
   width: 100%;
   color: ${({ theme }) => theme.colors.black};
   transition: ease-out 100ms;
-  background-color: ${({ theme }) => theme.colors.lightInput};
+  background-color: ${({ theme }) => theme.colors.input};
   border: none;
   border-bottom: 1px solid ${({ theme }) => theme.colors.dark};
   -webkit-border-radius: 0px;

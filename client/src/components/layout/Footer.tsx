@@ -8,6 +8,7 @@ import { setAlert } from '../../store/alert';
 import GeneralLink, { DefaultLinkHTML } from '../styles/Links';
 import GeneralInput from '../styles/Inputs';
 import Alert from '../styles/Alert';
+import { PrimaryButtonStyle } from '../styles/Buttons';
 
 const FooterContainer = styled.footer`
   background-color: ${({ theme }) => theme.colors.white};
@@ -65,21 +66,8 @@ const SiteLinks = styled.div`
   align-items: center;
 `;
 
-const SendButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
-  border-radius: 0.3rem;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: ease-out 100ms;
+const SendButton = styled(PrimaryButtonStyle)`
   width: 100%;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.darkPrimary};
-    transition: ease-in 100ms;
-  }
 `;
 
 const GitHubLink = styled.a`
@@ -95,7 +83,7 @@ const GitHubLink = styled.a`
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector((state) => state.auth);
-  const { status } = useAppSelector((state) => state.alert);
+  const { ERR_contact, SUCC_contact } = useAppSelector((state) => state.alert);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
@@ -110,12 +98,12 @@ const Footer: FC = () => {
 
     try {
       const { data } = await axios.post('/api/contact', { email, message }, config);
-      dispatch(setAlert(data.msg, 'SUCC_change_password', 200));
+      dispatch(setAlert(data.msg, 'SUCC_contact', 200));
 
       setEmail('');
       setMessage('');
     } catch (err) {
-      dispatch(setAlert(err.response.data.msg, 'ERR_change_password', err.response.status));
+      dispatch(setAlert(err.response.data.msg, 'ERR_contact', err.response.status));
     }
   };
 
@@ -155,16 +143,15 @@ const Footer: FC = () => {
           <h3>Contact</h3>
           <div>
             <label>Email</label>
-            <GeneralInput type="text" onChange={(e) => setEmail(e.target.value)} value={email} />
+            <GeneralInput type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
           </div>
           <div>
             <label>Message</label>
             <GeneralInput type="textarea" onChange={(e) => setMessage(e.target.value)} value={message} />
           </div>
-          <div>
-            <SendButton>Send</SendButton> {status && status === 400 && <Alert type="error" msg={''} />}
-            {/* {msg === 'Email sent' && status === 200 && <Alert type="success" msg={msg} />} */}
-          </div>
+          {ERR_contact && <Alert type="error" msg={ERR_contact} />}
+          {SUCC_contact && <Alert type="success" msg={SUCC_contact} />}
+          <SendButton>Send</SendButton>
         </form>
         <small>&copy; GeoLogger {new Date().getFullYear()}</small>
         <small>

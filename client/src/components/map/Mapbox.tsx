@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
-import ReactMapGL, { Layer, Source } from 'react-map-gl';
+import ReactMapGL, { Layer, Source, ViewportProps } from 'react-map-gl';
 import { useAppSelector } from '../../store';
 //import { useAppDispatch, useAppSelector } from '../store/';
 // import ReactTooltip from 'react-tooltip';
@@ -13,26 +13,34 @@ import useWindowDimensions from '../../hooks/windowDimensions';
 // import { Marker as MarkerType } from '../store/types';
 import MapActions from './mapActions/MapActions';
 
-type Viewport = {
-  width: string;
-  height: number;
-  latitude: number;
-  longitude: number;
-  zoom: number;
-};
+// type Viewport = {
+//   width: string;
+//   height: number;
+//   latitude: number;
+//   longitude: number;
+//   zoom: number;
+// };
 
 const Mapbox: FC = () => {
   // const dispatch = useAppDispatch();
   const { profile, loading } = useAppSelector((state) => state.profile);
-  const { height } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
-  const [viewport, setViewport] = useState({
-    width: '100%',
+  const [viewport, setViewport] = useState<ViewportProps>({
+    width: width,
     height: height,
     latitude: 40,
     longitude: -92,
     zoom: 3,
+    bearing: 0,
+    pitch: 0,
+    altitude: 0,
+    maxZoom: 23,
+    minZoom: 0,
+    maxPitch: 0,
+    minPitch: 0,
   });
+
   const [sources, setSources] = useState<React.ReactElement[]>([]);
   // const [markers, setMarkers] = useState<MarkerType[]>([]);
   // const [markerJustMoved, setMarkerJustMoved] = useState(false);
@@ -123,13 +131,15 @@ const Mapbox: FC = () => {
   //   return <Redirect to="/create" />;
   // }
 
+  console.log(viewport.zoom);
+
   return loading ? (
     <GeoLoggerSpinner />
   ) : (
     <ReactMapGL
       {...viewport}
       mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
-      onViewportChange={(nextViewport: Viewport) => setViewport(nextViewport)}
+      onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
     >

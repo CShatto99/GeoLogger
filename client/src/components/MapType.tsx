@@ -49,7 +49,6 @@ const ViewEx = styled.a`
   border-bottom-right-radius: 0.3rem;
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    margin-top: -24px;
   }
 `;
 

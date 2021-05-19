@@ -126,8 +126,9 @@ table {
 * {
   font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  scrollbar-width: thin;
-  scrollbar-color: #d9dfdd #0c0f11;
+  /* scrollbar-width: thin;
+  scrollbar-color: #d9dfdd #0c0f11; */
+  font-size: 16px;
 }
 
 /* * {
@@ -156,6 +157,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #0c0f11;
+  font-size: 16px;
 }
 
 img {
@@ -176,17 +178,9 @@ h3 {
   margin: 0;
 }
 
-p {
-  font-size: 1rem;
-  margin: 0;
-}
-
 .mapboxgl-ctrl-bottom-left {
   display: none;
 }
 
-@media only screen and (max-width: 768px) {
-  body {
-    font-size: 14px;
-  }
-}
+/* @media only screen and (max-width: 768px) {
+} */

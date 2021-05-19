@@ -190,14 +190,16 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
       </MapStyle>
       <HighlightColor>
         <ColorContent>
-          <SectionTitle>
-            <h3>Highlight Color</h3>
-            <IoInformationCircle data-tip data-for="pass-info" />
-            <ReactTooltip id="pass-info" aria-haspopup="true">
-              <small>This is the color your visited regions will be on your map.</small>
-            </ReactTooltip>
-          </SectionTitle>
-          <Divider />
+          <div>
+            <SectionTitle>
+              <h3>Highlight Color</h3>
+              <IoInformationCircle data-tip data-for="pass-info" />
+              <ReactTooltip id="pass-info" aria-haspopup="true">
+                <small>This is the color your visited regions will be on your map.</small>
+              </ReactTooltip>
+            </SectionTitle>
+            <Divider />
+          </div>
           {colors.map(({ name, hex }) => (
             <ColorBox
               key={hex}

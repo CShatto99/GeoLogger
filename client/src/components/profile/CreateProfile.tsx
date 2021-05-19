@@ -53,9 +53,7 @@ const MapContent = styled.div`
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
 
     & > div:first-child {
       grid-column: 1 / span 2;
@@ -71,29 +69,40 @@ export const SectionTitle = styled(PasswordLabelStyle)`
 `;
 
 export const ColorContent = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0.5rem;
   margin-bottom: 2.5rem;
 
   & > div:first-child {
-    width: 100%;
+    grid-column: 1 / span 6;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    & > div:first-child {
+      grid-column: 1 / span 4;
+    }
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.xs} {
+    grid-template-columns: 1fr 1fr;
+
+    & > div:first-child {
+      grid-column: 1 / span 2;
+    }
   }
 `;
 
 export const ColorBox = styled.div`
-  width: 100px;
+  width: 100%;
   height: 100px;
-  margin: 0.25rem;
   border-radius: 0.3rem;
   cursor: pointer;
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
     0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   transition: all ease-out 100ms;
-  box-sizing: border-box;
-
-  &:hover {
-    transition: all ease-in 100ms;
-  }
 `;
 
 const ButtonGroup = styled.div`

@@ -14,7 +14,6 @@ const ChangePassword = styled.div`
 
   & > form > a {
     margin-left: 0.5rem;
-    font-size: 14px;
   }
 `;
 

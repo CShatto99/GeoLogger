@@ -8,14 +8,13 @@ import { refreshUser } from './store/auth';
 import AppNavbar from './components/layout/AppNavbar';
 import Footer from './components/layout/Footer';
 import PrivateRoute from './components/routing/PrivateRoute';
-// import Mapbox from './components/map/Mapbox';
+import Mapbox from './components/map/Mapbox';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Home from './components/Home';
 import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/CreateProfile';
 import './App.css';
-import MapboxTest from './components/map/MapboxTest';
 
 const RenderNavbar: FC = () => {
   const location = useLocation();
@@ -53,7 +52,7 @@ const App: FC = () => {
             <Route exact path="/login">
               <Login />
             </Route>
-            <PrivateRoute exact path="/map" component={MapboxTest} />
+            <PrivateRoute exact path="/map" component={Mapbox} />
             <PrivateRoute path="/settings" component={Settings} />
             <PrivateRoute path="/create" component={CreateProfile} />
           </Switch>
