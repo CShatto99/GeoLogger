@@ -36,7 +36,7 @@ const ApplyButton = styled.div`
 
 const AddHighlight: FC = () => {
   const dispatch = useAppDispatch();
-  const { profile } = useAppSelector((state) => state.profile);
+  const { profile, loading } = useAppSelector((state) => state.profile);
   const [isOpen, setIsOpen] = useState(false);
   const [visited, setVisited] = useState<string[]>([]);
 
@@ -51,6 +51,7 @@ const AddHighlight: FC = () => {
 
     return true;
   };
+
   const handleClick = (region: string) => {
     !visited.includes(region)
       ? setVisited((prevVisited) => [...prevVisited, region])
@@ -74,6 +75,7 @@ const AddHighlight: FC = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(!isOpen)}
         toggler={
+          !loading &&
           !arrayEquals(visited, profile.visited) && (
             <ApplyButton onClick={onSubmit}>
               <BsCheck />

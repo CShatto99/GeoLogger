@@ -7,7 +7,6 @@ import ReactTooltip from 'react-tooltip';
 const MapTypeContainer = styled.div`
   & > .map-active {
     position: relative;
-    transform: scale(1.05);
   }
 
   & > .map-active > div:last-child {
@@ -17,7 +16,7 @@ const MapTypeContainer = styled.div`
 
 const MapTypeContent = styled.div`
   cursor: pointer;
-  max-width: 300px;
+  width: 100%;
   transition: all ease-out 100ms;
   z-index: 2;
 
@@ -34,7 +33,6 @@ const MapTypeContent = styled.div`
 
   & > img {
     position: relative;
-    max-width: 300px;
     box-sizing: border-box;
     z-index: 0;
   }
@@ -49,6 +47,10 @@ const ViewEx = styled.a`
   width: 16px;
   float: right;
   border-bottom-right-radius: 0.3rem;
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    margin-top: -24px;
+  }
 `;
 
 type MapTypeProps = {
