@@ -37,6 +37,12 @@ const CreateProfileContent = styled.div`
   max-width: 72rem;
   margin: 0 auto;
 
+  & > h3 {
+    font-size: 2rem;
+    // text-align: center;
+    // margin-bottom: 1.5rem;
+  }
+
   & > button {
     width: 100%;
   }
@@ -112,6 +118,8 @@ const ButtonGroup = styled.div`
 `;
 
 const CPDangerLink = styled(DangerLink)`
+  display: grid;
+  place-items: center;
   margin: 0;
 `;
 
@@ -144,6 +152,9 @@ const CreateProfile: FC = () => {
   ) : (
     <CreateProfileContainer>
       <CreateProfileContent>
+        <h3>Please complete the following steps to finish setting up your account</h3>
+        <Divider />
+
         <ButtonGroup>
           {step <= 1 ? (
             <CPDangerLink to="/register" onClick={() => dispatch(logout())}>

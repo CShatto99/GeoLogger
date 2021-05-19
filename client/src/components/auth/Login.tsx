@@ -11,7 +11,7 @@ import { DefaultLink, DangerLink } from '../styles/Links';
 import Alert from '../styles/Alert';
 
 const LoginFormContent = styled(FormContent)`
-  & > div:nth-child(4) a {
+  & > .forgot-pass > a {
     float: right;
     color: ${({ theme }) => theme.colors.primary};
     margin-top: 0.25rem;
@@ -51,12 +51,11 @@ const Login: FC = () => {
             <label>Email</label>
             <AuthInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
-          <div>
+          <div className="forgot-pass">
             <label>Password</label>
             <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
             <DefaultLink to="/forgot-password">Forgot Password?</DefaultLink>
           </div>
-
           <div>
             <Button disabled={!email || !password}>Login</Button>
             <DangerLink to="/">Cancel</DangerLink>

@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
 import ReactMapGL, { Layer, Source, ViewportProps } from 'react-map-gl';
+import styled from 'styled-components';
 import { useAppSelector } from '../../store';
 //import { useAppDispatch, useAppSelector } from '../store/';
 // import ReactTooltip from 'react-tooltip';
@@ -13,13 +14,10 @@ import useWindowDimensions from '../../hooks/windowDimensions';
 // import { Marker as MarkerType } from '../store/types';
 import MapActions from './mapActions/MapActions';
 
-// type Viewport = {
-//   width: string;
-//   height: number;
-//   latitude: number;
-//   longitude: number;
-//   zoom: number;
-// };
+const MapContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.black};
+  height: 100vh;
+`;
 
 const Mapbox: FC = () => {
   // const dispatch = useAppDispatch();
@@ -136,16 +134,17 @@ const Mapbox: FC = () => {
   return loading ? (
     <GeoLoggerSpinner />
   ) : (
-    <ReactMapGL
-      {...viewport}
-      mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
-      onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
-    >
-      {sources}
-      <MapActions />
-      {/* <div className="add-states">
+    <MapContainer>
+      <ReactMapGL
+        {...viewport}
+        mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
+        onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
+      >
+        {sources}
+        <MapActions />
+        {/* <div className="add-states">
               <Checklist />
               {markerMode && (
                 <ReactTooltip id="marker-btn" aria-haspopup="true">
@@ -209,7 +208,8 @@ const Mapbox: FC = () => {
                 )}
               </React.Fragment>
             ))} */}
-    </ReactMapGL>
+      </ReactMapGL>
+    </MapContainer>
   );
 };
 

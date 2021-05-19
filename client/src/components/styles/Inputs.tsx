@@ -8,9 +8,9 @@ export const GeneralInputStyle = styled.input`
   transition: ease-out 100ms;
   background-color: ${({ theme }) => theme.colors.input};
   border: none;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.dark};
+  border: 1px solid ${({ theme }) => theme.colors.dark};
   -webkit-border-radius: 0px;
-  border-radius: 0.3rem 0.3rem 0 0;
+  border-radius: 0.3rem;
   box-sizing: border-box;
   margin-top: 0.25rem;
   padding: 0.25rem;
@@ -18,8 +18,8 @@ export const GeneralInputStyle = styled.input`
   &:focus {
     transition: ease-in 100ms;
     outline: none;
-    box-shadow: 0px 1px 1px 0px ${({ theme }) => theme.colors.primary};
-    -webkit-box-shadow: 0px 1px 1px 0px ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 4px ${({ theme }) => theme.colors.primary};
+    -webkit-box-shadow: 0 0 4px ${({ theme }) => theme.colors.primary};
   }
 
   &::placeholder {
@@ -31,11 +31,24 @@ const AuthInputStyle = styled(GeneralInputStyle)`
   padding: 0.5rem 0.25rem;
 `;
 
-const Toggler = styled.span`
+const InputContainer = styled.div`
   position: relative;
-  float: right;
-  margin-top: -24px;
-  margin-right: 10px;
+`;
+
+const Toggler = styled.div`
+  background-color: ${({ theme }) => theme.colors.input};
+  display: grid;
+  place-items: center;
+  padding: 0 0.5rem;
+  width: 20px;
+  height: 36px;
+  margin-bottom: -3px;
+  border-radius: 0 0.3rem 0.3rem 0;
+  border: 1px solid ${({ theme }) => theme.colors.dark};
+  border-left: none;
+  position: absolute;
+  top: 10%;
+  right: 0;
 
   & > svg:hover {
     cursor: pointer;
@@ -65,17 +78,17 @@ export const PasswordInput: FC<InputProps> = ({ value, placeholder, onChange }: 
   const [passVisible, setPassVisible] = useState(false);
 
   return (
-    <>
+    <InputContainer>
       <AuthInputStyle
         type={passVisible ? 'text' : 'password'}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
       />
-      {value && (
-        <Toggler onClick={() => setPassVisible(!passVisible)}>{passVisible ? <IoMdEye /> : <IoMdEyeOff />}</Toggler>
-      )}
-    </>
+      <Toggler onClick={() => setPassVisible(!passVisible)}>
+        {value && (passVisible ? <IoMdEye /> : <IoMdEyeOff />)}
+      </Toggler>
+    </InputContainer>
   );
 };
 

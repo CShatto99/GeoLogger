@@ -11,7 +11,7 @@ import usa from '../../../json/US.json';
 
 const Checklist = styled.div`
   & > div {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
   & > div > div {

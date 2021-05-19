@@ -14,7 +14,7 @@ import PasswordLabel from './PasswordLabel';
 
 export const AuthContainer = styled.div`
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.white};
   background-image: url(${satelliteV9});
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,7 +26,7 @@ export const AuthContainer = styled.div`
 `;
 
 export const AuthContent = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 468px;
   background-color: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.black};
