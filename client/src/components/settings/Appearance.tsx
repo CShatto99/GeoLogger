@@ -44,10 +44,6 @@ const Themes = styled.div`
     transition: all 100ms ease-out;
   }
 
-  & > div > .item-active {
-    transform: scale(1.05);
-  }
-
   & > div > div {
     border-radius: 0.3rem;
   }

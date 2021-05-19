@@ -6,7 +6,6 @@ import { useAppSelector } from '../../store';
 // import ReactTooltip from 'react-tooltip';
 import geoJSON from '../../json/geoJSON.json';
 import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
-// import Checklist from './Checklist';
 // import MarkerPopup from './MarkerPopup';
 import useWindowDimensions from '../../hooks/windowDimensions';
 // import { updateProfile } from '../store/profile';

@@ -78,10 +78,6 @@ export const ColorContent = styled.div`
   & > div:first-child {
     width: 100%;
   }
-
-  & > .item-active {
-    transform: scale(1.05);
-  }
 `;
 
 export const ColorBox = styled.div`

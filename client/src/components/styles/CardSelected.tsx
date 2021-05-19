@@ -2,11 +2,12 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 const CardSelectedStyle = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.dark};
+  border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: 50%;
   width: 12px;
   height: 12px;
-  padding: 0.1rem;
+  display: grid;
+  place-items: center;
 
   & > div {
     opacity: 0;
@@ -22,7 +23,8 @@ const CardSelectedStyle = styled.div`
 const IsSelected = styled.div`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.success};
-  height: 100%;
+  height: 8px;
+  width: 8px;
 `;
 
 type CardSelectedProps = {
