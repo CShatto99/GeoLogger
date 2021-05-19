@@ -36,19 +36,14 @@ const InputContainer = styled.div`
 `;
 
 const Toggler = styled.div`
+  height: 24px;
   background-color: ${({ theme }) => theme.colors.input};
   display: grid;
   place-items: center;
-  padding: 0 0.5rem;
-  width: 20px;
-  height: 36px;
-  margin-bottom: -3px;
-  border-radius: 0 0.3rem 0.3rem 0;
-  border: 1px solid ${({ theme }) => theme.colors.dark};
-  border-left: none;
   position: absolute;
-  top: 10%;
-  right: 0;
+  right: 1px;
+  padding: 0 0.5rem 0 0.25rem;
+  margin-top: -29px;
 
   & > svg:hover {
     cursor: pointer;

@@ -61,7 +61,7 @@ export const FormContent = styled.form`
   }
 
   & > div:first-child {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     color: ${({ theme }) => theme.colors.black};
   }
 
@@ -75,6 +75,14 @@ export const FormContent = styled.form`
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
     width: 100%;
+
+    & > div:first-child {
+      margin-bottom: 2rem;
+    }
+
+    & > p {
+      margin-top: 2rem;
+    }
   }
 `;
 
