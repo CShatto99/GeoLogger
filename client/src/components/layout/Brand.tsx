@@ -18,10 +18,15 @@ const BrandStyle = styled.div`
   & > a {
     margin-left: 0.5rem;
     font-size: 1.875rem;
-    font-weight: ${({ theme }) => theme.fontWeights.regular};
     color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
     text-decoration: none;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    & > a {
+      font-size: 1.5rem;
+    }
   }
 `;
 

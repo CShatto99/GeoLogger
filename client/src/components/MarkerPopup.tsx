@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store';
 import { setAlert } from '../store/alert';
-import { Marker as MarkerType } from '../store/types';
+import { MarkerType } from '../store/types';
 import getBase64 from '../utils/handleFile';
 //import "../css/markerPopup.css";
 
@@ -66,7 +66,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ index, marker, setMarkers, setMarke
             <button
               type="button"
               onClick={() => {
-                setMarkers((prevMarkers) => prevMarkers.map((m, i) => (i === index ? { ...m, open: !m.open } : m)));
+                // setMarkers((prevMarkers) => prevMarkers.map((m, i) => (i === index ? { ...m, open: !m.open } : m)));
 
                 setMarkersEdited();
               }}

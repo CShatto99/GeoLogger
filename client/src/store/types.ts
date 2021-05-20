@@ -1,10 +1,9 @@
-export type Marker = {
+export type MarkerType = {
   date: string;
   image: string;
   latitude: number;
   longitude: number;
   notes: string;
-  open: boolean;
   title: string;
 };
 
@@ -13,7 +12,7 @@ export type Profile = {
   fillColor: string;
   mapStyle: string;
   visited: string[];
-  markers: Marker[];
+  markers: MarkerType[];
 };
 
 type User = {

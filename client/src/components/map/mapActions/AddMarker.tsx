@@ -1,45 +1,31 @@
-import { FC, useState } from 'react';
-import Modal from 'react-modal';
+import { FC } from 'react';
 import ReactTooltip from 'react-tooltip';
-import { IoCloseSharp } from 'react-icons/io5';
+import { useToasts } from 'react-toast-notifications';
 import { RiRoadMapFill } from 'react-icons/ri';
 
-const modalStyles = {
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
+type MapActionsProps = {
+  markerMode: boolean;
+  setMarkerMode: React.MouseEventHandler<SVGElement>;
 };
 
-Modal.setAppElement('#root');
-
-const AddMarker: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const AddMarker: FC<MapActionsProps> = ({}: MapActionsProps) => {
+  const { addToast } = useToasts();
 
   return (
     <>
-      <RiRoadMapFill data-tip data-for="marker-action" onClick={() => setIsOpen(!isOpen)} />
+      <RiRoadMapFill
+        data-tip
+        data-for="marker-action"
+        onClick={() =>
+          addToast(<div>hello</div>, {
+            appearance: 'info',
+            autoDismiss: true,
+          })
+        }
+      />
       <ReactTooltip id="marker-action" aria-haspopup="true">
         <small>Add a Marker</small>
       </ReactTooltip>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={() => setIsOpen(!isOpen)}
-        contentLabel="Add Marker Modal"
-        shouldCloseOnEsc={false}
-        shouldCloseOnOverlayClick={true}
-        style={modalStyles}
-      >
-        ADD MARKER MODAL
-        <IoCloseSharp onClick={() => setIsOpen(!isOpen)} />
-      </Modal>
     </>
   );
 };

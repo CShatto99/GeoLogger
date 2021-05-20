@@ -27,11 +27,6 @@ const ProfileSchema = new mongoose.Schema({
     type: [
       {
         _id: false,
-        open: {
-          type: Boolean,
-          required: true,
-          default: false,
-        },
         latitude: {
           type: Number,
           required: true,

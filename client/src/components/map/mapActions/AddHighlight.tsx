@@ -62,8 +62,6 @@ const AddHighlight: FC = () => {
     dispatch(updateProfile({ ...profile, ...{ visited } }));
   };
 
-  console.log(visited, profile.visited);
-
   return (
     <>
       <IoMdAddCircle data-tip data-for="add-action" onClick={() => setIsOpen(!isOpen)} />

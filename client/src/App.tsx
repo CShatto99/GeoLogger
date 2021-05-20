@@ -31,8 +31,6 @@ const RenderFooter: FC = () => {
 const App: FC = () => {
   const { siteTheme } = useTheme();
 
-  console.log(siteTheme);
-
   useEffect(() => {
     store.dispatch(refreshUser());
   }, []);

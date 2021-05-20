@@ -7,8 +7,6 @@ export const useTheme = () => {
 
   const { profile } = store.getState().profile;
 
-  console.log(profile.theme);
-
   useEffect(() => {
     if (profile) {
       profile.theme === 'dark' && setSiteTheme(theme.dark);

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { ToastProvider } from 'react-toast-notifications';
 import styled from 'styled-components';
 import AddHighlight from './AddHighlight';
 import AddMarker from './AddMarker';
@@ -47,22 +48,29 @@ const MapAction = styled.div`
   }
 `;
 
-const MapActions: FC = () => {
+type MapActionsProps = {
+  markerMode: boolean;
+  setMarkerMode: React.MouseEventHandler<SVGElement>;
+};
+
+const MapActions: FC<MapActionsProps> = ({ markerMode, setMarkerMode }: MapActionsProps) => {
   return (
-    <MapActionsContainer>
-      <MapAction>
-        <AddHighlight />
-      </MapAction>
-      <MapAction>
-        <AddMarker />
-      </MapAction>
-      <MapAction>
-        <HighlightColor />
-      </MapAction>
-      <MapAction>
-        <MapStyle />
-      </MapAction>
-    </MapActionsContainer>
+    <ToastProvider>
+      <MapActionsContainer>
+        <MapAction>
+          <AddHighlight />
+        </MapAction>
+        <MapAction>
+          <AddMarker markerMode={markerMode} setMarkerMode={setMarkerMode} />
+        </MapAction>
+        <MapAction>
+          <HighlightColor />
+        </MapAction>
+        <MapAction>
+          <MapStyle />
+        </MapAction>
+      </MapActionsContainer>
+    </ToastProvider>
   );
 };
 

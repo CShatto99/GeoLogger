@@ -13,6 +13,8 @@ import useWindowDimensions from '../../hooks/windowDimensions';
 // import { setAlert } from '../store/alert';
 // import { Marker as MarkerType } from '../store/types';
 import MapActions from './mapActions/MapActions';
+import Markers from './Markers';
+import { MarkerType } from '../../store/types';
 
 const MapContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
@@ -23,7 +25,7 @@ const Mapbox: FC = () => {
   // const dispatch = useAppDispatch();
   const { profile, loading } = useAppSelector((state) => state.profile);
   const { width, height } = useWindowDimensions();
-
+  const [sources, setSources] = useState<React.ReactElement[]>([]);
   const [viewport, setViewport] = useState<ViewportProps>({
     width: width,
     height: height,
@@ -38,8 +40,7 @@ const Mapbox: FC = () => {
     maxPitch: 0,
     minPitch: 0,
   });
-
-  const [sources, setSources] = useState<React.ReactElement[]>([]);
+  const [markerMode, setMarkerMode] = useState(false);
   // const [markers, setMarkers] = useState<MarkerType[]>([]);
   // const [markerJustMoved, setMarkerJustMoved] = useState(false);
   // const [markersEdited, setMarkersEdited] = useState(false);
@@ -95,21 +96,6 @@ const Mapbox: FC = () => {
   //   }
   // }, [markers, markersEdited]);
 
-  // const addMarker = ([longitude, latitude]: [number, number]) => {
-  //   const newMarker = {
-  //     longitude,
-  //     latitude,
-  //     open: false,
-  //     title: '',
-  //     date: '',
-  //     notes: '',
-  //     image: '',
-  //   };
-  //   setMarkers((markers) => [...markers, newMarker]);
-  //   setMarkersEdited(true);
-  //   setMarkerMode(false);
-  // };
-
   // const handleMarkerDrag = ([longitude, latitude]: [number, number], index: number) => {
   //   setMarkers((prevMarkers) => prevMarkers.map((m, i) => (index !== i ? m : { ...m, ...{ longitude, latitude } })));
   //   setMarkerJustMoved(true);
@@ -129,7 +115,21 @@ const Mapbox: FC = () => {
   //   return <Redirect to="/create" />;
   // }
 
-  console.log(viewport.zoom);
+  const [markers, setMarkers] = useState<MarkerType[]>([]);
+
+  const addMarker = ([longitude, latitude]: [number, number]) => {
+    const newMarker = {
+      longitude,
+      latitude,
+      title: '',
+      date: '',
+      notes: '',
+      image: '',
+    };
+
+    setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
+    setMarkerMode(false);
+  };
 
   return loading ? (
     <GeoLoggerSpinner />
@@ -140,10 +140,10 @@ const Mapbox: FC = () => {
         mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
         onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        //onClick={({ lngLat }) => markerMode && !modeJustChanged && addMarker(lngLat)}
+        onClick={({ lngLat }) => markerMode && addMarker(lngLat)}
       >
         {sources}
-        <MapActions />
+        <Markers markers={markers} />
         {/* <div className="add-states">
               <Checklist />
               {markerMode && (
@@ -208,6 +208,7 @@ const Mapbox: FC = () => {
                 )}
               </React.Fragment>
             ))} */}
+        <MapActions markerMode={markerMode} setMarkerMode={() => setMarkerMode(!markerMode)} />
       </ReactMapGL>
     </MapContainer>
   );
