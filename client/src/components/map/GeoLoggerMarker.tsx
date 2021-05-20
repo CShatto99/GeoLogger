@@ -1,11 +1,21 @@
 import { FC, useState, useCallback } from 'react';
 import { Marker } from 'react-map-gl';
+import styled from 'styled-components';
 import { FcGlobe } from 'react-icons/fc';
+import { MarkerType } from '../../store/types';
 
-const GeoLoggerMarker: FC = () => {
+const MarkerIcon = styled(FcGlobe)`
+  font-size: 2rem;
+
+  & > path:nth-child(2) {
+    fill: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const GeoLoggerMarker: FC<MarkerType> = ({ latitude, longitude }: MarkerType) => {
   const [marker, setMarker] = useState({
-    latitude: 40,
-    longitude: -100,
+    latitude,
+    longitude,
   });
 
   const onMarkerDragEnd = useCallback((event) => {
@@ -21,7 +31,7 @@ const GeoLoggerMarker: FC = () => {
       offsetLeft={-10}
       onDragEnd={onMarkerDragEnd}
     >
-      <FcGlobe size="2rem" />
+      <MarkerIcon />
     </Marker>
   );
 };

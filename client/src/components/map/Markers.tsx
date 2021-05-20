@@ -12,8 +12,8 @@ const Markers: FC<MarkersProps> = ({ markers }: MarkersProps) => {
 
   return (
     <>
-      {markers.map((_, index) => (
-        <GeoLoggerMarker key={index} />
+      {markers.map((m, index) => (
+        <GeoLoggerMarker {...m} key={index} />
       ))}
     </>
 
