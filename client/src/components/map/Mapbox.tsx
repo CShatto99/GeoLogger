@@ -18,7 +18,6 @@ import { MarkerType } from '../../store/types';
 
 const MapContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
-  height: 100vh;
 `;
 
 const Mapbox: FC = () => {

@@ -64,6 +64,8 @@ const NavbarLink = styled(GeneralLink)`
 
 const NavbarRegister = styled(GeneralLink)`
   background-color: ${({ theme }) => theme.colors.primary};
+  display: grid;
+  place-items: center;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.darkPrimary};

@@ -33,17 +33,19 @@ const AuthInputStyle = styled(GeneralInputStyle)`
 
 const InputContainer = styled.div`
   position: relative;
+
+  & > input {
+    padding-right: 2rem;
+  }
 `;
 
 const Toggler = styled.div`
-  height: 24px;
-  background-color: ${({ theme }) => theme.colors.input};
   display: grid;
   place-items: center;
   position: absolute;
-  right: 1px;
-  padding: 0 0.5rem 0 0.25rem;
-  margin-top: -30px;
+  right: 0;
+  padding: 0 0.5rem 0 0;
+  margin-top: -26px;
 
   & > svg:hover {
     cursor: pointer;
