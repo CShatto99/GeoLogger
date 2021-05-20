@@ -2,16 +2,14 @@ import { FC, useState, useEffect } from 'react';
 // import { Redirect } from 'react-router-dom';
 import ReactMapGL, { Layer, Source, ViewportProps } from 'react-map-gl';
 import styled from 'styled-components';
-import { useAppSelector } from '../../store';
-//import { useAppDispatch, useAppSelector } from '../store/';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { updateMapActionStatus } from '../../store/profile';
 // import ReactTooltip from 'react-tooltip';
 import geoJSON from '../../json/geoJSON.json';
 import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 // import MarkerPopup from './MarkerPopup';
 import useWindowDimensions from '../../hooks/windowDimensions';
-// import { updateProfile } from '../store/profile';
 // import { setAlert } from '../store/alert';
-// import { Marker as MarkerType } from '../store/types';
 import MapActions from './mapActions/MapActions';
 import Markers from './Markers';
 import { MarkerType } from '../../store/types';
@@ -21,8 +19,8 @@ const MapContainer = styled.div`
 `;
 
 const Mapbox: FC = () => {
-  // const dispatch = useAppDispatch();
-  const { profile, loading } = useAppSelector((state) => state.profile);
+  const dispatch = useAppDispatch();
+  const { profile, actionsStatus, loading } = useAppSelector((state) => state.profile);
   const { width, height } = useWindowDimensions();
   const [sources, setSources] = useState<React.ReactElement[]>([]);
   const [viewport, setViewport] = useState<ViewportProps>({
@@ -130,16 +128,23 @@ const Mapbox: FC = () => {
     setMarkerMode(false);
   };
 
+  console.log(actionsStatus);
+
   return loading ? (
     <GeoLoggerSpinner />
   ) : (
     <MapContainer>
+      <MapActions markerMode={markerMode} setMarkerMode={() => setMarkerMode(!markerMode)} />
       <ReactMapGL
+        style={{ zIndex: '0' }}
         {...viewport}
         mapStyle={`mapbox://styles/mapbox/${profile.mapStyle}`}
         onViewportChange={(nextViewport: ViewportProps) => setViewport(nextViewport)}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        onClick={({ lngLat }) => markerMode && addMarker(lngLat)}
+        onClick={({ lngLat }) => {
+          actionsStatus[1] && addMarker(lngLat);
+          dispatch(updateMapActionStatus([false, false, false, false]));
+        }}
       >
         {sources}
         <Markers markers={markers} />
@@ -207,7 +212,6 @@ const Mapbox: FC = () => {
                 )}
               </React.Fragment>
             ))} */}
-        <MapActions markerMode={markerMode} setMarkerMode={() => setMarkerMode(!markerMode)} />
       </ReactMapGL>
     </MapContainer>
   );

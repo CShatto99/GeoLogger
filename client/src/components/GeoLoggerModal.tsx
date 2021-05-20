@@ -16,6 +16,7 @@ const ModalRoot = styled.div`
 
 const ModalContainer = styled.div`
   opacity: 0;
+  z-index: 2;
   transition: all 300ms ease-in-out;
   pointer-events: none;
   position: fixed;

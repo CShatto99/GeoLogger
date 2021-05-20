@@ -27,7 +27,7 @@ type User = {
 };
 
 export interface Actions {
-  profile: (profile?: Profile) => (dispatch: React.Dispatch<unknown>) => void;
+  profile: (profile?: Profile | [boolean, boolean, boolean, boolean]) => (dispatch: React.Dispatch<unknown>) => void;
   auth: (user?: User) => (dispatch: React.Dispatch<unknown>) => void;
   alert: (msg?: string, key?: string, status?: number) => (dispatch: React.Dispatch<unknown>) => void;
 }

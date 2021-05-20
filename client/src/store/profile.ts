@@ -13,6 +13,7 @@ const profile = createSlice({
       visited: [],
       markers: [],
     },
+    actionsStatus: [false, false, false, false],
     loading: true,
   },
   reducers: {
@@ -33,7 +34,15 @@ const profile = createSlice({
           visited: [],
           markers: [],
         },
+        actionsStatus: [false, false, false, false],
         loading: true,
+      };
+    },
+    update_actions: (state, action) => {
+      return {
+        ...state,
+        actionsStatus: action.payload,
+        loading: false,
       };
     },
   },
@@ -41,7 +50,7 @@ const profile = createSlice({
 
 export default profile.reducer;
 
-const { load_profile, clear_profile } = profile.actions;
+const { load_profile, clear_profile, update_actions } = profile.actions;
 
 export const loadProfile: Actions['profile'] = () => async (dispatch) => {
   try {
@@ -70,4 +79,8 @@ export const updateProfile: Actions['profile'] = (profile) => async (dispatch) =
 
 export const clearProfile: Actions['profile'] = () => (dispatch) => {
   dispatch(clear_profile());
+};
+
+export const updateMapActionStatus: Actions['profile'] = (newActionsStatus) => (dispatch) => {
+  dispatch(update_actions(newActionsStatus));
 };

@@ -50,6 +50,10 @@ const NavbarLinks = styled.ul`
     padding: 5.5rem 1rem 1rem 1rem;
     background-color: ${({ theme }) => theme.colors.black};
     z-index: -1;
+
+    & > a:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
   }
 `;
 
@@ -58,7 +62,7 @@ const NavbarLink = styled(GeneralLink)`
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     margin: 0;
-    padding: 1rem 0;
+    padding: 0.75rem 0;
   }
 `;
 
@@ -69,6 +73,11 @@ const NavbarRegister = styled(GeneralLink)`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.darkPrimary};
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 0.75rem 0;
+    margin: 0;
   }
 `;
 

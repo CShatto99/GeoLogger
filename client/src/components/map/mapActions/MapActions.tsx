@@ -19,6 +19,7 @@ const MapActionsContainer = styled.div`
   border-radius: 999px;
   display: flex;
   justify-content: center;
+  z-index: 1;
 
   & > div:not(:last-child) {
     margin-right: 1.5rem;
@@ -55,7 +56,7 @@ type MapActionsProps = {
 
 const MapActions: FC<MapActionsProps> = ({ markerMode, setMarkerMode }: MapActionsProps) => {
   return (
-    <ToastProvider>
+    <ToastProvider placement="top-left">
       <MapActionsContainer>
         <MapAction>
           <AddHighlight />

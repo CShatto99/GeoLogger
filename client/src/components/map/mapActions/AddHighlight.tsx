@@ -4,7 +4,7 @@ import { IoMdAddCircle } from 'react-icons/io';
 import { BsCheck } from 'react-icons/bs';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
-import { updateProfile } from '../../../store/profile';
+import { updateProfile, updateMapActionStatus } from '../../../store/profile';
 import GeoLoggerModal from '../../GeoLoggerModal';
 import CardLabel from '../../styles/CardLabel';
 import usa from '../../../json/US.json';
@@ -36,8 +36,7 @@ const ApplyButton = styled.div`
 
 const AddHighlight: FC = () => {
   const dispatch = useAppDispatch();
-  const { profile, loading } = useAppSelector((state) => state.profile);
-  const [isOpen, setIsOpen] = useState(false);
+  const { profile, actionsStatus, loading } = useAppSelector((state) => state.profile);
   const [visited, setVisited] = useState<string[]>([]);
 
   useEffect(() => {
@@ -64,14 +63,18 @@ const AddHighlight: FC = () => {
 
   return (
     <>
-      <IoMdAddCircle data-tip data-for="add-action" onClick={() => setIsOpen(!isOpen)} />
+      <IoMdAddCircle
+        data-tip
+        data-for="add-action"
+        onClick={() => dispatch(updateMapActionStatus([true, false, false, false]))}
+      />
       <ReactTooltip id="add-action" aria-haspopup="true">
         <small>Add a Highlight</small>
       </ReactTooltip>
       <GeoLoggerModal
         title="Add Highlights"
-        isOpen={isOpen}
-        onClose={() => setIsOpen(!isOpen)}
+        isOpen={actionsStatus[0]}
+        onClose={() => dispatch(updateMapActionStatus([false, false, false, false]))}
         toggler={
           !loading &&
           !arrayEquals(visited, profile.visited) && (
@@ -82,15 +85,6 @@ const AddHighlight: FC = () => {
         }
       >
         {usa.map((region: { name: string; 'alpha-2': string }) => (
-          // <ChecklistItem
-          //   key={region.name}
-          //   id={region.name}
-          //   // onClick={() => handleClick(region.name)}
-          //   color="light"
-          // >
-          //   {region.name}
-          //   {/* {state.visited.includes(region.name) && <span className="float-right text-success">VISITED</span>} */}
-          // </ChecklistItem>
           <Checklist key={region.name}>
             <CardLabel
               active={visited.includes(region.name)}
