@@ -43,7 +43,7 @@ const Toggler = styled.div`
   position: absolute;
   right: 1px;
   padding: 0 0.5rem 0 0.25rem;
-  margin-top: -29px;
+  margin-top: -30px;
 
   & > svg:hover {
     cursor: pointer;

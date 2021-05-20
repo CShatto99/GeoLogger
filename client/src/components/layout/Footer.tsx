@@ -130,8 +130,8 @@ const Footer: FC = () => {
         <div>
           <h3>About</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Morbi tristique senectus et netus et malesuada fames.
+            GeoLogger is a tool used for tracking countries you&apos;ve visited, creating map markers detailing your
+            vacations, sharing your vacation history with others, and much more.
           </p>
         </div>
         <SiteLinks>

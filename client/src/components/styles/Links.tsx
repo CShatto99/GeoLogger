@@ -5,12 +5,11 @@ const GeneralLink = styled(Link)`
   color: #edf2f7;
   border-radius: 0.3rem;
   margin-left: 0.5rem;
-  padding: 0.25rem 1rem;
+  padding: 0.1rem 1rem;
   cursor: pointer;
   transition: ease-out 100ms;
   text-decoration: none;
   text-align: center;
-  font-size: 16px !important;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.4);

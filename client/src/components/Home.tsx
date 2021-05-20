@@ -9,16 +9,7 @@ import satelliteV9 from '../img/satellite-v9.png';
 import vacaEx from '../img/vaca-ex.png';
 import GeneralLink from './styles/Links';
 
-const HomePage = styled.div`
-  & img {
-    transition: ease-out 100ms;
-  }
-
-  & img:hover {
-    transform: scale(1.01);
-    transition: ease-in 100ms;
-  }
-`;
+const HomePage = styled.div``;
 
 const LandingSection = styled.div`
   background-image: url(${satelliteV9});
@@ -35,16 +26,36 @@ const LandingContent = styled.div`
   color: ${({ theme }) => theme.colors.white};
 
   & > h1 {
-    margin-bottom: 0;
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
+    font-size: 4rem;
   }
 
   & > p {
-    font-weight: ${({ theme }) => theme.fontWeights.light};
-    margin: 0.5rem 0 2rem 0;
+    margin: 2rem 0 3rem 0;
+    font-size: 1.5rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.md} {
+    & > h1 {
+      font-size: 3rem;
+    }
+
+    & > p {
+      font-size: 1.25rem;
+    }
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     padding: 1rem;
+
+    & > h1 {
+      font-size: 2rem;
+    }
+
+    & > p {
+      margin: 1rem 0 2rem 0;
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -192,10 +203,10 @@ const Home: FC = () => {
     <HomePage>
       <LandingSection>
         <LandingContent>
-          <h1>Welcome To GeoLogger</h1>
+          <h1>Log your vacation history with GeoLogger</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Morbi tristique senectus et netus et malesuada fames.
+            Keep track of countries you&apos;ve visited, create meaningful markers detailing your vacations, share your
+            vacation history with others, and much more on GeoLogger.
           </p>
           <LandingLink to="/register">Start Logging</LandingLink>
         </LandingContent>

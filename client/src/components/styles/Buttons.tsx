@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const PrimaryButtonStyle = styled.button`
   color: #edf2f7;
   border-radius: 0.3rem;
-  padding: 0.25rem 1rem;
+  padding: 0.1rem 1rem;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
