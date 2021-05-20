@@ -15,6 +15,7 @@ const MapTypeContainer = styled.div`
 `;
 
 const MapTypeContent = styled.div`
+  position: relative;
   cursor: pointer;
   width: 100%;
   transition: all ease-out 100ms;
@@ -39,17 +40,13 @@ const MapTypeContent = styled.div`
 `;
 
 const ViewEx = styled.a`
-  position: relative;
+  position: absolute;
   z-index: 2;
   background-color: ${({ theme }) => theme.colors.white};
-  margin-top: -26px;
   padding: 0.2rem;
-  width: 16px;
-  float: right;
+  right: 0;
+  bottom: 3px;
   border-bottom-right-radius: 0.3rem;
-
-  @media ${({ theme }) => theme.mediaQueries.sm} {
-  }
 `;
 
 type MapTypeProps = {

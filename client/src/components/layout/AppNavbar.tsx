@@ -54,8 +54,11 @@ const NavbarLinks = styled.ul`
 `;
 
 const NavbarLink = styled(GeneralLink)`
+  padding: 0.25rem 1rem;
+
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    margin: 0 0 0.5rem 0;
+    margin: 0;
+    padding: 1rem 0;
   }
 `;
 
@@ -101,9 +104,10 @@ const DropdownContent = styled.div`
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
     0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   min-width: 140px;
-  margin: 1.5rem 0 0 6.5rem;
-  border-radius: 4px;
+  border-radius: 0.3rem;
   transition: ease-out 100ms;
+  right: 1.5rem;
+  top: 3.1rem;
 
   & > a {
     color: ${({ theme }) => theme.colors.black};
@@ -126,6 +130,10 @@ const DropdownContent = styled.div`
     margin-left: 0.5rem;
   }
 
+  & > a:first-child:hover {
+    border-radius: 0.3rem 0.3rem 0 0;
+  }
+
   & > a:first-child > svg {
     font-size: 14px;
     margin-right: 0.1rem;
@@ -136,13 +144,16 @@ const DropdownContent = styled.div`
     color: ${({ theme }) => theme.colors.danger};
   }
 
+  & > a:last-child:hover {
+    border-radius: 0 0 0.3rem 0.3rem;
+  }
+
   & > a:last-child > svg {
     margin: 0.05rem -0.1rem 0 0.1rem;
   }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    position: absolute;
-    margin: 5.5rem 0 0 0;
+    margin: 11rem 0 0 0;
     right: 4.5rem;
     left: 4.5rem;
   }

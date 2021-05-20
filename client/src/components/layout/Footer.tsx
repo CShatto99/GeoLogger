@@ -147,7 +147,7 @@ const Footer: FC = () => {
           </div>
           <div>
             <label>Message</label>
-            <GeneralInput type="textarea" onChange={(e) => setMessage(e.target.value)} value={message} />
+            <GeneralInput type="text" onChange={(e) => setMessage(e.target.value)} value={message} />
           </div>
           {ERR_contact && <Alert type="error" msg={ERR_contact} />}
           {SUCC_contact && <Alert type="success" msg={SUCC_contact} />}
