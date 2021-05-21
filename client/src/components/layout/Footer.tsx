@@ -52,7 +52,7 @@ const FooterContent = styled.div`
 
 const FooterLink = styled(GeneralLink)`
   color: ${({ theme }) => theme.colors.black};
-  margin: 0;
+  margin: 0 0 0.5rem 0;
   width: 60px;
 
   &:hover {
