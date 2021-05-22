@@ -8,8 +8,6 @@ type MarkersProps = {
 };
 
 const Markers: FC<MarkersProps> = ({ markers }: MarkersProps) => {
-  console.log(markers);
-
   return (
     <>
       {markers.map((m, index) => (

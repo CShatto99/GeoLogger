@@ -20,7 +20,6 @@ const AddMarker: FC<MapActionsProps> = ({}: MapActionsProps) => {
   const { addToast, removeToast } = useToasts();
 
   useEffect(() => {
-    console.log('markers changed');
     !actionsStatus[1] && removeToast('add-marker');
   }, [markers, actionsStatus]);
 
@@ -32,8 +31,6 @@ const AddMarker: FC<MapActionsProps> = ({}: MapActionsProps) => {
       autoDismiss: actionsStatus[1],
     });
   };
-
-  console.log(actionsStatus);
 
   return (
     <>

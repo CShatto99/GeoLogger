@@ -128,8 +128,6 @@ const Mapbox: FC = () => {
     setMarkerMode(false);
   };
 
-  console.log(actionsStatus);
-
   return loading ? (
     <GeoLoggerSpinner />
   ) : (

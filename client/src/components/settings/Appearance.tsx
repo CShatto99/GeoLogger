@@ -64,9 +64,7 @@ const MapContent = styled.div`
   margin-bottom: 2.5rem;
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
   }
 `;
 
