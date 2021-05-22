@@ -1,13 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
-
 const User = require("../models/User");
 const Profile = require("../models/Profile");
 const authToken = require("../middleware/authToken");
 const genAccessToken = require("../utils/genAccessToken");
 const genRefreshToken = require("../utils/genRefreshToken");
 const validator = require("../utils/validator");
+const isEmail = require("../utils/isEmail");
 
 // @route GET /api/user
 // @desc Load a user
@@ -55,15 +55,21 @@ router.put("/", authToken, async (req, res) => {
 // @desc Login a user
 // @access Public
 router.post("/", async (req, res) => {
-  const { email, password } = req.body;
+  const { identifier, password } = req.body;
 
   try {
-    if (!email) return res.status(400).json({ msg: "An email is required" });
-
-    if (!password)
+    if (!identifier)
+      return res.status(400).json({ msg: "A username or email is required" });
+    else if (!password)
       return res.status(400).json({ msg: "A password is required" });
 
-    const user = await User.findOne({ email }).select("_id password");
+    isEmail(identifier)
+      ? console.log("logging in with email")
+      : console.log("logging in with username");
+
+    const user = isEmail(identifier)
+      ? await User.findOne({ email: identifier }).select("_id password")
+      : await User.findOne({ username: identifier }).select("_id password");
 
     if (!user)
       return res.status(400).json({ msg: "Incorrect login information" });

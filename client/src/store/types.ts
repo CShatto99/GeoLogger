@@ -24,6 +24,7 @@ type User = {
   confirmPass?: string;
   profileSetUp?: boolean;
   deletePass?: string;
+  identifier?: string;
 };
 
 export interface Actions {

@@ -22,7 +22,7 @@ const Login: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isAuth } = useAppSelector((state) => state.auth);
   const { ERR_login } = useAppSelector((state) => state.alert);
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -30,7 +30,7 @@ const Login: FC = () => {
 
     dispatch(
       login({
-        email,
+        identifier,
         password,
       }),
     );
@@ -48,8 +48,8 @@ const Login: FC = () => {
           <h2>Log in to your account</h2>
           {ERR_login && <Alert type="error" msg={ERR_login} />}
           <div>
-            <label>Email</label>
-            <AuthInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <label>Username or email</label>
+            <AuthInput type="text" value={identifier} onChange={(e) => setIdentifier(e.target.value)} />
           </div>
           <div className="forgot-pass">
             <label>Password</label>
@@ -57,7 +57,7 @@ const Login: FC = () => {
             <DefaultLink to="/forgot-password">Forgot Password?</DefaultLink>
           </div>
           <div>
-            <Button disabled={!email || !password}>Login</Button>
+            <Button disabled={!identifier || !password}>Login</Button>
             <DangerLink to="/">Cancel</DangerLink>
           </div>
           <p>
