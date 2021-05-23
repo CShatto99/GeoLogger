@@ -49,12 +49,7 @@ const MapAction = styled.div`
   }
 `;
 
-type MapActionsProps = {
-  markerMode: boolean;
-  setMarkerMode: React.MouseEventHandler<SVGElement>;
-};
-
-const MapActions: FC<MapActionsProps> = ({ markerMode, setMarkerMode }: MapActionsProps) => {
+const MapActions: FC = () => {
   return (
     <ToastProvider placement="top-left">
       <MapActionsContainer>
@@ -62,7 +57,7 @@ const MapActions: FC<MapActionsProps> = ({ markerMode, setMarkerMode }: MapActio
           <AddHighlight />
         </MapAction>
         <MapAction>
-          <AddMarker markerMode={markerMode} setMarkerMode={setMarkerMode} />
+          <AddMarker />
         </MapAction>
         <MapAction>
           <HighlightColor />

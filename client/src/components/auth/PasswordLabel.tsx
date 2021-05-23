@@ -26,7 +26,7 @@ const PasswordLabel: FC = () => {
     <PasswordLabelStyle>
       <label>Password</label>
       <IoInformationCircle data-tip data-for="pass-info" />
-      <ReactTooltip id="pass-info" aria-haspopup="true">
+      <ReactTooltip id="pass-info" effect="solid" aria-haspopup="true">
         <small>
           Your password must contain at least 8 characters, 1 number, 1 lowercase letter, 1 uppercase letter, and 1
           special character.

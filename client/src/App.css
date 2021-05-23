@@ -171,6 +171,10 @@ h3 {
   display: none;
 }
 
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
 .react-toast-notifications__container {
   margin-top: 4.5rem;
 }

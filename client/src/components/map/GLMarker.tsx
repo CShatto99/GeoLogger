@@ -12,10 +12,14 @@ const MarkerIcon = styled(FcGlobe)`
   }
 `;
 
-const GeoLoggerMarker: FC<MarkerType> = ({ latitude, longitude }: MarkerType) => {
+type GLMarkerProps = {
+  onClick: React.Dispatch<React.SetStateAction<MarkerType | null>>;
+} & MarkerType;
+
+const GLMarker: FC<GLMarkerProps> = ({ onClick, ...rest }: GLMarkerProps) => {
   const [marker, setMarker] = useState({
-    latitude,
-    longitude,
+    latitude: rest.latitude,
+    longitude: rest.longitude,
   });
 
   const onMarkerDragEnd = useCallback((event) => {
@@ -31,9 +35,9 @@ const GeoLoggerMarker: FC<MarkerType> = ({ latitude, longitude }: MarkerType) =>
       offsetLeft={-10}
       onDragEnd={onMarkerDragEnd}
     >
-      <MarkerIcon />
+      <MarkerIcon onClick={() => onClick(rest)} />
     </Marker>
   );
 };
 
-export default GeoLoggerMarker;
+export default GLMarker;

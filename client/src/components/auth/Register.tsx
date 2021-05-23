@@ -131,19 +131,19 @@ const Register: FC = () => {
           {ERR_register && <Alert type="error" msg={ERR_register} />}
           <div>
             <label>Username</label>
-            <AuthInput type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <AuthInput type="text" value={username} maxLength={15} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div>
             <label>Email</label>
-            <AuthInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <AuthInput type="email" value={email} maxLength={100} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <PasswordLabel />
-            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
+            <PasswordInput value={password} maxLength={100} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div>
             <label>Verify Password</label>
-            <PasswordInput value={confirmPass} onChange={(e) => setconfirmPass(e.target.value)} />
+            <PasswordInput value={confirmPass} maxLength={100} onChange={(e) => setconfirmPass(e.target.value)} />
           </div>
           <div>
             <Button disabled={!username || !email || !password || !confirmPass}>Register</Button>

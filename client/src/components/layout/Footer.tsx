@@ -143,11 +143,11 @@ const Footer: FC = () => {
           <h3>Contact</h3>
           <div>
             <label>Email</label>
-            <GeneralInput type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
+            <GeneralInput type="email" maxLength={100} onChange={(e) => setEmail(e.target.value)} value={email} />
           </div>
           <div>
             <label>Message</label>
-            <GeneralInput type="text" onChange={(e) => setMessage(e.target.value)} value={message} />
+            <GeneralInput type="text" maxLength={280} onChange={(e) => setMessage(e.target.value)} value={message} />
           </div>
           {ERR_contact && <Alert type="error" msg={ERR_contact} />}
           {SUCC_contact && <Alert type="success" msg={SUCC_contact} />}

@@ -1,18 +1,16 @@
 import { FC, useState, useEffect } from 'react';
-// import { Redirect } from 'react-router-dom';
-import ReactMapGL, { Layer, Source, ViewportProps } from 'react-map-gl';
+import ReactMapGL, { Layer, Popup, Source, ViewportProps } from 'react-map-gl';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { updateMapActionStatus } from '../../store/profile';
-// import ReactTooltip from 'react-tooltip';
+import { updateMapActionStatus, updateProfile } from '../../store/profile';
 import geoJSON from '../../json/geoJSON.json';
 import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
-// import MarkerPopup from './MarkerPopup';
 import useWindowDimensions from '../../hooks/windowDimensions';
-// import { setAlert } from '../store/alert';
 import MapActions from './mapActions/MapActions';
 import Markers from './Markers';
+// import MarkerPopup from './MarkerPopup';
 import { MarkerType } from '../../store/types';
+import MarkerPopup from './MarkerPopup';
 
 const MapContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
@@ -22,6 +20,7 @@ const Mapbox: FC = () => {
   const dispatch = useAppDispatch();
   const { profile, actionsStatus, loading } = useAppSelector((state) => state.profile);
   const { width, height } = useWindowDimensions();
+  const [popupInfo, setPopupInfo] = useState<MarkerType | null>(null);
   const [sources, setSources] = useState<React.ReactElement[]>([]);
   const [viewport, setViewport] = useState<ViewportProps>({
     width: width,
@@ -37,85 +36,48 @@ const Mapbox: FC = () => {
     maxPitch: 0,
     minPitch: 0,
   });
-  const [markerMode, setMarkerMode] = useState(false);
-  // const [markers, setMarkers] = useState<MarkerType[]>([]);
-  // const [markerJustMoved, setMarkerJustMoved] = useState(false);
-  // const [markersEdited, setMarkersEdited] = useState(false);
-  // const [markerMode, setMarkerMode] = useState(false);
-  // const [modeJustChanged, setModeJustChanged] = useState(false);
 
   const geoJSONRegions: React.ReactElement[] = [];
 
   useEffect(() => {
-    if (!loading && JSON.stringify(profile) !== '{}') {
-      profile.visited.map((region: string) => {
-        const regionFound = geoJSON.regions.find(({ source }) => source === region);
+    profile.visited.map((region: string) => {
+      const regionFound = geoJSON.regions.find(({ source }) => source === region);
 
-        if (regionFound) {
-          geoJSONRegions.push(
-            <Source
-              key={regionFound.source}
+      if (regionFound) {
+        geoJSONRegions.push(
+          <Source
+            key={regionFound.source}
+            id={regionFound.source}
+            type="geojson"
+            data={{
+              type: 'FeatureCollection',
+              features: [
+                {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: { type: 'Polygon', coordinates: regionFound.coordinates },
+                },
+              ],
+            }}
+          >
+            <Layer
               id={regionFound.source}
-              type="geojson"
-              data={{
-                type: 'FeatureCollection',
-                features: [
-                  {
-                    type: 'Feature',
-                    properties: {},
-                    geometry: { type: 'Polygon', coordinates: regionFound.coordinates },
-                  },
-                ],
+              type="fill"
+              paint={{
+                'fill-color': profile.fillColor,
+                'fill-opacity': 0.5,
               }}
-            >
-              <Layer
-                id={regionFound.source}
-                type="fill"
-                paint={{
-                  'fill-color': profile.fillColor,
-                  'fill-opacity': 0.5,
-                }}
-              />
-            </Source>,
-          );
-        }
-      });
-      setSources(geoJSONRegions);
-      //setMarkers(profile.markers);
-    }
+            />
+          </Source>,
+        );
+      }
+    });
+    setSources(geoJSONRegions);
   }, [profile]);
-
-  // useEffect(() => {
-  //   if (markersEdited) {
-  //     dispatch(updateProfile({ ...profile, markers }));
-  //     dispatch(setAlert('Saved!', 200));
-  //     setMarkersEdited(false);
-  //   }
-  // }, [markers, markersEdited]);
-
-  // const handleMarkerDrag = ([longitude, latitude]: [number, number], index: number) => {
-  //   setMarkers((prevMarkers) => prevMarkers.map((m, i) => (index !== i ? m : { ...m, ...{ longitude, latitude } })));
-  //   setMarkerJustMoved(true);
-  //   setTimeout(() => setMarkerJustMoved(false), 100);
-  //   setMarkersEdited(true);
-  // };
-
-  // const handleMarkerClick = (index: number) => {
-  //   if (!markerJustMoved) {
-  //     setMarkers((prevMarkers) => prevMarkers.map((m, i) => (index === i ? { ...m, open: !m.open } : m)));
-
-  //     setMarkersEdited(true);
-  //   }
-  // };
-
-  // if (isAuth && JSON.stringify(profile) === '{}') {
-  //   return <Redirect to="/create" />;
-  // }
-
-  const [markers, setMarkers] = useState<MarkerType[]>([]);
 
   const addMarker = ([longitude, latitude]: [number, number]) => {
     const newMarker = {
+      id: '',
       longitude,
       latitude,
       title: '',
@@ -124,15 +86,16 @@ const Mapbox: FC = () => {
       image: '',
     };
 
-    setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
-    setMarkerMode(false);
+    dispatch(updateProfile({ ...profile, ...{ markers: [...profile.markers, newMarker] } }));
   };
+
+  console.log(profile.markers);
 
   return loading ? (
     <GeoLoggerSpinner />
   ) : (
     <MapContainer>
-      <MapActions markerMode={markerMode} setMarkerMode={() => setMarkerMode(!markerMode)} />
+      <MapActions />
       <ReactMapGL
         style={{ zIndex: '0' }}
         {...viewport}
@@ -145,7 +108,18 @@ const Mapbox: FC = () => {
         }}
       >
         {sources}
-        <Markers markers={markers} />
+        <Markers markers={profile.markers} onClick={setPopupInfo} />
+        {popupInfo && (
+          <Popup
+            anchor="top"
+            longitude={popupInfo.longitude}
+            latitude={popupInfo.latitude}
+            closeOnClick={false}
+            onClose={() => setPopupInfo(null)}
+          >
+            <MarkerPopup marker={popupInfo} onClick={setPopupInfo} />
+          </Popup>
+        )}
         {/* <div className="add-states">
               <Checklist />
               {markerMode && (

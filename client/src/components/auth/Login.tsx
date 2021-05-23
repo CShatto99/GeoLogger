@@ -49,11 +49,11 @@ const Login: FC = () => {
           {ERR_login && <Alert type="error" msg={ERR_login} />}
           <div>
             <label>Username or email</label>
-            <AuthInput type="text" value={identifier} onChange={(e) => setIdentifier(e.target.value)} />
+            <AuthInput type="text" value={identifier} maxLength={100} onChange={(e) => setIdentifier(e.target.value)} />
           </div>
           <div className="forgot-pass">
             <label>Password</label>
-            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
+            <PasswordInput value={password} maxLength={100} onChange={(e) => setPassword(e.target.value)} />
             <DefaultLink to="/forgot-password">Forgot Password?</DefaultLink>
           </div>
           <div>

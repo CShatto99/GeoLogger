@@ -5,8 +5,9 @@ import { BsCheck } from 'react-icons/bs';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateProfile, updateMapActionStatus } from '../../../store/profile';
-import GeoLoggerModal from '../../GeoLoggerModal';
+import GeoLoggerModal from '../../GLModal';
 import CardLabel from '../../styles/CardLabel';
+import { ApplyButton } from '../../styles/Buttons';
 import usa from '../../../json/US.json';
 
 const Checklist = styled.div`
@@ -20,19 +21,19 @@ const Checklist = styled.div`
   }
 `;
 
-const ApplyButton = styled.div`
-  & > svg {
-    stroke: ${({ theme }) => theme.colors.success};
-    stroke-width: 2px;
-    cursor: pointer;
-    transition: all 100ms ease-out;
-  }
+// const ApplyButton = styled.div`
+//   & > svg {
+//     stroke: ${({ theme }) => theme.colors.success};
+//     stroke-width: 2px;
+//     cursor: pointer;
+//     transition: all 100ms ease-out;
+//   }
 
-  & > svg:hover {
-    transform: scale(1.4);
-    transition: all 100ms ease-in;
-  }
-`;
+//   & > svg:hover {
+//     transform: scale(1.4);
+//     transition: all 100ms ease-in;
+//   }
+// `;
 
 const AddHighlight: FC = () => {
   const dispatch = useAppDispatch();
@@ -68,7 +69,7 @@ const AddHighlight: FC = () => {
         data-for="add-action"
         onClick={() => dispatch(updateMapActionStatus([true, false, false, false]))}
       />
-      <ReactTooltip id="add-action" aria-haspopup="true">
+      <ReactTooltip id="add-action" effect="solid" aria-haspopup="true">
         <small>Add a Highlight</small>
       </ReactTooltip>
       <GeoLoggerModal

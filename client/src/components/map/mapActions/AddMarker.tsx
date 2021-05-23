@@ -4,14 +4,8 @@ import { useToasts } from 'react-toast-notifications';
 import { RiRoadMapFill } from 'react-icons/ri';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateMapActionStatus } from '../../../store/profile';
-// import isActionActive from '../../../utils/isActionActive';
 
-type MapActionsProps = {
-  markerMode: boolean;
-  setMarkerMode: React.MouseEventHandler<SVGElement>;
-};
-
-const AddMarker: FC<MapActionsProps> = ({}: MapActionsProps) => {
+const AddMarker: FC = () => {
   const dispatch = useAppDispatch();
   const {
     profile: { markers },
@@ -35,7 +29,7 @@ const AddMarker: FC<MapActionsProps> = ({}: MapActionsProps) => {
   return (
     <>
       <RiRoadMapFill data-tip data-for="marker-action" onClick={() => showToast()} />
-      <ReactTooltip id="marker-action" aria-haspopup="true">
+      <ReactTooltip id="marker-action" effect="solid" aria-haspopup="true">
         <small>Add a Marker</small>
       </ReactTooltip>
     </>

@@ -152,6 +152,7 @@ router.post("/register", async (req, res) => {
 
     res.json({ accessToken });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ msg: "Error registering user" });
   }
 });

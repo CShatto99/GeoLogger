@@ -223,6 +223,7 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
           <AuthInput
             type="text"
             value={fillColor.slice(1, fillColor.length)}
+            maxLength={280}
             onChange={(e) => setFillColor('#' + e.target.value)}
           />
         </HexInput>

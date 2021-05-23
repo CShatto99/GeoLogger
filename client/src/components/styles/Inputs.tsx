@@ -27,6 +27,31 @@ export const GeneralInputStyle = styled.input`
   }
 `;
 
+export const TextareaStyle = styled.textarea`
+  width: 100%;
+  color: ${({ theme }) => theme.colors.black};
+  transition: ease-out 100ms;
+  background-color: ${({ theme }) => theme.colors.input};
+  border: none;
+  border: 1px solid ${({ theme }) => theme.colors.dark};
+  -webkit-border-radius: 0px;
+  border-radius: 0.3rem;
+  box-sizing: border-box;
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+
+  &:focus {
+    transition: ease-in 100ms;
+    outline: none;
+    box-shadow: 0 0 4px ${({ theme }) => theme.colors.primary};
+    -webkit-box-shadow: 0 0 4px ${({ theme }) => theme.colors.primary};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.dark};
+  }
+`;
+
 const AuthInputStyle = styled(GeneralInputStyle)`
   padding: 0.5rem 0.25rem;
 `;
@@ -57,21 +82,23 @@ const Toggler = styled.div`
 `;
 
 type InputProps = {
-  type?: string | undefined;
-  value?: string | number | readonly string[] | undefined;
-  placeholder?: string | undefined;
-  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  type?: string;
+  value?: string | number | readonly string[];
+  placeholder?: string;
+  maxLength?: number;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onTextareaChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
 };
 
-const GeneralInput: FC<InputProps> = ({ type, value, placeholder, onChange }: InputProps) => (
-  <GeneralInputStyle type={type} value={value} placeholder={placeholder} onChange={onChange} />
+const GeneralInput: FC<InputProps> = ({ type, value, placeholder, maxLength, onChange }: InputProps) => (
+  <GeneralInputStyle type={type} value={value} placeholder={placeholder} onChange={onChange} maxLength={maxLength} />
 );
 
-export const AuthInput: FC<InputProps> = ({ type, value, placeholder, onChange }: InputProps) => (
-  <AuthInputStyle type={type} value={value} placeholder={placeholder} onChange={onChange} />
+export const AuthInput: FC<InputProps> = ({ type, value, placeholder, maxLength, onChange }: InputProps) => (
+  <AuthInputStyle type={type} value={value} placeholder={placeholder} onChange={onChange} maxLength={maxLength} />
 );
 
-export const PasswordInput: FC<InputProps> = ({ value, placeholder, onChange }: InputProps) => {
+export const PasswordInput: FC<InputProps> = ({ value, placeholder, maxLength, onChange }: InputProps) => {
   const [passVisible, setPassVisible] = useState(false);
 
   return (
@@ -81,6 +108,7 @@ export const PasswordInput: FC<InputProps> = ({ value, placeholder, onChange }: 
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        maxLength={maxLength}
       />
       <Toggler onClick={() => setPassVisible(!passVisible)}>
         {value && (passVisible ? <IoMdEye /> : <IoMdEyeOff />)}
@@ -88,5 +116,14 @@ export const PasswordInput: FC<InputProps> = ({ value, placeholder, onChange }: 
     </InputContainer>
   );
 };
+
+export const Textarea: FC<InputProps> = ({ value, placeholder, maxLength, onTextareaChange }: InputProps) => (
+  <TextareaStyle
+    value={value}
+    placeholder={placeholder}
+    onChange={onTextareaChange}
+    maxLength={maxLength}
+  ></TextareaStyle>
+);
 
 export default GeneralInput;

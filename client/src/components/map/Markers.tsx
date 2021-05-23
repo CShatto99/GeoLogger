@@ -1,17 +1,17 @@
-import React, { FC } from 'react';
+import { FC, memo } from 'react';
 import { MarkerType } from '../../store/types';
-import GeoLoggerMarker from './GeoLoggerMarker';
+import GLMarker from './GLMarker';
 
 type MarkersProps = {
   markers: MarkerType[];
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: React.Dispatch<React.SetStateAction<MarkerType | null>>;
 };
 
-const Markers: FC<MarkersProps> = ({ markers }: MarkersProps) => {
+const Markers: FC<MarkersProps> = ({ markers, onClick }: MarkersProps) => {
   return (
     <>
       {markers.map((m, index) => (
-        <GeoLoggerMarker {...m} key={index} />
+        <GLMarker {...m} key={index} onClick={onClick} />
       ))}
     </>
 
@@ -61,4 +61,4 @@ const Markers: FC<MarkersProps> = ({ markers }: MarkersProps) => {
   );
 };
 
-export default React.memo(Markers);
+export default memo(Markers);

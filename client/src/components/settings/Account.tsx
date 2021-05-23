@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { changePassword, deleteUser } from '../../store/auth';
-import GeoLoggerModal from '../GeoLoggerModal';
+import GeoLoggerModal from '../GLModal';
 import PasswordLabel from '../auth/PasswordLabel';
 import { PasswordInput } from '../styles/Inputs';
 import Button, { DangerButton } from '../styles/Buttons';
@@ -84,15 +84,15 @@ const Account: FC = () => {
         <form onSubmit={onSubmit}>
           <FormGroup>
             <label>Old password</label>
-            <PasswordInput value={oldPass} onChange={(e) => setOldPass(e.target.value)} />
+            <PasswordInput value={oldPass} maxLength={100} onChange={(e) => setOldPass(e.target.value)} />
           </FormGroup>
           <FormGroup>
             <PasswordLabel />
-            <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
+            <PasswordInput value={password} maxLength={100} onChange={(e) => setPassword(e.target.value)} />
           </FormGroup>
           <FormGroup>
             <label>Confirm password</label>
-            <PasswordInput value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
+            <PasswordInput value={confirmPass} maxLength={100} onChange={(e) => setConfirmPass(e.target.value)} />
           </FormGroup>
           <Button disabled={!oldPass || !password || !confirmPass} onClick={onSubmit}>
             Change Password
@@ -117,7 +117,7 @@ const Account: FC = () => {
             </p>
             <ModalFormGroup>
               <label>Enter your password:</label>
-              <PasswordInput value={deletePass} onChange={(e) => setDeletePass(e.target.value)} />
+              <PasswordInput value={deletePass} maxLength={100} onChange={(e) => setDeletePass(e.target.value)} />
             </ModalFormGroup>
             {ERR_delete_account && <Alert type="error" msg={ERR_delete_account} />}
             <DangerButton disabled={!deletePass} onClick={() => dispatch(deleteUser({ deletePass }))}>

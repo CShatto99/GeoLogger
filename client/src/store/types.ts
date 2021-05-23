@@ -1,4 +1,5 @@
 export type MarkerType = {
+  id: string;
   date: string;
   image: string;
   latitude: number;

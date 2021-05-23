@@ -6,7 +6,7 @@ import { ColorBox } from '../../profile/CreateProfile';
 import { DefaultLinkHTML } from '../../styles/Links';
 import CardLabel from '../../styles/CardLabel';
 import { AuthInput } from '../../styles/Inputs';
-import GeoLoggerModal from '../../GeoLoggerModal';
+import GeoLoggerModal from '../../GLModal';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateProfile, updateMapActionStatus } from '../../../store/profile';
 import colors from '../../../json/colors.json';
@@ -66,7 +66,7 @@ const HighlightColor: FC = () => {
         data-for="highlight-action"
         onClick={() => dispatch(updateMapActionStatus([false, false, true, false]))}
       />
-      <ReactTooltip id="highlight-action" aria-haspopup="true">
+      <ReactTooltip id="highlight-action" effect="solid" aria-haspopup="true">
         <small>Map Highlight Color</small>
       </ReactTooltip>
       <GeoLoggerModal
@@ -108,6 +108,7 @@ const HighlightColor: FC = () => {
           <AuthInput
             type="text"
             value={fillColor.slice(1, fillColor.length)}
+            maxLength={6}
             onChange={(e) => setFillColor('#' + e.target.value)}
           />
         </HexInput>

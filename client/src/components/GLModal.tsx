@@ -53,6 +53,7 @@ const ModalHeader = styled.div`
 
   & > h2 {
     font-weight: ${({ theme }) => theme.fontWeights.medium};
+    font-size: 1.4rem;
   }
 
   & > div > svg {
@@ -84,7 +85,7 @@ type ModalProps = {
   toggler?: React.ReactNode;
 };
 
-const GeoLoggerModal: FC<ModalProps> = ({ isOpen, onClose, title, children, toggler }: ModalProps) => {
+const GLModal: FC<ModalProps> = ({ isOpen, onClose, title, children, toggler }: ModalProps) => {
   const portalDiv = document.getElementById('root');
 
   return portalDiv
@@ -111,4 +112,4 @@ const GeoLoggerModal: FC<ModalProps> = ({ isOpen, onClose, title, children, togg
     : null;
 };
 
-export default GeoLoggerModal;
+export default GLModal;

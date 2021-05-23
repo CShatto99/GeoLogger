@@ -40,6 +40,22 @@ export const DangerButtonStyle = styled(PrimaryButtonStyle)`
   }
 `;
 
+export const ApplyButton = styled.div`
+  & > svg {
+    stroke: ${({ theme }) => theme.colors.success};
+    stroke-width: 2px;
+    cursor: pointer;
+    transition: all 100ms ease-out;
+    margin-right: 0 !important;
+    font-size: 1.2rem;
+  }
+
+  & > svg:hover {
+    transform: scale(1.4);
+    transition: all 100ms ease-in;
+  }
+`;
+
 type ButtonProps = {
   disabled?: boolean;
   children?: React.ReactNode;

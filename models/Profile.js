@@ -26,7 +26,11 @@ const ProfileSchema = new mongoose.Schema({
   markers: {
     type: [
       {
-        _id: false,
+        _id: {
+          type: mongoose.Types.ObjectId,
+          required: true,
+          default: mongoose.Types.ObjectId(),
+        },
         latitude: {
           type: Number,
           required: true,

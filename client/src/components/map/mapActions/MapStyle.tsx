@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import ReactTooltip from 'react-tooltip';
 import styled from 'styled-components';
 import { IoEarthSharp } from 'react-icons/io5';
-import GeoLoggerModal from '../../GeoLoggerModal';
+import GeoLoggerModal from '../../GLModal';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateProfile, updateMapActionStatus } from '../../../store/profile';
 import { BsCheck } from 'react-icons/bs';
@@ -58,7 +58,7 @@ const MapStyle: FC = () => {
         data-for="map-style-action"
         onClick={() => dispatch(updateMapActionStatus([false, false, false, true]))}
       />
-      <ReactTooltip id="map-style-action" aria-haspopup="true">
+      <ReactTooltip id="map-style-action" effect="solid" aria-haspopup="true">
         <small>Map Style</small>
       </ReactTooltip>
       <GeoLoggerModal
