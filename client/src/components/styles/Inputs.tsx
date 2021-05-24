@@ -10,6 +10,7 @@ export const GeneralInputStyle = styled.input`
   border: none;
   border: 1px solid ${({ theme }) => theme.colors.dark};
   -webkit-border-radius: 0px;
+  -webkit-appearance: none;
   border-radius: 0.3rem;
   box-sizing: border-box;
   margin-top: 0.25rem;

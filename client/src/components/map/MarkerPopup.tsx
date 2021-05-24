@@ -39,6 +39,10 @@ const PopupActions = styled.div`
     margin-right: 0.5rem;
   }
 
+  & > div > svg:focus {
+    outline: none;
+  }
+
   & > div > svg > path {
     transition: all 100ms ease-out;
   }
@@ -99,7 +103,7 @@ const ImageContainer = styled.div`
   border-radius: 3px;
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
 
   & > img {
     box-shadow: none;
@@ -122,6 +126,16 @@ const PopupSection = styled.div`
   }
 `;
 
+const CloseButton = styled(ApplyButton)`
+  & > svg:hover {
+    transform: scale(1);
+  }
+
+  & > svg:hover > path {
+    fill: ${({ theme }) => theme.colors.danger};
+  }
+`;
+
 type MarkerPopupProps = {
   marker: MarkerType;
   onClick: React.Dispatch<React.SetStateAction<MarkerType | null>>;
@@ -129,7 +143,7 @@ type MarkerPopupProps = {
 
 const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps) => {
   const dispatch = useAppDispatch();
-  const { profile, loading } = useAppSelector((state) => state.profile);
+  const { profile } = useAppSelector((state) => state.profile);
 
   const [title, setTitle] = useState(marker.title);
   const [date, setDate] = useState(marker.date);
@@ -138,11 +152,21 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
   const [editing, setEditing] = useState(false);
 
   const markerEdited = () =>
-    !loading && (title !== marker.title || date !== marker.date || notes !== marker.notes || image !== marker.notes);
+    title !== marker.title || date !== marker.date || notes !== marker.notes || image !== marker.image;
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const base64 = await getBase64(e);
     typeof base64 === 'string' ? dispatch(setAlert(base64, 'ERR_change_password', 400)) : setImage(base64.result);
+  };
+
+  const onDelete = () => {
+    console.log('deleting marker: ', marker.id);
+    dispatch(
+      updateProfile({
+        ...profile,
+        ...{ markers: profile.markers.filter((m: MarkerType) => m.id === marker.id) },
+      }),
+    );
   };
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -171,7 +195,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
         <PopupButtons>
           <PopupActions>
             <div>
-              <FaTrashAlt data-tip data-for="delete-marker" />
+              <FaTrashAlt data-tip data-for="delete-marker" onClick={onDelete} />
               <ReactTooltip id="delete-marker" effect="solid">
                 <small>Delete</small>
               </ReactTooltip>
@@ -193,7 +217,9 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
               />
             </ApplyButton>
           ) : (
-            <IoCloseSharp onClick={() => onClick(null)} />
+            <CloseButton>
+              <IoCloseSharp onClick={() => onClick(null)} />
+            </CloseButton>
           )}
         </PopupButtons>
         <Divider />
@@ -239,6 +265,11 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
               <p>Click on the pencil icon to add some details!</p>
             </PopupSection>
           )}
+          {image && (
+            <ImageContainer>
+              <img src={image} />
+            </ImageContainer>
+          )}
           {date && (
             <PopupSection style={{ marginBottom: '0.5rem' }}>
               {title && <h3>{title}</h3>}
@@ -249,11 +280,6 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
             <PopupSection>
               <p>{notes}</p>
             </PopupSection>
-          )}
-          {image && (
-            <ImageContainer>
-              <img src={image} />
-            </ImageContainer>
           )}
         </>
       )}
