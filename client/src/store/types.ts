@@ -1,11 +1,11 @@
 export type MarkerType = {
-  id: string;
-  date: string;
-  image: string;
+  _id?: string;
+  date?: string;
+  image?: string;
   latitude: number;
   longitude: number;
-  notes: string;
-  title: string;
+  notes?: string;
+  title?: string;
 };
 
 export type Profile = {
@@ -29,7 +29,9 @@ type User = {
 };
 
 export interface Actions {
-  profile: (profile?: Profile | [boolean, boolean, boolean, boolean]) => (dispatch: React.Dispatch<unknown>) => void;
+  profile: (
+    profile?: Profile | MarkerType[] | [boolean, boolean, boolean, boolean],
+  ) => (dispatch: React.Dispatch<unknown>) => void;
   auth: (user?: User) => (dispatch: React.Dispatch<unknown>) => void;
   alert: (msg?: string, key?: string, status?: number) => (dispatch: React.Dispatch<unknown>) => void;
 }

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
@@ -6,10 +6,10 @@ import GeneralInput, { Textarea } from '../styles/Inputs';
 import { IoCloseSharp } from 'react-icons/io5';
 import { BsCheck } from 'react-icons/bs';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { setAlert } from '../../store/alert';
+import { clearAlert, setAlert } from '../../store/alert';
 import { updateProfile } from '../../store/profile';
 import { MarkerType } from '../../store/types';
-import { ApplyButton } from '../styles/Buttons';
+import { ApplyButton, DangerButton } from '../styles/Buttons';
 import GenDivider from '../styles/Divider';
 import getBase64 from '../../utils/handleFile';
 
@@ -77,6 +77,11 @@ const ImageSection = styled.div`
   & > label > input {
     display: none;
   }
+
+  & > button {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
 `;
 
 const ImageUpload = styled.div`
@@ -99,7 +104,6 @@ const ImageUpload = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  max-width: 300px;
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -107,6 +111,10 @@ const ImageContainer = styled.div`
 
   & > img {
     box-shadow: none;
+    max-width: 300px;
+    max-height: 300px;
+    width: auto;
+    cursor: pointer;
   }
 `;
 
@@ -122,7 +130,8 @@ const PopupSection = styled.div`
   }
 
   & > p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1rem;
   }
 `;
 
@@ -144,12 +153,16 @@ type MarkerPopupProps = {
 const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps) => {
   const dispatch = useAppDispatch();
   const { profile } = useAppSelector((state) => state.profile);
-
+  const { SUCC_POPUP_IMG } = useAppSelector((state) => state.alert);
   const [title, setTitle] = useState(marker.title);
   const [date, setDate] = useState(marker.date);
   const [notes, setNotes] = useState(marker.notes);
   const [image, setImage] = useState(marker.image);
   const [editing, setEditing] = useState(false);
+
+  useEffect(() => {
+    console.log('marker updated');
+  }, [marker]);
 
   const markerEdited = () =>
     title !== marker.title || date !== marker.date || notes !== marker.notes || image !== marker.image;
@@ -157,16 +170,21 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const base64 = await getBase64(e);
     typeof base64 === 'string' ? dispatch(setAlert(base64, 'ERR_change_password', 400)) : setImage(base64.result);
+    dispatch(setAlert('Image Saved!', 'SUCC_POPUP_IMG', 200));
+    setTimeout(() => {
+      dispatch(clearAlert());
+    }, 3000);
   };
 
   const onDelete = () => {
-    console.log('deleting marker: ', marker.id);
     dispatch(
       updateProfile({
         ...profile,
-        ...{ markers: profile.markers.filter((m: MarkerType) => m.id === marker.id) },
+        ...{ markers: profile.markers.filter((m: MarkerType) => m._id === marker._id) },
       }),
     );
+
+    onClick(null);
   };
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -182,12 +200,12 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
     dispatch(
       updateProfile({
         ...profile,
-        ...{ markers: profile.markers.map((m: MarkerType) => (m.id === marker.id ? { ...m, ...newMarker } : m)) },
+        ...{ markers: profile.markers.map((m: MarkerType) => (m._id === marker._id ? { ...m, ...newMarker } : m)) },
       }),
     );
-  };
 
-  console.log(markerEdited());
+    onClick({ ...marker, ...newMarker });
+  };
 
   return (
     <>
@@ -212,7 +230,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
               <BsCheck
                 onClick={(e) => {
                   onSubmit(e);
-                  onClick(null);
+                  setEditing(false);
                 }}
               />
             </ApplyButton>
@@ -225,7 +243,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
         <Divider />
       </PopupContainer>
       {editing ? (
-        <form onSubmit={onSubmit}>
+        <form>
           <FormGroup>
             <label>Title</label>
             <GeneralInput type="text" value={title} maxLength={30} onChange={(e) => setTitle(e.target.value)} />
@@ -247,16 +265,14 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
                 onChange={handleFileUpload}
                 accept=".jpg, .jpeg, .png"
               />
-              <ImageUpload>{image ? 'Change Image' : 'Upload Image'}</ImageUpload>
+              <ImageUpload>{SUCC_POPUP_IMG ? SUCC_POPUP_IMG : image ? 'Change Image' : 'Upload Image'}</ImageUpload>
             </label>
             {image && (
-              <ImageContainer>
-                <img src={image} />
-              </ImageContainer>
+              <DangerButton type="button" onClick={() => setImage('')}>
+                Remove Image
+              </DangerButton>
             )}
           </ImageSection>
-          {/* {msg && status === 400 && <div className="err-div mb-2">{msg}</div>} */}
-          {/* <button className="gen-btn popup-submit">{msg === 'Saved!' ? 'Saved!' : 'Save Changes'}</button> */}
         </form>
       ) : (
         <>
@@ -266,12 +282,12 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
             </PopupSection>
           )}
           {image && (
-            <ImageContainer>
+            <ImageContainer style={{ marginBottom: notes || date ? '0.5rem' : '0' }}>
               <img src={image} />
             </ImageContainer>
           )}
           {date && (
-            <PopupSection style={{ marginBottom: '0.5rem' }}>
+            <PopupSection style={{ marginBottom: notes ? '0.5rem' : '0' }}>
               {title && <h3>{title}</h3>}
               {date && <p>{date}</p>}
             </PopupSection>

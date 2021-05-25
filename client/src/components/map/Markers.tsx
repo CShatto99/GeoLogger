@@ -8,6 +8,8 @@ type MarkersProps = {
 };
 
 const Markers: FC<MarkersProps> = ({ markers, onClick }: MarkersProps) => {
+  console.log(markers);
+
   return (
     <>
       {markers.map((m, index) => (

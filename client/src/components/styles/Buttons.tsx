@@ -33,7 +33,7 @@ export const DangerButtonStyle = styled(PrimaryButtonStyle)`
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.danger};
   color: ${({ theme }) => theme.colors.black};
-
+  padding: 0 1rem;
   &:hover {
     background-color: ${({ theme }) => theme.colors.danger};
     color: ${({ theme }) => theme.colors.white};
@@ -57,26 +57,27 @@ export const ApplyButton = styled.div`
 `;
 
 type ButtonProps = {
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   children?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Button: FC<ButtonProps> = ({ disabled, children, onClick }: ButtonProps) => {
+const Button: FC<ButtonProps> = ({ type, disabled, children, onClick }: ButtonProps) => {
   return disabled ? (
     <DisabledButton disabled={disabled}>{children}</DisabledButton>
   ) : (
-    <PrimaryButtonStyle disabled={disabled} onClick={onClick}>
+    <PrimaryButtonStyle type={type} disabled={disabled} onClick={onClick}>
       {children}
     </PrimaryButtonStyle>
   );
 };
 
-export const DangerButton: FC<ButtonProps> = ({ disabled, children, onClick }: ButtonProps) => {
+export const DangerButton: FC<ButtonProps> = ({ type, disabled, children, onClick }: ButtonProps) => {
   return disabled ? (
     <DisabledButton disabled={disabled}>{children}</DisabledButton>
   ) : (
-    <DangerButtonStyle disabled={disabled} onClick={onClick}>
+    <DangerButtonStyle type={type} disabled={disabled} onClick={onClick}>
       {children}
     </DangerButtonStyle>
   );

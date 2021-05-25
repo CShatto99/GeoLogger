@@ -26,6 +26,8 @@ router.get("/", authToken, async (req, res) => {
 router.post("/", authToken, async (req, res) => {
   const { theme, mapStyle, fillColor, visited, markers } = req.body;
 
+  // console.log(markers);
+
   const profileFields = {
     user: req.user.id,
     theme,
@@ -55,6 +57,28 @@ router.post("/", authToken, async (req, res) => {
     const newProfile = await new Profile(profileFields).save();
 
     res.json(newProfile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// @route POST /api/profile/markers
+// @desc Update a user's markers
+// @access Private
+router.put("/markers", async (req, res) => {
+  const { markers } = req.body;
+
+  try {
+    const profile = await Profile.findByIdAndUpdate(
+      req.params._id,
+      { markers },
+      { new: true }
+    );
+
+    console.log(markers);
+
+    res.json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

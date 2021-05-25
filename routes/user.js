@@ -63,10 +63,6 @@ router.post("/", async (req, res) => {
     else if (!password)
       return res.status(400).json({ msg: "A password is required" });
 
-    isEmail(identifier)
-      ? console.log("logging in with email")
-      : console.log("logging in with username");
-
     const user = isEmail(identifier)
       ? await User.findOne({ email: identifier }).select("_id password")
       : await User.findOne({ username: identifier }).select("_id password");

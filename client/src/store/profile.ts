@@ -77,10 +77,26 @@ export const updateProfile: Actions['profile'] = (profile) => async (dispatch) =
   }
 };
 
-export const clearProfile: Actions['profile'] = () => (dispatch) => {
-  dispatch(clear_profile());
+export const updateMarkers: Actions['profile'] = (markers) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const { data } = await axios.put('/api/profile/markers', { markers }, config);
+
+    dispatch(load_profile(data));
+  } catch (err) {
+    dispatch(setAlert(err.response.data.msg, err.response.status));
+  }
 };
 
 export const updateMapActionStatus: Actions['profile'] = (newActionsStatus) => (dispatch) => {
   dispatch(update_actions(newActionsStatus));
+};
+
+export const clearProfile: Actions['profile'] = () => (dispatch) => {
+  dispatch(clear_profile());
 };

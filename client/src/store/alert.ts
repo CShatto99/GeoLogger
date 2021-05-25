@@ -11,6 +11,7 @@ const alert = createSlice({
     ERR_register: '',
     SUCC_contact: '',
     ERR_contact: '',
+    SUCC_POPUP_IMG: '',
     status: undefined,
   },
   reducers: {
@@ -32,6 +33,7 @@ const alert = createSlice({
         ERR_register: '',
         SUCC_contact: '',
         ERR_contact: '',
+        SUCC_POPUP_IMG: '',
         status: undefined,
       };
     },

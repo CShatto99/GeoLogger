@@ -50,7 +50,7 @@ const ViewEx = styled.a`
 `;
 
 type MapTypeProps = {
-  selectedMapStyle: string;
+  selectedMapStyle?: string;
   setSelectedMapStyle?: () => void;
   mapTitle: string;
   image: string;

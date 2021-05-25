@@ -77,13 +77,8 @@ const Mapbox: FC = () => {
 
   const addMarker = ([longitude, latitude]: [number, number]) => {
     const newMarker = {
-      id: '',
       longitude,
       latitude,
-      title: '',
-      date: '',
-      notes: '',
-      image: '',
     };
 
     dispatch(updateProfile({ ...profile, ...{ markers: [...profile.markers, newMarker] } }));

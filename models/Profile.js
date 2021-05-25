@@ -28,18 +28,15 @@ const ProfileSchema = new mongoose.Schema({
       {
         _id: {
           type: mongoose.Types.ObjectId,
-          required: true,
-          default: mongoose.Types.ObjectId(),
+          default: new mongoose.Types.ObjectId(),
         },
         latitude: {
           type: Number,
           required: true,
-          default: "",
         },
         longitude: {
           type: Number,
           required: true,
-          default: "",
         },
         title: {
           type: String,
