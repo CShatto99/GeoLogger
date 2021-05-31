@@ -133,6 +133,8 @@ const CreateProfile: FC = () => {
 
   const onSubmit = () => {
     const profile = {
+      pfp: '',
+      bio: '',
       theme: 'light',
       mapStyle,
       fillColor,

@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
@@ -160,10 +160,6 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
   const [image, setImage] = useState(marker.image);
   const [editing, setEditing] = useState(false);
 
-  useEffect(() => {
-    console.log('marker updated');
-  }, [marker]);
-
   const markerEdited = () =>
     title !== marker.title || date !== marker.date || notes !== marker.notes || image !== marker.image;
 
@@ -180,7 +176,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
     dispatch(
       updateProfile({
         ...profile,
-        ...{ markers: profile.markers.filter((m: MarkerType) => m._id === marker._id) },
+        ...{ markers: profile.markers.filter((m: MarkerType) => m._id !== marker._id) },
       }),
     );
 

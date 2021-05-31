@@ -19,11 +19,18 @@ const AddMarker: FC = () => {
 
   const showToast = () => {
     dispatch(updateMapActionStatus([false, true, false, false]));
-    addToast(<div>Click anywhere on the map to add a marker!</div>, {
-      id: 'add-marker',
-      appearance: 'info',
-      autoDismiss: actionsStatus[1],
-    });
+    addToast(
+      <>
+        <div>
+          Click anywhere on the map to add a marker!{' '}
+          <span style={{ fontWeight: 600 }}>Once a marker is placed on the map it can not be moved.</span>
+        </div>
+      </>,
+      {
+        id: 'add-marker',
+        appearance: 'info',
+      },
+    );
   };
 
   return (

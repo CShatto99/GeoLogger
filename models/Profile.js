@@ -6,6 +6,14 @@ const ProfileSchema = new mongoose.Schema({
     ref: "user",
     required: true,
   },
+  pfp: {
+    type: String,
+    default: "",
+  },
+  bio: {
+    type: String,
+    default: "",
+  },
   theme: {
     type: String,
     default: "dark",
@@ -27,8 +35,8 @@ const ProfileSchema = new mongoose.Schema({
     type: [
       {
         _id: {
-          type: mongoose.Types.ObjectId,
-          default: new mongoose.Types.ObjectId(),
+          type: String,
+          default: "",
         },
         latitude: {
           type: Number,

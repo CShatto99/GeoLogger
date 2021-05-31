@@ -14,6 +14,7 @@ import Login from './components/auth/Login';
 import Home from './components/Home';
 import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/CreateProfile';
+import PublicProfile from './components/profile/PublicProfile';
 import './App.css';
 
 const RenderNavbar: FC = () => {
@@ -53,6 +54,7 @@ const App: FC = () => {
             <PrivateRoute exact path="/map" component={Mapbox} />
             <PrivateRoute path="/settings" component={Settings} />
             <PrivateRoute path="/create" component={CreateProfile} />
+            <PrivateRoute path="/profile" component={PublicProfile} />
           </Switch>
           <RenderFooter />
         </Provider>

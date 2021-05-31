@@ -7,6 +7,8 @@ const profile = createSlice({
   name: 'profile',
   initialState: {
     profile: {
+      pfp: '',
+      bio: '',
       theme: '',
       fillColor: '',
       mapStyle: '',
@@ -28,6 +30,8 @@ const profile = createSlice({
       return {
         ...state,
         profile: {
+          pfp: '',
+          bio: '',
           theme: '',
           fillColor: '',
           mapStyle: '',

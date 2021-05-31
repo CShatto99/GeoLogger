@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import ReactMapGL, { Layer, Popup, Source, ViewportProps } from 'react-map-gl';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { updateMapActionStatus, updateProfile } from '../../store/profile';
 import geoJSON from '../../json/geoJSON.json';
@@ -77,14 +78,13 @@ const Mapbox: FC = () => {
 
   const addMarker = ([longitude, latitude]: [number, number]) => {
     const newMarker = {
+      _id: uuidv4(),
       longitude,
       latitude,
     };
 
     dispatch(updateProfile({ ...profile, ...{ markers: [...profile.markers, newMarker] } }));
   };
-
-  console.log(profile.markers);
 
   return loading ? (
     <GeoLoggerSpinner />

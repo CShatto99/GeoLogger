@@ -9,6 +9,8 @@ export type MarkerType = {
 };
 
 export type Profile = {
+  pfp: string;
+  bio: string;
   theme: string;
   fillColor: string;
   mapStyle: string;
