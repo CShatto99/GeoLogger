@@ -59,7 +59,7 @@ const { load_profile, clear_profile, update_actions } = profile.actions;
 export const loadProfile: Actions['profile'] = () => async (dispatch) => {
   try {
     const res = await axios.get(`/api/profile`);
-    res.data ? dispatch(load_profile(res.data)) : dispatch(load_profile({}));
+    dispatch(load_profile(res.data));
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }

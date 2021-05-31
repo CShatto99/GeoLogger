@@ -23,7 +23,7 @@ const Checklist = styled.div`
 
 const AddHighlight: FC = () => {
   const dispatch = useAppDispatch();
-  const { profile, actionsStatus, loading } = useAppSelector((state) => state.profile);
+  const { profile, actionsStatus } = useAppSelector((state) => state.profile);
   const [visited, setVisited] = useState<string[]>([]);
 
   useEffect(() => {
@@ -63,7 +63,6 @@ const AddHighlight: FC = () => {
         isOpen={actionsStatus[0]}
         onClose={() => dispatch(updateMapActionStatus([false, false, false, false]))}
         toggler={
-          !loading &&
           !arrayEquals(visited, profile.visited) && (
             <ApplyButton onClick={onSubmit}>
               <BsCheck />

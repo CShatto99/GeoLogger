@@ -1,28 +1,8 @@
 import { FC } from 'react';
 import { Marker } from 'react-map-gl';
-import styled from 'styled-components';
-import { FcGlobe } from 'react-icons/fc';
-import { MarkerType } from '../../store/types';
 import ReactTooltip from 'react-tooltip';
-
-const MarkerIcon = styled(FcGlobe)`
-  font-size: 2rem;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-
-  & > path:nth-child(2) {
-    fill: ${({ theme }) => theme.colors.primary};
-    transition: all 100ms ease-out;
-  }
-
-  &:hover > path:nth-child(2) {
-    fill: ${({ theme }) => theme.colors.darkPrimary};
-    transition: all 100ms ease-in;
-  }
-`;
+import { MarkerType } from '../../store/types';
+import MarkerIcon from '../styles/MarkerIcon';
 
 type GLMarkerProps = {
   onClick: React.Dispatch<React.SetStateAction<MarkerType | null>>;
