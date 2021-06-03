@@ -4,15 +4,26 @@ import styled from 'styled-components';
 import defaultPFP from '../../../img/defaultPFP.png';
 
 const PFPContainer = styled.div`
-  // & > svg {
-  //   font-size: 12rem;
-  // }
   margin-bottom: 1rem;
 
   & > img {
     border-radius: 50%;
     box-shadow: none;
     width: 200px;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.md} {
+    margin: 0 1rem 0 0;
+
+    & > img {
+      border-radius: 50%;
+      box-shadow: none;
+      width: 100px;
+    }
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.md} {
+    margin-bottom: 1rem;
   }
 `;
 
