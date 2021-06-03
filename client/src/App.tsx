@@ -54,7 +54,7 @@ const App: FC = () => {
             <PrivateRoute exact path="/map" component={Mapbox} />
             <PrivateRoute path="/settings" component={Settings} />
             <PrivateRoute path="/create" component={CreateProfile} />
-            <PrivateRoute path="/profile" component={PublicProfile} />
+            <PrivateRoute path="/profile/:username" component={PublicProfile} />
           </Switch>
           <RenderFooter />
         </Provider>

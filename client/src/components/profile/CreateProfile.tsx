@@ -127,22 +127,19 @@ const CreateProfile: FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { user, loading } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const [step, setStep] = useState(1);
   const [mapStyle, setMapStyle] = useState('');
   const [fillColor, setFillColor] = useState('');
 
   const onSubmit = () => {
-    const profile = {
-      pfp: '',
-      bio: '',
+    const newProfile = {
       theme: 'light',
       mapStyle,
       fillColor,
-      visited: [],
-      markers: [],
     };
 
-    dispatch(updateProfile(profile));
+    dispatch(updateProfile({ ...profile, ...newProfile }));
     dispatch(updateUser({ ...user, ...{ profileSetUp: true } }));
     history.push('/map');
   };

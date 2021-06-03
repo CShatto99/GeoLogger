@@ -16,7 +16,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   theme: {
     type: String,
-    default: "dark",
+    default: "light",
     required: true,
   },
   mapStyle: {

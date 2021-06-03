@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const User = require("../models/User");
 const Profile = require("../models/Profile");
 const authToken = require("../middleware/authToken");
 
@@ -63,58 +64,21 @@ router.post("/", authToken, async (req, res) => {
   }
 });
 
-// @route POST /api/profile/markers
-// @desc Update a user's markers
+// @route POST /api/profile/:username
+// @desc Fetch a profile by id
 // @access Private
-router.put("/markers", async (req, res) => {
-  const { markers } = req.body;
-
+router.get("/:username", authToken, async (req, res) => {
+  const { username } = req.params;
   try {
-    const profile = await Profile.findByIdAndUpdate(
-      req.params._id,
-      { markers },
-      { new: true }
-    );
+    const user = await User.findOne({ username }).select("username email date");
 
-    console.log(markers);
+    if (!user) return res.status(400).json({ msg: "User not found" });
 
-    res.json(profile);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
-});
+    const profile = await Profile.findOne({
+      user: user._id,
+    }).select("-_id pfp bio visited markers");
 
-// @route POST /api/profile/:_id/visited
-// @desc Update a user visited states
-// @access Private
-router.post("/:_id/visited", async (req, res) => {
-  try {
-    const profile = await Profile.findByIdAndUpdate(
-      req.params._id,
-      { visited: req.body.visited },
-      { new: true }
-    );
-
-    res.json(profile);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
-  }
-});
-
-// @route POST /api/profile/:_id/fill
-// @desc Update a user visited states
-// @access Private
-router.post("/:_id/fill", async (req, res) => {
-  try {
-    const profile = await Profile.findByIdAndUpdate(
-      req.params._id,
-      { fillColor: req.body.fillColor },
-      { new: true }
-    );
-
-    res.json(profile);
+    res.json({ user, profile });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

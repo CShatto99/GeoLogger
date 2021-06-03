@@ -9,6 +9,7 @@ export type MarkerType = {
 };
 
 export type Profile = {
+  _id: string;
   pfp: string;
   bio: string;
   theme: string;
@@ -32,7 +33,7 @@ type User = {
 
 export interface Actions {
   profile: (
-    profile?: Profile | MarkerType[] | [boolean, boolean, boolean, boolean],
+    profile?: Profile | MarkerType[] | [boolean, boolean, boolean, boolean] | string,
   ) => (dispatch: React.Dispatch<unknown>) => void;
   auth: (user?: User) => (dispatch: React.Dispatch<unknown>) => void;
   alert: (msg?: string, key?: string, status?: number) => (dispatch: React.Dispatch<unknown>) => void;

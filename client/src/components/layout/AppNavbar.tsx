@@ -187,8 +187,7 @@ const DropdownToggler = styled(NavbarLink)`
 const AppNavbar: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const { isAuth } = useAppSelector((state) => state.auth);
-  // const { profile } = useAppSelector((state) => state.profile);
+  const { user, isAuth } = useAppSelector((state) => state.auth);
   const [navIcon, setNavIcon] = useState('nav-items-hide');
 
   // useEffect(() => {
@@ -212,7 +211,7 @@ const AppNavbar: FC = () => {
       </NavbarLink>
       <DropdownToggler to={location.pathname}>Profile</DropdownToggler>
       <DropdownContent>
-        <Link to="/profile" onClick={() => setNavIcon('nav-items-hide')}>
+        <Link to={`/profile/${user.username}`} onClick={() => setNavIcon('nav-items-hide')}>
           <VscAccount />
           <span>Profile</span>
         </Link>

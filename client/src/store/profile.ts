@@ -7,11 +7,21 @@ const profile = createSlice({
   name: 'profile',
   initialState: {
     profile: {
+      _id: '',
       pfp: '',
       bio: '',
       theme: '',
       fillColor: '',
       mapStyle: '',
+      visited: [],
+      markers: [],
+    },
+    publicProfile: {
+      username: '',
+      email: '',
+      date: '',
+      pfp: '',
+      bio: '',
       visited: [],
       markers: [],
     },
@@ -26,10 +36,18 @@ const profile = createSlice({
         loading: false,
       };
     },
+    load_public_profile: (state, action) => {
+      return {
+        ...state,
+        publicProfile: action.payload,
+        loading: false,
+      };
+    },
     clear_profile: (state) => {
       return {
         ...state,
         profile: {
+          _id: '',
           pfp: '',
           bio: '',
           theme: '',
@@ -38,8 +56,29 @@ const profile = createSlice({
           visited: [],
           markers: [],
         },
+        publicProfile: {
+          username: '',
+          email: '',
+          date: '',
+          pfp: '',
+          bio: '',
+          visited: [],
+          markers: [],
+        },
         actionsStatus: [false, false, false, false],
         loading: true,
+      };
+    },
+    action_start: (state) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+    action_end: (state) => {
+      return {
+        ...state,
+        loading: false,
       };
     },
     update_actions: (state, action) => {
@@ -54,7 +93,7 @@ const profile = createSlice({
 
 export default profile.reducer;
 
-const { load_profile, clear_profile, update_actions } = profile.actions;
+const { load_profile, load_public_profile, clear_profile, action_start, action_end, update_actions } = profile.actions;
 
 export const loadProfile: Actions['profile'] = () => async (dispatch) => {
   try {
@@ -81,17 +120,16 @@ export const updateProfile: Actions['profile'] = (profile) => async (dispatch) =
   }
 };
 
-export const updateMarkers: Actions['profile'] = (markers) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
+export const getPublicProfile: Actions['profile'] = (username) => async (dispatch) => {
   try {
-    const { data } = await axios.put('/api/profile/markers', { markers }, config);
+    dispatch(action_start());
 
-    dispatch(load_profile(data));
+    const {
+      data: { user, profile },
+    } = await axios.get(`/api/profile/${username}`);
+
+    dispatch(load_public_profile({ ...user, ...profile }));
+    dispatch(action_end());
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, err.response.status));
   }

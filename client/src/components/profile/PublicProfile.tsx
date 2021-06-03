@@ -1,9 +1,12 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FcGlobe } from 'react-icons/fc';
-import { useAppSelector } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store';
 import ProfilePicture from './publicProfile/ProfilePicture';
 import PhotoAlbum from './publicProfile/PhotoAlbum';
+import { getPublicProfile } from '../../store/profile';
+import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
 
 const PublicProfileContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
@@ -71,29 +74,37 @@ const VisitedInfo = styled.div`
 const VisitedIcon = styled(FcGlobe)``;
 
 const PublicProfile: FC = () => {
-  const { user } = useAppSelector((state) => state.auth);
-  const { profile } = useAppSelector((state) => state.profile);
+  const dispatch = useAppDispatch();
+  const { username } = useParams<{ username: string }>();
+  // const { user } = useAppSelector((state) => state.auth);
+  const { publicProfile, loading } = useAppSelector((state) => state.profile);
 
-  return (
+  useEffect(() => {
+    dispatch(getPublicProfile(username));
+  }, []);
+
+  return loading ? (
+    <GeoLoggerSpinner />
+  ) : (
     <PublicProfileContainer>
       <PublicProfileContent>
         <ProfileInfo>
           <ProfilePicture pfp={''} />
           <div>
-            <h1>{user.username}</h1>
-            <h3>{user.email}</h3>
+            <h1>{publicProfile.username}</h1>
+            <h3>{publicProfile.email}</h3>
           </div>
           <div>
-            <Bio>{profile.bio && profile.bio}</Bio>
+            <Bio>{publicProfile.bio && publicProfile.bio}</Bio>
             <VisitedInfo>
               <VisitedIcon />
               <small>
-                <span>{profile.visited.length}</span> states visited
+                <span>{publicProfile.visited.length}</span> states visited
               </small>
             </VisitedInfo>
           </div>
         </ProfileInfo>
-        <PhotoAlbum markers={profile.markers} />
+        <PhotoAlbum markers={publicProfile.markers} />
       </PublicProfileContent>
     </PublicProfileContainer>
   );
