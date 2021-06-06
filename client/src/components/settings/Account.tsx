@@ -8,6 +8,7 @@ import { PasswordInput } from '../styles/Inputs';
 import Button, { DangerButton } from '../styles/Buttons';
 import { DefaultLink } from '../styles/Links';
 import Alert from '../styles/Alert';
+import PasswordLabel from '../auth/PasswordLabel';
 
 const ChangePassword = styled.div`
   margin: 1rem 0 2.5rem 0;
@@ -87,8 +88,7 @@ const Account: FC = () => {
             <PasswordInput value={oldPass} maxLength={100} onChange={(e) => setOldPass(e.target.value)} />
           </FormGroup>
           <FormGroup>
-            {/* <PasswordLabel /> */}
-            <label>Password</label>
+            <PasswordLabel />
             <PasswordInput value={password} maxLength={100} onChange={(e) => setPassword(e.target.value)} />
           </FormGroup>
           <FormGroup>

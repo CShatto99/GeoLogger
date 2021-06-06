@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { RiShareForwardBoxLine } from 'react-icons/ri';
 import CardLabel from './styles/CardLabel';
-import ReactTooltip from 'react-tooltip';
+import GLTooltip from './GLTooltip';
 
 const MapTypeContainer = styled.div`
   & > .map-active {
@@ -45,7 +45,7 @@ const ViewEx = styled.a`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 0.2rem;
   right: 0;
-  bottom: 3px;
+  bottom: 0;
   border-bottom-right-radius: 0.3rem;
 `;
 
@@ -68,12 +68,11 @@ const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapT
       >
         <CardLabel label={mapTitle} active={selectedMapStyle === mapStyle} />
         <img src={image} alt={`mapbox ${selectedMapStyle} theme`} onClick={setSelectedMapStyle} />
-        <ViewEx data-tip data-for={mapStyle} href={demo} target="_blank" rel="noopener noreferrer">
-          <RiShareForwardBoxLine />
-        </ViewEx>
-        <ReactTooltip id={mapStyle} aria-haspopup="true">
-          <small>View {mapTitle} demo.</small>
-        </ReactTooltip>
+        <GLTooltip direction="left" content={`View ${mapTitle} demo`}>
+          <ViewEx href={demo} target="_blank" rel="noopener noreferrer">
+            <RiShareForwardBoxLine />
+          </ViewEx>
+        </GLTooltip>
       </MapTypeContent>
     </MapTypeContainer>
   );

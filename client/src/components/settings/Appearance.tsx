@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import ReactTooltip from 'react-tooltip';
 import { IoInformationCircle } from 'react-icons/io5';
 import { useAppDispatch } from '../../store';
 import { updateProfile } from '../../store/profile';
@@ -19,6 +18,7 @@ import lightV10 from '../../img/light-v10.png';
 import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
+import GLTooltip from '../GLTooltip';
 
 const TitleSection = styled.div`
   margin-bottom: 2rem;
@@ -191,13 +191,13 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
           <div>
             <SectionTitle>
               <h3>Highlight Color</h3>
-              <IoInformationCircle data-tip data-for="pass-info" />
-              <ReactTooltip id="pass-info" aria-haspopup="true">
-                <small>This is the color your visited regions will be on your map.</small>
-              </ReactTooltip>
+              <GLTooltip content="This is the color your visited regions will be on your map">
+                <IoInformationCircle />
+              </GLTooltip>
             </SectionTitle>
             <Divider />
           </div>
+
           {colors.map(({ name, hex }) => (
             <ColorBox
               key={hex}

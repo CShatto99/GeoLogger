@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import { useHistory, Redirect } from 'react-router';
 import styled from 'styled-components';
-import ReactTooltip from 'react-tooltip';
 import { IoInformationCircle } from 'react-icons/io5';
 import { useAppDispatch, useAppSelector } from '../../store/index';
 import { updateProfile } from '../../store/profile';
@@ -20,6 +19,7 @@ import outdoorsV11 from '../../img/outdoors-v11.png';
 import streetsV11 from '../../img/streets-v11.png';
 import satelliteV9 from '../../img/satellite-v9.png';
 import mapStyles from '../../utils/mapStyles';
+import GLTooltip from '../GLTooltip';
 
 const TOTAL_STEPS = 2;
 
@@ -68,7 +68,8 @@ const MapContent = styled.div`
 `;
 
 export const SectionTitle = styled(PasswordLabelStyle)`
-  & > svg {
+  & > div {
+    width: fit-content;
     margin: 0 0 -4px 5px;
     font-size: 1.2rem;
   }
@@ -245,11 +246,10 @@ const CreateProfile: FC = () => {
           <ColorContent>
             <div>
               <SectionTitle>
-                <h3>Choose a Highlight Color</h3>
-                <IoInformationCircle data-tip data-for="pass-info" />
-                <ReactTooltip id="pass-info" aria-haspopup="true">
-                  <small>This is the color your visited regions will be on your map.</small>
-                </ReactTooltip>
+                <h3>Highlight Color</h3>
+                <GLTooltip content="This is the color your visited regions will be on your map">
+                  <IoInformationCircle />
+                </GLTooltip>
               </SectionTitle>
               <Divider />
             </div>

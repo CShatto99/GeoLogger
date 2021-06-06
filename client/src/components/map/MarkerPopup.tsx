@@ -296,7 +296,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
         <>
           {!title && !date && !notes && !image && (
             <PopupSection>
-              <p>Click on the pencil icon to add some details!</p>
+              <p style={{ textAlign: 'center' }}>Click on the pencil icon to add some details!</p>
             </PopupSection>
           )}
           {image && (
