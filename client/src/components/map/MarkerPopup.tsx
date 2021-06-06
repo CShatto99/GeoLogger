@@ -13,6 +13,7 @@ import { ApplyButton, DangerButton } from '../styles/Buttons';
 import GenDivider from '../styles/Divider';
 import getBase64 from '../../utils/handleFile';
 import GLTooltip from '../GLTooltip';
+import ExpandedImage from './ExpandedImage';
 // import Alert from '../styles/Alert';
 
 const PopupContainer = styled.div`
@@ -107,6 +108,7 @@ const ImageUpload = styled.div`
 
 const ImageContainer = styled.div`
   border-radius: 3px;
+  background-color: #000;
   display: flex;
   justify-content: center;
   margin: 0.5rem 0;
@@ -117,6 +119,7 @@ const ImageContainer = styled.div`
     max-height: 300px;
     width: auto;
     cursor: pointer;
+    border-radius: 0;
   }
 `;
 
@@ -164,6 +167,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
   const { profile } = useAppSelector((state) => state.profile);
   const { SUCC_POPUP_IMG } = useAppSelector((state) => state.alert);
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [title, setTitle] = useState(marker.title);
   const [date, setDate] = useState(marker.date);
   const [notes, setNotes] = useState(marker.notes);
@@ -301,7 +305,8 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
           )}
           {image && (
             <ImageContainer style={{ marginBottom: notes || date ? '0.5rem' : '0' }}>
-              <img src={image} />
+              <img src={image} onClick={() => setIsExpanded(true)} />
+              <ExpandedImage title={title} src={image} isOpen={isExpanded} onClose={() => setIsExpanded(false)} />
             </ImageContainer>
           )}
           {date && (

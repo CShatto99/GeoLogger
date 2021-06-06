@@ -33,6 +33,10 @@ const ModalContainer = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
     padding: 6rem 1.5rem 1.5rem 1.5rem;
+
+    & svg {
+      font-size: 1.2rem !important;
+    }
   }
 `;
 
@@ -56,6 +60,10 @@ const ModalHeader = styled.div`
     font-size: 1.4rem;
   }
 
+  & svg {
+    font-size: 1.5rem;
+  }
+
   & > div > svg {
     cursor: pointer;
     height: 100%;
@@ -68,6 +76,12 @@ const ModalHeader = styled.div`
   & > div > svg:hover > path {
     fill: ${({ theme }) => theme.colors.danger};
     transition: fill 100ms ease-in;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.xs} {
+    & > h2 {
+      font-size: 1rem;
+    }
   }
 `;
 

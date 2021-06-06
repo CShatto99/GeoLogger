@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, memo } from 'react';
 import ReactMapGL, { Layer, Popup, Source, ViewportProps } from 'react-map-gl';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
@@ -120,4 +120,4 @@ const Mapbox: FC = () => {
   );
 };
 
-export default Mapbox;
+export default memo(Mapbox);
