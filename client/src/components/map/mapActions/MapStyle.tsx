@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react';
-import ReactTooltip from 'react-tooltip';
 import styled from 'styled-components';
 import { IoEarthSharp } from 'react-icons/io5';
 import GeoLoggerModal from '../../GLModal';
@@ -13,6 +12,7 @@ import outdoorsV11 from '../../../img/outdoors-v11.png';
 import streetsV11 from '../../../img/streets-v11.png';
 import satelliteV9 from '../../../img/satellite-v9.png';
 import mapStyles from '../../../utils/mapStyles';
+import GLTooltip from '../../GLTooltip';
 
 const ApplyButton = styled.div`
   & > svg {
@@ -53,14 +53,9 @@ const MapStyle: FC = () => {
 
   return (
     <>
-      <IoEarthSharp
-        data-tip
-        data-for="map-style-action"
-        onClick={() => dispatch(updateMapActionStatus([false, false, false, true]))}
-      />
-      <ReactTooltip id="map-style-action" effect="solid" aria-haspopup="true">
-        <small>Map Style</small>
-      </ReactTooltip>
+      <GLTooltip content="Map Style">
+        <IoEarthSharp onClick={() => dispatch(updateMapActionStatus([false, false, false, true]))} />
+      </GLTooltip>
       <GeoLoggerModal
         title="Map Style"
         isOpen={actionsStatus[3]}

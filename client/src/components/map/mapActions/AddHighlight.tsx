@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react';
-import ReactTooltip from 'react-tooltip';
 import { IoMdAddCircle } from 'react-icons/io';
 import { BsCheck } from 'react-icons/bs';
 import styled from 'styled-components';
@@ -9,6 +8,7 @@ import GeoLoggerModal from '../../GLModal';
 import CardLabel from '../../styles/CardLabel';
 import { ApplyButton } from '../../styles/Buttons';
 import usa from '../../../json/US.json';
+import GLTooltip from '../../GLTooltip';
 
 const Checklist = styled.div`
   & > div {
@@ -50,14 +50,9 @@ const AddHighlight: FC = () => {
 
   return (
     <>
-      <IoMdAddCircle
-        data-tip
-        data-for="add-action"
-        onClick={() => dispatch(updateMapActionStatus([true, false, false, false]))}
-      />
-      <ReactTooltip id="add-action" effect="solid" aria-haspopup="true">
-        <small>Add a Highlight</small>
-      </ReactTooltip>
+      <GLTooltip content="Add Highlight">
+        <IoMdAddCircle onClick={() => dispatch(updateMapActionStatus([true, false, false, false]))} />
+      </GLTooltip>
       <GeoLoggerModal
         title="Add Highlights"
         isOpen={actionsStatus[0]}

@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
-import ReactTooltip from 'react-tooltip';
 import { useToasts } from 'react-toast-notifications';
 import { RiRoadMapFill } from 'react-icons/ri';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateMapActionStatus } from '../../../store/profile';
+import GLTooltip from '../../GLTooltip';
 
 const AddMarker: FC = () => {
   const dispatch = useAppDispatch();
@@ -35,10 +35,9 @@ const AddMarker: FC = () => {
 
   return (
     <>
-      <RiRoadMapFill data-tip data-for="marker-action" onClick={() => showToast()} />
-      <ReactTooltip id="marker-action" effect="solid" aria-haspopup="true">
-        <small>Add a Marker</small>
-      </ReactTooltip>
+      <GLTooltip content="Add Marker">
+        <RiRoadMapFill onClick={() => showToast()} />
+      </GLTooltip>
     </>
   );
 };

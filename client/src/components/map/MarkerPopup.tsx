@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import ReactTooltip from 'react-tooltip';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 import GeneralInput, { Textarea } from '../styles/Inputs';
 import { IoCloseSharp } from 'react-icons/io5';
@@ -9,9 +8,12 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { clearAlert, setAlert } from '../../store/alert';
 import { updateProfile } from '../../store/profile';
 import { MarkerType } from '../../store/types';
+import GLModal from '../GLModal';
 import { ApplyButton, DangerButton } from '../styles/Buttons';
 import GenDivider from '../styles/Divider';
 import getBase64 from '../../utils/handleFile';
+import GLTooltip from '../GLTooltip';
+// import Alert from '../styles/Alert';
 
 const PopupContainer = styled.div`
   max-width: 300px;
@@ -145,6 +147,13 @@ const CloseButton = styled(ApplyButton)`
   }
 `;
 
+const ModalBody = styled.div`
+  & > button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+`;
+
 type MarkerPopupProps = {
   marker: MarkerType;
   onClick: React.Dispatch<React.SetStateAction<MarkerType | null>>;
@@ -154,6 +163,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
   const dispatch = useAppDispatch();
   const { profile } = useAppSelector((state) => state.profile);
   const { SUCC_POPUP_IMG } = useAppSelector((state) => state.alert);
+  const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(marker.title);
   const [date, setDate] = useState(marker.date);
   const [notes, setNotes] = useState(marker.notes);
@@ -209,17 +219,23 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
         <PopupButtons>
           <PopupActions>
             <div>
-              <FaTrashAlt data-tip data-for="delete-marker" onClick={onDelete} />
-              <ReactTooltip id="delete-marker" effect="solid">
-                <small>Delete</small>
-              </ReactTooltip>
+              <GLTooltip content="Delete">
+                <FaTrashAlt onClick={() => setIsOpen(true)} />
+              </GLTooltip>
+              <GLModal
+                title="Are you sure you want to delete this marker?"
+                isOpen={isOpen}
+                onClose={() => setIsOpen(!isOpen)}
+              >
+                <ModalBody>
+                  <p>All data associated with this marker will be permanently erased.</p>
+                  <DangerButton onClick={() => onDelete()}>Delete Marker</DangerButton>
+                </ModalBody>
+              </GLModal>
             </div>
-            <div>
-              <FaPencilAlt data-tip data-for="edit-marker" onClick={() => setEditing(!editing)} />
-              <ReactTooltip id="edit-marker" effect="solid">
-                <small>Edit</small>
-              </ReactTooltip>
-            </div>
+            <GLTooltip content="Edit">
+              <FaPencilAlt onClick={() => setEditing(!editing)} />
+            </GLTooltip>
           </PopupActions>
           {markerEdited() ? (
             <ApplyButton>
@@ -246,7 +262,13 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
           </FormGroup>
           <FormGroup>
             <label>Date Travelled</label>
-            <GeneralInput type="date" value={date} maxLength={50} onChange={(e) => setDate(e.target.value)} />
+            <GeneralInput
+              type="date"
+              value={date}
+              maxLength={50}
+              style={{ minHeight: '32px' }}
+              onChange={(e) => setDate(e.target.value)}
+            />
           </FormGroup>
           <FormGroup>
             <label>Notes</label>

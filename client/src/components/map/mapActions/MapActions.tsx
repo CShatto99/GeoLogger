@@ -27,23 +27,23 @@ const MapActionsContainer = styled.div`
 `;
 
 const MapAction = styled.div`
-  & > svg {
+  & svg {
     font-size: 1.5rem;
   }
 
-  & > svg:focus {
+  & svg:focus {
     outline: none;
   }
 
-  & > svg:hover > path,
-  > svg:hover {
+  & svg:hover > path,
+  svg:hover {
     cursor: pointer;
     fill: ${({ theme }) => theme.colors.primary};
     transition: ease-in 100ms;
   }
 
-  & > svg,
-  > svg > path {
+  & svg,
+  svg > path {
     fill: ${({ theme }) => theme.colors.white};
     transition: ease-out 100ms;
   }

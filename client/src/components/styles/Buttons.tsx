@@ -34,9 +34,21 @@ export const DangerButtonStyle = styled(PrimaryButtonStyle)`
   border: 1px solid ${({ theme }) => theme.colors.danger};
   color: ${({ theme }) => theme.colors.black};
   padding: 0 1rem;
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.danger};
     color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+export const DefaultButtonStyle = styled(PrimaryButtonStyle)`
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.dark};
+  color: ${({ theme }) => theme.colors.black};
+  padding: 0 1rem;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.dark};
   }
 `;
 
@@ -80,6 +92,16 @@ export const DangerButton: FC<ButtonProps> = ({ type, disabled, children, onClic
     <DangerButtonStyle type={type} disabled={disabled} onClick={onClick}>
       {children}
     </DangerButtonStyle>
+  );
+};
+
+export const DefaultButton: FC<ButtonProps> = ({ type, disabled, children, onClick }: ButtonProps) => {
+  return disabled ? (
+    <DisabledButton disabled={disabled}>{children}</DisabledButton>
+  ) : (
+    <DefaultButtonStyle type={type} disabled={disabled} onClick={onClick}>
+      {children}
+    </DefaultButtonStyle>
   );
 };
 

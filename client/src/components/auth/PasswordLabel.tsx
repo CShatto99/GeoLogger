@@ -1,7 +1,8 @@
-import { FC } from 'react';
-import ReactTooltip from 'react-tooltip';
+import { FC, useState } from 'react';
+import { BsCheck } from 'react-icons/bs';
 import { IoInformationCircle } from 'react-icons/io5';
 import styled from 'styled-components';
+import GLModal from '../GLModal';
 
 export const PasswordLabelStyle = styled.div`
   display: flex;
@@ -13,25 +14,57 @@ export const PasswordLabelStyle = styled.div`
   }
 
   & > svg {
-    margin: 0 0 -2px 3px;
+    margin: 0 0 0px 3px;
+    cursor: pointer;
   }
 
   & > svg > path {
     fill: ${({ theme }) => theme.colors.dark};
+    transition: fill ease-out 100ms;
+  }
+
+  & > svg:hover > path {
+    fill: ${({ theme }) => theme.colors.primary};
+    transition: fill ease-in 100ms;
+  }
+`;
+
+const Requirement = styled.li`
+  display: flex;
+  align-items: center;
+
+  & > svg {
+    margin-right: 0.5rem;
   }
 `;
 
 const PasswordLabel: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <PasswordLabelStyle>
       <label>Password</label>
-      <IoInformationCircle data-tip data-for="pass-info" />
-      <ReactTooltip id="pass-info" effect="solid" aria-haspopup="true">
-        <small>
-          Your password must contain at least 8 characters, 1 number, 1 lowercase letter, 1 uppercase letter, and 1
-          special character.
-        </small>
-      </ReactTooltip>
+      <IoInformationCircle onClick={() => setIsOpen(true)} />
+      <GLModal isOpen={isOpen} title="Password Requirements" onClose={() => setIsOpen(false)}>
+        <ul>
+          <Requirement>
+            <BsCheck />
+            At least 8 characters
+          </Requirement>
+          <Requirement>
+            <BsCheck />
+            At least 1 number
+          </Requirement>
+          <Requirement>
+            <BsCheck />
+            One uppercase + lowercase character
+          </Requirement>
+          <Requirement>
+            <BsCheck />
+            At least 1 special character
+          </Requirement>
+        </ul>
+      </GLModal>
     </PasswordLabelStyle>
   );
 };

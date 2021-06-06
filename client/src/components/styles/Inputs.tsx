@@ -87,24 +87,40 @@ type InputProps = {
   value?: string | number | readonly string[];
   placeholder?: string;
   maxLength?: number;
+  style?: React.CSSProperties;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onTextareaChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
 };
 
-const GeneralInput: FC<InputProps> = ({ type, value, placeholder, maxLength, onChange }: InputProps) => (
-  <GeneralInputStyle type={type} value={value} placeholder={placeholder} onChange={onChange} maxLength={maxLength} />
+const GeneralInput: FC<InputProps> = ({ style, type, value, placeholder, maxLength, onChange }: InputProps) => (
+  <GeneralInputStyle
+    style={style}
+    type={type}
+    value={value}
+    placeholder={placeholder}
+    onChange={onChange}
+    maxLength={maxLength}
+  />
 );
 
-export const AuthInput: FC<InputProps> = ({ type, value, placeholder, maxLength, onChange }: InputProps) => (
-  <AuthInputStyle type={type} value={value} placeholder={placeholder} onChange={onChange} maxLength={maxLength} />
+export const AuthInput: FC<InputProps> = ({ style, type, value, placeholder, maxLength, onChange }: InputProps) => (
+  <AuthInputStyle
+    style={style}
+    type={type}
+    value={value}
+    placeholder={placeholder}
+    onChange={onChange}
+    maxLength={maxLength}
+  />
 );
 
-export const PasswordInput: FC<InputProps> = ({ value, placeholder, maxLength, onChange }: InputProps) => {
+export const PasswordInput: FC<InputProps> = ({ style, value, placeholder, maxLength, onChange }: InputProps) => {
   const [passVisible, setPassVisible] = useState(false);
 
   return (
     <InputContainer>
       <AuthInputStyle
+        style={style}
         type={passVisible ? 'text' : 'password'}
         value={value}
         placeholder={placeholder}

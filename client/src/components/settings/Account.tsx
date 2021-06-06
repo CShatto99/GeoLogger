@@ -2,8 +2,8 @@ import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { changePassword, deleteUser } from '../../store/auth';
-import GeoLoggerModal from '../GLModal';
-import PasswordLabel from '../auth/PasswordLabel';
+import GLModal from '../GLModal';
+// import PasswordLabel from '../auth/PasswordLabel';
 import { PasswordInput } from '../styles/Inputs';
 import Button, { DangerButton } from '../styles/Buttons';
 import { DefaultLink } from '../styles/Links';
@@ -87,7 +87,8 @@ const Account: FC = () => {
             <PasswordInput value={oldPass} maxLength={100} onChange={(e) => setOldPass(e.target.value)} />
           </FormGroup>
           <FormGroup>
-            <PasswordLabel />
+            {/* <PasswordLabel /> */}
+            <label>Password</label>
             <PasswordInput value={password} maxLength={100} onChange={(e) => setPassword(e.target.value)} />
           </FormGroup>
           <FormGroup>
@@ -105,7 +106,7 @@ const Account: FC = () => {
         <Divider />
         <p>This action is irreversible. Once you delete your account you can no longer recover it.</p>
         <DangerButton onClick={() => setIsOpen(!isOpen)}>Delete Account</DangerButton>
-        <GeoLoggerModal
+        <GLModal
           title="Are you sure you want to delete your account?"
           isOpen={isOpen}
           onClose={() => setIsOpen(!isOpen)}
@@ -124,7 +125,7 @@ const Account: FC = () => {
               Delete My Account
             </DangerButton>
           </ModalBody>
-        </GeoLoggerModal>
+        </GLModal>
       </DeleteAccount>
     </>
   );

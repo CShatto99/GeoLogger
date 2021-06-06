@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react';
-import ReactTooltip from 'react-tooltip';
 import styled from 'styled-components';
 import { FaHighlighter } from 'react-icons/fa';
 import { ColorBox } from '../../profile/CreateProfile';
@@ -11,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateProfile, updateMapActionStatus } from '../../../store/profile';
 import colors from '../../../json/colors.json';
 import { BsCheck } from 'react-icons/bs';
+import GLTooltip from '../../GLTooltip';
 
 const ColorContent = styled.div`
   display: grid;
@@ -61,14 +61,9 @@ const HighlightColor: FC = () => {
 
   return (
     <>
-      <FaHighlighter
-        data-tip
-        data-for="highlight-action"
-        onClick={() => dispatch(updateMapActionStatus([false, false, true, false]))}
-      />
-      <ReactTooltip id="highlight-action" effect="solid" aria-haspopup="true">
-        <small>Map Highlight Color</small>
-      </ReactTooltip>
+      <GLTooltip content="Map Highlight Color">
+        <FaHighlighter onClick={() => dispatch(updateMapActionStatus([false, false, true, false]))} />
+      </GLTooltip>
       <GeoLoggerModal
         title="Highlight Color"
         isOpen={actionsStatus[2]}
