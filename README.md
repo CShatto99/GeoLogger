@@ -47,15 +47,15 @@ GeoLogger is a web app that allows you to log your vacation history. Create an a
 4. Servers
 
    ```
-    Option 1 (runs backeend and fronteend servers):
+    Option 1 (runs back-end and front-end servers):
 
     npm run dev
 
     Option 2 (for running both the servers individually):
 
-    npm run server (runs backeend server only)
+    npm run server (runs back-end server only)
 
-    npm run client (runs fronteend server only)
+    npm run client (runs front-end server only)
    ```
 
 ## DEMO
