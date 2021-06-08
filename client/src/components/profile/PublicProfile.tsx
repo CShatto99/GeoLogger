@@ -14,6 +14,8 @@ const PublicProfileContainer = styled.div`
   min-height: calc(100vh - 7.5rem);
 
   @media ${({ theme }) => theme.mediaQueries.md} {
+    padding: 6rem 1rem 1rem 1rem;
+
     & h1 {
       font-size: 2rem;
     }
