@@ -119,7 +119,7 @@ type ExpandedImageProps = {
   isOpen: boolean;
   onClose: React.MouseEventHandler<unknown> | undefined;
   title?: string;
-  src: string;
+  src?: string;
 };
 
 const ExpandedImage: FC<ExpandedImageProps> = ({ isOpen, onClose, title, src }: ExpandedImageProps) => {
