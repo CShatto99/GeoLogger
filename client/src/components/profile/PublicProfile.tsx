@@ -31,14 +31,21 @@ const PublicProfileContent = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.md} {
     grid-template-columns: 1fr;
+    grid-gap: 2rem;
   }
 `;
 
 const ProfileInfo = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 
   @media ${({ theme }) => theme.mediaQueries.md} {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    & > div {
+      height: fit-content;
+    }
     & > div:nth-child(2) {
       height: fit-content;
       align-self: center;
@@ -53,6 +60,10 @@ const ProfileInfo = styled.div`
 const Bio = styled.p`
   margin: 1rem 0;
   line-height: 1.4rem;
+
+  @media ${({ theme }) => theme.mediaQueries.md} {
+    margin: 0 0 1rem 0;
+  }
 `;
 
 const VisitedInfo = styled.div`
