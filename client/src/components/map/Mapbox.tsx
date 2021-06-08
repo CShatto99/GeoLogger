@@ -22,6 +22,7 @@ const Mapbox: FC = () => {
   const { profile, actionsStatus, loading } = useAppSelector((state) => state.profile);
   const { width, height } = useWindowDimensions();
   const [popupInfo, setPopupInfo] = useState<MarkerType | null>(null);
+  const [markers, setMarkers] = useState<MarkerType[]>([]);
   const [sources, setSources] = useState<React.ReactElement[]>([]);
   const [viewport, setViewport] = useState<ViewportProps>({
     width: width,
@@ -74,6 +75,7 @@ const Mapbox: FC = () => {
       }
     });
     setSources(geoJSONRegions);
+    setMarkers(profile.markers);
   }, [profile]);
 
   const addMarker = ([longitude, latitude]: [number, number]) => {
@@ -82,7 +84,7 @@ const Mapbox: FC = () => {
       longitude,
       latitude,
     };
-
+    setMarkers([...profile.markers, newMarker]);
     dispatch(updateProfile({ ...profile, ...{ markers: [...profile.markers, newMarker] } }));
   };
 
@@ -103,7 +105,7 @@ const Mapbox: FC = () => {
         }}
       >
         {sources}
-        <Markers markers={profile.markers} onClick={setPopupInfo} />
+        <Markers markers={markers} onClick={setPopupInfo} />
         {popupInfo && (
           <Popup
             anchor="top"

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 import GeneralInput, { Textarea } from '../styles/Inputs';
@@ -162,20 +162,25 @@ type MarkerPopupProps = {
   onClick: React.Dispatch<React.SetStateAction<MarkerType | null>>;
 };
 
-const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps) => {
+const MarkerPopup: FC<MarkerPopupProps> = ({ marker: m, onClick }: MarkerPopupProps) => {
   const dispatch = useAppDispatch();
   const { profile } = useAppSelector((state) => state.profile);
   const { SUCC_POPUP_IMG } = useAppSelector((state) => state.alert);
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [title, setTitle] = useState(marker.title);
-  const [date, setDate] = useState(marker.date);
-  const [notes, setNotes] = useState(marker.notes);
-  const [image, setImage] = useState(marker.image);
+  const [title, setTitle] = useState<string | undefined>(m.title);
+  const [date, setDate] = useState<string | undefined>(m.date);
+  const [notes, setNotes] = useState<string | undefined>(m.notes);
+  const [image, setImage] = useState<string | undefined>(m.image);
   const [editing, setEditing] = useState(false);
 
-  const markerEdited = () =>
-    title !== marker.title || date !== marker.date || notes !== marker.notes || image !== marker.image;
+  useEffect(() => {
+    setEditing(false);
+    setTitle(m.title);
+    setDate(m.date);
+    setNotes(m.notes);
+    setImage(m.image);
+  }, [m]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const base64 = await getBase64(e);
@@ -190,7 +195,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
     dispatch(
       updateProfile({
         ...profile,
-        ...{ markers: profile.markers.filter((m: MarkerType) => m._id !== marker._id) },
+        ...{ markers: profile.markers.filter((marker: MarkerType) => marker._id !== m._id) },
       }),
     );
 
@@ -210,11 +215,15 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
     dispatch(
       updateProfile({
         ...profile,
-        ...{ markers: profile.markers.map((m: MarkerType) => (m._id === marker._id ? { ...m, ...newMarker } : m)) },
+        ...{
+          markers: profile.markers.map((marker: MarkerType) =>
+            marker._id === m._id ? { ...marker, ...newMarker } : marker,
+          ),
+        },
       }),
     );
 
-    onClick({ ...marker, ...newMarker });
+    onClick({ ...m, ...newMarker });
   };
 
   return (
@@ -241,7 +250,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker, onClick }: MarkerPopupProps
               <FaPencilAlt onClick={() => setEditing(!editing)} />
             </GLTooltip>
           </PopupActions>
-          {markerEdited() ? (
+          {editing ? (
             <ApplyButton>
               <BsCheck
                 onClick={(e) => {

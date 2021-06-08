@@ -9,6 +9,11 @@ type GLMarkerProps = {
 } & MarkerType;
 
 const GLMarker: FC<GLMarkerProps> = ({ onClick, ...rest }: GLMarkerProps) => {
+  // const handleClick = () => {
+  //   onClick(null);
+  //   if (rest === null) onClick(rest);
+  // };
+
   return (
     <Marker longitude={rest.longitude} latitude={rest.latitude} offsetTop={-20} offsetLeft={-10}>
       <GlTooltip content={rest.title ? rest.title : 'Click to edit'} direction="top">
