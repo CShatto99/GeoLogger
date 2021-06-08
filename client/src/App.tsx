@@ -15,6 +15,7 @@ import Home from './components/Home';
 import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/CreateProfile';
 import PublicProfile from './components/profile/PublicProfile';
+import Explore from './components/explore/Explore';
 import './App.css';
 
 const RenderNavbar: FC = () => {
@@ -45,13 +46,14 @@ const App: FC = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/register">
+            <Route path="/register">
               <Register />
             </Route>
-            <Route exact path="/login">
+            <Route path="/login">
               <Login />
             </Route>
-            <PrivateRoute exact path="/map" component={Mapbox} />
+            <PrivateRoute path="/explore" component={Explore} />
+            <PrivateRoute path="/map" component={Mapbox} />
             <PrivateRoute path="/settings" component={Settings} />
             <PrivateRoute path="/create" component={CreateProfile} />
             <PrivateRoute path="/profile/:username" component={PublicProfile} />

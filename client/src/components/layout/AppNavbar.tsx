@@ -206,6 +206,9 @@ const AppNavbar: FC = () => {
 
   const userLinks = (
     <>
+      <NavbarLink to="/explore" onClick={() => setNavIcon('nav-items-hide')}>
+        Explore
+      </NavbarLink>
       <NavbarLink to="/map" onClick={() => setNavIcon('nav-items-hide')}>
         Map
       </NavbarLink>

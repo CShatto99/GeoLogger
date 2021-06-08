@@ -14,6 +14,7 @@ const auth = createSlice({
       email: '',
       profileSetUp: false,
     },
+    users: [],
     isAuth: false,
     loading: true,
   },
@@ -51,8 +52,16 @@ const auth = createSlice({
       return {
         ...state,
         user: { date: '', username: '', email: '', profileSetUp: false },
+        users: [],
         isAuth: false,
         loading: true,
+      };
+    },
+    load_users: (state, action) => {
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
       };
     },
   },
@@ -60,7 +69,7 @@ const auth = createSlice({
 
 export default auth.reducer;
 
-const { login_user, load_user, logout_user, action_ended, action_started } = auth.actions;
+const { login_user, load_user, logout_user, load_users, action_ended, action_started } = auth.actions;
 
 export const loadUser: Actions['auth'] = () => async (dispatch) => {
   try {
@@ -202,4 +211,14 @@ export const deleteUser: Actions['auth'] = (body) => async (dispatch) => {
     dispatch(setAlert(err.response.data.msg, 'ERR_delete_account', err.response.status));
   }
   dispatch(action_ended());
+};
+
+export const loadUsers: Actions['auth'] = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get('/api/user/users');
+
+    dispatch(load_users(data));
+  } catch (err) {
+    dispatch(setAlert(err.response.data.msg, 'ERR_delete_account', err.response.status));
+  }
 };

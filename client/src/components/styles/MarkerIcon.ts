@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FcGlobe } from 'react-icons/fc';
 
 const MarkerIcon = styled(FcGlobe)`
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
 
   &:focus {

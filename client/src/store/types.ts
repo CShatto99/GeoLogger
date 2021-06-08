@@ -19,7 +19,7 @@ export type Profile = {
   markers: MarkerType[];
 };
 
-type User = {
+export type User = {
   date?: string;
   username?: string;
   email?: string;
@@ -29,6 +29,13 @@ type User = {
   profileSetUp?: boolean;
   deletePass?: string;
   identifier?: string;
+};
+
+export type PublicUser = {
+  _id: string;
+  username: string;
+  email: string;
+  date: string;
 };
 
 export interface Actions {

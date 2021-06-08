@@ -225,4 +225,15 @@ router.delete("/delete-user", authToken, async (req, res) => {
   }
 });
 
+// @route GET /api/user/users
+// @desc Get all users
+// @access Private
+router.get("/users", authToken, async (req, res) => {
+  try {
+    const users = await User.find().select(" -__v -password -profileSetUp");
+
+    res.json(users);
+  } catch (error) {}
+});
+
 module.exports = router;
