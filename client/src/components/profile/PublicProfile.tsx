@@ -7,6 +7,7 @@ import ProfilePicture from './publicProfile/ProfilePicture';
 import PhotoAlbum from './publicProfile/PhotoAlbum';
 import { getPublicProfile } from '../../store/profile';
 import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
+import { MarkerType } from '../../store/types';
 
 const PublicProfileContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
@@ -117,7 +118,7 @@ const PublicProfile: FC = () => {
             </VisitedInfo>
           </div>
         </ProfileInfo>
-        <PhotoAlbum markers={publicProfile.markers} />
+        <PhotoAlbum markers={publicProfile.markers.filter((marker: MarkerType) => marker.image)} />
       </PublicProfileContent>
     </PublicProfileContainer>
   );

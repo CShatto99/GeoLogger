@@ -7,6 +7,10 @@ import Photo from './Photo';
 const PhotoAblumContainer = styled.div`
   grid-column: 2 / span 4;
 
+  & img {
+    box-shadow: none;
+  }
+
   @media ${({ theme }) => theme.mediaQueries.md} {
     grid-column: 1 / span 1;
   }
@@ -31,9 +35,13 @@ const PhotoAlbum: FC<PhotoAlbumProps> = ({ markers }: PhotoAlbumProps) => {
     <PhotoAblumContainer>
       <h1>Photo Album</h1>
       <Divider />
-      <Photos>
-        {markers.map((m: MarkerType) => (m.image ? <Photo title={m.title} image={m.image} /> : null)).reverse()}
-      </Photos>
+      {markers.length <= 0 ? (
+        <h3>This user has no images uploaded :(</h3>
+      ) : (
+        <Photos>
+          {markers.map((m: MarkerType) => <Photo key={m._id} title={m.title} image={m.image} />).reverse()}
+        </Photos>
+      )}
     </PhotoAblumContainer>
   );
 };
