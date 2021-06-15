@@ -32,7 +32,7 @@ const auth = createSlice({
       };
     },
     login_user: (state) => {
-      localStorage.setItem('isAuth', 'true');
+      localStorage.setItem('gl_is_auth', 'true');
       return {
         ...state,
         isAuth: true,
@@ -48,7 +48,7 @@ const auth = createSlice({
       };
     },
     logout_user: (state) => {
-      localStorage.removeItem('isAuth');
+      localStorage.removeItem('gl_is_auth');
       return {
         ...state,
         user: { date: '', username: '', email: '', profileSetUp: false },

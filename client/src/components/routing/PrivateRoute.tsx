@@ -1,20 +1,21 @@
 import React, { FC } from 'react';
 import { Route, Redirect, RouteProps, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../store/index';
+import isAuthenticated from '../../utils/isAuthenticated';
 
 type PrivateRouteProps = {
   component: React.FC;
 } & RouteProps;
 
 const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }: PrivateRouteProps) => {
-  const { user, isAuth } = useAppSelector((state) => state.auth);
+  const { user } = useAppSelector((state) => state.auth);
   const location = useLocation();
 
   return (
     <Route {...rest}>
-      {!localStorage.getItem('isAuth') && !user.profileSetUp && location.pathname !== '/create' ? (
+      {!isAuthenticated() && !user.profileSetUp && location.pathname !== '/create' ? (
         <Redirect to={{ pathname: '/create', state: { from: location } }} />
-      ) : !isAuth ? (
+      ) : !isAuthenticated() ? (
         <Redirect to={{ pathname: '/login', state: { from: location } }} />
       ) : (
         <Component />
