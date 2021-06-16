@@ -4,11 +4,11 @@ import { BsCheck } from 'react-icons/bs';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateProfile, updateMapActionStatus } from '../../../store/profile';
-import GeoLoggerModal from '../../GLModal';
-import CardLabel from '../../styles/CardLabel';
-import { ApplyButton } from '../../styles/Buttons';
-import usa from '../../../json/US.json';
-import GLTooltip from '../../GLTooltip';
+import GeoLoggerModal from '../../common/GLModal';
+import CardLabel from '../../common/CardLabel';
+import { ApplyButton } from '../../common/Buttons';
+import usa from '../../../assets/json/US.json';
+import GLTooltip from '../../common/GLTooltip';
 
 const Checklist = styled.div`
   & > div {

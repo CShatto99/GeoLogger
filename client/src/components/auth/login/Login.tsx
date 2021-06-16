@@ -1,14 +1,14 @@
 import React, { FC, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { login } from '../../store/auth';
-import { AuthContainer, AuthContent, FormContent, FooterContent } from './Register';
-import { AuthInput, PasswordInput } from '../styles/Inputs';
-import Brand from '../layout/Brand';
-import Button from '../styles/Buttons';
-import { DefaultLink, DangerLink } from '../styles/Links';
-import Alert from '../styles/Alert';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { login } from '../../../store/auth';
+import { AuthContainer, AuthContent, FormContent, FooterContent } from '../register/Register';
+import { AuthInput, PasswordInput } from '../../common/Inputs';
+import GLBrand from '../../common/GLBrand';
+import Button from '../../common/Buttons';
+import { DefaultLink, DangerLink } from '../../common/Links';
+import Alert from '../../common/Alert';
 
 const LoginFormContent = styled(FormContent)`
   & > .forgot-pass > a {
@@ -44,7 +44,7 @@ const Login: FC = () => {
     <AuthContainer>
       <AuthContent>
         <LoginFormContent onSubmit={onSubmit}>
-          <Brand />
+          <GLBrand />
           <h2>Log in to your account</h2>
           {ERR_login && <Alert type="error" msg={ERR_login} />}
           <div>

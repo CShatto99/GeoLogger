@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { MarkerType } from '../../../store/types';
-import Divider from '../../styles/Divider';
+import Divider from '../../common/styles/Divider';
 import Photo from './Photo';
 
 const PhotoAblumContainer = styled.div`

@@ -1,14 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { changePassword, deleteUser } from '../../store/auth';
-import GLModal from '../GLModal';
-// import PasswordLabel from '../auth/PasswordLabel';
-import { PasswordInput } from '../styles/Inputs';
-import Button, { DangerButton } from '../styles/Buttons';
-import { DefaultLink } from '../styles/Links';
-import Alert from '../styles/Alert';
-import PasswordLabel from '../auth/PasswordLabel';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { changePassword, deleteUser } from '../../../store/auth';
+import GLModal from '../../common/GLModal';
+import { PasswordInput } from '../../common/Inputs';
+import Button, { DangerButton } from '../../common/Buttons';
+import { DefaultLink } from '../../common/Links';
+import Alert from '../../common/Alert';
+import PasswordLabel from '../../auth/PasswordLabel';
 
 const ChangePassword = styled.div`
   margin: 1rem 0 2.5rem 0;

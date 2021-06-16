@@ -1,20 +1,19 @@
 import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
-import GeneralInput, { Textarea } from '../styles/Inputs';
 import { IoCloseSharp } from 'react-icons/io5';
 import { BsCheck } from 'react-icons/bs';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { clearAlert, setAlert } from '../../store/alert';
-import { updateProfile } from '../../store/profile';
-import { MarkerType } from '../../store/types';
-import GLModal from '../GLModal';
-import { ApplyButton, DangerButton } from '../styles/Buttons';
-import GenDivider from '../styles/Divider';
-import getBase64 from '../../utils/handleFile';
-import GLTooltip from '../GLTooltip';
-import ExpandedImage from './ExpandedImage';
-// import Alert from '../styles/Alert';
+import { useAppDispatch, useAppSelector } from '../../../../store';
+import { clearAlert, setAlert } from '../../../../store/alert';
+import { updateProfile } from '../../../../store/profile';
+import { MarkerType } from '../../../../store/types';
+import ExpandedImage from '../../../common/ExpandedImage';
+import GLModal from '../../../common/GLModal';
+import { ApplyButton, DangerButton } from '../../../common/Buttons';
+import GenDivider from '../../../common/styles/Divider';
+import getBase64 from '../../../../utils/handleFile';
+import GLTooltip from '../../../common/GLTooltip';
+import GeneralInput, { Textarea } from '../../../common/Inputs';
 
 const PopupContainer = styled.div`
   max-width: 300px;

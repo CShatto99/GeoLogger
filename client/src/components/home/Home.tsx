@@ -1,18 +1,12 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import usa from '../json/US.json';
-import darkV10 from '../img/dark-v10.png';
-import lightV10 from '../img/light-v10.png';
-import outdoorsV11 from '../img/outdoors-v11.png';
-import streetsV11 from '../img/streets-v11.png';
-import satelliteV9 from '../img/satellite-v9.png';
-import vacaEx from '../img/vaca-ex.png';
-import GeneralLink from './styles/Links';
-
-const HomePage = styled.div``;
+import GeneralLink from '../common/Links';
+import usa from '../../assets/json/US.json';
+import vacaEx from '../../assets/img/vaca-ex.png';
+import mapImages from '../../utils/getMapImages';
 
 const LandingSection = styled.div`
-  background-image: url(${satelliteV9});
+  background-image: url(${mapImages.satelliteV9});
   background-size: cover;
   display: grid;
   place-items: center;
@@ -200,7 +194,7 @@ const Home: FC = () => {
   }, []);
 
   return (
-    <HomePage>
+    <>
       <LandingSection>
         <LandingContent>
           <h1>Log your vacation history with GeoLogger</h1>
@@ -215,23 +209,23 @@ const Home: FC = () => {
         <MapContent>
           <h1>Customize Your Map Style</h1>
           <MapStyleContainer>
-            <img src={darkV10} alt="mapbox dark-v10 theme" />
+            <img src={mapImages.darkV10} alt="mapbox dark-v10 theme" />
             <h3>Dark V10</h3>
           </MapStyleContainer>
           <MapStyleContainer>
-            <img src={lightV10} alt="mapbox light-v10 theme" />
+            <img src={mapImages.lightV10} alt="mapbox light-v10 theme" />
             <h3>Light V10</h3>
           </MapStyleContainer>
           <MapStyleContainer>
-            <img src={outdoorsV11} alt="mapbox outdoors-v11 theme" />
+            <img src={mapImages.outdoorsV11} alt="mapbox outdoors-v11 theme" />
             <h3>Outdoors V11</h3>
           </MapStyleContainer>
           <MapStyleContainer>
-            <img src={streetsV11} alt="mapbox streets-v11 theme" />
+            <img src={mapImages.streetsV11} alt="mapbox streets-v11 theme" />
             <h3>Streets V11</h3>
           </MapStyleContainer>
           <MapStyleContainer className="md:col-span-2 sm:col-span-1">
-            <img src={satelliteV9} alt="mapbox satellite-v9 theme" />
+            <img src={mapImages.satelliteV9} alt="mapbox satellite-v9 theme" />
             <h3>Satellite V9</h3>
           </MapStyleContainer>
         </MapContent>
@@ -245,7 +239,7 @@ const Home: FC = () => {
           <ModalProp>{modalDemo}</ModalProp>
         </LoggingContent>
       </LoggingSection>
-    </HomePage>
+    </>
   );
 };
 

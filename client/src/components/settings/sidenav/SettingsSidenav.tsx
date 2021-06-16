@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const SettingsNavContainer = styled.div`
+const SettingsSidenavContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@ const NavItem = styled(Link)`
 
 const paths = ['/settings/profile', '/settings/account', '/settings/appearance'];
 
-const SettingsNav: FC = () => {
+const SettingsSidenav: FC = () => {
   const { url } = useRouteMatch();
   const { pathname } = useLocation();
 
@@ -60,7 +60,7 @@ const SettingsNav: FC = () => {
 
   return (
     <div>
-      <SettingsNavContainer>
+      <SettingsSidenavContainer>
         <div>Settings</div>
         <NavItem to={`${url}/profile`} className={getClassName(0)}>
           Profile
@@ -71,9 +71,9 @@ const SettingsNav: FC = () => {
         <NavItem to={`${url}/appearance`} className={getClassName(2)}>
           Appearance
         </NavItem>
-      </SettingsNavContainer>
+      </SettingsSidenavContainer>
     </div>
   );
 };
 
-export default SettingsNav;
+export default SettingsSidenav;

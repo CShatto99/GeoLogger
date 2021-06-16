@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { RiShareForwardBoxLine } from 'react-icons/ri';
-import CardLabel from './styles/CardLabel';
+import CardLabel from './CardLabel';
 import GLTooltip from './GLTooltip';
 
 const MapTypeContainer = styled.div`

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 // import Button from '../styles/Buttons';
-import { Profile } from '../../store/types';
+import { Profile } from '../../../store/types';
 
 const TitleSection = styled.div`
   margin-bottom: 2rem;

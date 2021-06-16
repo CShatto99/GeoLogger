@@ -1,7 +1,7 @@
 import { FC } from 'react';
 // import { CgProfile } from 'react-icons/cg';
 import styled from 'styled-components';
-import defaultPFP from '../../../img/defaultPFP.png';
+import defaultPFP from '../../../assets/img/defaultPFP.png';
 
 const PFPContainer = styled.div`
   margin-bottom: 1rem;

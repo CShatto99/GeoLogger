@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FcGlobe } from 'react-icons/fc';
 import styled from 'styled-components';
 
-const BrandStyle = styled.div`
+const GLBrandStyle = styled.div`
   display: flex;
   align-items: center;
 
@@ -30,13 +30,13 @@ const BrandStyle = styled.div`
   }
 `;
 
-const Brand: FC = () => {
+const GLBrand: FC = () => {
   return (
-    <BrandStyle>
-      <FcGlobe color="red !important" />
+    <GLBrandStyle>
+      <FcGlobe />
       <Link to="/">GeoLogger</Link>
-    </BrandStyle>
+    </GLBrandStyle>
   );
 };
 
-export default Brand;
+export default GLBrand;

@@ -1,8 +1,8 @@
 import { FC, memo } from 'react';
 import { Marker } from 'react-map-gl';
-import GLTooltip from '../GLTooltip';
-import { MarkerType } from '../../store/types';
-import MarkerIcon from '../styles/MarkerIcon';
+import GLTooltip from '../../common/GLTooltip';
+import { MarkerType } from '../../../store/types';
+import MarkerIcon from '../../common/styles/MarkerIcon';
 
 type MarkersProps = {
   markers: MarkerType[];

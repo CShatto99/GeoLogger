@@ -5,23 +5,23 @@ import { ThemeProvider } from 'styled-components';
 import { useTheme } from './theme/useTheme';
 import store from './store/index';
 import { refreshUser } from './store/auth';
-import AppNavbar from './components/layout/AppNavbar';
-import Footer from './components/layout/Footer';
+import GLNavbar from './components/common/GLNavbar';
+import Footer from './components/common/Footer';
 import PrivateRoute from './components/routing/PrivateRoute';
-import Mapbox from './components/map/Mapbox';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import Home from './components/Home';
+import Map from './components/map/Map';
+import Register from './components/auth/register/Register';
+import Login from './components/auth/login/Login';
+import Home from './components/home/Home';
 import Settings from './components/settings/Settings';
-import CreateProfile from './components/profile/CreateProfile';
-import PublicProfile from './components/profile/PublicProfile';
+import CreateProfile from './components/profile/createProfile/CreateProfile';
+import PublicProfile from './components/profile/publicProfile/PublicProfile';
 import Explore from './components/explore/Explore';
 import './App.css';
 
 const RenderNavbar: FC = () => {
   const location = useLocation();
 
-  return location.pathname !== '/login' && location.pathname !== '/register' ? <AppNavbar /> : null;
+  return location.pathname !== '/login' && location.pathname !== '/register' ? <GLNavbar /> : null;
 };
 
 const RenderFooter: FC = () => {
@@ -46,17 +46,17 @@ const App: FC = () => {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/register">
+            <Route exact path="/register">
               <Register />
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
             </Route>
-            <PrivateRoute path="/explore" component={Explore} />
-            <PrivateRoute path="/map" component={Mapbox} />
+            <PrivateRoute exact path="/explore" component={Explore} />
+            <PrivateRoute exact path="/map" component={Map} />
             <PrivateRoute path="/settings" component={Settings} />
-            <PrivateRoute path="/create" component={CreateProfile} />
-            <PrivateRoute path="/profile/:username" component={PublicProfile} />
+            <PrivateRoute exact path="/create" component={CreateProfile} />
+            <PrivateRoute exact path="/profile/:username" component={PublicProfile} />
           </Switch>
           <RenderFooter />
         </Provider>

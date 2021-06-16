@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import ExpandedImage from '../../map/ExpandedImage';
+import ExpandedImage from './../../common/ExpandedImage';
 
 const PhotoContainer = styled.div`
   display: flex;

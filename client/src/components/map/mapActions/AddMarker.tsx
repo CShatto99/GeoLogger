@@ -3,7 +3,7 @@ import { useToasts } from 'react-toast-notifications';
 import { RiRoadMapFill } from 'react-icons/ri';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateMapActionStatus } from '../../../store/profile';
-import GLTooltip from '../../GLTooltip';
+import GLTooltip from '../../common/GLTooltip';
 
 const AddMarker: FC = () => {
   const dispatch = useAppDispatch();

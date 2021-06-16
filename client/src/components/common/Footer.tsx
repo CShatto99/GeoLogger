@@ -5,10 +5,10 @@ import { FaGithub } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
 import { setAlert } from '../../store/alert';
-import GeneralLink, { DefaultLinkHTML } from '../styles/Links';
-import GeneralInput from '../styles/Inputs';
-import Alert from '../styles/Alert';
-import { PrimaryButtonStyle } from '../styles/Buttons';
+import GeneralLink, { DefaultLinkHTML } from './Links';
+import GeneralInput from './Inputs';
+import Alert from './Alert';
+import { PrimaryButtonStyle } from './Buttons';
 
 const FooterContainer = styled.footer`
   background-color: ${({ theme }) => theme.colors.white};

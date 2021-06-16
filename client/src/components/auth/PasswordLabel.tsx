@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
 import { IoInformationCircle } from 'react-icons/io5';
 import styled from 'styled-components';
-import GLModal from '../GLModal';
+import GLModal from '../common/GLModal';
 
 export const PasswordLabelStyle = styled.div`
   display: flex;

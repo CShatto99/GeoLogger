@@ -2,7 +2,7 @@ import { FC } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { IoCloseSharp, IoDownloadOutline } from 'react-icons/io5';
-import GLTooltip from '../GLTooltip';
+import GLTooltip from './GLTooltip';
 // import axios from 'axios';
 
 const ExpandedImageRoot = styled.div`

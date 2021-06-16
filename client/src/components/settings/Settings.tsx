@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Route, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
-import SettingsNav from './SettingsNav';
-import ProfileInfo from './ProfileInfo';
-import Account from './Account';
-import Appearance from './Appearance';
+import SettingsSidenav from './sidenav/SettingsSidenav';
+import ProfileInfo from './sidenav/ProfileInfo';
+import Account from './sidenav/Account';
+import Appearance from './sidenav/Appearance';
 import { useAppSelector } from '../../store';
-import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
+import GLSpinner from '../common/GLSpinner';
 
 const SettingsContainer = styled.div`
   min-height: calc(100vh - 7.5rem);
@@ -42,11 +42,11 @@ const Settings: FC = () => {
   const { profile, loading } = useAppSelector((state) => state.profile);
 
   return loading ? (
-    <GeoLoggerSpinner />
+    <GLSpinner />
   ) : (
     <SettingsContainer>
       <SettingsContent>
-        <SettingsNav />
+        <SettingsSidenav />
         <SettingsTabContent>
           <Route path={`${url}/profile`}>
             <ProfileInfo profile={profile} />

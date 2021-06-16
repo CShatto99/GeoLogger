@@ -1,16 +1,15 @@
 import React, { FC, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { register } from '../../store/auth';
-import Brand from '../layout/Brand';
-import { AuthInput, PasswordInput } from '../styles/Inputs';
-import Button from '../styles/Buttons';
-import { DefaultLink, DangerLink } from '../styles/Links';
-import satelliteV9 from '../../img/satellite-v9.png';
-import Alert from '../styles/Alert';
-import PasswordLabel from './PasswordLabel';
-// import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { register } from '../../../store/auth';
+import GLBrand from '../../common/GLBrand';
+import { AuthInput, PasswordInput } from '../../common/Inputs';
+import Button from '../../common/Buttons';
+import { DefaultLink, DangerLink } from '../../common/Links';
+import satelliteV9 from '../../../assets/img/satellite-v9.png';
+import Alert from '../../common/Alert';
+import PasswordLabel from '../PasswordLabel';
 
 export const AuthContainer = styled.div`
   min-height: 100vh;
@@ -126,7 +125,7 @@ const Register: FC = () => {
     <AuthContainer>
       <AuthContent>
         <FormContent onSubmit={onSubmit}>
-          <Brand />
+          <GLBrand />
           <h2>Create an accoount</h2>
           {ERR_register && <Alert type="error" msg={ERR_register} />}
           <div>

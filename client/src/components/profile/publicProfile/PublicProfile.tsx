@@ -2,12 +2,12 @@ import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FcGlobe } from 'react-icons/fc';
-import { useAppDispatch, useAppSelector } from '../../store';
-import ProfilePicture from './publicProfile/ProfilePicture';
-import PhotoAlbum from './publicProfile/PhotoAlbum';
-import { getPublicProfile } from '../../store/profile';
-import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
-import { MarkerType } from '../../store/types';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import ProfilePicture from './ProfilePicture';
+import PhotoAlbum from './PhotoAlbum';
+import { getPublicProfile } from '../../../store/profile';
+import GLSpinner from '../../common/GLSpinner';
+import { MarkerType } from '../../../store/types';
 
 const PublicProfileContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
@@ -98,7 +98,7 @@ const PublicProfile: FC = () => {
   }, []);
 
   return loading ? (
-    <GeoLoggerSpinner />
+    <GLSpinner />
   ) : (
     <PublicProfileContainer>
       <PublicProfileContent>

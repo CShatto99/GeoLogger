@@ -44,7 +44,7 @@ type SpinnerProps = {
   borderWidth?: string;
 };
 
-const GeoLoggerSpinner: FC<SpinnerProps> = ({ size = '7rem', borderWidth = '1rem' }: SpinnerProps) => {
+const GLSpinner: FC<SpinnerProps> = ({ size = '7rem', borderWidth = '1rem' }: SpinnerProps) => {
   return (
     <SpinnerContainer>
       <Spinner
@@ -59,4 +59,4 @@ const GeoLoggerSpinner: FC<SpinnerProps> = ({ size = '7rem', borderWidth = '1rem
   );
 };
 
-export default GeoLoggerSpinner;
+export default GLSpinner;

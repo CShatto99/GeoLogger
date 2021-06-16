@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Marker } from 'react-map-gl';
-import { MarkerType } from '../../store/types';
-import MarkerIcon from '../styles/MarkerIcon';
-import GlTooltip from '../GLTooltip';
+import { MarkerType } from '../../../../store/types';
+import MarkerIcon from '../../../common/styles/MarkerIcon';
+import GlTooltip from '../../../common/GLTooltip';
 
 type GLMarkerProps = {
   onClick: React.Dispatch<React.SetStateAction<MarkerType | null>>;

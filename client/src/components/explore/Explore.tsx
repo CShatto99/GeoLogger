@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { PublicUser } from '../../store/types';
 import { loadUsers } from '../../store/auth';
-import { DefaultLink } from '../styles/Links';
-import Divider from '../styles/Divider';
+import { DefaultLink } from '../common/Links';
+import Divider from '../common/styles/Divider';
 
 const ExploreContainer = styled.div`
   min-height: calc(100vh - 7.5rem);

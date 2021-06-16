@@ -1,16 +1,16 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaHighlighter } from 'react-icons/fa';
-import { ColorBox } from '../../profile/CreateProfile';
-import { DefaultLinkHTML } from '../../styles/Links';
-import CardLabel from '../../styles/CardLabel';
-import { AuthInput } from '../../styles/Inputs';
-import GeoLoggerModal from '../../GLModal';
+import { ColorBox } from '../../profile/createProfile/CreateProfile';
+import { DefaultLinkHTML } from '../../common/Links';
+import CardLabel from '../../common/CardLabel';
+import { AuthInput } from '../../common/Inputs';
+import GeoLoggerModal from '../../common/GLModal';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateProfile, updateMapActionStatus } from '../../../store/profile';
-import colors from '../../../json/colors.json';
+import colors from '../../../assets/json/colors.json';
 import { BsCheck } from 'react-icons/bs';
-import GLTooltip from '../../GLTooltip';
+import GLTooltip from '../../common/GLTooltip';
 
 const ColorContent = styled.div`
   display: grid;

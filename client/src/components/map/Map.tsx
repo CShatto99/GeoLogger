@@ -4,20 +4,19 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { updateMapActionStatus, updateProfile } from '../../store/profile';
-import geoJSON from '../../json/geoJSON.json';
-import GeoLoggerSpinner from '../layout/GeoLoggerSpinner';
+import geoJSON from '../../assets/json/geoJSON.json';
+import GLSpinner from '../common/GLSpinner';
 import useWindowDimensions from '../../hooks/windowDimensions';
 import MapActions from './mapActions/MapActions';
-import Markers from './Markers';
-// import MarkerPopup from './MarkerPopup';
+import Markers from './markers/Markers';
 import { MarkerType } from '../../store/types';
-import MarkerPopup from './MarkerPopup';
+import MarkerPopup from './markers/marker/MarkerPopup';
 
 const MapContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
 `;
 
-const Mapbox: FC = () => {
+const Map: FC = () => {
   const dispatch = useAppDispatch();
   const { profile, actionsStatus, loading } = useAppSelector((state) => state.profile);
   const { width, height } = useWindowDimensions();
@@ -89,7 +88,7 @@ const Mapbox: FC = () => {
   };
 
   return loading ? (
-    <GeoLoggerSpinner />
+    <GLSpinner />
   ) : (
     <MapContainer>
       <MapActions />
@@ -122,4 +121,4 @@ const Mapbox: FC = () => {
   );
 };
 
-export default memo(Mapbox);
+export default memo(Map);

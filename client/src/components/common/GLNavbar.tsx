@@ -3,10 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5';
 import { VscAccount } from 'react-icons/vsc';
-import Brand from './Brand';
+import GLBrand from './GLBrand';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { logout } from '../../store/auth';
-import GeneralLink from '../styles/Links';
+import GeneralLink from './Links';
 
 const NavbarContainer = styled.nav`
   width: 100%;
@@ -184,7 +184,7 @@ const DropdownToggler = styled(NavbarLink)`
   }
 `;
 
-const AppNavbar: FC = () => {
+const GLNavbar: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { user, isAuth } = useAppSelector((state) => state.auth);
@@ -238,7 +238,7 @@ const AppNavbar: FC = () => {
   return (
     <NavbarContainer>
       <NavbarContents>
-        <Brand />
+        <GLBrand />
         <NavbarLinks className={navIcon}>
           <NavbarLink to="/" onClick={() => setNavIcon('nav-items-hide')}>
             Home
@@ -271,4 +271,4 @@ const AppNavbar: FC = () => {
   );
 };
 
-export default AppNavbar;
+export default GLNavbar;
