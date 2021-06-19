@@ -5,8 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import { useTheme } from './theme/useTheme';
 import store from './store/index';
 import { refreshUser } from './store/auth';
-import GLNavbar from './components/common/GLNavbar';
-import Footer from './components/common/Footer';
+import NavigationBar from './components/layout/NavigationBar';
+import Footer from './components/layout/Footer';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Map from './components/map/Map';
 import Register from './components/auth/register/Register';
@@ -16,12 +16,13 @@ import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/createProfile/CreateProfile';
 import PublicProfile from './components/profile/publicProfile/PublicProfile';
 import Explore from './components/explore/Explore';
+import NotFound from './components/layout/NotFound';
 import './App.css';
 
 const RenderNavbar: FC = () => {
   const location = useLocation();
 
-  return location.pathname !== '/login' && location.pathname !== '/register' ? <GLNavbar /> : null;
+  return location.pathname !== '/login' && location.pathname !== '/register' ? <NavigationBar /> : null;
 };
 
 const RenderFooter: FC = () => {
@@ -57,6 +58,7 @@ const App: FC = () => {
             <PrivateRoute path="/settings" component={Settings} />
             <PrivateRoute exact path="/create" component={CreateProfile} />
             <PrivateRoute exact path="/profile/:username" component={PublicProfile} />
+            <Route component={NotFound} />
           </Switch>
           <RenderFooter />
         </Provider>

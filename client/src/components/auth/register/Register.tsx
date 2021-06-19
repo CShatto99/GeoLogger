@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { register } from '../../../store/auth';
-import GLBrand from '../../common/GLBrand';
+import Brand from '../../common/Brand';
 import { AuthInput, PasswordInput } from '../../common/Inputs';
 import Button from '../../common/Buttons';
 import { DefaultLink, DangerLink } from '../../common/Links';
@@ -125,7 +125,7 @@ const Register: FC = () => {
     <AuthContainer>
       <AuthContent>
         <FormContent onSubmit={onSubmit}>
-          <GLBrand />
+          <Brand />
           <h2>Create an accoount</h2>
           <Alert type="error" msg={ERR_register} />
           <div>
