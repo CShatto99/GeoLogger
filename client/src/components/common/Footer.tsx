@@ -8,7 +8,7 @@ import { setAlert } from '../../store/alert';
 import GeneralLink, { DefaultLinkHTML } from './Links';
 import GeneralInput from './Inputs';
 import Alert from './Alert';
-import { PrimaryButtonStyle } from './Buttons';
+import Button from './Buttons';
 
 const FooterContainer = styled.footer`
   background-color: ${({ theme }) => theme.colors.white};
@@ -66,10 +66,6 @@ const SiteLinks = styled.div`
   align-items: center;
 `;
 
-const SendButton = styled(PrimaryButtonStyle)`
-  width: 100%;
-`;
-
 const GitHubLink = styled.a`
   transition: ease-out 100ms;
   color: ${({ theme }) => theme.colors.black};
@@ -98,6 +94,7 @@ const Footer: FC = () => {
 
     try {
       const { data } = await axios.post('/api/contact', { email, message }, config);
+      console.log(data.msg);
       dispatch(setAlert(data.msg, 'SUCC_contact', 200));
 
       setEmail('');
@@ -149,9 +146,9 @@ const Footer: FC = () => {
             <label>Message</label>
             <GeneralInput type="text" maxLength={280} onChange={(e) => setMessage(e.target.value)} value={message} />
           </div>
-          {ERR_contact && <Alert type="error" msg={ERR_contact} />}
-          {SUCC_contact && <Alert type="success" msg={SUCC_contact} />}
-          <SendButton>Send</SendButton>
+          <Alert type="error" msg={ERR_contact} />
+          <Alert type="success" msg={SUCC_contact} />
+          <Button disabled={!email || !message}>Send</Button>
         </form>
         <small>&copy; GeoLogger {new Date().getFullYear()}</small>
         <small>

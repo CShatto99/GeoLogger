@@ -46,7 +46,7 @@ const Login: FC = () => {
         <LoginFormContent onSubmit={onSubmit}>
           <GLBrand />
           <h2>Log in to your account</h2>
-          {ERR_login && <Alert type="error" msg={ERR_login} />}
+          <Alert type="error" msg={ERR_login} />
           <div>
             <label>Username or email</label>
             <AuthInput type="text" value={identifier} maxLength={100} onChange={(e) => setIdentifier(e.target.value)} />

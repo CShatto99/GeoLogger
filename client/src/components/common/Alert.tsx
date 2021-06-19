@@ -4,6 +4,16 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { useAppDispatch } from '../../store';
 import { clearAlert } from '../../store/alert';
 
+const AlertContainer = styled.div`
+  & > .active {
+    visibility: visible;
+    opacity: 1;
+    height: 1rem;
+    transition: all 150ms linear;
+    position: relative;
+  }
+`;
+
 const ErrorAlert = styled.div`
   background-color: ${({ theme }) => theme.colors.dangerLight};
   border-radius: 0.3rem;
@@ -15,9 +25,12 @@ const ErrorAlert = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  transition: visibility 0s all 150ms linear;
+  position: absolute;
 
-  & > p {
-  }
   & svg {
     cursor: pointer;
   }
@@ -37,16 +50,20 @@ type AlertProps = {
 const Alert: FC<AlertProps> = ({ type, msg }: AlertProps) => {
   const dispatch = useAppDispatch();
 
-  return type === 'error' ? (
-    <ErrorAlert>
-      <p>{msg}</p>
-      <IoCloseSharp onClick={() => dispatch(clearAlert())} />
-    </ErrorAlert>
-  ) : (
-    <SuccessAlert>
-      <p>{msg}</p>
-      <IoCloseSharp onClick={() => dispatch(clearAlert())} />
-    </SuccessAlert>
+  return (
+    <AlertContainer>
+      {type === 'error' ? (
+        <ErrorAlert className={msg ? 'active' : ''}>
+          <p>{msg}</p>
+          <IoCloseSharp onClick={() => dispatch(clearAlert())} />
+        </ErrorAlert>
+      ) : (
+        <SuccessAlert className={msg ? 'active' : ''}>
+          <p>{msg}</p>
+          <IoCloseSharp onClick={() => dispatch(clearAlert())} />
+        </SuccessAlert>
+      )}
+    </AlertContainer>
   );
 };
 

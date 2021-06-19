@@ -127,7 +127,7 @@ const Register: FC = () => {
         <FormContent onSubmit={onSubmit}>
           <GLBrand />
           <h2>Create an accoount</h2>
-          {ERR_register && <Alert type="error" msg={ERR_register} />}
+          <Alert type="error" msg={ERR_register} />
           <div>
             <label>Username</label>
             <AuthInput type="text" value={username} maxLength={15} onChange={(e) => setUsername(e.target.value)} />

@@ -76,8 +76,8 @@ const Account: FC = () => {
   return (
     <>
       <h1 style={{ marginBottom: '2rem' }}>Account</h1>
-      {SUCC_change_password && <Alert type="success" msg={SUCC_change_password} />}
-      {ERR_change_password && <Alert type="error" msg={ERR_change_password} />}
+      <Alert type="success" msg={SUCC_change_password} />
+      <Alert type="error" msg={ERR_change_password} />
       <ChangePassword>
         <h3>Change password</h3>
         <Divider />
@@ -119,7 +119,7 @@ const Account: FC = () => {
               <label>Enter your password:</label>
               <PasswordInput value={deletePass} maxLength={100} onChange={(e) => setDeletePass(e.target.value)} />
             </ModalFormGroup>
-            {ERR_delete_account && <Alert type="error" msg={ERR_delete_account} />}
+            <Alert type="error" msg={ERR_delete_account} />
             <DangerButton disabled={!deletePass} onClick={() => dispatch(deleteUser({ deletePass }))}>
               Delete My Account
             </DangerButton>
