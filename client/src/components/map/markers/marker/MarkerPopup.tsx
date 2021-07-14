@@ -51,14 +51,6 @@ const PopupActions = styled.div`
   }
 `;
 
-/*
-<PopupAction>
-  <GLTooltip content="Edit">
-    <FaPencilAlt onClick={() => setEditing(!editing)} />
-  </GLTooltip>
-</PopupAction>
-*/
-
 const PopupAction = styled.div`
   & > div > svg:focus {
     outline: none;
