@@ -24,16 +24,14 @@ const Explore: FC = () => {
     dispatch(loadUsers());
   }, []);
 
-  console.log(users);
   return (
     <ExploreContainer>
+      <h5 style={{ color: 'red', marginBottom: '1rem' }}>NOTE: this page is experimental and may contain bugs</h5>
       {users.map((user: PublicUser) => (
-        <>
-          <DefaultLink key={user._id} to={`/profile/${user.username}`}>
-            {user.username}
-          </DefaultLink>
+        <div key={user._id}>
+          <DefaultLink to={`/profile/${user.username}`}>{user.username}</DefaultLink>
           <Divider />
-        </>
+        </div>
       ))}
     </ExploreContainer>
   );

@@ -4,11 +4,15 @@ import ExpandedImage from './../../common/ExpandedImage';
 
 const PhotoContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
 
   & > img {
     box-shadow: none;
     cursor: pointer;
+    max-height: calc(100vh - 12rem);
+    width: auto;
+    max-width: 100%;
   }
 `;
 

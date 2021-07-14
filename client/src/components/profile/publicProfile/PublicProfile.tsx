@@ -90,7 +90,7 @@ const VisitedIcon = styled(FcGlobe)``;
 const PublicProfile: FC = () => {
   const dispatch = useAppDispatch();
   const { username } = useParams<{ username: string }>();
-  // const { user } = useAppSelector((state) => state.auth);
+  const { user } = useAppSelector((state) => state.auth);
   const { publicProfile, loading } = useAppSelector((state) => state.profile);
 
   useEffect(() => {
@@ -118,7 +118,11 @@ const PublicProfile: FC = () => {
             </VisitedInfo>
           </div>
         </ProfileInfo>
-        <PhotoAlbum markers={publicProfile.markers.filter((marker: MarkerType) => marker.image)} />
+        <PhotoAlbum
+          markers={publicProfile.markers.filter((marker: MarkerType) => marker.image)}
+          userViewingSelf={username === user.username}
+          username={username}
+        />
       </PublicProfileContent>
     </PublicProfileContainer>
   );
