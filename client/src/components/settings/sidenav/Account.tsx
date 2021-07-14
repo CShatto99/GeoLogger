@@ -7,7 +7,6 @@ import { PasswordInput } from '../../common/Inputs';
 import Button, { DangerButton } from '../../common/Buttons';
 import { DefaultLink } from '../../common/Links';
 import Alert from '../../common/Alert';
-import PasswordLabel from '../../auth/PasswordLabel';
 
 const ChangePassword = styled.div`
   margin: 1rem 0 2.5rem 0;
@@ -83,11 +82,11 @@ const Account: FC = () => {
         <Divider />
         <form onSubmit={onSubmit}>
           <FormGroup>
-            <label>Old password</label>
+            <label>Password</label>
             <PasswordInput value={oldPass} maxLength={100} onChange={(e) => setOldPass(e.target.value)} />
           </FormGroup>
           <FormGroup>
-            <PasswordLabel />
+            <label>New Password</label>
             <PasswordInput value={password} maxLength={100} onChange={(e) => setPassword(e.target.value)} />
           </FormGroup>
           <FormGroup>

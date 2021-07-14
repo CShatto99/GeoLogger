@@ -9,7 +9,6 @@ import Button from '../../common/Buttons';
 import { DefaultLink, DangerLink } from '../../common/Links';
 import satelliteV9 from '../../../assets/img/satellite-v9.png';
 import Alert from '../../common/Alert';
-import PasswordLabel from '../PasswordLabel';
 
 export const AuthContainer = styled.div`
   min-height: 100vh;
@@ -137,7 +136,7 @@ const Register: FC = () => {
             <AuthInput type="email" value={email} maxLength={100} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
-            <PasswordLabel />
+            <label>Password</label>
             <PasswordInput value={password} maxLength={100} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div>
