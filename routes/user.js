@@ -107,12 +107,16 @@ router.post("/register", async (req, res) => {
     else if (password !== confirmPass)
       return res.status(400).json({ msg: "Your passwords do not match" });
     else {
+      // const rules = {
+      //   "8 characters": password.length >= 8,
+      //   "1 number": /(?=.*?[0-9])/.test(password),
+      //   "1 lowercase letter": /(?=.*?[a-z])/.test(password),
+      //   "1 uppercase letter": /(?=.*?[A-Z])/.test(password),
+      //   "1 special character": /(?=.*?[#?!@$%^&*-])/.test(password),
+      // };
+
       const rules = {
-        "8 characters": password.length >= 8,
-        "1 number": /(?=.*?[0-9])/.test(password),
-        "1 lowercase letter": /(?=.*?[a-z])/.test(password),
-        "1 uppercase letter": /(?=.*?[A-Z])/.test(password),
-        "1 special character": /(?=.*?[#?!@$%^&*-])/.test(password),
+        "6 characters": password.length >= 6,
       };
 
       const msg = validator(password, "password", rules);

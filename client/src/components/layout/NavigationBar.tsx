@@ -192,6 +192,9 @@ const NavigationBar: FC = () => {
 
   const guestLinks = (
     <>
+      <NavbarLink to="/" onClick={() => setNavIcon('nav-items-hide')}>
+        Home
+      </NavbarLink>
       <NavbarLink to="/login" onClick={() => setNavIcon('nav-items-hide')}>
         Login
       </NavbarLink>
@@ -236,12 +239,7 @@ const NavigationBar: FC = () => {
     <NavbarContainer>
       <NavbarContents>
         <Brand />
-        <NavbarLinks className={navIcon}>
-          <NavbarLink to="/" onClick={() => setNavIcon('nav-items-hide')}>
-            Home
-          </NavbarLink>
-          {isAuth ? userLinks : guestLinks}
-        </NavbarLinks>
+        <NavbarLinks className={navIcon}>{isAuth ? userLinks : guestLinks}</NavbarLinks>
         <NavbarToggler
           onClick={() => {
             navIcon === 'nav-items-hide' ? setNavIcon('nav-items') : setNavIcon('nav-items-hide');

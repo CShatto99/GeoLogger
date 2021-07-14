@@ -46,7 +46,6 @@ const { set_alert, clear_alert } = alert.actions;
 
 export const setAlert: Actions['alert'] = (msg, key, status) => (dispatch) => {
   dispatch(set_alert({ msg, key, status }));
-  setTimeout(() => dispatch(clear_alert()), 10000);
 };
 
 export const clearAlert: Actions['alert'] = () => (dispatch) => {
