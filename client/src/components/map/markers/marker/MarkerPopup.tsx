@@ -17,6 +17,7 @@ import GeneralInput, { Textarea } from '../../../common/Inputs';
 
 const PopupContainer = styled.div`
   max-width: 300px;
+  cursor: default;
 `;
 
 const PopupButtons = styled.div`
@@ -33,14 +34,24 @@ const PopupButtons = styled.div`
 const PopupActions = styled.div`
   display: flex;
 
+  & > div:first-child > div:first-child {
+    margin-right: 0.5rem;
+  }
+
   & > div {
     cursor: pointer;
   }
 
-  & > div:first-child {
-    margin-right: 0.5rem;
+  & > div:first-child:hover svg {
+    fill: ${({ theme }) => theme.colors.danger};
   }
 
+  & > div:last-child:hover svg {
+    fill: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const PopupAction = styled.div`
   & > div > svg:focus {
     outline: none;
   }
@@ -51,14 +62,6 @@ const PopupActions = styled.div`
 
   & > div:hover > svg > path {
     transition: all 100ms ease-in;
-  }
-
-  & > div:first-child:hover > svg > path {
-    fill: ${({ theme }) => theme.colors.danger};
-  }
-
-  & > div:last-child:hover > svg > path {
-    fill: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -111,13 +114,13 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 0.5rem 0;
+  cursor: pointer;
 
   & > img {
     box-shadow: none;
     max-width: 300px;
     max-height: 300px;
     width: auto;
-    cursor: pointer;
     border-radius: 0;
   }
 `;
@@ -141,10 +144,6 @@ const PopupSection = styled.div`
 
 const CloseButton = styled(ApplyButton)`
   & > svg:hover {
-    transform: scale(1);
-  }
-
-  & > svg:hover > path {
     fill: ${({ theme }) => theme.colors.danger};
   }
 `;
@@ -230,7 +229,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker: m, onClick }: MarkerPopupPr
       <PopupContainer>
         <PopupButtons>
           <PopupActions>
-            <div>
+            <PopupAction>
               <GLTooltip content="Delete">
                 <FaTrashAlt onClick={() => setIsOpen(true)} />
               </GLTooltip>
@@ -244,10 +243,12 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker: m, onClick }: MarkerPopupPr
                   <DangerButton onClick={() => onDelete()}>Delete Marker</DangerButton>
                 </ModalBody>
               </GLModal>
-            </div>
-            <GLTooltip content="Edit">
-              <FaPencilAlt onClick={() => setEditing(!editing)} />
-            </GLTooltip>
+            </PopupAction>
+            <PopupAction>
+              <GLTooltip content="Edit">
+                <FaPencilAlt onClick={() => setEditing(!editing)} />
+              </GLTooltip>
+            </PopupAction>
           </PopupActions>
           {editing ? (
             <ApplyButton>
@@ -312,8 +313,11 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker: m, onClick }: MarkerPopupPr
             </PopupSection>
           )}
           {image && (
-            <ImageContainer style={{ marginBottom: notes || date ? '0.5rem' : '0' }}>
-              <img src={image} onClick={() => setIsExpanded(true)} />
+            <ImageContainer
+              style={{ marginBottom: notes || date ? '0.5rem' : '0' }}
+              onClick={() => setIsExpanded(true)}
+            >
+              <img src={image} />
               <ExpandedImage title={title} src={image} isOpen={isExpanded} onClose={() => setIsExpanded(false)} />
             </ImageContainer>
           )}

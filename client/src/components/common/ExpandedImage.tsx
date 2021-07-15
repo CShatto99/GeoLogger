@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { IoCloseSharp, IoDownloadOutline } from 'react-icons/io5';
 import GLTooltip from './GLTooltip';
-// import axios from 'axios';
 
 const ExpandedImageRoot = styled.div`
   & > .show {
@@ -30,8 +29,7 @@ const ExpandedImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  padding: 5.5rem 0 1.5rem 0;
-  overflow: scroll;
+  padding: 5.5rem 0 0 0;
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
     padding: 5.5rem 1rem 1rem 1rem;
@@ -78,7 +76,7 @@ const ExpandedImageHeader = styled.div`
   }
 `;
 
-const ExpandedImageSubHeader = styled.div`
+const ExpandedImageTitle = styled.div`
   display: flex;
   align-items: center;
 
@@ -109,9 +107,17 @@ const ExpandedImageSubHeader = styled.div`
 `;
 
 const ExpandedImageBody = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: #000;
+  border-radius: 0 0 0.3rem 0.3rem;
+
   & img {
     box-shadow: none;
     border-radius: 0 0 0.3rem 0.3rem !important;
+    max-height: calc(100vh - 11rem);
+    width: auto;
+    max-width: 700px;
   }
 `;
 
@@ -131,14 +137,14 @@ const ExpandedImage: FC<ExpandedImageProps> = ({ isOpen, onClose, title, src }: 
           <ExpandedImageContainer onClick={onClose} className={`ExpandedImage ${isOpen ? 'show' : ''}`}>
             <ExpandedImageContent onClick={(e) => e.stopPropagation()}>
               <ExpandedImageHeader>
-                <ExpandedImageSubHeader>
+                <ExpandedImageTitle>
                   <h2>{title}</h2>
                   <GLTooltip content="Download">
                     <a href={src} download={`${title}.png`}>
                       <IoDownloadOutline />
                     </a>
                   </GLTooltip>
-                </ExpandedImageSubHeader>
+                </ExpandedImageTitle>
                 <IoCloseSharp onClick={onClose} />
               </ExpandedImageHeader>
               <ExpandedImageBody>
