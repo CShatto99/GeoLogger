@@ -19,7 +19,7 @@ const ErrorAlert = styled.div`
   border-radius: 0.3rem;
   border: 1px solid ${({ theme }) => theme.colors.danger};
   margin-top: 0.5rem;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem;
   color: ${({ theme }) => theme.colors.black};
   text-align: left;
   display: flex;
