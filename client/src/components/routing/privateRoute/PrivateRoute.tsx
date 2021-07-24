@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Route, Redirect, RouteProps, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../store/index';
-import isAuthenticated from '../../utils/isAuthenticated';
+import { useAppSelector } from '../../../store/index';
+import isAuthenticated from '../../../utils/isAuthenticated';
 
 type PrivateRouteProps = {
   component: React.FC;

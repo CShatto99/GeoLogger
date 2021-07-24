@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Route, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAppSelector } from '../../store';
 import SettingsSidenav from './sidenav/SettingsSidenav';
 import ProfileInfo from './sidenav/ProfileInfo';
 import Account from './sidenav/Account';
 import Appearance from './sidenav/Appearance';
-import { useAppSelector } from '../../store';
 import GLSpinner from '../common/GLSpinner';
 
 const SettingsContainer = styled.div`

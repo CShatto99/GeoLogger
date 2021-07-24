@@ -7,16 +7,15 @@ import satelliteV9 from '../../assets/img/satellite-v9.png';
 
 const NotFoundContainer = styled.div`
   height: 100vh;
-  max-height: calc(100vh - 7.5rem);
+  max-height: 100vh;
   background-color: ${({ theme }) => theme.colors.white};
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${satelliteV9});
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 6rem 1.5rem 1.5rem 1.5rem;
+  padding: 0 1.5rem;
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 6rem 1rem 1rem 1rem;
-    max-height: calc(100vh - 7rem);
+    padding: 0 1rem;
   }
 `;
 

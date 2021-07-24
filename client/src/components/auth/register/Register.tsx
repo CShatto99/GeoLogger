@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { register } from '../../../store/auth';
@@ -96,7 +95,6 @@ export const FooterContent = styled.span`
 
 const Register: FC = () => {
   const dispatch = useAppDispatch();
-  const { user, isAuth } = useAppSelector((state) => state.auth);
   const { ERR_register } = useAppSelector((state) => state.alert);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -116,11 +114,7 @@ const Register: FC = () => {
     );
   };
 
-  return isAuth && !user.profileSetUp ? (
-    <Redirect to="/create" />
-  ) : isAuth && user.profileSetUp ? (
-    <Redirect to="/map" />
-  ) : (
+  return (
     <AuthContainer>
       <AuthContent>
         <FormContent onSubmit={onSubmit}>
