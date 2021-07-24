@@ -8,7 +8,6 @@ import satelliteV9 from '../../assets/img/satellite-v9.png';
 const NotFoundContainer = styled.div`
   height: 100vh;
   max-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.white};
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${satelliteV9});
   background-repeat: no-repeat;
   background-size: cover;
@@ -79,11 +78,8 @@ const InformationSection = styled.div`
 `;
 
 const SiteLinkButtons = styled.div`
-  background-color: rgba(14, 16, 18, 0.6);
-  backdrop-filter: blur(10px);
   box-sizing: border-box;
   display: flex;
-  padding: 1rem;
   border-radius: 0.3rem;
 
   & > *:not(:last-child) {
