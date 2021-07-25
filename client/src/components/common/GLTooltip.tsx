@@ -89,7 +89,7 @@ type GLTooltipProps = {
   delay?: number;
   children: React.ReactNode;
   direction?: 'top' | 'right' | 'bottom' | 'left';
-  content: React.ReactNode;
+  content?: React.ReactNode;
 };
 
 const GLTooltip: FC<GLTooltipProps> = ({ delay = 300, children, direction = 'top', content }: GLTooltipProps) => {
