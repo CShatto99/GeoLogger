@@ -17,7 +17,7 @@ const AddMarker: FC = () => {
     !actionsStatus[1] && removeToast('add-marker');
   }, [markers, actionsStatus]);
 
-  const showToast = () => {
+  const addMarker = () => {
     dispatch(updateMapActionStatus([false, true, false, false]));
     addToast(
       <>
@@ -36,7 +36,7 @@ const AddMarker: FC = () => {
   return (
     <>
       <GLTooltip content="Add Marker">
-        <RiRoadMapFill onClick={() => showToast()} />
+        <RiRoadMapFill onClick={() => addMarker()} />
       </GLTooltip>
     </>
   );

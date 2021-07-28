@@ -16,7 +16,7 @@ const NavbarContainer = styled.nav`
   background-color: rgba(14, 16, 18, 0.6);
   backdrop-filter: blur(10px);
   position: absolute;
-  z-index: 10;
+  z-index: 1;
 `;
 
 const NavbarContents = styled.div`

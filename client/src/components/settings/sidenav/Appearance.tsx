@@ -4,12 +4,11 @@ import { IoInformationCircle } from 'react-icons/io5';
 import { useAppDispatch } from '../../../store';
 import { updateProfile } from '../../../store/profile';
 import { Profile } from '../../../store/types';
+import CustomHighlight from '../../common/CustomHighlight';
 import { ColorContent as OldColorContent, ColorBox, SectionTitle } from '../../profile/createProfile/CreateProfile';
 import Divider from '../../common/styles/Divider';
 import MapType from '../../common/MapType';
 import Button from '../../common/Buttons';
-import { DefaultLinkHTML } from '../../common/Links';
-import { AuthInput } from '../../common/Inputs';
 import CardLabel from '../../common/CardLabel';
 import GLTooltip from '../../common/GLTooltip';
 import colors from '../../../assets/json/colors.json';
@@ -69,15 +68,6 @@ const ColorContent = styled(OldColorContent)`
 
 const HighlightColor = styled.div`
   margin-bottom: 2.5rem;
-`;
-
-const HexInput = styled.div`
-  display: flex;
-  align-items: center;
-
-  & > label {
-    margin-right: 0.25rem;
-  }
 `;
 
 type AppearanceProps = {
@@ -146,7 +136,6 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
             </SectionTitle>
             <Divider />
           </div>
-
           {colors.map(({ name, hex }) => (
             <ColorBox
               key={hex}
@@ -160,22 +149,10 @@ const Appearance: FC<AppearanceProps> = ({ profile }: AppearanceProps) => {
             </ColorBox>
           ))}
         </ColorContent>
-        <p style={{ marginBottom: '0.5rem' }}>
-          Not seeing your favorite color? Click{' '}
-          <DefaultLinkHTML href="https://htmlcolorcodes.com/color-picker/" target="_blank" rel="noopener noreferrer">
-            here
-          </DefaultLinkHTML>{' '}
-          for hex color codes and enter the 6-digit hex code below:
-        </p>
-        <HexInput>
-          <label>#</label>
-          <AuthInput
-            type="text"
-            value={fillColor.slice(1, fillColor.length)}
-            maxLength={6}
-            onChange={(e) => setFillColor('#' + e.target.value)}
-          />
-        </HexInput>
+        <CustomHighlight
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFillColor(e.target.value)}
+          fillColor={fillColor}
+        />
       </HighlightColor>
     </>
   );

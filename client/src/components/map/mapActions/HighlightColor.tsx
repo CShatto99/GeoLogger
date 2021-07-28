@@ -1,16 +1,15 @@
 import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { BsCheck } from 'react-icons/bs';
 import { FaHighlighter } from 'react-icons/fa';
-import { ColorBox } from '../../profile/createProfile/CreateProfile';
-import { DefaultLinkHTML } from '../../common/Links';
-import CardLabel from '../../common/CardLabel';
-import { AuthInput } from '../../common/Inputs';
-import GeoLoggerModal from '../../common/GLModal';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateProfile, updateMapActionStatus } from '../../../store/profile';
-import colors from '../../../assets/json/colors.json';
-import { BsCheck } from 'react-icons/bs';
+import CustomHighlight from '../../common/CustomHighlight';
+import { ColorBox } from '../../profile/createProfile/CreateProfile';
+import CardLabel from '../../common/CardLabel';
+import GeoLoggerModal from '../../common/GLModal';
 import GLTooltip from '../../common/GLTooltip';
+import colors from '../../../assets/json/colors.json';
 
 const ColorContent = styled.div`
   display: grid;
@@ -91,22 +90,10 @@ const HighlightColor: FC = () => {
             </ColorBox>
           ))}
         </ColorContent>
-        <p style={{ marginBottom: '0.5rem' }}>
-          Not seeing your favorite color? Click{' '}
-          <DefaultLinkHTML href="https://htmlcolorcodes.com/color-picker/" target="_blank" rel="noopener noreferrer">
-            here
-          </DefaultLinkHTML>{' '}
-          for hex color codes and enter the 6-digit hex code below:
-        </p>
-        <HexInput>
-          <label>#</label>
-          <AuthInput
-            type="text"
-            value={fillColor.slice(1, fillColor.length)}
-            maxLength={6}
-            onChange={(e) => setFillColor('#' + e.target.value)}
-          />
-        </HexInput>
+        <CustomHighlight
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFillColor(e.target.value)}
+          fillColor={fillColor}
+        />
       </GeoLoggerModal>
     </>
   );
