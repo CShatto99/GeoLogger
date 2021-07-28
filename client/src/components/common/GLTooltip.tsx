@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const TooltipWrapper = styled.div`
   display: inline-block;
+  z-index: 100;
   position: relative;
 
   & > .inactive {

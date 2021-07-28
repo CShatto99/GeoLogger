@@ -117,7 +117,7 @@ const ExpandedImageBody = styled.div`
     border-radius: 0 0 0.3rem 0.3rem !important;
     max-height: calc(100vh - 11rem);
     width: auto;
-    max-width: 700px;
+    max-width: 100%;
   }
 `;
 

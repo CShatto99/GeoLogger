@@ -19,7 +19,6 @@ const MapTypeContent = styled.div`
   cursor: pointer;
   width: 100%;
   transition: all ease-out 100ms;
-  z-index: 2;
 
   &:hover {
     transition: all ease-in 100ms;
@@ -35,18 +34,29 @@ const MapTypeContent = styled.div`
   & > img {
     position: relative;
     box-sizing: border-box;
-    z-index: 0;
   }
 `;
 
 const ViewEx = styled.a`
   position: absolute;
   z-index: 2;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: #fff;
   padding: 0.2rem;
   right: 0;
-  bottom: 0;
+  bottom: 2px;
   border-bottom-right-radius: 0.3rem;
+  width: 16px;
+  height: 16px;
+
+  & svg {
+    fill: #000;
+    transition: ease-out 100ms;
+  }
+
+  & svg:hover {
+    transition: ease-in 100ms;
+    fill: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 type MapTypeProps = {
@@ -68,11 +78,11 @@ const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapT
       >
         <CardLabel label={mapTitle} active={selectedMapStyle === mapStyle} />
         <img src={image} alt={`mapbox ${selectedMapStyle} theme`} onClick={setSelectedMapStyle} />
-        <GLTooltip direction="left" content={`View ${mapTitle} demo`}>
-          <ViewEx href={demo} target="_blank" rel="noopener noreferrer">
+        <ViewEx href={demo} target="_blank" rel="noopener noreferrer">
+          <GLTooltip direction="top" content={`View ${mapTitle} demo`}>
             <RiShareForwardBoxLine />
-          </ViewEx>
-        </GLTooltip>
+          </GLTooltip>
+        </ViewEx>
       </MapTypeContent>
     </MapTypeContainer>
   );

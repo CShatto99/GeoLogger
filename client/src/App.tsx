@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ToastProvider } from 'react-toast-notifications';
 import { ThemeProvider } from 'styled-components';
 import { useTheme } from './hooks/useTheme';
 import store from './store/index';
@@ -31,19 +32,21 @@ const App: FC = () => {
     <Router>
       <ThemeProvider theme={siteTheme}>
         <Provider store={store}>
-          <NavigationBar />
-          <Switch>
-            <PublicRoute exact path="/" component={Home} />
-            <PublicRoute exact path="/register" component={Register} />
-            <PublicRoute exact path="/login" component={Login} />
-            <PrivateRoute exact path="/explore" component={Explore} />
-            <PrivateRoute exact path="/map" component={Map} />
-            <PrivateRoute path="/settings" component={Settings} />
-            <PrivateRoute exact path="/create" component={CreateProfile} />
-            <PrivateRoute exact path="/profile/:username" component={PublicProfile} />
-            <Route component={NotFound} />
-          </Switch>
-          <Footer />
+          <ToastProvider placement="top-left">
+            <NavigationBar />
+            <Switch>
+              <PublicRoute exact path="/" component={Home} />
+              <PublicRoute exact path="/register" component={Register} />
+              <PublicRoute exact path="/login" component={Login} />
+              <PrivateRoute exact path="/explore" component={Explore} />
+              <PrivateRoute exact path="/map" component={Map} />
+              <PrivateRoute path="/settings" component={Settings} />
+              <PrivateRoute exact path="/create" component={CreateProfile} />
+              <PrivateRoute exact path="/profile/:username" component={PublicProfile} />
+              <Route component={NotFound} />
+            </Switch>
+            <Footer />
+          </ToastProvider>
         </Provider>
       </ThemeProvider>
     </Router>

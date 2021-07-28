@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { ToastProvider } from 'react-toast-notifications';
 import styled from 'styled-components';
 import AddHighlight from './AddHighlight';
 import AddMarker from './AddMarker';
@@ -51,22 +50,20 @@ const MapAction = styled.div`
 
 const MapActions: FC = () => {
   return (
-    <ToastProvider placement="top-left">
-      <MapActionsContainer>
-        <MapAction>
-          <AddHighlight />
-        </MapAction>
-        <MapAction>
-          <AddMarker />
-        </MapAction>
-        <MapAction>
-          <HighlightColor />
-        </MapAction>
-        <MapAction>
-          <MapStyle />
-        </MapAction>
-      </MapActionsContainer>
-    </ToastProvider>
+    <MapActionsContainer>
+      <MapAction>
+        <AddHighlight />
+      </MapAction>
+      <MapAction>
+        <AddMarker />
+      </MapAction>
+      <MapAction>
+        <HighlightColor />
+      </MapAction>
+      <MapAction>
+        <MapStyle />
+      </MapAction>
+    </MapActionsContainer>
   );
 };
 

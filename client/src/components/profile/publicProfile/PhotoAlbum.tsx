@@ -1,5 +1,8 @@
 import { FC } from 'react';
+import { useToasts } from 'react-toast-notifications';
 import styled from 'styled-components';
+import { useAppDispatch } from '../../../store';
+import { updateMapActionStatus } from '../../../store/profile';
 import { MarkerType } from '../../../store/types';
 import { DefaultLink } from '../../common/Links';
 import Divider from '../../common/styles/Divider';
@@ -34,9 +37,33 @@ type PhotoAlbumProps = {
 };
 
 const PhotoAlbum: FC<PhotoAlbumProps> = ({ markers, userViewingSelf, username }: PhotoAlbumProps) => {
+  const dispatch = useAppDispatch();
+  const { addToast } = useToasts();
+
+  const addMarker = () => {
+    dispatch(updateMapActionStatus([false, true, false, false]));
+    addToast(
+      <>
+        <div>
+          Click anywhere on the map to add a marker!{' '}
+          <span style={{ fontWeight: 600 }}>Once a marker is placed on the map it can not be moved.</span>
+        </div>
+      </>,
+      {
+        id: 'add-marker',
+        appearance: 'info',
+      },
+    );
+  };
+
   const noPhotosMsg = userViewingSelf ? (
     <h3>
-      You have no photos. Add a photo by <DefaultLink to="/map"> creating a marker</DefaultLink>.
+      You have no photos. Add a photo by{' '}
+      <DefaultLink to="/map" onClick={addMarker}>
+        {' '}
+        creating a marker
+      </DefaultLink>
+      .
     </h3>
   ) : (
     <h3>{username} has no public photos.</h3>
