@@ -12,7 +12,7 @@ import PublicRoute from './components/routing/publicRoute/PublicRoute';
 import Map from './components/map/Map';
 import Register from './components/auth/register/Register';
 import Login from './components/auth/login/Login';
-import NewHome from './components/home/NewHome';
+import Home from './components/home/Home';
 import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/createProfile/CreateProfile';
 import PublicProfile from './components/profile/publicProfile/PublicProfile';
@@ -45,7 +45,7 @@ const App: FC = () => {
         <Provider store={store}>
           <RenderNavbar />
           <Switch>
-            <PublicRoute exact path="/new" component={NewHome} />
+            <PublicRoute exact path="/" component={Home} />
             <PublicRoute exact path="/register" component={Register} />
             <PublicRoute exact path="/login" component={Login} />
             <PrivateRoute exact path="/explore" component={Explore} />

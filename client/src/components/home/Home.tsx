@@ -11,7 +11,7 @@ const HomeContainer = styled.div`
   }
 `;
 
-const NewHome: FC = () => {
+const Home: FC = () => {
   return (
     <HomeContainer>
       <Landing />
@@ -22,4 +22,4 @@ const NewHome: FC = () => {
   );
 };
 
-export default NewHome;
+export default Home;

@@ -34,7 +34,7 @@ const Information = styled.div`
 
   & > p {
     margin-top: 1.5rem;
-    color: ${({ theme }) => theme.colors.light};
+    color: ${({ theme }) => theme.colors.dark};
     font-size: 20px;
   }
 

@@ -4,10 +4,9 @@ import { RiShareForwardBoxLine } from 'react-icons/ri';
 import styled from 'styled-components';
 import mapTypes from '../../../utils/getMapTypes';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import GLTooltip from '../../common/GLTooltip';
 
 const CustomizeMapContainer = styled.div`
-  padding: 5rem 1.5rem 3rem 1.5rem;
+  padding: 5rem 1.5rem 5rem 1.5rem;
   max-width: 100rem;
   margin: 0 auto;
   color: #fff;
@@ -15,17 +14,6 @@ const CustomizeMapContainer = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 3rem;
   place-items: start center;
-
-  & > h1 {
-    font-size: 44px;
-    text-align: center;
-  }
-
-  & > p {
-    margin-top: 1.5rem;
-    color: ${({ theme }) => theme.colors.light};
-    font-size: 20px;
-  }
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     grid-gap: 2rem;
@@ -39,9 +27,13 @@ const Information = styled.div`
   justify-content: center;
   text-align: center;
 
+  & > h1 {
+    font-size: 44px;
+  }
+
   & > p {
     margin-top: 1.5rem;
-    color: ${({ theme }) => theme.colors.light};
+    color: ${({ theme }) => theme.colors.dark};
     font-size: 20px;
   }
 
@@ -58,6 +50,10 @@ const Information = styled.div`
 `;
 const CarouselContainer = styled.div`
   width: 60%;
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    width: 100%;
+  }
 `;
 
 const Legend = styled.p`
@@ -97,11 +93,9 @@ const CustomizeMap: FC = () => {
               <img src={mapType.image} />
               <Legend className="legend">
                 {mapType.title}
-                <GLTooltip content="View Demo">
-                  <DemoIcon href={mapType.demo} target="_blank" rel="noopener noreferrer">
-                    <RiShareForwardBoxLine />
-                  </DemoIcon>
-                </GLTooltip>
+                <DemoIcon href={mapType.demo} title="View Demo" target="_blank" rel="noopener noreferrer">
+                  <RiShareForwardBoxLine />
+                </DemoIcon>
               </Legend>
             </div>
           ))}
