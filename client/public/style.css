@@ -6,11 +6,10 @@ body {
   background-color: #0c0f11;
   font-size: 16px;
   margin: 0;
-  color: #fff;
 }
 
 .no-js {
   padding: 1rem;
-  background-color: #2b6cb0;
+  background-color: #fff;
   text-align: center;
 }

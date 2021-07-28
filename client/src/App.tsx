@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { useTheme } from './hooks/useTheme';
@@ -20,18 +20,6 @@ import Explore from './components/explore/Explore';
 import NotFound from './components/layout/NotFound';
 import './App.css';
 
-const RenderNavbar: FC = () => {
-  const location = useLocation();
-
-  return location.pathname !== '/login' && location.pathname !== '/register' ? <NavigationBar /> : null;
-};
-
-const RenderFooter: FC = () => {
-  const location = useLocation();
-
-  return location.pathname === '/' || location.pathname === '/settings' ? <Footer /> : null;
-};
-
 const App: FC = () => {
   const { siteTheme } = useTheme();
 
@@ -43,7 +31,7 @@ const App: FC = () => {
     <Router>
       <ThemeProvider theme={siteTheme}>
         <Provider store={store}>
-          <RenderNavbar />
+          <NavigationBar />
           <Switch>
             <PublicRoute exact path="/" component={Home} />
             <PublicRoute exact path="/register" component={Register} />
@@ -55,7 +43,7 @@ const App: FC = () => {
             <PrivateRoute exact path="/profile/:username" component={PublicProfile} />
             <Route component={NotFound} />
           </Switch>
-          <RenderFooter />
+          <Footer />
         </Provider>
       </ThemeProvider>
     </Router>

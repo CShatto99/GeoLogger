@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaGithub } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from '../../store';
@@ -124,7 +124,10 @@ const SupportLinks = styled.div`
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const { isAuth } = useAppSelector((state) => state.auth);
+
+  const pageNeedsFooter = () => location.pathname === '/';
 
   const guestLinks = (
     <>
@@ -143,7 +146,7 @@ const Footer: FC = () => {
     </>
   );
 
-  return (
+  return !pageNeedsFooter() ? null : (
     <FooterContainer>
       <TopContent>
         <Brand />
