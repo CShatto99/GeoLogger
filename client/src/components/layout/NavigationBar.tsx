@@ -190,6 +190,8 @@ const NavigationBar: FC = () => {
   const { user, isAuth } = useAppSelector((state) => state.auth);
   const [navIcon, setNavIcon] = useState('nav-items-hide');
 
+  const isAuthPage = () => location.pathname === '/login' || location.pathname === '/register';
+
   const guestLinks = (
     <>
       <NavbarLink to="/" onClick={() => setNavIcon('nav-items-hide')}>
@@ -235,7 +237,7 @@ const NavigationBar: FC = () => {
     </>
   );
 
-  return (
+  return isAuthPage() ? null : (
     <NavbarContainer>
       <NavbarContents>
         <Brand />

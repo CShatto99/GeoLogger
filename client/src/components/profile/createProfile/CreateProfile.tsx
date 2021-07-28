@@ -14,8 +14,7 @@ import CardLabel from '../../common/CardLabel';
 import Button from '../../common/Buttons';
 import GLTooltip from '../../common/GLTooltip';
 import colors from '../../../assets/json/colors.json';
-import mapImages from '../../../utils/getMapImages';
-import mapStyles from '../../../utils/getMapStyles';
+import mapTypes from '../../../utils/getMapTypes';
 
 const TOTAL_STEPS = 2;
 
@@ -35,8 +34,6 @@ const CreateProfileContent = styled.div`
 
   & > h3 {
     font-size: 2rem;
-    // text-align: center;
-    // margin-bottom: 1.5rem;
   }
 
   & > button {
@@ -180,62 +177,16 @@ const CreateProfile: FC = () => {
               <h3>Choose a Map Style</h3>
               <Divider />
             </div>
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.streets)}
-              mapTitle="Streets V11"
-              image={mapImages.streetsV11}
-              demo="https://www.mapbox.com/maps/streets"
-            />
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.outdoors)}
-              mapTitle="Outdoors V11"
-              image={mapImages.outdoorsV11}
-              demo="https://www.mapbox.com/maps/outdoors"
-            />
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.light)}
-              mapTitle="Light V10"
-              image={mapImages.lightV10}
-              demo="https://www.mapbox.com/maps/light"
-            />
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.dark)}
-              mapTitle="Dark V10"
-              image={mapImages.darkV10}
-              demo="https://www.mapbox.com/maps/dark"
-            />
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.satellite)}
-              mapTitle="Satellite V9"
-              image={mapImages.satelliteV9}
-              demo="https://www.mapbox.com/maps/satellite"
-            />
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.satelliteStreets)}
-              mapTitle="Satellite Streets V11"
-              image={mapImages.satelliteV9}
-              demo="https://docs.mapbox.com/help/getting-started/satellite-imagery/"
-            />
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.navigationDay)}
-              mapTitle="Navigation Day V1"
-              image={mapImages.satelliteV9}
-              demo="https://api.mapbox.com/styles/v1/mapbox/navigation-day-v1.html?access_token=pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg#13/40.41695/-3.70192"
-            />
-            <MapType
-              selectedMapStyle={mapStyle}
-              setSelectedMapStyle={() => setMapStyle(mapStyles.navigationNight)}
-              mapTitle="Navigation Night V1"
-              image={mapImages.satelliteV9}
-              demo="https://api.mapbox.com/styles/v1/mapbox/navigation-night-v1.html?access_token=pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg#13/40.41695/-3.70192"
-            />
+            {mapTypes.map((mapType) => (
+              <MapType
+                key={mapType.style}
+                selectedMapStyle={mapStyle}
+                setSelectedMapStyle={() => setMapStyle(mapType.style)}
+                mapTitle={mapType.title}
+                image={mapType.image}
+                demo={mapType.demo}
+              />
+            ))}
           </MapContent>
         )}
         {step === 2 && (

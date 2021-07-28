@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import store from '../store';
-import theme from '.';
+import theme from '../theme';
+import { IThemeType } from '../theme';
 
-export const useTheme = () => {
+type UseThemeType = () => {
+  siteTheme: IThemeType;
+  setSiteTheme: React.Dispatch<React.SetStateAction<IThemeType>>;
+};
+
+export const useTheme: UseThemeType = () => {
   const [siteTheme, setSiteTheme] = useState(theme.light);
 
   const { profile } = store.getState().profile;

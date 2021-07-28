@@ -1,3 +1,42 @@
+export interface IThemeType {
+  colors: {
+    primary: string;
+    darkPrimary: string;
+    secondary: string;
+    white: string;
+    black: string;
+    light: string;
+    dark: string;
+    success: string;
+    successLight: string;
+    danger: string;
+    dangerLight: string;
+    border: string;
+    input: string;
+  };
+  fontSizes: {
+    largest: string;
+    large: string;
+    medium: string;
+    small: string;
+    smallest: string;
+  };
+  fontWeights: {
+    bold: number;
+    semiBold: number;
+    medium: number;
+    regular: number;
+    light: number;
+  };
+  mediaQueries: {
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+  };
+}
+
 const theme = {
   light: {
     colors: {

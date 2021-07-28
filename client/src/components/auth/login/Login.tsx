@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { login } from '../../../store/auth';
@@ -20,7 +19,6 @@ const LoginFormContent = styled(FormContent)`
 
 const Login: FC = () => {
   const dispatch = useAppDispatch();
-  const { user, isAuth } = useAppSelector((state) => state.auth);
   const { ERR_login } = useAppSelector((state) => state.alert);
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
@@ -36,11 +34,7 @@ const Login: FC = () => {
     );
   };
 
-  return isAuth && !user.profileSetUp ? (
-    <Redirect to="/create" />
-  ) : isAuth && user.profileSetUp ? (
-    <Redirect to="/map" />
-  ) : (
+  return (
     <AuthContainer>
       <AuthContent>
         <LoginFormContent onSubmit={onSubmit}>

@@ -20,6 +20,13 @@ const GeneralLink = styled(Link)`
 export const DefaultLinkHTML = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
+  transition: ease-out 100ms;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.darkPrimary};
+    transition: ease-in 100ms;
+  }
 `;
 
 export const DefaultLink = styled(Link)`

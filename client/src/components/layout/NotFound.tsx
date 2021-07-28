@@ -7,16 +7,14 @@ import satelliteV9 from '../../assets/img/satellite-v9.png';
 
 const NotFoundContainer = styled.div`
   height: 100vh;
-  max-height: calc(100vh - 7.5rem);
-  background-color: ${({ theme }) => theme.colors.white};
+  max-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${satelliteV9});
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 6rem 1.5rem 1.5rem 1.5rem;
+  padding: 0 1.5rem;
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
-    padding: 6rem 1rem 1rem 1rem;
-    max-height: calc(100vh - 7rem);
+    padding: 0 1rem;
   }
 `;
 
@@ -80,11 +78,8 @@ const InformationSection = styled.div`
 `;
 
 const SiteLinkButtons = styled.div`
-  background-color: rgba(14, 16, 18, 0.6);
-  backdrop-filter: blur(10px);
   box-sizing: border-box;
   display: flex;
-  padding: 1rem;
   border-radius: 0.3rem;
 
   & > *:not(:last-child) {
