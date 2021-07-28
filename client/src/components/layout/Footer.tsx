@@ -10,7 +10,7 @@ const FooterContainer = styled.footer`
   color: ${({ theme }) => theme.colors.dark};
   padding: 5rem 1.5rem 3rem 1.5rem;
   margin: 0 auto;
-  max-width: 72rem;
+  max-width: 100rem;
 
   & a {
     text-decoration: none;
