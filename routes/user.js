@@ -79,7 +79,7 @@ router.post("/", async (req, res) => {
     const refreshToken = genRefreshToken({ id: user._id });
 
     res.cookie("gl_token", refreshToken, {
-      expires: new Date(Date.now() + 6048000),
+      expires: new Date(Date.now() + 2592000000),
       httpOnly: true,
     });
 
@@ -146,13 +146,12 @@ router.post("/register", async (req, res) => {
     const refreshToken = genRefreshToken({ id: newUser._id });
 
     res.cookie("gl_token", refreshToken, {
-      expires: new Date(Date.now() + 6048000),
+      expires: new Date(Date.now() + 2592000000),
       httpOnly: true,
     });
 
     res.json({ accessToken });
   } catch (err) {
-    console.log(err);
     res.status(500).json({ msg: "Error registering user" });
   }
 });

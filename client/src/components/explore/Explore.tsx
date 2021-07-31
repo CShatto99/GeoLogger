@@ -5,7 +5,6 @@ import { PublicUser } from '../../store/types';
 import { loadUsers } from '../../store/auth';
 import { DefaultLink } from '../common/Links';
 import Divider from '../common/styles/Divider';
-import { useHistory } from 'react-router-dom';
 
 const ExploreContainer = styled.div`
   min-height: calc(100vh - 7.5rem);
@@ -20,11 +19,9 @@ const ExploreContainer = styled.div`
 const Explore: FC = () => {
   const dispatch = useAppDispatch();
   const { users } = useAppSelector((state) => state.auth);
-  const history = useHistory();
 
   useEffect(() => {
     dispatch(loadUsers());
-    history.push('/explore');
   }, []);
 
   return (

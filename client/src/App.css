@@ -179,7 +179,7 @@ h3 {
   margin-top: 4.5rem;
 }
 
-.react-toast-notifications__toast__icon-wrapper {
+.react-toast-notifications__toast--info .react-toast-notifications__toast__icon-wrapper {
   background-color: #2b6cb0 !important;
 }
 

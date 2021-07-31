@@ -95,7 +95,7 @@ export const FooterContent = styled.span`
 
 const Register: FC = () => {
   const dispatch = useAppDispatch();
-  const { ERR_register } = useAppSelector((state) => state.alert);
+  const { ERR_REGISTER } = useAppSelector((state) => state.alert);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -120,7 +120,7 @@ const Register: FC = () => {
         <FormContent onSubmit={onSubmit}>
           <Brand />
           <h2>Create an accoount</h2>
-          <Alert type="error" msg={ERR_register} />
+          <Alert type="error" msg={ERR_REGISTER} />
           <div>
             <label>Username</label>
             <AuthInput type="text" value={username} maxLength={15} onChange={(e) => setUsername(e.target.value)} />

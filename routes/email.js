@@ -40,9 +40,6 @@ router.post("/", async (req, res) => {
       html: htmlEmail,
     });
 
-    // console.log('Message sent: %s', info.messageId)
-    // console.log('Message URL %s', nodemailer.getTestMessageUrl(info))
-
     res.json({ msg: "Email sent" });
   } catch (err) {
     res.status(500).send("Error sending email");

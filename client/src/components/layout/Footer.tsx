@@ -165,8 +165,8 @@ const Footer: FC = () => {
             <label>Message</label>
             <GeneralInput type="text" maxLength={280} onChange={(e) => setMessage(e.target.value)} value={message} />
           </div>
-          <Alert type="error" msg={ERR_contact} />
-          <Alert type="success" msg={SUCC_contact} />
+          <Alert type="error" msg={ERR_CONTACT} />
+          <Alert type="success" msg={SUCC_CONTACT} />
           <Button disabled={!email || !message}>Send</Button>
         </form> */}
         <GitHubLink href="https://github.com/CShatto99/GeoLogger" target="_blank" rel="noreferrer noopener">

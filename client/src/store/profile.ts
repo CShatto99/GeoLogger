@@ -100,7 +100,7 @@ export const loadProfile: Actions['profile'] = () => async (dispatch) => {
     const res = await axios.get(`/api/profile`);
     dispatch(load_profile(res.data));
   } catch (err) {
-    dispatch(setAlert(err.response.data.msg, err.response.status));
+    dispatch(setAlert(err.response.data.msg, 'ERR_LOAD_PROFILE', err.response.status));
   }
 };
 
@@ -116,7 +116,7 @@ export const updateProfile: Actions['profile'] = (profile) => async (dispatch) =
 
     dispatch(load_profile(data));
   } catch (err) {
-    dispatch(setAlert(err.response.data.msg, err.response.status));
+    dispatch(setAlert(err.response.data.msg, 'ERR_UPDATE_PROFILE', err.response.status));
   }
 };
 
@@ -131,7 +131,7 @@ export const getPublicProfile: Actions['profile'] = (username) => async (dispatc
     dispatch(load_public_profile({ ...user, ...profile }));
     dispatch(action_end());
   } catch (err) {
-    dispatch(setAlert(err.response.data.msg, err.response.status));
+    dispatch(setAlert(err.response.data.msg, 'ERR_LOAD_PROFILE', err.response.status));
   }
 };
 

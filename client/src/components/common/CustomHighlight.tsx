@@ -9,14 +9,15 @@ const CustomHighlightContainer = styled.div`
     margin-bottom: 0.5rem;
   }
 `;
+
 const ColorContainer = styled.div`
   width: 38px;
   height: 38px;
-  // background-color: red;
   margin-top: 0.25rem;
   border-radius: 0.3rem 0 0 0.3rem;
   border: 1px solid ${({ theme }) => theme.colors.dark};
   box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   border-right: none;
   display: grid;
   place-items: center;
