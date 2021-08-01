@@ -139,7 +139,6 @@ const NotFound: FC = () => {
 
   const userLinks = (
     <>
-      <SiteLinkButton to="/explore">Explore</SiteLinkButton>
       <SiteLinkButton to="/map">Map</SiteLinkButton>
       <SiteLinkButton to={`/profile/${user.username}`}>Profile</SiteLinkButton>
       <SiteLinkButton to="/settings/profile">Settings</SiteLinkButton>

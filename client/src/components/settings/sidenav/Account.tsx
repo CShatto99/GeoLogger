@@ -55,7 +55,7 @@ const ModalFormGroup = styled.div`
 const Account: FC = () => {
   const dispatch = useAppDispatch();
 
-  const { SUCC_change_password, ERR_change_password, ERR_delete_account } = useAppSelector((state) => state.alert);
+  const { SUCC_CHANGE_PASSWORD, ERR_CHANGE_PASSWORD, ERR_DELETE_ACCOUNT } = useAppSelector((state) => state.alert);
   const [isOpen, setIsOpen] = useState(false);
   const [oldPass, setOldPass] = useState('');
   const [password, setPassword] = useState('');
@@ -75,8 +75,8 @@ const Account: FC = () => {
   return (
     <>
       <h1 style={{ marginBottom: '2rem' }}>Account</h1>
-      <Alert type="success" msg={SUCC_change_password} />
-      <Alert type="error" msg={ERR_change_password} />
+      <Alert type="success" msg={SUCC_CHANGE_PASSWORD} />
+      <Alert type="error" msg={ERR_CHANGE_PASSWORD} />
       <ChangePassword>
         <h3>Change password</h3>
         <Divider />
@@ -118,7 +118,7 @@ const Account: FC = () => {
               <label>Enter your password:</label>
               <PasswordInput value={deletePass} maxLength={100} onChange={(e) => setDeletePass(e.target.value)} />
             </ModalFormGroup>
-            <Alert type="error" msg={ERR_delete_account} />
+            <Alert type="error" msg={ERR_DELETE_ACCOUNT} />
             <DangerButton disabled={!deletePass} onClick={() => dispatch(deleteUser({ deletePass }))}>
               Delete My Account
             </DangerButton>

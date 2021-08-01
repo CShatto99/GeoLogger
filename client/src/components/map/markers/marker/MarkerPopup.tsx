@@ -182,7 +182,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker: m, onClick }: MarkerPopupPr
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const base64 = await getBase64(e);
-    typeof base64 === 'string' ? dispatch(setAlert(base64, 'ERR_change_password', 400)) : setImage(base64.result);
+    typeof base64 === 'string' ? dispatch(setAlert(base64, 'ERR_CHANGE_PASSWORD', 400)) : setImage(base64.result);
     dispatch(setAlert('Image Saved!', 'SUCC_POPUP_IMG', 200));
     setTimeout(() => {
       dispatch(clearAlert());

@@ -19,7 +19,7 @@ const LoginFormContent = styled(FormContent)`
 
 const Login: FC = () => {
   const dispatch = useAppDispatch();
-  const { ERR_login } = useAppSelector((state) => state.alert);
+  const { ERR_LOGIN } = useAppSelector((state) => state.alert);
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
 
@@ -40,7 +40,7 @@ const Login: FC = () => {
         <LoginFormContent onSubmit={onSubmit}>
           <Brand />
           <h2>Log in to your account</h2>
-          <Alert type="error" msg={ERR_login} />
+          <Alert type="error" msg={ERR_LOGIN} />
           <div>
             <label>Username or email</label>
             <AuthInput type="text" value={identifier} maxLength={100} onChange={(e) => setIdentifier(e.target.value)} />

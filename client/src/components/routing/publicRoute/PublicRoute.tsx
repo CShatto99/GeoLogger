@@ -8,20 +8,21 @@ type PublicRouteProps = {
 } & RouteProps;
 
 const PublicRoute: FC<PublicRouteProps> = ({ component: Component, ...rest }: PublicRouteProps) => {
-  const { user } = useAppSelector((state) => state.auth);
   const location = useLocation();
+  const { user } = useAppSelector((state) => state.auth);
+  const { loading: profileLoading } = useAppSelector((state) => state.profile);
 
-  return (
-    <Route {...rest}>
-      {isAuthenticated() && user.profileSetUp ? (
-        <Redirect to={{ pathname: '/create', state: { from: location } }} />
-      ) : isAuthenticated() && !user.profileSetUp && location.pathname !== '/create' ? (
-        <Redirect to={{ pathname: '/map', state: { from: location } }} />
-      ) : (
-        <Component />
-      )}
-    </Route>
-  );
+  const getDestination = () => {
+    if (isAuthenticated() && user.profileSetUp) {
+      return <Redirect to={{ pathname: '/map', state: { from: location } }} />;
+    } else if (isAuthenticated() && !user.profileSetUp && !profileLoading && location.pathname !== '/create') {
+      return <Redirect to={{ pathname: '/create', state: { from: location } }} />;
+    }
+
+    return <Component />;
+  };
+
+  return <Route {...rest}>{getDestination()}</Route>;
 };
 
 export default PublicRoute;

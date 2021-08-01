@@ -43,9 +43,9 @@ const ExpandedImageContainer = styled.div`
 const ExpandedImageContent = styled.div`
   transform: translateY(-200px);
   transition: all 300ms ease-in-out;
-  width: 700px;
+  width: 80%;
 
-  @media ${({ theme }) => theme.mediaQueries.xs} {
+  @media ${({ theme }) => theme.mediaQueries.sm} {
     width: 100%;
   }
 `;

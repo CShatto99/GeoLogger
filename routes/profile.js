@@ -27,8 +27,6 @@ router.get("/", authToken, async (req, res) => {
 router.post("/", authToken, async (req, res) => {
   const { theme, mapStyle, fillColor, visited, markers } = req.body;
 
-  // console.log(markers);
-
   const profileFields = {
     user: req.user.id,
     theme,

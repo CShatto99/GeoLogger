@@ -36,15 +36,6 @@ const ApplyButton = styled.div`
   }
 `;
 
-const HexInput = styled.div`
-  display: flex;
-  align-items: center;
-
-  & > label {
-    margin-right: 0.25rem;
-  }
-`;
-
 const HighlightColor: FC = () => {
   const dispatch = useAppDispatch();
   const { profile, actionsStatus, loading } = useAppSelector((state) => state.profile);
