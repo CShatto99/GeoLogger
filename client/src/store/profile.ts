@@ -69,18 +69,6 @@ const profile = createSlice({
         loading: true,
       };
     },
-    action_start: (state) => {
-      return {
-        ...state,
-        loading: true,
-      };
-    },
-    action_end: (state) => {
-      return {
-        ...state,
-        loading: false,
-      };
-    },
     update_actions: (state, action) => {
       return {
         ...state,
@@ -93,7 +81,7 @@ const profile = createSlice({
 
 export default profile.reducer;
 
-const { load_profile, load_public_profile, clear_profile, action_start, action_end, update_actions } = profile.actions;
+const { load_profile, load_public_profile, clear_profile, update_actions } = profile.actions;
 
 export const loadProfile: Actions['profile'] = () => async (dispatch) => {
   try {
@@ -122,14 +110,11 @@ export const updateProfile: Actions['profile'] = (profile) => async (dispatch) =
 
 export const getPublicProfile: Actions['profile'] = (username) => async (dispatch) => {
   try {
-    dispatch(action_start());
-
     const {
       data: { user, profile },
     } = await axios.get(`/api/profile/${username}`);
 
     dispatch(load_public_profile({ ...user, ...profile }));
-    dispatch(action_end());
   } catch (err) {
     dispatch(setAlert(err.response.data.msg, 'ERR_LOAD_PROFILE', err.response.status));
   }

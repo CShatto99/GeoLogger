@@ -17,7 +17,6 @@ import Home from './components/home/Home';
 import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/createProfile/CreateProfile';
 import PublicProfile from './components/profile/publicProfile/PublicProfile';
-import Explore from './components/explore/Explore';
 import NotFound from './components/layout/NotFound';
 import './App.css';
 import getToast from './utils/getToast';
@@ -50,7 +49,6 @@ const AppContent: FC = () => {
         <PublicRoute exact path="/" component={Home} />
         <PublicRoute exact path="/register" component={Register} />
         <PublicRoute exact path="/login" component={Login} />
-        <PrivateRoute exact path="/explore" component={Explore} />
         <PrivateRoute exact path="/map" component={Map} />
         <PrivateRoute path="/settings" component={Settings} />
         <PrivateRoute exact path="/create" component={CreateProfile} />
