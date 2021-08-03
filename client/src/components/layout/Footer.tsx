@@ -116,9 +116,9 @@ const MadeWith = styled.p`
   }
 `;
 
-const SupportLinks = styled.div`
-  & > a:not(:last-child) {
-    margin-right: 1rem;
+const SupportLinks = styled.ul`
+  & > span {
+    margin: 0 0.5rem;
   }
 `;
 
@@ -183,6 +183,7 @@ const Footer: FC = () => {
         </MadeWith>
         <SupportLinks>
           <FooterLink to="/contact">Contact</FooterLink>
+          <span>&bull;</span>
           <FooterLink to="/terms-conditions">Terms</FooterLink>
         </SupportLinks>
       </BottomContent>

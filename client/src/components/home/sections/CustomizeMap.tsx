@@ -6,7 +6,7 @@ import mapTypes from '../../../utils/getMapTypes';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const CustomizeMapContainer = styled.div`
-  padding: 5rem 1.5rem 5rem 1.5rem;
+  padding: 8rem 1.5rem 8rem 1.5rem;
   max-width: 100rem;
   margin: 0 auto;
   color: #fff;

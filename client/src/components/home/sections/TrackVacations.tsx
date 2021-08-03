@@ -4,7 +4,7 @@ import trackYourVacations from '../../../assets/img/trackYourVacations.png';
 
 const TrackVacationsContainer = styled.div`
   max-width: 100rem;
-  padding: 10rem 1.5rem;
+  padding: 8rem 1.5rem 8rem 1.5rem;
   margin: 0 auto;
   color: #fff;
   display: grid;
@@ -14,7 +14,8 @@ const TrackVacationsContainer = styled.div`
   @media ${({ theme }) => theme.mediaQueries.sm} {
     grid-template-columns: 1fr;
     grid-gap: 2rem;
-    padding: 8rem 1rem 4rem 1rem;
+    padding: 4rem 1rem 3rem 1rem;
+    text-align: center;
   }
 `;
 
