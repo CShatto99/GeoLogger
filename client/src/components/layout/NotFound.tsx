@@ -33,7 +33,7 @@ const NotFoundContent = styled.div`
   }
 `;
 
-const InformationSection = styled.div`
+const Information = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,7 +106,7 @@ const SiteLinkButton = styled(GeneralLink)`
   }
 `;
 
-const IconSection = styled.div`
+const Image = styled.div`
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -148,15 +148,15 @@ const NotFound: FC = () => {
   return (
     <NotFoundContainer>
       <NotFoundContent>
-        <InformationSection>
+        <Information>
           <h1>404</h1>
           <h2>We could not find this page on our map!</h2>
           <h3>No problem, try using one of the site links below:</h3>
           <SiteLinkButtons>{isAuth ? userLinks : guestLinks}</SiteLinkButtons>
-        </InformationSection>
-        <IconSection>
+        </Information>
+        <Image>
           <MarkerIcon />
-        </IconSection>
+        </Image>
       </NotFoundContent>
     </NotFoundContainer>
   );

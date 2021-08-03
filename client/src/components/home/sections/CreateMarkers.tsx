@@ -4,7 +4,7 @@ import trackYourMarkers from '../../../assets/img/trackYourVacations.png';
 
 const CreateMarkersContainer = styled.div`
   max-width: 100rem;
-  padding: 5rem 1.5rem;
+  padding: 8rem 1.5rem;
   margin: 0 auto;
   color: #fff;
   display: grid;
@@ -15,6 +15,7 @@ const CreateMarkersContainer = styled.div`
     grid-template-columns: 1fr;
     grid-gap: 2rem;
     padding: 4rem 1rem;
+    text-align: center;
   }
 `;
 

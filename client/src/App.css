@@ -183,5 +183,6 @@ h3 {
   background-color: #2b6cb0 !important;
 }
 
-/* @media only screen and (max-width: 768px) {
-} */
+.slider-wrapper {
+  border-radius: 0.3rem;
+}
