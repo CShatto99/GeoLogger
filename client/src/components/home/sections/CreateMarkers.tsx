@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import trackYourMarkers from '../../../assets/img/trackYourVacations.png';
+import createMarkers from '../../../assets/img/createMarkers.png';
 
 const CreateMarkersContainer = styled.div`
   max-width: 100rem;
@@ -22,6 +22,12 @@ const CreateMarkersContainer = styled.div`
 const Image = styled.div`
   display: flex;
   align-items: center;
+  transition: transform 100ms ease-out;
+
+  &:hover {
+    transition: transform 100ms ease-in;
+    transform: scale(1.01);
+  }
 `;
 
 const Information = styled.div`
@@ -55,14 +61,14 @@ const CreateMarkers: FC = () => {
   return (
     <CreateMarkersContainer>
       <Information>
-        <h1>Create Custom Markers</h1>
+        <h1>Create Markers</h1>
         <p>
-          Phasellus vitae rhoncus magna. Cras euismod mi eget eros congue porta. Suspendisse pulvinar lobortis nisl, id
-          cursus nulla sollicitudin et. Ut at ornare est. Mauris vel tincidunt sem.
+          Create and manage fully customizable markers that detail your vacation history. Add an image, title, date, or
+          description to your markers.
         </p>
       </Information>
       <Image>
-        <img src={trackYourMarkers} alt="Visual of tracked Markers" />
+        <img src={createMarkers} alt="Visual of tracked Markers" />
       </Image>
     </CreateMarkersContainer>
   );

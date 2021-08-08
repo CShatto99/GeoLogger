@@ -59,11 +59,11 @@ export const ApplyButton = styled.div`
     cursor: pointer;
     transition: all 100ms ease-out;
     margin-right: 0 !important;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   & > svg:hover {
-    transform: scale(1.4);
+    transform: scale(1.1);
     transition: all 100ms ease-in;
   }
 `;

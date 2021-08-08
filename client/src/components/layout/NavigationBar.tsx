@@ -118,7 +118,7 @@ const DropdownContent = styled.div`
   border-radius: 0.3rem;
   transition: ease-out 100ms;
   right: 1.5rem;
-  top: 3.1rem;
+  top: 3rem;
 
   & > a {
     color: ${({ theme }) => theme.colors.black};
@@ -167,6 +167,7 @@ const DropdownContent = styled.div`
     margin: 11rem 0 0 0;
     right: 4.5rem;
     left: 4.5rem;
+    top: 0;
   }
 `;
 

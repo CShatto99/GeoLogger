@@ -6,13 +6,13 @@ import Brand from '../../common/Brand';
 import { AuthInput, PasswordInput } from '../../common/Inputs';
 import Button from '../../common/Buttons';
 import { DefaultLink, DangerLink } from '../../common/Links';
-import satelliteV9 from '../../../assets/img/satellite-v9.png';
+import satellite from '../../../assets/img/satellite.png';
 import Alert from '../../common/Alert';
 
 export const AuthContainer = styled.div`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.white};
-  background-image: url(${satelliteV9});
+  background-image: url(${satellite});
   background-repeat: no-repeat;
   background-size: cover;
   grid-template-columns: 1fr 1fr;

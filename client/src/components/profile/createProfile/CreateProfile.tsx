@@ -29,7 +29,7 @@ const CreateProfileContainer = styled.div`
 `;
 
 const CreateProfileContent = styled.div`
-  max-width: 72rem;
+  max-width: 100rem;
   margin: 0 auto;
 
   & > h3 {

@@ -9,6 +9,7 @@ import { ColorBox } from '../../profile/createProfile/CreateProfile';
 import CardLabel from '../../common/CardLabel';
 import GeoLoggerModal from '../../common/GLModal';
 import GLTooltip from '../../common/GLTooltip';
+import { ApplyButton } from '../../common/Buttons';
 import colors from '../../../assets/json/colors.json';
 
 const ColorContent = styled.div`
@@ -19,20 +20,6 @@ const ColorContent = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.xs} {
     grid-template-columns: 1fr 1fr;
-  }
-`;
-
-const ApplyButton = styled.div`
-  & > svg {
-    stroke: ${({ theme }) => theme.colors.success};
-    stroke-width: 2px;
-    cursor: pointer;
-    transition: all 100ms ease-out;
-  }
-
-  & > svg:hover {
-    transform: scale(1.4);
-    transition: all 100ms ease-in;
   }
 `;
 

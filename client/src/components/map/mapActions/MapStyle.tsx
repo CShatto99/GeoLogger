@@ -7,21 +7,8 @@ import { updateProfile, updateMapActionStatus } from '../../../store/profile';
 import GeoLoggerModal from '../../common/GLModal';
 import MapType from '../../common/MapType';
 import GLTooltip from '../../common/GLTooltip';
+import { ApplyButton } from '../../common/Buttons';
 import mapTypes from '../../../utils/getMapTypes';
-
-const ApplyButton = styled.div`
-  & > svg {
-    stroke: ${({ theme }) => theme.colors.success};
-    stroke-width: 2px;
-    cursor: pointer;
-    transition: all 100ms ease-out;
-  }
-
-  & > svg:hover {
-    transform: scale(1.4);
-    transition: all 100ms ease-in;
-  }
-`;
 
 const MapContent = styled.div`
   display: grid;

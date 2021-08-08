@@ -1,11 +1,12 @@
 import { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import { ThemeProvider } from 'styled-components';
 import { useTheme } from './hooks/useTheme';
-import store, { useAppSelector } from './store/index';
+import store, { useAppDispatch, useAppSelector } from './store/index';
 import { refreshUser } from './store/auth';
+import { clearAlert } from './store/alert';
 import NavigationBar from './components/layout/NavigationBar';
 import Footer from './components/layout/Footer';
 import PrivateRoute from './components/routing/privateRoute/PrivateRoute';
@@ -18,29 +19,29 @@ import Settings from './components/settings/Settings';
 import CreateProfile from './components/profile/createProfile/CreateProfile';
 import PublicProfile from './components/profile/publicProfile/PublicProfile';
 import NotFound from './components/layout/NotFound';
-import './App.css';
 import getToast from './utils/getToast';
+import './App.css';
 
 const AppContent: FC = () => {
-  const { ERR_AUTHORIZE } = useAppSelector((state) => state.alert);
-
+  const { ERR_AUTHORIZE, status } = useAppSelector((state) => state.alert);
+  const dispatch = useAppDispatch();
   const { addToast, removeToast, toastStack } = useToasts();
+  const location = useLocation();
 
   useEffect(() => {
     if (ERR_AUTHORIZE) {
-      addToast(
-        <>
-          <div>{ERR_AUTHORIZE}</div>
-        </>,
-        {
-          id: 'user-unauthorized',
-          appearance: 'warning',
-        },
-      );
+      addToast(<div>{ERR_AUTHORIZE}</div>, {
+        id: 'user-unauthorized',
+        appearance: 'warning',
+      });
     } else if (getToast(toastStack, 'user-unauthorized')) {
       removeToast('user-unauthorized');
     }
   }, [ERR_AUTHORIZE]);
+
+  useEffect(() => {
+    status && dispatch(clearAlert());
+  }, [location.pathname]);
 
   return (
     <>

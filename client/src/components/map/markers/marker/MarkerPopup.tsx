@@ -11,9 +11,10 @@ import ExpandedImage from '../../../common/ExpandedImage';
 import GLModal from '../../../common/GLModal';
 import { ApplyButton, DangerButton } from '../../../common/Buttons';
 import GenDivider from '../../../common/styles/Divider';
-import getBase64 from '../../../../utils/handleFile';
 import GLTooltip from '../../../common/GLTooltip';
 import GeneralInput, { Textarea } from '../../../common/Inputs';
+import getBase64 from '../../../../utils/handleFile';
+import getReadableDate from '../../../../utils/getReadableData';
 
 const PopupContainer = styled.div`
   max-width: 300px;
@@ -167,7 +168,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker: m, onClick }: MarkerPopupPr
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [title, setTitle] = useState<string | undefined>(m.title);
-  const [date, setDate] = useState<string | undefined>(m.date);
+  const [date, setDate] = useState<any>(m.date);
   const [notes, setNotes] = useState<string | undefined>(m.notes);
   const [image, setImage] = useState<string | undefined>(m.image);
   const [editing, setEditing] = useState(false);
@@ -324,7 +325,7 @@ const MarkerPopup: FC<MarkerPopupProps> = ({ marker: m, onClick }: MarkerPopupPr
           {date && (
             <PopupSection style={{ marginBottom: notes ? '0.5rem' : '0' }}>
               {title && <h3>{title}</h3>}
-              {date && <p>{date}</p>}
+              {date && <p>{getReadableDate(new Date(date))}</p>}
             </PopupSection>
           )}
           {notes && (
