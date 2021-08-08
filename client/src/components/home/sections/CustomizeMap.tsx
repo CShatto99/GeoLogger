@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { RiShareForwardBoxLine } from 'react-icons/ri';
 import styled from 'styled-components';
+import GeneralLink from '../../common/Links';
 import mapTypes from '../../../utils/getMapTypes';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
@@ -48,6 +49,7 @@ const Information = styled.div`
     }
   }
 `;
+
 const CarouselContainer = styled.div`
   width: 60%;
 
@@ -76,15 +78,28 @@ const DemoIcon = styled.a`
   }
 `;
 
+const LandingLink = styled(GeneralLink)`
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  font-size: 1.1rem;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.darkPrimary};
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 1rem;
+  }
+`;
+
 const CustomizeMap: FC = () => {
   return (
     <CustomizeMapContainer>
       <Information>
         <h1>Customize Your Map</h1>
-        <p>
-          Vestibulum vehicula odio urna, ac venenatis elit aliquet eleifend. Sed a odio pretium, tincidunt elit at,
-          sagittis velit. Morbi vel leo eget nibh pharetra sagittis venenatis sit amet lectus.
-        </p>
+        <p>Choose bewteen six unique map styles to give your map dashboard a fresh look.</p>
       </Information>
       <CarouselContainer>
         <Carousel autoPlay infiniteLoop showThumbs={false}>
@@ -101,6 +116,7 @@ const CustomizeMap: FC = () => {
           ))}
         </Carousel>
       </CarouselContainer>
+      <LandingLink to="/register">Start Logging</LandingLink>
     </CustomizeMapContainer>
   );
 };

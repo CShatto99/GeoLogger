@@ -37,16 +37,12 @@ const MapTypeContent = styled.div`
   }
 `;
 
+const MapTypeHeader = styled.div`
+  display: flex;
+`;
+
 const ViewEx = styled.a`
-  position: absolute;
-  z-index: 2;
-  background-color: #fff;
-  padding: 0.2rem;
-  right: 0;
-  bottom: 2px;
-  border-bottom-right-radius: 0.3rem;
-  width: 16px;
-  height: 16px;
+  margin-left: 0.25rem;
 
   & svg {
     fill: #000;
@@ -69,6 +65,18 @@ type MapTypeProps = {
 
 const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapTitle, image, demo }: MapTypeProps) => {
   const mapStyle = mapTitle.replaceAll(' ', '-').toLowerCase();
+  const trimmedMapStyle = selectedMapStyle?.substring(0, selectedMapStyle?.lastIndexOf('-'));
+
+  const CardLabelContent = (
+    <MapTypeHeader>
+      <p>{mapTitle}</p>
+      <GLTooltip direction="top" content={`View ${mapTitle} demo`}>
+        <ViewEx href={demo} target="_blank" rel="noopener noreferrer">
+          <RiShareForwardBoxLine />
+        </ViewEx>
+      </GLTooltip>
+    </MapTypeHeader>
+  );
 
   return (
     <MapTypeContainer>
@@ -76,13 +84,8 @@ const MapType: FC<MapTypeProps> = ({ selectedMapStyle, setSelectedMapStyle, mapT
         onClick={setSelectedMapStyle}
         className={selectedMapStyle === mapStyle ? 'map-active' : undefined}
       >
-        <CardLabel label={mapTitle} active={selectedMapStyle === mapStyle} />
-        <img src={image} alt={`mapbox ${selectedMapStyle} theme`} onClick={setSelectedMapStyle} />
-        <ViewEx href={demo} target="_blank" rel="noopener noreferrer">
-          <GLTooltip direction="top" content={`View ${mapTitle} demo`}>
-            <RiShareForwardBoxLine />
-          </GLTooltip>
-        </ViewEx>
+        <CardLabel label={CardLabelContent} active={trimmedMapStyle === mapStyle}></CardLabel>
+        <img src={image} alt={`mapbox ${trimmedMapStyle} theme`} onClick={setSelectedMapStyle} />
       </MapTypeContent>
     </MapTypeContainer>
   );

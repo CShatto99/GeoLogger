@@ -29,9 +29,10 @@ const CardLabelContent = styled.div`
 `;
 
 type CardLabelProps = {
-  label: string;
+  label: React.ReactNode | string;
   active: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  // children?: React.ReactNode;
 };
 
 const CardLabel: FC<CardLabelProps> = ({ label, active, onClick }: CardLabelProps) => {

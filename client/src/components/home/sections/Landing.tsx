@@ -5,7 +5,7 @@ import GeneralLink from '../../common/Links';
 
 const LandingContainer = styled.div`
   max-width: 100rem;
-  padding: 10rem 1.5rem 8rem 1.5rem;
+  padding: 10rem 1.5rem 5rem 1.5rem;
   margin: 0 auto;
   color: #fff;
   display: grid;
@@ -35,7 +35,7 @@ const LandingContainer = styled.div`
 
   @media ${({ theme }) => theme.mediaQueries.sm} {
     grid-gap: 2rem;
-    padding: 8rem 1rem 4rem 1rem;
+    padding: 8rem 1rem 3rem 1rem;
 
     & > h1 {
       font-size: 2rem;
@@ -137,7 +137,7 @@ const Landing: FC = () => {
   return (
     <LandingContainer>
       <Information>
-        <h1>Vacation tracking made exciting</h1>
+        <h1>Vacation logging for travelers</h1>
         <p>
           Keep track of places you&apos;ve visited, create meaningful markers detailing your vacations, and much more on
           GeoLogger.

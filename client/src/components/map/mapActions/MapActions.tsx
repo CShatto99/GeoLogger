@@ -13,7 +13,7 @@ const MapActionsContainer = styled.div`
   width: auto;
   height: auto;
   background-color: rgba(14, 16, 18, 0.6);
-  margin: 5rem 0.5rem 0 0;
+  margin: 5rem 0 0 0;
   padding: 0.5rem;
   border-radius: 999px;
   display: flex;

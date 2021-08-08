@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import trackYourVacations from '../../../assets/img/trackYourVacations.png';
+import trackVacations from '../../../assets/img/trackVacations.png';
 
 const TrackVacationsContainer = styled.div`
   max-width: 100rem;
@@ -22,6 +22,12 @@ const TrackVacationsContainer = styled.div`
 const Image = styled.div`
   display: flex;
   align-items: center;
+  transition: transform 100ms ease-out;
+
+  &:hover {
+    transition: transform 100ms ease-in;
+    transform: scale(1.01);
+  }
 `;
 
 const Information = styled.div`
@@ -57,14 +63,13 @@ const TrackVacations: FC = () => {
   return (
     <TrackVacationsContainer>
       <Image>
-        <img src={trackYourVacations} alt="Visual of tracked vacations" />
+        <img src={trackVacations} alt="Visual of tracked vacations" />
       </Image>
       <Information>
-        <h1>Track Your Vacations</h1>
+        <h1>Track Vacations</h1>
         <p>
-          Aliquam rhoncus tortor velit, et sodales erat placerat ut. Nulla non purus varius, aliquet felis ut, euismod
-          purus. Etiam quis erat sed ipsum gravida pulvinar. Ut tempus nibh ut tellus elementum, quis auctor tellus
-          euismod.
+          GeoLogger allows you to keep track of places you have visited with customizable highlights. Add a location to
+          your list of visited regions and apply any highlight color you want.
         </p>
       </Information>
     </TrackVacationsContainer>

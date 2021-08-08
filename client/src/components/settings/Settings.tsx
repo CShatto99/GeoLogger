@@ -19,7 +19,7 @@ const SettingsContainer = styled.div`
 `;
 
 const SettingsContent = styled.div`
-  max-width: 72rem;
+  max-width: 100rem;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 4fr;

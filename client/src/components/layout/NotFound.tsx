@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { useAppSelector } from '../../store';
 import GeneralLink from '../common/Links';
 import MarkerIcon from '../common/styles/MarkerIcon';
-import satelliteV9 from '../../assets/img/satellite-v9.png';
+import satellite from '../../assets/img/satellite.png';
 
 const NotFoundContainer = styled.div`
   height: 100vh;
   max-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${satelliteV9});
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${satellite});
   background-repeat: no-repeat;
   background-size: cover;
   padding: 0 1.5rem;

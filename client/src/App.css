@@ -163,10 +163,6 @@ h3 {
   margin: 0;
 }
 
-/* .mapboxgl-map {
-  z-index: -1;
-} */
-
 .mapboxgl-ctrl-bottom-right {
   display: none;
 }
