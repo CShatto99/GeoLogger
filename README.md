@@ -1,6 +1,6 @@
 # GeoLogger
 
-GeoLogger is a web app that allows you to log your vacation history. Create an account to choose from one of five map styles and change your vacation history tracking color using any hex color code. An early version of the site can be found at [GeoLogger](https://geo-logger.herokuapp.com). This web app is currently under development and will be expected to contain bugs. If you discover a bug please notify me at geologgerservice@gmail.com.
+GeoLogger is a web app that allows you to log your vacation history. Create an account to choose from one of five map styles and change your vacation history tracking color using any hex color code. This web app is currently under development and will be expected to contain bugs. If you discover a bug please notify me at geologgerservice@gmail.com.
 
 ## Table of Contents
 
